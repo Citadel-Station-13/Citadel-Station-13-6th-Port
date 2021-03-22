@@ -48,75 +48,43 @@
 
 //exposure and through-clothing code
 /mob/living/carbon
-	var/list/exposed_genitals = list() //Keeping track of them so we don't have to iterate through every genitalia and see if exposed
+	var/list/exposed_zones = list()
 
-/obj/item/organ/genital/proc/is_exposed()
-	if(!owner || genital_flags & (GENITAL_INTERNAL|GENITAL_HIDDEN))
-		return FALSE
-	if(genital_flags & GENITAL_UNDIES_HIDDEN && ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		if(!(NO_UNDERWEAR in H.dna.species.species_traits))
-			var/datum/sprite_accessory/underwear/top/T = H.hidden_undershirt ? null : GLOB.undershirt_list[H.undershirt]
-			var/datum/sprite_accessory/underwear/bottom/B = H.hidden_underwear ? null : GLOB.underwear_list[H.underwear]
-			if(zone == BODY_ZONE_CHEST ? (T?.covers_chest || B?.covers_chest) : (T?.covers_groin || B?.covers_groin))
-				return FALSE
-	if(genital_flags & GENITAL_THROUGH_CLOTHES)
-		return TRUE
-
-	switch(zone) //update as more genitals are added
-		if(BODY_ZONE_CHEST)
-			return owner.is_chest_exposed()
-		if(BODY_ZONE_PRECISE_GROIN)
-			return owner.is_groin_exposed()
-
-/obj/item/organ/genital/proc/toggle_visibility(visibility, update = TRUE)
-	genital_flags &= ~(GENITAL_THROUGH_CLOTHES|GENITAL_HIDDEN|GENITAL_UNDIES_HIDDEN)
-	if(owner)
-		owner.exposed_genitals -= src
-	switch(visibility)
-		if(GEN_VISIBLE_ALWAYS)
-			genital_flags |= GENITAL_THROUGH_CLOTHES
-			if(owner)
-				owner.log_message("Exposed their [src]",LOG_EMOTE)
-				owner.exposed_genitals += src
-		if(GEN_VISIBLE_NO_CLOTHES)
-			if(owner)
-				owner.log_message("Hid their [src] under clothes only",LOG_EMOTE)
-		if(GEN_VISIBLE_NO_UNDIES)
-			genital_flags |= GENITAL_UNDIES_HIDDEN
-			if(owner)
-				owner.log_message("Hid their [src] under underwear",LOG_EMOTE)
-		if(GEN_VISIBLE_NEVER)
-			genital_flags |= GENITAL_HIDDEN
-			if(owner)
-				owner.log_message("Hid their [src] completely",LOG_EMOTE)
-
-	if(update && owner && ishuman(owner)) //recast to use update genitals proc
-		var/mob/living/carbon/human/H = owner
-		H.update_genitals()
-
-/mob/living/carbon/verb/toggle_genitals()
+/mob/living/carbon/verb/toggle_exposables()
 	set category = "IC"
-	set name = "Expose/Hide genitals"
-	set desc = "Allows you to toggle which genitals should show through clothes or not."
+	set name = "Expose/Hide parts"
+	set desc = "Allows you to toggle which parts should show through clothes or not."
 
 	if(stat != CONSCIOUS)
-		to_chat(usr, "<span class='warning'>You can toggle genitals visibility right now...</span>")
+		to_chat(usr, "<span class='warning'>You can't toggle part visibility right now.</span>")
 		return
 
-	var/list/genital_list = list()
-	for(var/obj/item/organ/genital/G in internal_organs)
-		if(!CHECK_BITFIELD(G.genital_flags, GENITAL_INTERNAL))
-			genital_list += G
-	if(!genital_list.len) //There is nothing to expose
-		return
-	//Full list of exposable genitals created
-	var/obj/item/organ/genital/picked_organ
-	picked_organ = input(src, "Choose which genitalia to expose/hide", "Expose/Hide genitals") as null|anything in genital_list
-	if(picked_organ && (picked_organ in internal_organs))
-		var/picked_visibility = input(src, "Choose visibility setting", "Expose/Hide genitals") as null|anything in GLOB.genitals_visibility_toggles
-		if(picked_visibility && picked_organ && (picked_organ in internal_organs))
-			picked_organ.toggle_visibility(picked_visibility)
+	var/static/list/exposable_list = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN)
+	var/picked_exposable = input(src, "Choose which parts to expose/hide", "Expose/Hide parts") as null|anything in exposable_list
+	if(picked_exposable)
+		var/picked_visibility = input(src, "Choose visibility setting", "Expose/Hide parts") as null|anything in GLOB.zone_visibility_toggles
+		if(picked_visibility)
+			var/prev_flags = (picked_exposable in exposed_zones ? exposed_zones[picked_exposable] : NONE)
+			var/exposure_flags = NONE
+			switch(visibility)
+				if(GEN_VISIBLE_ALWAYS)
+					exposure_flags |= EXPOSABLE_THROUGH_CLOTHES
+					if(owner)
+						owner.log_message("Exposed their [picked_exposable]",LOG_EMOTE)
+				if(GEN_VISIBLE_NO_CLOTHES)
+					if(owner)
+						owner.log_message("Hid their [picked_exposable] under clothes only",LOG_EMOTE)
+				if(GEN_VISIBLE_NO_UNDIES)
+					exposure_flags |= EXPOSABLE_UNDIES_HIDDEN
+					if(owner)
+						owner.log_message("Hid their [picked_exposable] under underwear",LOG_EMOTE)
+				if(GEN_VISIBLE_NEVER)
+					exposure_flags |= EXPOSABLE_HIDDEN
+					if(owner)
+						owner.log_message("Hid their [picked_exposable] completely",LOG_EMOTE)
+			exposed_zones[picked_exposable] = exposure_flags
+			if(prev_flags != exposure_flags)
+				update_genitals()
 	return
 
 /mob/living/carbon/verb/toggle_arousal_state()
@@ -188,8 +156,6 @@
 	if(.)
 		update()
 		RegisterSignal(owner, COMSIG_MOB_DEATH, .proc/update_appearance)
-		if(genital_flags & GENITAL_THROUGH_CLOTHES)
-			owner.exposed_genitals += src
 
 /obj/item/organ/genital/Remove(special = FALSE)
 	. = ..()
@@ -199,7 +165,6 @@
 		if(genital_flags & UPDATE_OWNER_APPEARANCE && ishuman(C))
 			var/mob/living/carbon/human/H = .
 			H.update_genitals()
-		C.exposed_genitals -= src
 		UnregisterSignal(C, COMSIG_MOB_DEATH)
 
 //proc to give a player their genitals and stuff when they log in
@@ -231,7 +196,10 @@
 /obj/item/organ/genital/proc/get_features(mob/living/carbon/human/H)
 	return
 
-/mob/living/carbon/human/proc/update_genitals()
+/mob/living/carbon/proc/update_genitals()
+	return
+
+/mob/living/carbon/human/update_genitals()
 	if(QDELETED(src))
 		return
 	var/static/list/relevant_layers = list("[GENITALS_BEHIND_LAYER]" = "BEHIND", "[GENITALS_FRONT_LAYER]" = "FRONT")
@@ -251,7 +219,7 @@
 	var/list/genitals_to_add
 	var/list/fully_exposed
 	for(var/obj/item/organ/genital/G in internal_organs)
-		if(G.is_exposed()) //Checks appropriate clothing slot and if it's through_clothes
+		if(is_zone_exposed(G.zone)) //Checks appropriate clothing slot and if it's through_clothes
 			LAZYADD(gen_index[G.layer_index], G)
 	for(var/L in gen_index)
 		if(L) //skip nulls

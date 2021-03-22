@@ -7,8 +7,10 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 	var/list/texts_by_atom = list()
 	var/addendum = ""
 	var/always_show = FALSE
+	var/show_if_unknown = FALSE
 	var/max_len = MAX_FLAVOR_LEN
 	var/can_edit = TRUE
+	var/zone = BODY_ZONE_PRECISE_EYES
 	/// For preference/DNA saving/loading. Null to prevent. Prefs are only loaded from obviously if it exists in preferences.features.
 	var/save_key
 	/// Do not attempt to render a preview on examine. If this is on, it will display as \[flavor_name\]
@@ -16,7 +18,7 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 	/// Examine FULLY views. Overrides examine_no_preview
 	var/examine_full_view = FALSE
 
-/datum/element/flavor_text/Attach(datum/target, text = "", _name = "Flavor Text", _addendum, _max_len = MAX_FLAVOR_LEN, _always_show = FALSE, _edit = TRUE, _save_key, _examine_no_preview = FALSE)
+/datum/element/flavor_text/Attach(datum/target, mob/text = "", _name = "Flavor Text", _addendum, _max_len = MAX_FLAVOR_LEN, _always_show = FALSE, _show_if_unknown = FALSE _edit = TRUE, _save_key, _examine_no_preview = FALSE, examine_more = FALSE, _zone = BODY_ZONE_PRECISE_EYES)
 	. = ..()
 
 	if(. == ELEMENT_INCOMPATIBLE || !isatom(target)) //no reason why this shouldn't work on atoms too.
@@ -29,12 +31,15 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 		flavor_name = _name
 	if(!isnull(addendum))
 		addendum = _addendum
+	show_if_unknown = _show_if_unknown
 	always_show = _always_show
 	can_edit = _edit
 	save_key = _save_key
 	examine_no_preview = _examine_no_preview
-
-	RegisterSignal(target, COMSIG_PARENT_EXAMINE, .proc/show_flavor)
+	if(examine_more)
+		RegisterSignal(target, COMSIG_PARENT_EXAMINE_MORE, .proc/show_flavor)
+	else
+		RegisterSignal(target, COMSIG_PARENT_EXAMINE, .proc/show_flavor)
 
 	if(can_edit && ismob(target)) //but only mobs receive the proc/verb for the time being
 		var/mob/M = target
@@ -46,7 +51,7 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 
 /datum/element/flavor_text/Detach(atom/A)
 	. = ..()
-	UnregisterSignal(A, list(COMSIG_PARENT_EXAMINE, COMSIG_HUMAN_PREFS_COPIED_TO))
+	UnregisterSignal(A, list(COMSIG_PARENT_EXAMINE, COMSIG_PARENT_EXAMINE_MORE, COMSIG_HUMAN_PREFS_COPIED_TO))
 	texts_by_atom -= A
 	if(can_edit && ismob(A))
 		var/mob/M = A
@@ -56,16 +61,15 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 			remove_verb(M, /mob/proc/manage_flavor_tests)
 
 /datum/element/flavor_text/proc/show_flavor(atom/target, mob/user, list/examine_list)
-	if(!always_show && isliving(target))
-		var/mob/living/L = target
-		var/unknown = L.get_visible_name() == "Unknown"
-		if(!unknown && iscarbon(target))
-			var/mob/living/carbon/C = L
-			unknown = (C.wear_mask && (C.wear_mask.flags_inv & HIDEFACE)) || (C.head && (C.head.flags_inv & HIDEFACE))
-		if(unknown)
-			if(!("...?" in examine_list)) //can't think of anything better in case of multiple flavor texts.
-				examine_list += "...?"
-			return
+	if(!always_show)
+		if(!show_if_unknown && isliving(target))
+			var/mob/living/L = target
+			if(L.get_visible_name() == "Unknown")
+				return
+		if(iscarbon(target))
+			var/mob/living/carbon/C = target
+			if(C.is_zone_exposed(zone)))
+				return
 	var/text = texts_by_atom[target]
 	if(!text)
 		return
@@ -199,7 +203,9 @@ GLOBAL_LIST_EMPTY(mobs_with_editable_flavor_text) //et tu, hacky code
 	if(ismob(target))
 		add_verb(target, /mob/proc/set_pose)
 
-/datum/element/flavor_Text/carbon/temporary/Detach(datum/source, force)
+/datum/element/flavor_text/carbon/temporary/Detach(datum/source, force)
 	. = ..()
 	if(ismob(source))
 		remove_verb(source, /mob/proc/set_pose)
+
+/datum/element/flavor_text/carbon/exposable/

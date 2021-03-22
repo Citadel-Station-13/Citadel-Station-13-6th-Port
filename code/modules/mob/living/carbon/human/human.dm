@@ -43,6 +43,9 @@
 		AddComponent(/datum/component/mood)
 	AddComponent(/datum/component/combat_mode)
 	AddElement(/datum/element/flavor_text/carbon, _name = "Flavor Text", _save_key = "flavor_text")
+	AddElement(/datum/element/flavor_text/carbon, _name = "Chest Flavor Text", _save_key = "chest_flavor_text", examine_more = TRUE, _zone = BODY_ZONE_CHEST)
+	AddElement(/datum/element/flavor_text/carbon, _name = "Groin Flavor Text", _save_key = "groin_flavor_text", examine_more = TRUE, _zone = BODY_ZONE_PRECISE_GROIN)
+	AddElement(/datum/element/flavor_text/carbon, _name = "Feet Flavor Text", _save_key = "feet_flavor_text", examine_more = TRUE, _zone = BODY_ZONE_PRECISE_L_FOOT)
 	AddElement(/datum/element/flavor_text/carbon/temporary, "", "Set Pose (Temporary Flavor Text)", "This should be used only for things pertaining to the current round!", _save_key = null)
 	AddElement(/datum/element/flavor_text, _name = "OOC Notes", _addendum = "Put information on ERP/vore/lewd-related preferences here. THIS SHOULD NOT CONTAIN REGULAR FLAVORTEXT!!", _always_show = TRUE, _save_key = "ooc_notes", _examine_no_preview = TRUE)
 

@@ -159,20 +159,20 @@
 	if(!all_scars)
 		return ..()
 
-	var/list/visible_scars
+	var/list/visible_scars = list()
 	for(var/i in all_scars)
 		var/datum/scar/S = i
 		if(S.is_visible(user))
-			LAZYADD(visible_scars, S)
+			visible_scars += S
 
-	if(!visible_scars)
+	if(!length(visible_scars))
 		return ..()
 
-	var/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+	. = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+
+	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE_MORE, user, .)
 	for(var/i in visible_scars)
 		var/datum/scar/S = i
 		var/scar_text = S.get_examine_description(user)
 		if(scar_text)
-			msg += "[scar_text]"
-
-	return msg
+			. += "[scar_text]"

@@ -112,13 +112,17 @@
 	if(!isnull(effects_exam))
 		. += effects_exam
 
+	var/was_genit = FALSE
 	//CIT CHANGES START HERE - adds genital details to examine text
 	if(LAZYLEN(internal_organs) && CHECK_BITFIELD(user.client?.prefs.cit_toggles, GENITAL_EXAMINE))
 		for(var/obj/item/organ/genital/dicc in internal_organs)
-			if(istype(dicc) && dicc.is_exposed())
+			if(istype(dicc) && is_zone_exposed(dicc.zone))
 				. += "[dicc.desc]"
+				was_genit = TRUE
+	if(was_genit)
+		. += "You can look again to take a closer look..."
 	if(CHECK_BITFIELD(user.client?.prefs.cit_toggles, VORE_EXAMINE))
-		var/cursed_stuff = attempt_vr(src,"examine_bellies",args) //vore Code
+		var/cursed_stuff = examine_bellies()
 		if(cursed_stuff)
 			. += cursed_stuff
 //END OF CIT CHANGES

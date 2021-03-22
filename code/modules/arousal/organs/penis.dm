@@ -14,6 +14,7 @@
 	shape = DEF_COCK_SHAPE
 	size = 2 //arbitrary value derived from length and diameter for sprites.
 	layer_index = PENIS_LAYER_INDEX
+	flavor_text_key = "cock_flavor_text"
 	var/length = 6 //inches
 
 	var/prev_length = 6 //really should be renamed to prev_length
@@ -83,8 +84,7 @@
 			var/datum/sprite_accessory/taur/T = GLOB.taur_list[owner.dna.features["taur"]]
 			if(T.taur_mode & S.accepted_taurs) //looks out of place on those.
 				lowershape = "taur, [lowershape]"
-
-	desc = "You see [aroused_state ? "an erect" : "a flaccid"] [lowershape] [name]. You estimate it's about [round(length, 0.25)] inch[round(length, 0.25) != 1 ? "es" : ""] long and [round(diameter, 0.25)] inch[round(diameter, 0.25) != 1 ? "es" : ""] in diameter."
+	desc = "[aroused_state ? "an erect" : "a flaccid"] [lowershape] [name]."
 
 /obj/item/organ/genital/penis/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna

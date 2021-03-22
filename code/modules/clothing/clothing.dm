@@ -183,8 +183,7 @@
 		RegisterSignal(C, COMSIG_MOVABLE_MOVED, .proc/bristle)
 
 	zones_disabled++
-	for(var/i in zone2body_parts_covered(def_zone))
-		body_parts_covered &= ~i
+	body_parts_covered &= ~zone2body_parts_covered(def_zone)
 
 	if(body_parts_covered == NONE) // if there are no more parts to break then the whole thing is kaput
 		obj_destruction((damage_type == BRUTE ? "melee" : "laser")) // melee/laser is good enough since this only procs from direct attacks anyway and not from fire/bombs

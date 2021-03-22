@@ -345,17 +345,17 @@
 /proc/zone2body_parts_covered(def_zone)
 	switch(def_zone)
 		if(BODY_ZONE_CHEST)
-			return list(CHEST, GROIN)
+			return CHEST | GROIN
 		if(BODY_ZONE_HEAD)
-			return list(HEAD)
+			return HEAD
 		if(BODY_ZONE_L_ARM)
-			return list(ARM_LEFT, HAND_LEFT)
+			return ARM_LEFT | HAND_LEFT
 		if(BODY_ZONE_R_ARM)
-			return list(ARM_RIGHT, HAND_RIGHT)
+			return ARM_RIGHT | HAND_RIGHT
 		if(BODY_ZONE_L_LEG)
-			return list(LEG_LEFT, FOOT_LEFT)
+			return LEG_LEFT | FOOT_LEFT
 		if(BODY_ZONE_R_LEG)
-			return list(LEG_RIGHT, FOOT_RIGHT)
+			return LEG_RIGHT | FOOT_RIGHT
 
 //Turns a Body_parts_covered bitfield into a list of organ/limb names.
 //(I challenge you to find a use for this) -I found a use for it!!
@@ -432,6 +432,32 @@
 
 		if(SLOT_LEGCUFFED)
 			return pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+
+/proc/zone2body_parts_covered_precise(def_zone)
+	switch(def_zone)
+		if(BODY_ZONE_CHEST)
+			return CHEST
+		if(BODY_ZONE_HEAD)
+			return HEAD
+		if(BODY_ZONE_L_ARM)
+			return ARM_LEFT
+		if(BODY_ZONE_R_ARM)
+			return ARM_RIGHT
+		if(BODY_ZONE_L_LEG)
+			return LEG_LEFT
+		if(BODY_ZONE_R_LEG)
+			return LEG_RIGHT
+		if(BODY_ZONE_PRECISE_GROIN)
+			return GROIN
+		if(BODY_ZONE_PRECISE_L_FOOT)
+			return FOOT_LEFT
+		if(BODY_ZONE_PRECISE_R_FOOT)
+			return FOOT_RIGHT
+		if(BODY_ZONE_PRECISE_L_HAND)
+			return HAND_LEFT
+		if(BODY_ZONE_PRECISE_R_HAND)
+			return HAND_RIGHT
+	return NONE // face
 
 //adapted from http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2colour(temp)

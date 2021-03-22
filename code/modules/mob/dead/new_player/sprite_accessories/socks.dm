@@ -4,10 +4,12 @@
 
 /datum/sprite_accessory/underwear/socks
 	has_digitigrade = TRUE
+	body_parts_covered = FEET
 
 /datum/sprite_accessory/underwear/socks/nude
 	name = "Nude"
 	icon_state = null
+	body_parts_covered = NONE
 
 // please make sure they're sorted alphabetically and categorized
 

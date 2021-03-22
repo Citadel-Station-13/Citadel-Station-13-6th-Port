@@ -3,12 +3,12 @@
 ////////////////////////////
 
 /datum/sprite_accessory/underwear/top
-	covers_chest = TRUE
+	body_parts_covered = CHEST
 
 /datum/sprite_accessory/underwear/top/nude
 	name = "Nude"
 	icon_state = null
-	covers_chest = FALSE
+	body_parts_covered = NONE
 
 // please make sure they're sorted alphabetically and categorized
 
@@ -348,14 +348,14 @@
 	icon_state = "shibari"
 	gender = FEMALE
 	has_color = TRUE
-	covers_chest = FALSE
+	body_parts_covered = NONE
 
 /datum/sprite_accessory/underwear/top/shibari_sleeved
 	name = "Shibari Ropes - sleeves"
 	icon_state = "shibari_sleeves"
 	gender = FEMALE
 	has_color = TRUE
-	covers_chest = FALSE
+	body_parts_covered = NONE
 
 /datum/sprite_accessory/underwear/top/swimsuit
 	name = "Swimsuit Top"

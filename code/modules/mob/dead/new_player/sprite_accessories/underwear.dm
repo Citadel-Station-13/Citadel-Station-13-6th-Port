@@ -3,12 +3,12 @@
 ///////////////////////////
 
 /datum/sprite_accessory/underwear/bottom
-	covers_groin = TRUE
+	body_parts_covered = GROIN
 
 /datum/sprite_accessory/underwear/bottom/nude
 	name = "Nude"
 	icon_state = null
-	covers_groin = FALSE
+	body_parts_covered = NONE
 
 /datum/sprite_accessory/underwear/bottom/briefs
 	name = "Briefs"
@@ -161,19 +161,19 @@
 	name = "Swimsuit, One Piece - Black"
 	icon_state = "swimming_black"
 	gender = FEMALE
-	covers_chest = TRUE
+	body_parts_covered = CHEST|GROIN
 
 /datum/sprite_accessory/underwear/bottom/swimsuit_blue
 	name = "Swimsuit, One Piece - Striped Blue"
 	icon_state = "swimming_blue"
 	gender = FEMALE
-	covers_chest = TRUE
+	body_parts_covered = CHEST|GROIN
 
 /datum/sprite_accessory/underwear/bottom/swimsuit_red
 	name = "Swimsuit, One Piece - Red"
 	icon_state = "swimming_red"
 	gender = FEMALE
-	covers_chest = TRUE
+	body_parts_covered = CHEST|GROIN
 
 /datum/sprite_accessory/underwear/bottom/thong
 	name = "Thong"
