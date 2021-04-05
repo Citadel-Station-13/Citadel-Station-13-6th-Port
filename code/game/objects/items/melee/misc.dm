@@ -715,3 +715,72 @@
 	overlay = mutable_appearance(icon, overlay_state)
 	overlay.appearance_flags = RESET_COLOR
 	add_overlay(overlay)
+
+/obj/item/melee/epitaphhand
+	name = "Epitaph's Hand"
+	icon = 'icons/obj/items_and_weapons.dmi'
+	icon_state = "disintegrate"
+	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	righthand_file ='icons/mob/inhands/items_righthand.dmi'
+	force = 10
+	throwforce = 0
+	armour_penetration = 100
+	wound_bonus = 20
+	bare_wound_bonus = 0
+	w_class = WEIGHT_CLASS_BULKY
+	attack_verb = list("smacked", "brutally punched", "eviscerated")
+	block_parry_data = /datum/block_parry_data/epitaphhand
+	item_flags = ITEM_CAN_PARRY | DROPDEL | ABSTRACT
+
+/datum/block_parry_data/epitaphhand
+	parry_time_windup = 0.5
+	parry_time_active = 10
+	parry_time_spindown = 2
+	parry_time_perfect = 5
+	parry_time_perfect_leeway = 5
+	parry_imperfect_falloff_percent = 30
+	parry_efficiency_perfect = 100
+	parry_failed_stagger_duration = 1 SECONDS
+	parry_failed_clickcd_duration = 1 SECONDS
+	parry_cooldown = 3 SECONDS
+	parry_sounds = list('sound/weapons/Epitaph.ogg')
+	parry_data = list(PARRY_DISARM_ATTACKER = TRUE)
+
+/obj/item/melee/epitaphhand/active_parry_reflex_counter(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, list/return_list, parry_efficiency, list/effect_text)
+	. = ..()
+	if(!attacker)
+		return
+	if(!iscarbon(attacker))
+		return
+	var/mob/living/carbon/C = attacker
+	var/obj/item/bodypart/chest/epitaphwoundtarget = C.get_bodypart(BODY_ZONE_CHEST)
+	if(!epitaphwoundtarget)
+		return
+	var/datum/wound/slash/critical/epitaphwound = new /datum/wound/slash/critical
+	epitaphwound.apply_wound(epitaphwoundtarget)
+
+/obj/item/melee/epitaphhand/melee_attack_chain(mob/user, atom/target, params, attackchain_flags, damage_multiplier)
+	if(attackchain_flags & ATTACK_IS_PARRY_COUNTERATTACK)
+		if(damage_multiplier)
+			damage_multiplier *= 10
+		else
+			damage_multiplier = 10
+	. = ..()
+
+/obj/item/melee/epitaphhand/on_active_parry(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, list/block_return, parry_efficiency, parry_time)
+	. = ..()
+	if(!attacker)
+		return
+	do_teleport(owner, get_step(attacker, turn(attacker.dir, 180)), FALSE, TRUE)
+
+/obj/item/melee/epitaphhand/on_end_parry(mob/living/owner, wassuccessful)
+	if(QDELETED(src))
+		return
+	. = ..()
+	if(!wassuccessful)
+		return
+	qdel(src)
+
+/obj/item/melee/epitaphhand/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, EPITAPH_TRAIT)

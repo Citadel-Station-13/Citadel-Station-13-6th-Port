@@ -42,7 +42,7 @@
 	// Parrying
 	/// Whether or not the user is in the middle of an active parry. Set to [UNARMED_PARRY], [ITEM_PARRY], [MARTIAL_PARRY] if parrying.
 	var/parrying = FALSE
-	/// The itme the user is currently parrying with, if any.
+	/// The item the user is currently parrying with, if any.
 	var/obj/item/active_parry_item
 	/// world.time of parry action start
 	var/parry_start_time = 0

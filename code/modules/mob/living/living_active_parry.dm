@@ -134,6 +134,9 @@
 		if(efficiency >= data.parry_efficiency_considered_successful)
 			successful = TRUE
 			break
+	if(parrying == ITEM_PARRY)
+		if(active_parry_item)
+			active_parry_item.on_end_parry(src, successful)
 	if(!successful)		// didn't parry anything successfully
 		if(data.parry_failed_stagger_duration)
 			Stagger(data.parry_failed_stagger_duration)
@@ -179,6 +182,11 @@
   * Called when an attack is parried using this, whether or not the parry was successful.
   */
 /obj/item/proc/on_active_parry(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, list/block_return, parry_efficiency, parry_time)
+
+/**
+  * Called when the parry using this item ends.
+  */
+/obj/item/proc/on_end_parry(mob/living/owner, wassuccessful)
 
 /**
   * Called when an attack is parried innately, whether or not the parry was successful.

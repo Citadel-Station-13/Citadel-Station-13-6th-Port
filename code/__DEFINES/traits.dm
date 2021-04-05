@@ -330,6 +330,7 @@
 #define DEATHSQUAD_TRAIT "deathsquad"
 #define SLIMEPUDDLE_TRAIT "slimepuddle"
 #define CORRUPTED_SYSTEM "corrupted-system"
+#define EPITAPH_TRAIT "epitaph-trait"
 /// This trait is added by the active directional block system.
 #define ACTIVE_BLOCK_TRAIT				"active_block"
 /// This trait is added by the parry system.
