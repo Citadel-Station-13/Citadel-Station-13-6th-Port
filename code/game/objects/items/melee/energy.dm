@@ -188,36 +188,57 @@
 /obj/item/melee/transforming/energy/sword/cyborg/saw/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
 	return NONE
 
+#define ESWORD_SWORD 0
+#define ESWORD_SABER 1
+#define ESWORD_KATANA 2
+
 /obj/item/melee/transforming/energy/sword/saber
 	possible_colors = list("red" = LIGHT_COLOR_RED, "blue" = LIGHT_COLOR_LIGHT_CYAN, "green" = LIGHT_COLOR_GREEN, "purple" = LIGHT_COLOR_LAVENDER)
-	unique_reskin = list("Sword" = "sword0", "saber" = "esaber0")
+	unique_reskin = list("Sword" = "sword1", "Saber" = "esaber1", "Katana" = "samurai1")
 	var/hacked = FALSE
-	var/saber = FALSE
+	var/bladetype = ESWORD_SWORD
 
 /obj/item/melee/transforming/energy/sword/saber/transform_weapon(mob/living/user, supress_message_text)
 	. = ..()
 	if(.)
 		if(active)
 			if(sword_color)
-				if(saber)
-					icon_state = "esaber[sword_color]"
-				else
-					icon_state = "sword[sword_color]"
+				switch(bladetype)
+					if(ESWORD_SWORD)
+						icon_state = "sword[sword_color]"
+					if(ESWORD_SABER)
+						icon_state = "esaber[sword_color]"
+					if(ESWORD_KATANA)
+						icon_state = "samurai[sword_color]"
 		else
-			if(saber)
-				icon_state = "esaber0"
-			else
-				icon_state = "sword0"
+			switch(bladetype)
+				if(ESWORD_SWORD)
+					icon_state = "sword0"
+				if(ESWORD_SABER)
+					icon_state = "esaber0"
+				if(ESWORD_KATANA)
+					icon_state = "samurai0"
 
 /obj/item/melee/transforming/energy/sword/saber/reskin_obj(mob/M)
 	. = ..()
-	if(icon_state == "esaber0")
-		saber = TRUE
+	if(!active)
+		if(icon_state == "sword1")
+			icon_state = "sword0"
+			bladetype = ESWORD_SWORD
+		if(icon_state == "esaber1")
+			icon_state = "esaber0"
+			bladetype = ESWORD_SABER
+		if(icon_state == "samurai1")
+			icon_state = "samurai0"
+			bladetype = ESWORD_KATANA
 	if(active)
-		if(saber)
-			icon_state = "esaber[sword_color]"
-		else
-			icon_state = "sword[sword_color]"
+		switch(bladetype)
+			if(ESWORD_SWORD)
+				icon_state = "sword[sword_color]"
+			if(ESWORD_SABER)
+				icon_state = "esaber[sword_color]"
+			if(ESWORD_KATANA)
+				icon_state = "samurai[sword_color]"
 
 /obj/item/melee/transforming/energy/sword/saber/set_sword_color(var/color_forced)
 	if(color_forced) // wow i really do not like this at fucking all holy SHIT
@@ -297,9 +318,13 @@
 				icon_state = "swordrainbow"
 				user.update_inv_hands()
 		else
-			to_chat(user, "<span class='warning'>It's already fabulous!</span> <span class='notice'>If you wanted to reset the color, though, try a disarming intent while it's off.</span>")
+			to_chat(user, "<span class='warning'>It's already fabulous!</span> <span class='notice'>If you wanted to reset the color, though, try a <b>disarming</b> intent while it's off.</span>")
 	else
 		return ..()
+
+#undef ESWORD_SWORD
+#undef ESWORD_SABER
+#undef ESWORD_KATANA
 
 /obj/item/melee/transforming/energy/sword/pirate
 	name = "energy cutlass"
