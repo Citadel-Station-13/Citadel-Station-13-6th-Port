@@ -185,6 +185,17 @@
 /turf/open/floor/plating/asteroid/airless/cave/volcanic/has_data //subtype for producing a tunnel with given data
 	has_data = TRUE
 
+/turf/open/floor/plating/asteroid/airless/cave/volcanic/abyss
+	mob_spawn_list = list(/mob/living/simple_animal/hostile/asteroid/goliath/beast/random = 40, \
+		/mob/living/simple_animal/hostile/asteroid/abyss_demon = 40, \
+		/mob/living/simple_animal/hostile/asteroid/fire_wisp = 30, \
+		/mob/living/simple_animal/hostile/asteroid/ice_whelp/lavaland = 20)
+
+	data_having_type = /turf/open/floor/plating/asteroid/airless/cave/volcanic/abyss/has_data
+
+/turf/open/floor/plating/asteroid/airless/cave/volcanic/abyss/has_data //subtype for producing a tunnel with given data
+	has_data = TRUE
+
 /turf/open/floor/plating/asteroid/airless/cave/snow
 	gender = PLURAL
 	name = "snow"

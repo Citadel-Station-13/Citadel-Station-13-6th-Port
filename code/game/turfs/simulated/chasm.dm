@@ -89,6 +89,12 @@
 	light_power = 0.65 //less bright, too
 	light_color = LIGHT_COLOR_LAVA //let's just say you're falling into lava, that makes sense right
 
+/turf/open/chasm/lavaland/Initialize()
+	. = ..()
+	var/turf/T = SSmapping.get_turf_below(src)
+	if(T)
+		new /turf/open/floor/plating/asteroid/airless/cave/volcanic/abyss(T)
+
 // Chasms for Ice moon, with planetary atmos and glow
 /turf/open/chasm/icemoon
 	icon = 'icons/turf/floors/icechasms.dmi'

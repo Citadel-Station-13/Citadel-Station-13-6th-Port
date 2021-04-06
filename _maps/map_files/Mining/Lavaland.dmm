@@ -18,43 +18,13 @@
 /turf/closed/mineral/random/high_chance/volcanic,
 /area/lavaland/surface/outdoors)
 "ae" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"af" = (
-/obj/structure/necropolis_gate/legion_gate,
-/obj/structure/necropolis_arch,
 /obj/structure/stone_tile/slab,
+/obj/structure/necropolis_gate/legion_gate,
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"ag" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ah" = (
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+"af" = (
+/obj/structure/stone_tile/slab/cracked,
+/turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "ai" = (
 /turf/closed/mineral/random/volcanic,
@@ -77,26 +47,58 @@
 "aA" = (
 /turf/open/lava/smooth/lava_land_surface,
 /area/template_noop)
+"aJ" = (
+/obj/structure/stone_tile,
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
 "aQ" = (
 /obj/structure/stone_tile/surrounding_tile{
-	dir = 1
+	dir = 4
 	},
 /turf/closed/indestructible/riveted/boss,
 /area/lavaland/surface/outdoors)
 "aU" = (
-/obj/structure/stone_tile/block/cracked,
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/item/t_scanner/adv_mining_scanner/lesser,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"cp" = (
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 1
 	},
 /turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"bJ" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bV" = (
+/obj/machinery/hydroponics/soil,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/center,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
+"bW" = (
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"cp" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
 "cu" = (
 /obj/item/pickaxe,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
@@ -106,101 +108,164 @@
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "cw" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
+/obj/structure/stone_tile/slab,
+/obj/structure/table/wood,
+/obj/item/toy/cards/deck/syndicate,
+/obj/item/construction/rcd/loaded/upgraded,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"cO" = (
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"cS" = (
 /obj/structure/stone_tile{
 	dir = 8
 	},
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "dA" = (
-/obj/structure/stone_tile/block/cracked{
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"dD" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
 	dir = 4
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"dD" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"dF" = (
+/obj/structure/stone_tile/slab,
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"dP" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"dQ" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"eb" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
 	},
 /turf/closed/indestructible/riveted/boss,
 /area/lavaland/surface/outdoors)
-"dF" = (
-/obj/structure/stone_tile/block/cracked,
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"dM" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"eb" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/machinery/iv_drip,
-/obj/item/reagent_containers/glass/beaker/waterbottle/large,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"eh" = (
-/obj/structure/stone_tile/slab/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"eo" = (
-/obj/structure/stone_tile/cracked,
+"ee" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/table/wood,
+/obj/item/kitchen/knife/combat/bone,
+/obj/item/book/granter/crafting_recipe/bone_bow,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"eo" = (
+/obj/structure/stone_tile/slab/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "eq" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"eP" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/turf/closed/mineral/volcanic/lava_land_surface,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"eQ" = (
-/obj/structure/closet/crate/radiation,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/flare,
+"eM" = (
 /obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"eP" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile{
 	dir = 8
 	},
 /obj/structure/stone_tile/cracked{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"ft" = (
-/obj/structure/stone_tile/block,
-/obj/item/spear/bonespear,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"fN" = (
+/obj/structure/stone_tile,
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"eQ" = (
+/obj/structure/stone_tile/surrounding,
+/obj/structure/stone_tile/center/cracked,
+/mob/living/simple_animal/hostile/megafauna/legion,
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"eU" = (
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/item/spear/bonespear,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ft" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"fK" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"fN" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "fQ" = (
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
@@ -212,101 +277,12 @@
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors/unexplored)
 "fT" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"fV" = (
-/turf/closed/indestructible/riveted/boss/see_through,
-/area/lavaland/surface/outdoors)
-"fW" = (
-/obj/structure/necropolis_gate/locked,
+/obj/structure/necropolis_gate/legion_gate,
+/obj/structure/necropolis_arch,
 /obj/structure/stone_tile/slab,
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"gj" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/center,
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
-"gk" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
-"go" = (
-/obj/structure/stone_tile/block,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gr" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gs" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gt" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gy" = (
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gB" = (
+"fV" = (
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
@@ -316,7 +292,89 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"fW" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"gj" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"gk" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"go" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"gs" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"gt" = (
+/obj/structure/closet/crate,
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"gB" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "gC" = (
 /obj/structure/stone_tile,
@@ -331,94 +389,239 @@
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"gG" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gM" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gO" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "gP" = (
-/obj/structure/stone_tile/slab,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"gR" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile/surrounding/cracked{
 	dir = 1
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/area/ruin/unpowered/ash_walkers)
 "hd" = (
-/obj/structure/mineral_door/sandstone,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"hg" = (
-/obj/structure/stone_tile/surrounding,
-/obj/structure/stone_tile/center/cracked,
-/mob/living/simple_animal/hostile/megafauna/legion,
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
-"hr" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
+"hs" = (
+/obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/obj/item/hatchet,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"hs" = (
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/lava/smooth/lava_land_surface,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "hy" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/table/wood,
+/obj/item/storage/toolbox/syndicate,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"hD" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"hJ" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"hK" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"id" = (
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/indestructible/boss,
+/area/lavaland/surface/outdoors)
+"in" = (
+/obj/structure/stone_tile/block,
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ip" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ir" = (
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/center,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
 	},
 /turf/open/lava/smooth{
 	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
 /area/ruin/unpowered/ash_walkers)
-"hD" = (
-/obj/effect/mob_spawn/human/corpse/damaged,
+"it" = (
+/obj/item/seeds/glowshroom{
+	potency = 50;
+	yield = 5
+	},
+/obj/item/seeds/glowshroom{
+	potency = 50;
+	yield = 5
+	},
+/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck,
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"iw" = (
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/center,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
+"ix" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
-"hH" = (
-/obj/structure/stone_tile/block{
+"iC" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
 	dir = 1
 	},
 /obj/structure/stone_tile,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"iG" = (
+/obj/structure/stone_tile/block/cracked,
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/item/t_scanner/adv_mining_scanner/lesser,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"iJ" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"iK" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"iX" = (
+/obj/structure/stone_tile,
+/obj/item/shard,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"iY" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked,
 /obj/structure/stone_tile{
 	dir = 8
 	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"iZ" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"hJ" = (
+"jb" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"jg" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/machinery/iv_drip,
+/obj/item/reagent_containers/glass/beaker/waterbottle/large,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"jj" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"jk" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
+"jl" = (
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
@@ -427,28 +630,194 @@
 	dir = 1
 	},
 /turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"jo" = (
+/obj/machinery/hydroponics/soil,
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"ia" = (
-/obj/item/reagent_containers/glass/bucket/wood,
+"jq" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"id" = (
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/item/storage/bag/plants/portaseeder,
+/obj/item/storage/bag/plants,
+/obj/item/seeds/cotton{
+	yield = 5
+	},
+/obj/item/seeds/cotton/durathread,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"jF" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
 /obj/structure/stone_tile{
 	dir = 4
 	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"jH" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
+"jL" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"jN" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"jQ" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"jR" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/item/pickaxe,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"jS" = (
+/obj/structure/stone_tile/block,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ke" = (
+/obj/item/storage/box/rxglasses,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"kg" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"kj" = (
+/obj/structure/stone_tile/slab/cracked,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"kl" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/item/flashlight/lantern,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"ko" = (
+/obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
 /obj/structure/stone_tile{
 	dir = 8
 	},
+/obj/structure/stone_tile,
+/obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"ky" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"ir" = (
+"kG" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/item/flashlight/lantern,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"kN" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/machinery/the_singularitygen,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"kP" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
+	},
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
+"kS" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"lb" = (
 /obj/structure/stone_tile/slab/cracked{
 	dir = 5
 	},
@@ -457,397 +826,16 @@
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"it" = (
-/obj/structure/stone_tile/block,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iu" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iw" = (
-/obj/structure/stone_tile/slab/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/slab/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ix" = (
-/obj/structure/stone_tile/block/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iy" = (
-/obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iC" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile/block/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iG" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/item/stack/sheet/mineral/wood,
-/obj/item/stack/sheet/mineral/wood,
-/obj/item/stack/sheet/mineral/wood,
-/obj/item/stack/sheet/mineral/wood,
-/obj/item/seeds/ambrosia/deus{
-	potency = 50;
-	yield = 5
-	},
-/obj/item/seeds/ambrosia/deus{
-	potency = 50;
-	yield = 5
-	},
-/obj/item/seeds/tower,
-/obj/item/seeds/tower,
-/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"iJ" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/table/wood,
-/obj/item/clothing/head/helmet/roman/legionnaire,
-/obj/item/spear/bonespear,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"iK" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iX" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"iY" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ja" = (
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jb" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jg" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jj" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"jk" = (
-/obj/structure/stone_tile/center,
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jl" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jm" = (
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jq" = (
-/obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"js" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jx" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jF" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jH" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jL" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/center,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jN" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/center/cracked,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jQ" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jR" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"jS" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ke" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"kg" = (
-/obj/structure/fluff/drake_statue,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kj" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kl" = (
-/obj/structure/fluff/drake_statue/falling,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ko" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ky" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kB" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kD" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kG" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kH" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/center/cracked,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kJ" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/center,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kM" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kN" = (
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kP" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"kR" = (
-/obj/structure/stone_tile/slab/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lb" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
 "le" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 8
 	},
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lg" = (
 /obj/structure/stone_tile/block{
@@ -856,27 +844,26 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
 "lj" = (
-/obj/structure/stone_tile/block{
-	dir = 1
+/obj/structure/stone_tile/block,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ll" = (
+/obj/structure/stone_tile{
+	dir = 4
 	},
 /obj/structure/stone_tile,
 /obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ll" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
+	dir = 1
 	},
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/obj/item/stack/marker_beacon/ten,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
 "lp" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
@@ -890,24 +877,39 @@
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lq" = (
-/obj/structure/stone_tile/block/cracked,
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	dir = 4
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lr" = (
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile{
 	dir = 8
 	},
+/obj/structure/stone_tile/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "ls" = (
 /obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/lava/smooth/lava_land_surface,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lu" = (
 /obj/structure/stone_tile/block/cracked{
@@ -929,79 +931,60 @@
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lw" = (
-/obj/structure/stone_tile/cracked,
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ly" = (
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/lava/smooth/lava_land_surface,
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ly" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lz" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lD" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lE" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile{
 	dir = 1
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lF" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
 	},
 /obj/structure/stone_tile{
-	dir = 8
+	dir = 4
 	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lG" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/block,
+/obj/structure/stone_tile,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
+"lG" = (
+/turf/closed/indestructible/riveted/boss/see_through,
+/area/ruin/unpowered/ash_walkers)
 "lI" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
+/obj/structure/stone_tile/cracked,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"lL" = (
+/obj/structure/stone_tile/surrounding/cracked{
+	dir = 6
 	},
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lP" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
 /obj/structure/stone_tile/cracked{
-	dir = 4
+	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"lQ" = (
-/obj/structure/stone_tile/surrounding/cracked{
-	dir = 6
+/obj/structure/stone_tile/block{
+	dir = 4
 	},
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
@@ -1028,747 +1011,406 @@
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lW" = (
-/obj/structure/stone_tile/block/cracked,
 /obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/turf/open/lava/smooth/lava_land_surface,
+/obj/structure/stone_tile/block,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "lZ" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ma" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
 /obj/structure/stone_tile/block{
-	dir = 8
+	dir = 4
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"mb" = (
-/obj/structure/stone_tile/cracked,
+"ma" = (
 /obj/structure/stone_tile/cracked{
 	dir = 1
 	},
-/obj/structure/stone_tile/block{
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"mb" = (
+/obj/structure/stone_tile/block/cracked{
 	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
 	},
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mk" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile/slab/cracked{
 	dir = 4
+	},
+/obj/structure/stone_tile/slab/cracked{
+	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "ml" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
 /obj/structure/stone_tile/cracked,
-/turf/open/lava/smooth/lava_land_surface,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mn" = (
-/obj/structure/stone_tile/block/cracked,
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
+/obj/structure/stone_tile/slab,
+/obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mq" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile/block/cracked,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"mr" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ms" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/closet/crate,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"mt" = (
+/obj/structure/stone_tile/slab/cracked,
+/obj/effect/decal/cleanable/blood,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"mu" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
-"mr" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
-"ms" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
-"mt" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mu" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/indestructible/riveted/boss,
 /area/lavaland/surface/outdoors)
 "mv" = (
+/obj/structure/stone_tile,
 /obj/structure/stone_tile{
-	dir = 4
+	dir = 8
 	},
-/turf/open/lava/smooth/lava_land_surface,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mw" = (
 /obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"mx" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile{
 	dir = 1
 	},
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mx" = (
-/obj/structure/stone_tile,
-/turf/open/lava/smooth/lava_land_surface,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "my" = (
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/center,
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 4
 	},
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 1
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mA" = (
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mB" = (
 /obj/structure/stone_tile/cracked{
 	dir = 1
 	},
-/obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mC" = (
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mD" = (
 /obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"mC" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"mD" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mE" = (
-/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
 /obj/structure/stone_tile{
 	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mF" = (
 /obj/structure/stone_tile/block/cracked,
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/block/cracked{
 	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mG" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mH" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mI" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/obj/structure/stone_tile/center,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mJ" = (
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 8
 	},
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/center/cracked,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mK" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mL" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mM" = (
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
+/obj/structure/stone_tile/surrounding_tile/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/area/ruin/unpowered/ash_walkers)
 "mN" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"mO" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mP" = (
+/obj/structure/stone_tile/block,
 /obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
 	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mQ" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile/block{
-	dir = 4
+/obj/structure/stone_tile/surrounding,
+/obj/structure/stone_tile/center/cracked,
+/obj/effect/portal/permanent{
+	icon = 'icons/effects/effects.dmi';
+	icon_state = "bhole3";
+	id = "abyss_portal";
+	name = "Abyssal Portal"
 	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "mS" = (
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 4
 	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/indestructible/boss,
+/obj/structure/stone_tile/center,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mV" = (
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 4
 	},
-/obj/structure/stone_tile{
-	dir = 4
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
 	},
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
-/area/lavaland/surface/outdoors)
+/obj/structure/stone_tile/center,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
 "mW" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/open/indestructible/boss,
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/ore_box,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mX" = (
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/block{
 	dir = 4
 	},
-/turf/open/indestructible/boss,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mY" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/turf/open/indestructible/boss,
+/obj/structure/fluff/drake_statue,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "mZ" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/block{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"nb" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
+"na" = (
+/obj/structure/stone_tile{
+	dir = 4
 	},
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/turf/open/indestructible/boss,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "nc" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/indestructible/boss,
+/turf/closed/indestructible/riveted/boss/see_through,
 /area/lavaland/surface/outdoors)
 "ne" = (
-/obj/structure/stone_tile/block{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
 	},
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/center,
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "nf" = (
-/obj/structure/stone_tile/slab/cracked,
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "ng" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
 	},
-/obj/structure/stone_tile/block/cracked{
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center,
 /turf/open/indestructible/boss,
 /area/lavaland/surface/outdoors)
 "nt" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"nB" = (
-/obj/item/shovel,
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile/block{
 	dir = 8
 	},
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
+/area/lavaland/surface/outdoors)
 "nJ" = (
 /turf/closed/wall/mineral/wood,
 /area/ruin/unpowered/ash_walkers)
 "nU" = (
-/obj/structure/stone_tile,
-/obj/item/shard,
+/obj/structure/fluff/drake_statue/falling,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
+/area/lavaland/surface/outdoors)
 "nW" = (
-/obj/structure/stone_tile,
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
+/obj/structure/stone_tile,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"oh" = (
+/obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
-/obj/item/flashlight/lantern,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "ol" = (
 /obj/effect/landmark/stationroom/lavaland/station,
 /turf/open/lava/smooth/lava_land_surface,
 /area/template_noop)
 "ot" = (
-/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "oB" = (
-/obj/item/stack/sheet/mineral/wood,
-/obj/structure/stone_tile{
+/obj/effect/decal/cleanable/blood,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "oS" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/item/storage/firstaid/ancient,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"pc" = (
-/obj/effect/decal/cleanable/blood,
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"pq" = (
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"pt" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"pD" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"pF" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"pG" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"pH" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"qh" = (
-/obj/structure/stone_tile/surrounding/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"qi" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"qA" = (
-/obj/item/flashlight/lantern,
-/obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"qN" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"qS" = (
-/obj/structure/stone_tile/slab,
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"rz" = (
-/obj/item/storage/box/rxglasses,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"rO" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/ore_box,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"rQ" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"sa" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"se" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/item/flashlight/lantern,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"sk" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"sl" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"sx" = (
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/obj/item/stack/sheet/mineral/coal,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"ty" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/item/flashlight/lantern,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"tz" = (
-/obj/structure/stone_tile/slab,
-/obj/structure/table/wood,
-/obj/item/toy/cards/deck/syndicate,
-/obj/item/construction/rcd/loaded/upgraded,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"ui" = (
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"uk" = (
-/obj/structure/lavaland/ash_walker,
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"uz" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"vi" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"vu" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/center,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"vR" = (
-/obj/machinery/hydroponics/soil,
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"wm" = (
-/obj/item/seeds/glowshroom{
-	potency = 50;
-	yield = 5
-	},
-/obj/item/seeds/glowshroom{
-	potency = 50;
-	yield = 5
-	},
-/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck,
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"ww" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"wF" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"xr" = (
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
@@ -1781,87 +1423,185 @@
 /obj/item/pickaxe,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"xs" = (
+"pc" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"pq" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"pt" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"xX" = (
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"pD" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"pF" = (
+/obj/structure/stone_tile/block/cracked,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"pG" = (
+/obj/structure/stone_tile/surrounding_tile,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"pH" = (
 /obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"qh" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"qi" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/table/wood,
+/obj/item/weldingtool/experimental,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"qD" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
 	dir = 8
 	},
-/obj/item/pickaxe,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/table/wood,
+/obj/item/clothing/head/helmet/roman/legionnaire,
+/obj/item/spear/bonespear,
+/turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
-"yf" = (
-/obj/machinery/hydroponics/soil,
-/obj/structure/stone_tile/surrounding_tile/cracked{
+"qK" = (
+/obj/structure/stone_tile/block/cracked,
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"qN" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"qS" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rm" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rp" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rz" = (
+/obj/structure/stone_tile/surrounding_tile{
 	dir = 1
 	},
 /obj/structure/stone_tile/surrounding_tile,
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 4
 	},
+/obj/structure/stone_tile/center/cracked,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rD" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rO" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
 /obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"zf" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"rQ" = (
+/obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"zv" = (
-/obj/machinery/hydroponics/soil,
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"An" = (
-/obj/structure/stone_tile/slab,
-/obj/structure/table/wood,
-/obj/item/spear/bonespear,
-/obj/item/spear/bonespear,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"AH" = (
-/obj/structure/stone_tile{
-	dir = 4
+/area/lavaland/surface/outdoors)
+"sa" = (
+/obj/structure/stone_tile/block/cracked,
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/item/spear/bonespear,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
-"AU" = (
-/obj/structure/stone_tile,
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"AY" = (
+"se" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked{
 	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
 	},
 /obj/item/flashlight/lantern,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
-"Bj" = (
+"sk" = (
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
@@ -1872,35 +1612,124 @@
 /obj/structure/necropolis_gate/ashwalker,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
-"Br" = (
-/obj/structure/stone_tile/slab,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+"sl" = (
+/turf/open/water,
 /area/lavaland/surface/outdoors)
-"Bs" = (
-/obj/structure/stone_tile/cracked{
+"sx" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 8
 	},
-/obj/structure/closet/crate,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"BF" = (
-/obj/structure/flora/rock/jungle,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"BG" = (
-/obj/structure/stone_tile/block{
-	dir = 4
+"ta" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/cracked{
+	dir = 1
 	},
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ty" = (
+/obj/structure/stone_tile,
 /obj/structure/stone_tile{
 	dir = 8
 	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/item/flashlight/lantern,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"tz" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile,
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ui" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
 /turf/closed/indestructible/riveted/boss,
 /area/lavaland/surface/outdoors)
-"BH" = (
+"uk" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/table/wood,
+/obj/item/spear/bonespear,
+/obj/item/spear/bonespear,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"us" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"uz" = (
+/obj/effect/mob_spawn/human/corpse/damaged,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"vi" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"vR" = (
+/obj/effect/decal/cleanable/blood,
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"wm" = (
+/obj/structure/flora/rock/jungle,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ww" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/item/spear/bonespear,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"wF" = (
+/obj/structure/bonfire/dense,
+/obj/structure/stone_tile/center,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"wL" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 4
 	},
@@ -1913,150 +1742,148 @@
 /obj/structure/stone_tile/center/cracked,
 /turf/closed/mineral/volcanic/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"BP" = (
+"xr" = (
 /obj/structure/stone_tile/block/cracked{
-	dir = 4
+	dir = 1
 	},
+/obj/structure/stone_tile/cracked,
 /obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"BU" = (
-/turf/closed/indestructible/riveted/boss/see_through,
-/area/ruin/unpowered/ash_walkers)
-"Ch" = (
-/obj/structure/stone_tile/surrounding_tile{
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"xX" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
 	dir = 4
 	},
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"yc" = (
+/obj/structure/stone_tile,
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"yf" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"zf" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"An" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"AH" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"AY" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
+"Bj" = (
+/obj/structure/lavaland/ash_walker,
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
+"Br" = (
+/obj/structure/mineral_door/sandstone,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Bs" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/item/storage/firstaid/ancient,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"BF" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"BG" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"BH" = (
+/obj/structure/stone_tile/block/cracked,
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"BP" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"BU" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/turf/open/lava/smooth{
+	initial_gas_mix = "o2=14;n2=23;TEMP=300"
+	},
+/area/ruin/unpowered/ash_walkers)
 "CG" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
+/area/lavaland/surface/outdoors)
 "CL" = (
-/obj/structure/stone_tile/slab,
-/obj/structure/table/wood,
-/obj/item/clothing/head/helmet/skull,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Dn" = (
 /obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"Do" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Dx" = (
-/obj/structure/bonfire/dense,
-/obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Dz" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
 	dir = 1
 	},
 /obj/structure/stone_tile,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"DQ" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/item/book/granter/crafting_recipe/bone_bow,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Ef" = (
-/obj/structure/stone_tile/block/cracked,
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"Ez" = (
-/obj/machinery/grill{
-	name = "old rusty grill"
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"EQ" = (
-/obj/structure/stone_tile/surrounding/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Fn" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Fz" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"FD" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/obj/structure/stone_tile/cracked,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"Gc" = (
-/obj/structure/flora/junglebush/b,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Gw" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Gx" = (
-/obj/item/pickaxe,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"GC" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/stone_tile/center,
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/turf/open/lava/smooth{
-	initial_gas_mix = "o2=14;n2=23;TEMP=300"
-	},
-/area/ruin/unpowered/ash_walkers)
-"Hq" = (
+"Dm" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
 	dir = 8
@@ -2072,244 +1899,261 @@
 /obj/item/spear/bonespear,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
-"HX" = (
+"Dn" = (
+/obj/structure/flora/rock/pile/largejungle{
+	light_range = null
+	},
+/turf/open/water,
+/area/ruin/unpowered/ash_walkers)
+"Do" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/center/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Dx" = (
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
-"Jq" = (
-/obj/structure/stone_tile/slab/cracked,
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"JP" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
+"Dz" = (
+/obj/structure/stone_tile/block{
 	dir = 1
 	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
+/obj/structure/stone_tile{
+	dir = 8
 	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"DQ" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Ef" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"Ez" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"EF" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"EQ" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/item/spear/bonespear,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Fn" = (
+/obj/structure/well_foundation,
+/obj/item/reagent_containers/glass/bucket/wood,
+/obj/item/reagent_containers/glass/bucket/wood,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
+"FD" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Gg" = (
+/obj/structure/stone_tile/block/cracked,
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Gw" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Gx" = (
+/obj/structure/flora/junglebush/b,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"GC" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 1
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"Hq" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"HP" = (
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/obj/item/book/granter/crafting_recipe/bone_bow,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"HX" = (
+/obj/item/pickaxe,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"In" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Jq" = (
+/obj/structure/stone_tile/block/cracked,
+/obj/item/book/granter/crafting_recipe/bone_bow,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Jv" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"JA" = (
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "KA" = (
 /obj/structure/stone_tile/slab,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
-"KJ" = (
+"KH" = (
 /obj/structure/stone_tile/block/cracked,
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"KV" = (
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/effect/mob_spawn/human/corpse/damaged,
-/obj/effect/decal/cleanable/blood,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"LJ" = (
-/turf/open/water,
+/turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"Mh" = (
-/obj/structure/stone_tile/cracked,
+"KJ" = (
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
-/turf/closed/indestructible/riveted/boss,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"KV" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Lg" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"LJ" = (
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/obj/item/stack/sheet/mineral/coal,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Mh" = (
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "Mx" = (
 /turf/closed/mineral/volcanic/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "MQ" = (
-/obj/structure/table/optable,
+/obj/item/stack/sheet/mineral/wood,
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"MX" = (
+/obj/structure/stone_tile/block,
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/obj/item/surgical_drapes,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"MS" = (
-/obj/structure/stone_tile/cracked{
-	dir = 1
+/obj/structure/stone_tile{
+	dir = 4
 	},
-/obj/structure/stone_tile/cracked,
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"MX" = (
-/obj/structure/stone_tile/slab/cracked,
+/obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
 "Ou" = (
-/obj/structure/stone_tile/slab,
-/obj/structure/table/wood,
-/obj/item/storage/toolbox/syndicate,
-/turf/open/indestructible/boss,
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "Oy" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Pj" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Qd" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/table/wood,
-/obj/item/storage/belt,
-/obj/item/spear/bonespear,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Qk" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/item/stack/marker_beacon/ten,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"QC" = (
-/obj/structure/stone_tile/block,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"QG" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"QM" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Rb" = (
-/obj/structure/closet/crate,
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/obj/item/flashlight/lantern,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Rk" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Rr" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"RF" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"RX" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile,
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Sh" = (
-/obj/structure/stone_tile/block,
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Si" = (
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"SG" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Tn" = (
-/obj/structure/stone_tile/block{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/table/wood,
-/obj/item/kitchen/knife/combat/bone,
-/obj/item/book/granter/crafting_recipe/bone_bow,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"TN" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 8
 	},
@@ -2324,11 +2168,175 @@
 	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
 /area/ruin/unpowered/ash_walkers)
-"Uh" = (
-/obj/structure/stone_tile/slab,
-/obj/structure/table/wood,
-/obj/item/weldingtool/experimental,
+"Pj" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Qd" = (
+/obj/structure/stone_tile,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Qk" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/center,
+/obj/item/hatchet,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"QC" = (
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"QG" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/item/spear/bonespear,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"QI" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"QM" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"Rb" = (
+/obj/structure/table/optable,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/item/surgical_drapes,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Rk" = (
+/obj/structure/stone_tile/slab/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Rr" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"RF" = (
+/obj/structure/stone_tile/block/cracked,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"RX" = (
+/obj/structure/stone_tile/block,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile{
+	dir = 4
+	},
 /turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"Sh" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Si" = (
+/turf/closed/indestructible/riveted/boss,
+/area/ruin/unpowered/ash_walkers)
+"Sn" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"SG" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/turf/closed/indestructible/riveted/boss,
+/area/lavaland/surface/outdoors)
+"SJ" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Th" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Tn" = (
+/obj/structure/stone_tile/slab,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"TN" = (
+/obj/structure/stone_tile/cracked,
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Uh" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/effect/mob_spawn/human/corpse/damaged,
+/obj/effect/decal/cleanable/blood,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "Uq" = (
 /obj/docking_port/stationary{
@@ -2343,68 +2351,180 @@
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "UV" = (
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Vb" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/obj/structure/stone_tile{
+/obj/structure/stone_tile/block{
 	dir = 8
 	},
-/obj/structure/stone_tile/cracked{
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Vb" = (
+/obj/item/reagent_containers/glass/bucket/wood,
+/obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/obj/item/storage/bag/plants/portaseeder,
-/obj/item/storage/bag/plants,
-/obj/item/seeds/cotton{
-	yield = 5
-	},
-/obj/item/seeds/cotton/durathread,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "Vj" = (
-/obj/structure/stone_tile/cracked{
-	dir = 1
+/obj/structure/stone_tile{
+	dir = 4
 	},
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "VI" = (
-/obj/structure/well_foundation,
-/obj/item/reagent_containers/glass/bucket/wood,
-/obj/item/reagent_containers/glass/bucket/wood,
+/obj/structure/stone_tile/block,
+/obj/item/spear/bonespear,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
+"VN" = (
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "Wb" = (
+/obj/item/flashlight/lantern,
+/obj/structure/stone_tile/center,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Wh" = (
+/obj/machinery/hydroponics/soil,
 /obj/structure/stone_tile/block{
 	dir = 8
-	},
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
-"Wh" = (
-/obj/structure/stone_tile{
-	dir = 1
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "Wj" = (
-/obj/structure/stone_tile/surrounding_tile/cracked,
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked,
 /turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
+/area/lavaland/surface/outdoors)
 "WA" = (
-/obj/structure/stone_tile/block/cracked,
-/obj/item/book/granter/crafting_recipe/bone_bow,
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/obj/item/flashlight/lantern,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "WL" = (
+/obj/structure/stone_tile/surrounding/cracked,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"WN" = (
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"WT" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/table/wood,
+/obj/item/storage/belt,
+/obj/item/spear/bonespear,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"WZ" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	dir = 8
+	},
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Xe" = (
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/item/stack/sheet/mineral/wood,
+/obj/item/stack/sheet/mineral/wood,
+/obj/item/stack/sheet/mineral/wood,
+/obj/item/stack/sheet/mineral/wood,
+/obj/item/seeds/ambrosia/deus{
+	potency = 50;
+	yield = 5
+	},
+/obj/item/seeds/ambrosia/deus{
+	potency = 50;
+	yield = 5
+	},
+/obj/item/seeds/tower,
+/obj/item/seeds/tower,
+/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"Xf" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/table/wood,
+/obj/item/clothing/head/helmet/skull,
+/turf/open/indestructible/boss,
+/area/ruin/unpowered/ash_walkers)
+"Xo" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/turf/closed/mineral/volcanic/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Xw" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Xz" = (
+/obj/item/shovel,
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"XG" = (
+/obj/structure/closet/crate/radiation,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/flare,
+/obj/structure/stone_tile/block/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Yg" = (
+/obj/machinery/grill{
+	name = "old rusty grill"
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/ruin/unpowered/ash_walkers)
+"Yy" = (
+/obj/structure/stone_tile/cracked{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"YQ" = (
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"Zc" = (
 /obj/structure/stone_tile{
 	dir = 4
 	},
@@ -2417,121 +2537,12 @@
 /obj/item/stack/sheet/cloth/ten,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
-"WN" = (
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/item/spear/bonespear,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"WT" = (
-/obj/structure/stone_tile/block{
-	dir = 4
-	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Xe" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/structure/stone_tile/center/cracked,
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"Xf" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Xo" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/turf/closed/indestructible/riveted/boss,
-/area/lavaland/surface/outdoors)
-"Xw" = (
-/obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile,
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
-"Xz" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	dir = 8
-	},
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"XG" = (
-/obj/effect/decal/cleanable/blood,
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Yg" = (
-/obj/structure/flora/rock/pile/largejungle{
-	light_range = null
-	},
-/turf/open/water,
-/area/ruin/unpowered/ash_walkers)
-"Yy" = (
-/obj/structure/stone_tile/block/cracked{
-	dir = 4
-	},
-/obj/item/flashlight/lantern,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ash_walkers)
-"Zc" = (
-/obj/structure/stone_tile{
-	dir = 4
-	},
-/obj/structure/stone_tile/cracked,
-/obj/structure/stone_tile/cracked{
-	dir = 1
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 8
-	},
-/obj/machinery/the_singularitygen,
-/turf/open/indestructible/boss,
-/area/ruin/unpowered/ash_walkers)
 "Zs" = (
-/obj/structure/stone_tile/block{
-	dir = 8
-	},
-/obj/structure/stone_tile/block/cracked{
+/obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 4
 	},
 /turf/closed/indestructible/riveted/boss,
-/area/ruin/unpowered/ash_walkers)
+/area/lavaland/surface/outdoors)
 
 (1,1,1) = {"
 aa
@@ -2545,15 +2556,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
 ab
 ab
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -2804,13 +2815,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -3061,13 +3072,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -3318,11 +3329,11 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -3575,12 +3586,12 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -3832,6 +3843,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -3855,10 +3870,6 @@ aj
 al
 al
 al
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -4089,6 +4100,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -4124,10 +4139,6 @@ ak
 ak
 ak
 al
-aj
-aj
-aj
-aj
 aj
 aj
 aj
@@ -4346,6 +4357,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -4366,10 +4381,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -4602,6 +4613,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -4623,10 +4638,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -4859,7 +4870,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
 ab
 ab
@@ -4883,10 +4898,6 @@ ab
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -5116,6 +5127,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -5138,10 +5153,6 @@ aj
 ab
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -5373,7 +5384,11 @@ aa
 aa
 aa
 aa
-iX
+aa
+aa
+aa
+aa
+mv
 ab
 ab
 ab
@@ -5393,10 +5408,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -5630,7 +5641,11 @@ aa
 aa
 aa
 aa
-iY
+aa
+aa
+aa
+aa
+WN
 ab
 ab
 ab
@@ -5654,10 +5669,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -5887,6 +5898,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -5907,10 +5922,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -6144,6 +6155,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -6165,10 +6180,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -6400,7 +6411,11 @@ aa
 aa
 aa
 aa
-ir
+aa
+aa
+aa
+aa
+lb
 ab
 ab
 ab
@@ -6422,10 +6437,6 @@ al
 al
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -6657,7 +6668,11 @@ aa
 aa
 aa
 aa
-gP
+aa
+aa
+aa
+aa
+Tn
 ad
 ad
 ab
@@ -6679,10 +6694,6 @@ aj
 al
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -6917,7 +6928,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 aj
 aj
@@ -6936,10 +6951,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -7174,6 +7185,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -7193,10 +7208,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -7431,6 +7442,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -7450,10 +7465,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -7688,6 +7699,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 aj
@@ -7707,10 +7722,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -7942,8 +7953,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-ix
+pF
 ab
 ab
 ab
@@ -7964,10 +7979,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -8199,6 +8210,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -8221,10 +8236,6 @@ ab
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -8458,6 +8469,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -8478,10 +8493,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -8715,7 +8726,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
 ab
 ab
@@ -8735,10 +8750,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -8972,6 +8983,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -8991,10 +9006,6 @@ ab
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -9229,8 +9240,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-jq
+Qd
 ab
 aj
 aj
@@ -9248,10 +9263,6 @@ ab
 ab
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -9486,6 +9497,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -9506,10 +9521,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -9741,7 +9752,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
 ab
@@ -9773,10 +9788,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -9998,6 +10009,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -10020,10 +10035,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -10255,6 +10266,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -10277,10 +10292,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -10512,6 +10523,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -10534,10 +10549,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -10769,6 +10780,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -10791,10 +10806,6 @@ ab
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -11026,9 +11037,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
-ja
+mw
 ab
 ab
 ab
@@ -11048,10 +11063,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -11283,6 +11294,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -11305,10 +11320,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -11544,7 +11555,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 aj
 aj
@@ -11562,10 +11577,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -11801,6 +11812,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -11824,10 +11839,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -12058,6 +12069,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -12076,10 +12091,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -12315,6 +12326,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -12333,10 +12348,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -12572,6 +12583,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -12590,10 +12605,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -12829,7 +12840,11 @@ aa
 aa
 aa
 aa
-jq
+aa
+aa
+aa
+aa
+Qd
 ab
 aj
 aj
@@ -12847,10 +12862,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -13082,7 +13093,11 @@ aa
 aa
 aa
 aa
-iu
+aa
+aa
+aa
+aa
+lZ
 ab
 ab
 ab
@@ -13103,10 +13118,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -13339,6 +13350,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -13360,10 +13375,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -13596,6 +13607,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -13617,10 +13632,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -13853,6 +13864,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -13875,10 +13890,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -14110,8 +14121,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-ja
+mw
 ab
 ab
 ab
@@ -14132,10 +14147,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -14367,6 +14378,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -14389,10 +14404,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -14625,6 +14636,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -14646,10 +14661,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -14882,6 +14893,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -14903,10 +14918,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -15138,7 +15149,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
 ab
@@ -15160,10 +15175,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -15395,6 +15406,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -15417,10 +15432,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -15652,6 +15663,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -15674,10 +15689,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -15909,6 +15920,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -15931,10 +15946,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -16166,6 +16177,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -16188,10 +16203,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -16423,9 +16434,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
-jx
+Vj
 ad
 ad
 ab
@@ -16445,10 +16460,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -16680,6 +16691,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ai
@@ -16702,10 +16717,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -16937,6 +16948,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ai
@@ -16959,10 +16974,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -17194,6 +17205,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ai
@@ -17215,10 +17230,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -17451,11 +17462,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ad
 ad
-jq
+Qd
 ab
 ab
 aj
@@ -17473,10 +17488,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -17708,6 +17719,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -17730,10 +17745,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -17965,6 +17976,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -17987,10 +18002,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -18222,6 +18233,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -18243,10 +18258,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -18479,6 +18490,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -18500,10 +18515,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -18736,6 +18747,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -18757,10 +18772,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -18993,6 +19004,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -19014,10 +19029,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -19250,6 +19261,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -19272,10 +19287,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -19507,6 +19518,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -19529,10 +19544,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -19764,9 +19775,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
-jb
+ky
 ab
 ab
 ab
@@ -19786,10 +19801,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -20024,6 +20035,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -20058,10 +20073,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -20281,6 +20292,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -20300,10 +20315,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -20538,6 +20549,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -20557,10 +20572,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -20795,6 +20806,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -20814,10 +20829,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -21049,7 +21060,11 @@ aa
 aa
 aa
 aa
-iw
+aa
+aa
+aa
+aa
+mk
 ad
 ad
 ab
@@ -21071,10 +21086,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -21306,6 +21317,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -21328,10 +21343,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -21563,6 +21574,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -21585,10 +21600,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -21820,6 +21831,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -21842,10 +21857,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -22077,6 +22088,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -22099,10 +22114,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -22334,6 +22345,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -22356,10 +22371,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -22591,6 +22602,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ad
@@ -22613,10 +22628,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -22848,6 +22859,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ai
@@ -22870,10 +22885,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -23105,6 +23116,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ai
@@ -23127,10 +23142,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -23362,6 +23373,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ai
@@ -23384,10 +23399,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -23619,12 +23630,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
 ad
 ad
-ix
+pF
 ab
 aj
 aj
@@ -23641,10 +23656,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -23876,6 +23887,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -23898,10 +23913,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -24133,6 +24144,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -24155,10 +24170,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -24390,6 +24401,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -24412,10 +24427,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -24647,7 +24658,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
 ab
 ab
@@ -24669,10 +24684,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -24904,8 +24915,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-jb
+ky
 ab
 ab
 ab
@@ -24926,10 +24941,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -25163,6 +25174,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -25183,10 +25198,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -25420,6 +25431,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -25440,10 +25455,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -25677,6 +25688,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -25697,10 +25712,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -25934,7 +25945,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -25954,10 +25969,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -26191,6 +26202,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -26211,10 +26226,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -26446,6 +26457,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -26468,10 +26483,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -26703,8 +26714,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-ix
+pF
 ab
 ab
 ab
@@ -26725,10 +26740,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -26960,6 +26971,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -26982,10 +26997,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -27217,7 +27228,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -27239,10 +27254,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -27474,6 +27485,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -27496,10 +27511,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -27731,6 +27742,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -27753,10 +27768,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -27988,6 +27999,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -28010,10 +28025,6 @@ ab
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -28245,6 +28256,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -28269,10 +28284,6 @@ aj
 ab
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -28502,6 +28513,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -28524,10 +28539,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -28759,6 +28770,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -28781,10 +28796,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -29016,6 +29027,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -29038,10 +29053,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -29273,11 +29284,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
-jb
-jb
+ky
+ky
 ab
 ab
 ab
@@ -29295,10 +29310,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -29535,6 +29546,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -29552,10 +29567,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -29792,6 +29803,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -29809,10 +29824,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -30049,6 +30060,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -30066,10 +30081,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -30306,7 +30317,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
 ab
 ab
@@ -30323,10 +30338,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -30563,6 +30574,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -30580,10 +30595,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -30815,6 +30826,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -30837,10 +30852,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -31072,7 +31083,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ad
 ab
 ab
@@ -31094,10 +31109,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -31329,6 +31340,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -31351,10 +31366,6 @@ aj
 aj
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -31586,6 +31597,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -31608,10 +31623,6 @@ aj
 aj
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -31843,6 +31854,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -31865,10 +31880,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -32100,7 +32111,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
 ab
@@ -32123,10 +32138,6 @@ aj
 ab
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -32357,6 +32368,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -32379,10 +32394,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -32617,8 +32628,12 @@ aa
 aa
 aa
 aa
-it
-ky
+aa
+aa
+aa
+aa
+jS
+pq
 ad
 ai
 ai
@@ -32636,10 +32651,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -32874,12 +32885,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ad
 ai
 ai
-jq
+Qd
 aj
 aj
 aj
@@ -32894,10 +32909,6 @@ ab
 ab
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -33131,6 +33142,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -33141,19 +33156,15 @@ aj
 aj
 aj
 aj
-kN
+Yy
 aj
 aj
 aj
 aj
 aj
 aj
-mD
+ip
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -33385,23 +33396,27 @@ aa
 aa
 aa
 aa
-ae
-jg
-gB
-gB
-js
+aa
+aa
+aa
+aa
+yf
+mx
+mE
+mE
+pt
 ab
 ab
 ab
 ab
 aj
 aj
-mu
+rp
 aj
 aj
 aj
 ab
-mA
+Lg
 aj
 aj
 aj
@@ -33414,10 +33429,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -33642,12 +33653,16 @@ aa
 aa
 aa
 aa
-iC
-gr
-gs
-gr
-gr
-kR
+aa
+aa
+aa
+aa
+mq
+lw
+lz
+lw
+lw
+eo
 ab
 ab
 ab
@@ -33663,21 +33678,17 @@ aj
 aj
 aj
 ab
-jQ
+Pj
 ak
 ak
 ak
 ak
 al
-iy
+ml
 ab
 ab
-mK
+hK
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -33899,20 +33910,24 @@ aa
 aa
 aa
 aa
-gR
-ag
-jF
-gM
-kB
-jm
-ix
+aa
+aa
+aa
+aa
+Hq
+ls
+mH
+mX
+pD
+mA
+pF
 ab
-jS
+DQ
 aj
 aj
 aj
 aj
-lI
+bJ
 aj
 aj
 aj
@@ -33927,15 +33942,11 @@ ak
 ak
 ab
 ab
-jx
+Vj
 ab
 ab
-mM
+rm
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -34157,45 +34168,45 @@ aa
 aa
 aa
 aa
-gG
-go
-kg
-hs
-gr
-hH
-ab
-ab
-aj
-ly
-aj
-aj
-aj
+aa
+aa
+aa
+aa
+lr
+lj
+mY
+pH
 lw
+ly
+ab
+ab
+aj
+VN
 aj
 aj
-ls
+aj
+lI
 aj
 aj
-jx
-jS
-iy
+Xw
+aj
+aj
+Vj
+DQ
+ml
 al
 ak
 al
-jq
+Qd
 ab
-kN
-ab
-ab
-jx
+Yy
 ab
 ab
-mN
+Vj
+ab
+ab
+Th
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -34405,54 +34416,54 @@ aj
 aa
 aa
 aa
-mS
-mV
-mq
-mV
+aa
+aa
+aa
+aa
+id
+fV
+eq
+fV
+gk
+aa
+aa
 nc
-aa
-aa
-fV
-fV
-gr
-jH
-gO
-kD
-ag
+nc
+lw
 le
-aa
-aa
+mZ
+qS
 ls
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-lI
+BF
 aa
 aa
-jS
+Xw
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+bJ
+aa
+aa
+DQ
 ab
 ab
-ja
+mw
 ab
-jx
+Vj
 ab
-jq
+Qd
 ab
-kN
+Yy
 ab
 ab
 ab
-mO
-ak
-ak
-ak
-ak
+EF
 ak
 ak
 ak
@@ -34661,56 +34672,56 @@ aj
 (126,1,1) = {"
 aa
 aa
-fV
-gj
 gC
-mr
-nb
+gC
+gC
+aa
+nc
 ne
+gC
+eP
+gj
+gB
 aa
 aa
-fV
-fV
-jk
-gr
-gr
-gr
-gr
-gs
-aa
-lp
-lp
+nc
+nc
+my
+lw
+lw
+lw
+lw
 lz
+aa
 lp
-lF
 lp
 lP
+lp
+SJ
+lp
+QI
 lS
 lp
-lZ
+dP
 lS
 lS
 lp
 aa
-mE
+dQ
 ab
 ab
 ab
 ab
-kN
+Yy
 ab
 ab
 ab
 ab
 ab
-jS
+DQ
 ab
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -34916,59 +34927,59 @@ aj
 aj
 "}
 (127,1,1) = {"
+aa
+aa
+gC
 mQ
-mQ
-fW
-mQ
-mW
-hg
-ac
+gC
 nf
-ac
-ac
+ae
+nf
+cp
+eQ
 ac
 af
-lg
+ac
+ac
+ac
 fT
-kj
-fT
-fT
-lg
-gP
+mD
 lq
-lu
+nt
 lq
-lD
-lG
-lu
-lQ
-lu
-lW
-ma
 lq
-mk
-mn
-kR
+mD
+Tn
 mF
+lu
+mF
+In
+lW
+lu
+lL
+lu
+KH
+UV
+mF
+oh
+BH
+eo
+Gg
 ab
-mG
+Sn
 ab
-ja
+mw
 ab
-jx
-ab
-ab
-kN
+Vj
 ab
 ab
-jq
-jR
+Yy
 ab
 ab
-ak
-ak
-ak
-ak
+Qd
+KV
+ab
+ab
 ak
 ak
 ak
@@ -35175,57 +35186,57 @@ aj
 (128,1,1) = {"
 aa
 aa
-fV
-gk
-mX
-mZ
+gC
+gC
+gC
+aa
 nc
 ng
+dA
+ft
+gk
+hd
 aa
 aa
-fV
-fV
-jl
-gr
-ah
-gG
+nc
+nc
 gs
-gy
-aa
+lw
+mB
 lr
-lv
-lv
-lE
-lv
-lE
-lR
+lz
+CG
+aa
+TN
 lv
 lv
 mb
+lv
+mb
 lR
-ml
+lv
+lv
+ta
+lR
+eM
 lR
 aa
-it
+jS
 ab
 ab
-jx
-jR
+Vj
+KV
 ab
 ab
 ab
-mL
+YQ
 al
-iY
+WN
 ab
 ab
-jQ
+Pj
 ab
-jx
-ak
-ak
-ak
-ak
+Vj
 ak
 ak
 ak
@@ -35433,43 +35444,47 @@ aj
 aa
 aa
 aa
-mS
-mY
-ms
-hJ
+aa
+aa
+aa
+aa
 id
+dD
+fN
+go
+hs
 aa
 aa
-fV
-fV
-jm
-jL
-gM
-kH
-gr
-hH
-aa
-aa
+nc
+nc
+mA
+mI
+mX
+rz
 lw
+ly
+aa
+aa
+lI
+aj
+aj
+aj
+bJ
+aj
 aj
 aj
 aj
 lI
 aj
-aj
-aj
-aj
-lw
-aj
 aa
 aa
-jq
+Qd
 ab
 ab
 ab
-jQ
+Pj
 ab
-mI
+Jv
 ab
 ab
 al
@@ -35479,10 +35494,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -35699,47 +35710,47 @@ aa
 aa
 aa
 aa
-gr
-go
-kl
-hs
-gG
-lj
-ab
-ab
-aj
-aj
-mv
-my
+aa
+aa
+aa
+aa
 lw
+lj
+nU
+pH
+lr
+CL
+ab
+ab
 aj
 aj
-aj
+eU
+us
 lI
 aj
 aj
-kN
-jq
-jS
-jx
-jS
+aj
+bJ
+aj
+aj
+Yy
+Qd
+DQ
+Vj
+DQ
 ab
 ab
 ab
 ab
 ab
 ab
-jR
+KV
 ak
-jS
-kN
+DQ
+Yy
 ab
 ab
-jR
-ak
-ak
-ak
-ak
+KV
 ak
 ak
 ak
@@ -35955,48 +35966,48 @@ aa
 aa
 aa
 aa
-gR
-ah
-jN
-gO
-kJ
-gr
-it
-ab
-ab
-aj
-aj
-aj
-ab
-jQ
-aj
-jx
-ab
-ly
-aj
-aj
-ab
-ab
-ak
-al
-ja
-ab
-mH
-ab
-ab
+aa
+aa
+aa
+aa
+Hq
+mB
 mJ
+mZ
+rO
+lw
+jS
+ab
+ab
+aj
+aj
+aj
+ab
+Pj
+aj
+Vj
+ab
+VN
+aj
+aj
+ab
+ab
+ak
+al
+mw
+ab
+iZ
+ab
+ab
+cS
 al
 ak
 ak
 al
 ab
 ab
-mP
+bW
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -36212,12 +36223,16 @@ aa
 aa
 aa
 aa
-gR
-gr
-gr
-gr
-jm
-gP
+aa
+aa
+aa
+aa
+Hq
+lw
+lw
+lw
+mA
+Tn
 ab
 ab
 ab
@@ -36228,16 +36243,12 @@ aj
 aj
 aj
 ab
-mB
+JA
 aj
 aj
 aj
 ab
-ja
-ak
-ak
-ak
-ak
+mw
 ak
 ak
 ak
@@ -36469,11 +36480,15 @@ aa
 aa
 aa
 aa
-ae
-gr
-jm
-ko
-iu
+aa
+aa
+aa
+aa
+yf
+lw
+mA
+nW
+lZ
 ab
 ab
 ab
@@ -36485,16 +36500,12 @@ aj
 aj
 aj
 aj
-iy
+ml
 aj
 aj
 aj
-kN
+Yy
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -36729,13 +36740,17 @@ aa
 aa
 aa
 aa
-jq
+aa
+aa
+aa
+aa
+Qd
 ab
 ab
 ab
 ab
 ab
-kN
+Yy
 aj
 aj
 aj
@@ -36748,10 +36763,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -36986,11 +36997,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
-jR
-mt
+KV
+Gw
 ab
 aj
 aj
@@ -37005,10 +37020,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -37243,11 +37254,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
 ab
-jq
+Qd
 ab
 aj
 aj
@@ -37258,14 +37273,10 @@ aj
 aj
 aj
 aj
-mC
+na
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -37497,32 +37508,32 @@ aa
 aa
 aa
 aa
-iK
+aa
+aa
+aa
+aa
+mr
 ab
-jQ
-jq
-ab
-ab
-ab
-ab
-ab
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
-aj
+Pj
+Qd
 ab
 ab
-ak
-ak
-ak
-ak
+ab
+ab
+ab
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+aj
+ab
+ab
 ak
 ak
 ak
@@ -37754,6 +37765,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -37776,10 +37791,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -38011,6 +38022,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -38033,10 +38048,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -38268,6 +38279,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -38279,7 +38294,7 @@ ab
 ab
 aj
 aj
-lI
+bJ
 aj
 aj
 aj
@@ -38290,10 +38305,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -38526,6 +38537,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -38537,7 +38552,7 @@ ab
 aj
 aj
 aj
-iy
+ml
 aj
 aj
 aj
@@ -38547,10 +38562,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -38783,6 +38794,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -38804,10 +38819,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -39040,6 +39051,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -39061,10 +39076,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -39296,8 +39307,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-jq
+Qd
 ab
 ab
 ab
@@ -39307,9 +39322,9 @@ ab
 ab
 aj
 aj
-mw
+kS
 ab
-lI
+bJ
 aj
 aj
 aj
@@ -39318,10 +39333,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -39553,7 +39564,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -39564,10 +39579,10 @@ ab
 ab
 aj
 aj
-mx
+yc
 ab
 ab
-mx
+yc
 aj
 aj
 aj
@@ -39575,10 +39590,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -39810,6 +39821,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -39831,10 +39846,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -40056,6 +40067,10 @@ aj
 aj
 "}
 (147,1,1) = {"
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -40296,10 +40311,6 @@ ak
 ak
 ak
 ak
-ak
-ak
-ak
-ak
 aj
 aj
 aj
@@ -40324,13 +40335,17 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
-jR
+KV
 ad
 ab
 ab
-ll
+ot
 ab
 ab
 aj
@@ -40344,10 +40359,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -40588,6 +40599,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -40601,10 +40616,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -40845,6 +40856,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 aj
@@ -40861,10 +40876,6 @@ ab
 ab
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -41095,7 +41106,11 @@ aa
 aa
 aa
 aa
-ix
+aa
+aa
+aa
+aa
+pF
 ab
 ab
 ab
@@ -41117,10 +41132,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -41352,6 +41363,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -41374,10 +41389,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -41609,6 +41620,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -41631,10 +41646,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -41866,9 +41877,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
-jS
+DQ
 ab
 ab
 ab
@@ -41888,10 +41903,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -42123,6 +42134,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -42145,10 +42160,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -42382,6 +42393,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -42402,10 +42417,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -42639,7 +42650,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -42659,10 +42674,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -42896,6 +42907,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -42916,10 +42931,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -43153,6 +43164,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -43173,10 +43188,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -43408,6 +43419,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -43430,10 +43445,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -43665,7 +43676,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -43687,10 +43702,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -43922,6 +43933,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -43944,10 +43959,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -44179,6 +44190,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -44202,10 +44217,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -44425,6 +44436,10 @@ aj
 aj
 "}
 (164,1,1) = {"
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -44665,10 +44680,6 @@ ak
 ak
 ak
 ak
-ak
-ak
-ak
-ak
 aj
 aj
 aj
@@ -44693,6 +44704,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -44715,10 +44730,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -44950,12 +44961,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
 ab
 ab
-jS
+DQ
 ad
 ad
 ab
@@ -44972,10 +44987,6 @@ ab
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -45207,6 +45218,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -45229,10 +45244,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -45464,11 +45475,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
 ab
-kM
+rQ
 ai
 ai
 ai
@@ -45486,10 +45501,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -45721,6 +45732,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -45743,10 +45758,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -45978,6 +45989,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -46000,10 +46015,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -46235,6 +46246,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -46257,10 +46272,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -46492,6 +46503,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -46514,10 +46529,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -46749,7 +46760,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
 ab
@@ -46771,10 +46786,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -47006,6 +47017,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -47028,10 +47043,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -47263,16 +47274,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
 ab
-kN
+Yy
 ai
 ai
 ai
 ai
-jq
+Qd
 ab
 ab
 ab
@@ -47285,10 +47300,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -47523,7 +47534,11 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ai
 ai
@@ -47542,10 +47557,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -47780,6 +47791,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -47799,10 +47814,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -48037,6 +48048,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -48056,10 +48071,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -48294,6 +48305,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -48313,10 +48328,6 @@ aj
 aj
 ab
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -48548,7 +48559,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ad
 ab
@@ -48569,10 +48584,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -48805,6 +48816,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -48826,10 +48841,6 @@ ab
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -49062,6 +49073,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -49083,10 +49098,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -49319,6 +49330,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -49340,10 +49355,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -49576,6 +49587,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ad
 ai
@@ -49597,10 +49612,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -49833,10 +49844,14 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ai
-jS
+DQ
 ab
 ab
 ab
@@ -49855,10 +49870,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -50090,6 +50101,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ai
@@ -50112,10 +50127,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -50347,6 +50358,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ai
@@ -50369,10 +50384,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -50604,6 +50615,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ai
@@ -50835,10 +50850,6 @@ ak
 ak
 ak
 ak
-ak
-ak
-ak
-ak
 aj
 aj
 aj
@@ -50861,8 +50872,12 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
-iy
+ml
 ab
 ab
 ab
@@ -50883,10 +50898,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -51118,7 +51129,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -51140,10 +51155,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -51375,6 +51386,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -51397,10 +51412,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -51632,6 +51643,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -51654,10 +51669,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -51889,6 +51900,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -51911,10 +51926,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -52148,6 +52159,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -52168,10 +52183,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -52405,6 +52416,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -52425,10 +52440,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -52662,6 +52673,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -52682,10 +52697,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -52919,6 +52930,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -52939,10 +52954,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -53174,9 +53185,13 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
-iy
+ml
 ab
 ad
 ad
@@ -53196,10 +53211,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -53437,7 +53448,11 @@ aa
 aa
 aa
 aa
-iy
+aa
+aa
+aa
+aa
+ml
 ab
 ab
 ab
@@ -53453,10 +53468,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -53694,6 +53705,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 Mx
 Mx
@@ -53716,10 +53731,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -53951,6 +53962,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 Mx
 Mx
@@ -53966,10 +53981,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -54208,6 +54219,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 Mx
 Mx
@@ -54223,10 +54238,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -54459,15 +54470,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
-iy
+ml
 ab
 ab
 ab
 ab
-jR
+KV
 Mx
 Mx
 Mx
@@ -54480,10 +54495,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -54716,14 +54727,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
 ab
 ab
-kN
+Yy
 ab
-LJ
+sl
 ab
 ab
 ab
@@ -54737,10 +54752,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -54973,17 +54984,21 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
 ab
 ab
-BF
-LJ
-LJ
-LJ
+wm
+sl
+sl
+sl
 ab
-iy
+ml
 ab
 Mx
 aj
@@ -54994,10 +55009,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -55230,18 +55241,22 @@ aa
 aa
 aa
 aa
-it
+aa
+aa
+aa
+aa
+jS
 ab
 ab
-jx
+Vj
 ab
-LJ
-LJ
-LJ
-LJ
+sl
+sl
+sl
+sl
 ai
 ab
-iy
+ml
 Mx
 aj
 aj
@@ -55251,10 +55266,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -55487,14 +55498,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
-Ez
-ab
-LJ
-LJ
 Yg
-LJ
+ab
+sl
+sl
+Dn
+sl
 ai
 ai
 ab
@@ -55508,10 +55523,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -55744,14 +55755,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
-sx
+LJ
 ab
-LJ
-LJ
-LJ
-LJ
+sl
+sl
+sl
+sl
 ai
 ai
 ad
@@ -55765,10 +55780,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -56001,14 +56012,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
-jQ
+Pj
 ab
-LJ
-LJ
-Gc
+sl
+sl
+Gx
 ab
 ad
 ab
@@ -56022,10 +56037,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -56258,11 +56269,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
 ab
-jQ
+Pj
 ab
 ab
 ab
@@ -56280,10 +56295,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -56515,15 +56526,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 Mx
 ab
 ab
 ab
 ab
-jS
+DQ
 ab
-jS
+DQ
 ab
 ab
 Mx
@@ -56537,10 +56552,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -56766,15 +56777,19 @@ aa
 aa
 aa
 aa
-wF
-Do
-Mh
 aa
 aa
+aa
+aa
+aQ
 Rr
+hD
+aa
+aa
+jN
 Mx
-xs
-eq
+mC
+mK
 ab
 ab
 ab
@@ -56802,10 +56817,6 @@ ak
 ak
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -57024,6 +57035,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Si
 Si
 Si
@@ -57031,12 +57046,12 @@ Si
 Si
 Si
 Si
-it
+jS
 ab
 ab
-jq
-ja
-Gx
+Qd
+mw
+HX
 ab
 ab
 ab
@@ -57060,10 +57075,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -57281,22 +57292,26 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Si
-oS
-CG
-wm
-Vb
 Bs
-Si
+iJ
 it
 jq
-jR
-AH
+ms
+Si
 jS
-jS
+Qd
 KV
-ab
+ww
 DQ
+DQ
+Uh
+ab
+HP
 aa
 aa
 ab
@@ -57306,7 +57321,7 @@ ab
 aj
 aa
 aa
-kG
+rD
 ab
 ab
 ab
@@ -57319,10 +57334,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -57537,33 +57548,37 @@ aa
 aa
 aa
 aa
-Gw
-Si
-aU
-Wh
+aa
+aa
+aa
+aa
 zf
-Qk
-iG
 Si
+iG
+iK
 jQ
 ll
 Xe
-iu
-Ch
-ja
-jx
-jQ
+Si
+Pj
+ot
+sx
+lZ
+Do
+mw
+Vj
+Pj
 ab
-jx
-lp
-lz
-lp
-lF
+Vj
 lp
 lP
+lp
+SJ
+lp
+QI
 lS
-iy
-iu
+ml
+lZ
 ab
 ab
 ab
@@ -57577,10 +57592,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -57794,33 +57805,37 @@ aa
 aa
 aa
 aa
-Rk
-Si
-WA
-rz
+aa
+aa
+aa
+aa
 qh
-pq
+Si
 Jq
 ke
 gP
 ma
-ix
+mt
 Dx
-kM
+Tn
 UV
-ja
+pF
+wF
+rQ
+Mh
+mw
+DQ
+ab
 jS
-ab
-it
 lu
-lq
-lD
-lG
+mF
+In
+lW
 lu
-lQ
+lL
 lu
-kR
-kM
+eo
+rQ
 ab
 ab
 ab
@@ -57834,10 +57849,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -58051,33 +58062,37 @@ aa
 aa
 aa
 aa
-uz
-Si
-MQ
-nU
+aa
+aa
+aa
+aa
 ui
-Xw
-Rb
 Si
+Rb
+iX
 ix
-jQ
+kg
 gt
-jb
+Si
 pF
-jq
-jx
+Pj
+tz
 ky
-jx
-kN
+Ez
+Qd
+Vj
+pq
+Vj
+Yy
 lv
 lv
-lE
+mb
 lv
-lE
+mb
 lR
 lv
 ab
-jS
+DQ
 ab
 ab
 ab
@@ -58089,10 +58104,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -58308,22 +58319,26 @@ aa
 aa
 aa
 aa
-uz
+aa
+aa
+aa
+aa
+ui
 Si
-WL
-eb
-dM
-eQ
 Zc
-Si
-jQ
+jg
+jF
 XG
 kN
-mn
-iy
+Si
+Pj
 oB
-ll
-nB
+Yy
+BH
+ml
+MQ
+ot
+Xz
 ab
 aa
 aa
@@ -58334,7 +58349,7 @@ aj
 aj
 aa
 aa
-FD
+fK
 ab
 ab
 ab
@@ -58345,10 +58360,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -58566,6 +58577,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Si
 Si
 Si
@@ -58573,15 +58588,15 @@ Si
 Si
 Si
 Si
-jR
-jQ
-jR
-ae
-jx
+KV
 Pj
-ia
+KV
 yf
-jS
+Vj
+Ou
+Vb
+bV
+DQ
 aa
 aj
 aj
@@ -58601,10 +58616,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -58821,24 +58832,28 @@ aa
 aa
 aa
 aa
-dD
-pt
-Wb
-Dn
+aa
+aa
+aa
+aa
 Zs
-Zs
+fW
 xX
 jb
-Fz
+QM
 QM
 jR
-jQ
+ky
 pc
-lg
-it
-qA
+mM
+KV
+Pj
 vR
 mD
+jS
+Wb
+jo
+ip
 Mx
 aj
 aj
@@ -58857,10 +58872,6 @@ ak
 ak
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -59077,8 +59088,12 @@ aj
 aa
 aa
 aa
-wF
-qS
+aa
+aa
+aa
+aa
+aQ
+dF
 Si
 Si
 Si
@@ -59086,16 +59101,16 @@ Si
 Si
 Si
 Si
-Br
-pD
-jQ
-jx
 mn
-jQ
-hr
-zv
+mN
+Pj
+Vj
 BH
-jq
+Pj
+Qk
+Wh
+wL
+Qd
 Mx
 ab
 aj
@@ -59107,10 +59122,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -59334,7 +59345,11 @@ aj
 aa
 aa
 aa
-cp
+aa
+aa
+aa
+aa
+Ef
 Si
 KA
 KA
@@ -59344,14 +59359,14 @@ KA
 Si
 Si
 Si
-ft
-jx
-kN
-mn
 VI
 Vj
-MS
-AU
+Yy
+BH
+Fn
+QC
+Wj
+aJ
 Mx
 Mx
 ab
@@ -59364,10 +59379,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -59591,20 +59602,24 @@ aj
 aa
 aa
 aa
-lb
-tz
-KA
-AY
+aa
+aa
+aa
+aa
 BP
 cw
-WT
+KA
 ty
-Si
-Si
+hJ
+jj
 qN
+kl
+Si
+Si
+mP
 ab
-hD
-gR
+uz
+Hq
 Mx
 Mx
 Mx
@@ -59621,10 +59636,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -59848,26 +59859,30 @@ aj
 aa
 aa
 aa
-dA
-Ou
-KA
-QC
+aa
+aa
+aa
+aa
 GC
 hy
-ww
+KA
 vi
-Si
+ir
 BU
 kP
 iY
-jR
+Si
 lG
-js
+mS
+WN
+KV
+lW
+pt
 Mx
-xs
-xs
-xs
-Xz
+mC
+mC
+mC
+WZ
 Mx
 ab
 aj
@@ -59878,10 +59893,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -60105,20 +60116,24 @@ aj
 aa
 aa
 aa
-cp
-An
-KA
-nt
+aa
+aa
+aa
+aa
 Ef
 uk
-rQ
+KA
 MX
 sa
 Bj
-gP
+jH
 kj
 lg
 sk
+Tn
+nt
+mD
+xr
 Si
 Si
 nJ
@@ -60135,10 +60150,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -60362,25 +60373,29 @@ aj
 aa
 aa
 aa
-cp
-Uh
-KA
-jj
-vu
+aa
+aa
+aa
+aa
+Ef
 qi
-TN
+KA
 RX
-Si
-BU
+iw
+jk
 Oy
-iY
-kN
-gR
-nJ
+ko
+Si
+lG
+mV
 WN
 Yy
 Hq
 nJ
+QG
+WA
+Dm
+nJ
 Mx
 Mx
 ab
@@ -60392,10 +60407,6 @@ ab
 ab
 al
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -60619,24 +60630,28 @@ aj
 aa
 aa
 aa
-sl
-CL
-KA
-nW
+aa
+aa
+aa
+aa
 Dz
 Xf
-QG
+KA
 se
-Si
-Si
+iC
+jl
 KJ
-jR
-fN
-gP
+kG
+Si
+Si
 RF
-eh
+KV
 EQ
 Tn
+FD
+Rk
+WL
+ee
 nJ
 Mx
 Mx
@@ -60663,10 +60678,6 @@ ak
 ak
 ak
 al
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -60876,7 +60887,11 @@ aj
 aa
 aa
 aa
-cp
+aa
+aa
+aa
+aa
+Ef
 Si
 KA
 KA
@@ -60886,16 +60901,16 @@ KA
 Si
 Si
 Si
-ix
-kN
-jq
+pF
+Yy
+Qd
 ab
 nJ
-JP
-Qd
-iJ
-Si
 Sh
+WT
+qD
+Si
+in
 Mx
 ab
 aj
@@ -60906,10 +60921,6 @@ al
 al
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -61133,26 +61144,30 @@ aj
 aa
 aa
 aa
-pH
-qS
-Si
-Si
-Si
-Si
-Si
-Si
-Si
-kR
-rO
-xr
-ab
-eo
-nJ
-nJ
-nJ
-Si
-Si
+aa
+aa
+aa
+aa
+aU
 dF
+Si
+Si
+Si
+Si
+Si
+Si
+Si
+eo
+mW
+oS
+ab
+An
+nJ
+nJ
+nJ
+Si
+Si
+qK
 Mx
 ab
 aj
@@ -61163,10 +61178,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -61391,25 +61402,29 @@ aa
 aa
 aa
 aa
-aQ
-Fn
-SG
-SG
-SG
+aa
+aa
+aa
+aa
+eb
 BG
 SG
-Xo
-ot
-ab
-ab
-ab
+SG
+SG
+jL
+SG
+mu
 pG
+ab
+ab
+ab
+AH
 Mx
 Mx
-eP
+Xo
 Mx
 Mx
-Wj
+cO
 Mx
 ab
 aj
@@ -61420,10 +61435,6 @@ aj
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -61655,12 +61666,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 Mx
 ab
 ab
 ab
-HX
+AY
 Mx
 Mx
 Mx
@@ -61677,10 +61692,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -61912,12 +61923,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 Mx
 Mx
 ab
 ab
-iC
+mq
 Mx
 Mx
 Mx
@@ -61934,10 +61949,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -62169,12 +62180,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 Mx
 Mx
 Mx
 ab
-jb
+ky
 Mx
 Mx
 ab
@@ -62191,10 +62206,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -62426,12 +62437,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 Mx
 Mx
 Mx
-hd
+Br
 Mx
 Mx
 ab
@@ -62448,10 +62463,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -62683,6 +62694,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -62705,10 +62720,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -62940,6 +62951,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -62962,10 +62977,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -63197,6 +63208,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 Mx
 Mx
@@ -63219,10 +63234,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -63459,6 +63470,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 Mx
 ab
 ab
@@ -63476,10 +63491,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -63716,6 +63727,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -63733,10 +63748,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -63973,6 +63984,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -63990,10 +64005,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -64230,6 +64241,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -64247,10 +64262,6 @@ ab
 ab
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -64487,6 +64498,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -64504,10 +64519,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -64744,6 +64755,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -64761,10 +64776,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -65001,6 +65012,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -65018,10 +65033,6 @@ aj
 aj
 ab
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -65242,6 +65253,10 @@ aj
 aj
 "}
 (245,1,1) = {"
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -65483,10 +65498,6 @@ ak
 ak
 ak
 ak
-ak
-ak
-ak
-ak
 aj
 aj
 aj
@@ -65515,6 +65526,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -65531,10 +65546,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -65772,6 +65783,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -65788,10 +65803,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -66029,6 +66040,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -66254,10 +66269,6 @@ ak
 ak
 ak
 ak
-ak
-ak
-ak
-ak
 aj
 aj
 aj
@@ -66281,6 +66292,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -66302,10 +66317,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -66538,6 +66549,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ab
@@ -66559,10 +66574,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -66795,6 +66806,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -66816,10 +66831,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -67052,6 +67063,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ab
 ab
 ab
@@ -67073,10 +67088,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -67309,11 +67320,15 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
-js
+pt
 ab
 ab
 ab
@@ -67330,10 +67345,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -67573,7 +67584,11 @@ aa
 aa
 aa
 aa
-js
+aa
+aa
+aa
+aa
+pt
 ab
 ab
 ab
@@ -67587,10 +67602,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak
@@ -67830,6 +67841,10 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
 ad
 ab
 ab
@@ -67844,10 +67859,6 @@ aj
 aj
 aj
 ab
-ak
-ak
-ak
-ak
 ak
 ak
 ak

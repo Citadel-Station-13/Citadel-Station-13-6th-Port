@@ -27,6 +27,8 @@
 	attack_verb_simple = "pulverize"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	throw_message = "does nothing to the rocky hide of the"
+	ranged_message = "throws a tentacle at"
+	projectiletype = /obj/item/projectile/tentacle_goliath
 	vision_range = 4
 	aggro_vision_range = 7
 	move_force = MOVE_FORCE_VERY_STRONG
@@ -38,10 +40,17 @@
 
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
+	var/can_tentacle = FALSE
+
 /mob/living/simple_animal/hostile/asteroid/goliath/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	handle_preattack()
+
+	if(SSmapping.level_trait(z, ZTRAIT_ABYSS))
+		can_tentacle = TRUE
+	else
+		can_tentacle = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/handle_preattack()
 	if(ranged_cooldown <= world.time + ranged_cooldown_time*0.25 && !pre_attack)
@@ -65,6 +74,12 @@
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return
+
+	if(can_tentacle && prob(25)) //Abyssal goliaths have a chance of throwing a tentacle at their target and them hitting them in melee.
+		. = ..()
+		CheckAndAttack()
+		return
+
 	if(get_dist(src, target) <= 7)//Screen range check, so you can't get tentacle'd offscreen
 		visible_message("<span class='warning'>[src] digs its tentacles under [target]!</span>")
 		new /obj/effect/temp_visual/goliath_tentacle/original(tturf, src)
@@ -212,3 +227,32 @@
 	icon_state = "Goliath_tentacle_retract"
 	deltimer(timerid)
 	timerid = QDEL_IN(src, 7)
+
+/obj/item/projectile/tentacle_goliath
+	name = "goliath tentacle"
+	icon_state = "goliath_end"
+	pass_flags = PASSTABLE
+	damage = 15
+	damage_type = BRUTE
+	range = 8
+	hitsound = 'sound/weapons/thudswoosh.ogg'
+	var/chain
+
+/obj/item/projectile/tentacle_goliath/fire(setAngle)
+	if(firer)
+		chain = firer.Beam(src, icon_state = "goliath", time = INFINITY, maxdistance = INFINITY, beam_sleep_time = 1)
+	..()
+
+
+/obj/item/projectile/tentacle_goliath/on_hit(atom/target, blocked = FALSE)
+	if(blocked >= 100)
+		return BULLET_ACT_BLOCK
+
+	if(isliving(target))
+		var/mob/living/L = target
+		if(!L.anchored && !L.throwing)
+			L.visible_message("<span class='danger'>[L] is pulled by [firer]'s tentacle!</span>","<span class='userdanger'>A tentacle grabs you and pulls you towards [firer]!</span>")
+			L.throw_at(get_step_towards(firer, L), 8, 2)
+			return BULLET_ACT_HIT
+
+	. = ..()
