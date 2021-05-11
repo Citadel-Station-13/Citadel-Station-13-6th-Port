@@ -874,7 +874,7 @@
 	else
 		to_chat(src,"<span class='notice'>You try to remove [who]'s [what.name].</span>")
 		what.add_fingerprint(src)
-	if(do_mob(src, who, round(what.strip_delay / strip_mod), ignorehelditem = TRUE))
+	if(do_mob(src, who, round(what.strip_delay / strip_mod), timed_action_flags = IGNORE_HELD_ITEM))
 		if(what && Adjacent(who))
 			if(islist(where))
 				var/list/L = where

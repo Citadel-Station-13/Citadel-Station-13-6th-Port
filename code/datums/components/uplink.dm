@@ -206,6 +206,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 	return data
 
 /datum/component/uplink/ui_act(action, params)
+	. = ..()
 	if(!active)
 		return
 	switch(action)

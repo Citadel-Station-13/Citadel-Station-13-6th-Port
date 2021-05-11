@@ -1,4 +1,4 @@
-import { Box } from '../../components';
+import { AnimatedNumber, Box } from '../../components';
 
 export const BeakerContents = props => {
   const { beakerLoaded, beakerContents } = props;
@@ -15,7 +15,10 @@ export const BeakerContents = props => {
       )}
       {beakerContents.map(chemical => (
         <Box key={chemical.name} color="label">
-          {chemical.volume} units of {chemical.name} {chemical.purity < 1 && "(Purity: "+chemical.purity+")"}
+          <AnimatedNumber
+            initial={0}
+            value={chemical.volume} />
+          {" units of "+chemical.name} {chemical.purity < 1 && "(Purity: "+chemical.purity+")"}
         </Box>
       ))}
     </Box>

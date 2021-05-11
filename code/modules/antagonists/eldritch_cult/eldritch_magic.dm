@@ -958,7 +958,7 @@
 	halo = halo || mutable_appearance('icons/effects/effects.dmi', "at_shield2", EFFECTS_LAYER)
 	user.add_overlay(halo)
 	playsound(get_turf(user), Snd, 50, 0)
-	if(do_mob(user,user,50,1))
+	if(do_mob(user,user,50, timed_action_flags = ALL))
 		user.cut_overlay(halo)
 		user.emote("clap1")
 		user.say("DOM'ENO ISPLETIMAS")

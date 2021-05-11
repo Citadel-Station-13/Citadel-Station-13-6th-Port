@@ -345,6 +345,64 @@ GLOBAL_LIST_EMPTY(species_datums)
 		else
 			return "unknown"
 
+///Timed action involving two mobs, the user and the target. interaction_key is the assoc key under which the do_after is capped under, and the max interaction count is how many of this interaction you can do at once.
+/proc/do_mob(mob/user, mob/target, time = 3 SECONDS, timed_action_flags = NONE, progress = TRUE, datum/callback/extra_checks, interaction_key, max_interact_count = 1)
+	if(!user || !target)
+		return FALSE
+	var/user_loc = user.loc
+
+	var/drifting = FALSE
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = TRUE
+
+	var/target_loc = target.loc
+
+	if(!interaction_key && target)
+		interaction_key = target //Use the direct ref to the target
+	if(interaction_key) //Do we have a interaction_key now?
+		var/current_interaction_count = LAZYACCESS(user.do_afters, interaction_key) || 0
+		if(current_interaction_count >= max_interact_count) //We are at our peak
+			return
+		LAZYSET(user.do_afters, interaction_key, current_interaction_count + 1)
+
+	var/holding = user.get_active_held_item()
+	var/datum/progressbar/progbar
+	if (progress)
+		progbar = new(user, time, target)
+	if(target.pixel_x != 0) //shifts the progress bar if target has an offset sprite
+		progbar.bar.pixel_x -= target.pixel_x
+
+	var/endtime = world.time+time
+	var/starttime = world.time
+	. = TRUE
+
+	while (world.time < endtime)
+		stoplag(1)
+
+		if(!QDELETED(progbar))
+			progbar.update(world.time - starttime)
+
+		if(drifting && !user.inertia_dir)
+			drifting = FALSE
+			user_loc = user.loc
+
+		if(
+			QDELETED(user) || QDELETED(target) \
+			|| (!(timed_action_flags & IGNORE_USER_LOC_CHANGE) && !drifting && user.loc != user_loc) \
+			|| (!(timed_action_flags & IGNORE_TARGET_LOC_CHANGE) && target.loc != target_loc) \
+			|| (!(timed_action_flags & IGNORE_HELD_ITEM) && user.get_active_held_item() != holding) \
+			|| (!(timed_action_flags & IGNORE_INCAPACITATED) && user.incapacitated()) \
+			|| (extra_checks && !extra_checks.Invoke()) \
+			)
+			. = FALSE
+			break
+
+	if(!QDELETED(progbar))
+		progbar.end_progress()
+
+	if(interaction_key)
+		LAZYREMOVE(user.do_afters, interaction_key)
+
 /proc/is_species(A, species_datum)
 	. = FALSE
 	if(ishuman(A))
@@ -469,3 +527,7 @@ GLOBAL_LIST_EMPTY(species_datums)
 	REMOVE_TRAIT(L, TRAIT_PASSTABLE, source)
 	if(!HAS_TRAIT(L, TRAIT_PASSTABLE))
 		L.pass_flags &= ~PASSTABLE
+
+/// Gets the client of the mob, allowing for mocking of the client.
+/// You only need to use this if you know you're going to be mocking clients somewhere else.
+#define GET_CLIENT(mob) (##mob.client) // huwhe??  || ##mob.mock_client

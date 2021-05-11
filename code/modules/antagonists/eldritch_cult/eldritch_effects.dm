@@ -171,7 +171,7 @@
  * Use this whenever you want to add someone to the list
  */
 /datum/reality_smash_tracker/proc/AddMind(datum/mind/e_cultists)
-	RegisterSignal(e_cultists.current,COMSIG_MOB_CLIENT_LOGIN,.proc/ReworkNetwork)
+	RegisterSignal(e_cultists.current,COMSIG_MOB_LOGIN,.proc/ReworkNetwork)
 	targets |= e_cultists
 	Generate()
 	for(var/obj/effect/reality_smash/reality_smash in smashes)
@@ -184,7 +184,7 @@
  * Use this whenever you want to remove someone from the list
  */
 /datum/reality_smash_tracker/proc/RemoveMind(datum/mind/e_cultists)
-	UnregisterSignal(e_cultists.current,COMSIG_MOB_CLIENT_LOGIN)
+	UnregisterSignal(e_cultists.current,COMSIG_MOB_LOGIN)
 	targets -= e_cultists
 	for(var/obj/effect/reality_smash/reality_smash in smashes)
 		reality_smash.RemoveMind(e_cultists)

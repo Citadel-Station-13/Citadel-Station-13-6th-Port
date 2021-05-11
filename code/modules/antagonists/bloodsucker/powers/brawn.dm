@@ -88,7 +88,7 @@
 		var/obj/machinery/door/D = target
 		playsound(get_turf(usr), 'sound/machines/airlock_alien_prying.ogg', 40, 1, -1)
 		to_chat(user, "<span class='notice'>You prepare to tear open [D].</span>")
-		if(do_mob(usr,target,25))
+		if(do_mob(usr,target,2.5 SECONDS))
 			if (D.Adjacent(user))
 				to_chat(user, "<span class='notice'>You tear open the [D].</span>")
 				user.Stun(10)
@@ -157,7 +157,7 @@
 	if(!istype(owner.loc, /obj/structure/closet))
 		return FALSE
 		playsound(get_turf(owner), 'sound/machines/airlock_alien_prying.ogg', 40, 1, -1)
-		if(do_mob(owner ,target, 25))
+		if(do_mob(owner ,target, 2.5 SECONDS))
 			var/obj/structure/closet/C = owner.loc
 			to_chat(owner, "<span class='notice'>You prepare to tear open the [C].</span>")
 			owner.do_attack_animation(C, ATTACK_EFFECT_SMASH)

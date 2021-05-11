@@ -22,7 +22,7 @@
 	RegisterSignal(L, COMSIG_DISABLE_COMBAT_MODE, .proc/safe_disable_combat_mode)
 	RegisterSignal(L, COMSIG_ENABLE_COMBAT_MODE, .proc/safe_enable_combat_mode)
 	RegisterSignal(L, COMSIG_MOB_DEATH, .proc/on_death)
-	RegisterSignal(L, COMSIG_MOB_CLIENT_LOGOUT, .proc/on_logout)
+	RegisterSignal(L, COMSIG_MOB_LOGOUT, .proc/on_logout)
 	RegisterSignal(L, COMSIG_MOB_HUD_CREATED, .proc/on_mob_hud_created)
 	RegisterSignal(L, COMSIG_COMBAT_MODE_CHECK, .proc/check_flags)
 

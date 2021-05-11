@@ -6,23 +6,49 @@
 #define STORAGE_VIEW_DEPTH	2
 
 //ITEM INVENTORY SLOT BITMASKS
-#define ITEM_SLOT_OCLOTHING		(1<<0)
-#define ITEM_SLOT_ICLOTHING		(1<<1)
-#define ITEM_SLOT_GLOVES		(1<<2)
-#define ITEM_SLOT_EYES			(1<<3)
-#define ITEM_SLOT_EARS			(1<<4)
-#define ITEM_SLOT_MASK			(1<<5)
-#define ITEM_SLOT_HEAD			(1<<6)
-#define ITEM_SLOT_FEET			(1<<7)
-#define ITEM_SLOT_ID			(1<<8)
-#define ITEM_SLOT_BELT			(1<<9)
-#define ITEM_SLOT_BACK			(1<<10)
-#define ITEM_SLOT_POCKET		(1<<11) // this is to allow items with a w_class of WEIGHT_CLASS_NORMAL or WEIGHT_CLASS_BULKY to fit in pockets.
-#define ITEM_SLOT_DENYPOCKET	(1<<12) // this is to deny items with a w_class of WEIGHT_CLASS_SMALL or WEIGHT_CLASS_TINY to fit in pockets.
-#define ITEM_SLOT_NECK			(1<<13)
-#define ITEM_SLOT_HANDS			(1<<14)
-#define ITEM_SLOT_BACKPACK		(1<<15)
-#define ITEM_SLOT_SUITSTORE		(1<<16)
+/// Suit slot (armors, costumes, space suits, etc.)
+#define ITEM_SLOT_OCLOTHING (1<<0)
+/// Jumpsuit slot
+#define ITEM_SLOT_ICLOTHING (1<<1)
+/// Glove slot
+#define ITEM_SLOT_GLOVES (1<<2)
+/// Glasses slot
+#define ITEM_SLOT_EYES (1<<3)
+/// Ear slot (radios, earmuffs)
+#define ITEM_SLOT_EARS (1<<4)
+/// Mask slot
+#define ITEM_SLOT_MASK (1<<5)
+/// Head slot (helmets, hats, etc.)
+#define ITEM_SLOT_HEAD (1<<6)
+/// Shoe slot
+#define ITEM_SLOT_FEET (1<<7)
+/// ID slot
+#define ITEM_SLOT_ID (1<<8)
+/// Belt slot
+#define ITEM_SLOT_BELT (1<<9)
+/// Back slot
+#define ITEM_SLOT_BACK (1<<10)
+/// Dextrous simplemob "hands" (used for Drones and Dextrous Guardians)
+#define ITEM_SLOT_DEX_STORAGE (1<<11)
+/// Neck slot (ties, bedsheets, scarves)
+#define ITEM_SLOT_NECK (1<<12)
+/// A character's hand slots
+#define ITEM_SLOT_HANDS (1<<13)
+/// Inside of a character's backpack
+#define ITEM_SLOT_BACKPACK (1<<14)
+/// Suit Storage slot
+#define ITEM_SLOT_SUITSTORE (1<<15)
+/// Left Pocket slot
+#define ITEM_SLOT_LPOCKET (1<<16)
+/// Right Pocket slot
+#define ITEM_SLOT_RPOCKET (1<<17)
+/// Handcuff slot
+#define ITEM_SLOT_HANDCUFFED (1<<18)
+/// Legcuff slot (bolas, beartraps)
+#define ITEM_SLOT_LEGCUFFED (1<<19)
+
+/// @depricated THIS IS A BANAID FIX
+#define ITEM_SLOT_POCKET (ITEM_SLOT_LPOCKET | ITEM_SLOT_RPOCKET)
 
 //SLOTS
 #define SLOT_BACK			1
@@ -46,6 +72,7 @@
 #define SLOT_IN_BACKPACK	18
 #define SLOT_LEGCUFFED		19
 #define SLOT_GENERC_DEXTROUS_STORAGE	20
+
 
 
 #define SLOTS_AMT			20 // Keep this up to date!
@@ -78,14 +105,18 @@
 			. = ITEM_SLOT_OCLOTHING
 		if(SLOT_W_UNIFORM)
 			. = ITEM_SLOT_ICLOTHING
-		if(SLOT_L_STORE, SLOT_R_STORE)
-			. = ITEM_SLOT_POCKET
+		if(SLOT_L_STORE)
+			. = ITEM_SLOT_LPOCKET
+		if(SLOT_R_STORE)
+			. = ITEM_SLOT_RPOCKET
 		if(SLOT_HANDS)
 			. = ITEM_SLOT_HANDS
 		if(SLOT_IN_BACKPACK)
 			. = ITEM_SLOT_BACKPACK
 		if(SLOT_S_STORE)
 			. = ITEM_SLOT_SUITSTORE
+		if(SLOT_LEGCUFFED)
+			. = ITEM_SLOT_LEGCUFFED
 
 
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
@@ -158,6 +189,18 @@
 
 #define TINT_DARKENED 2			//Threshold of tint level to apply weld mask overlay
 #define TINT_BLIND 3			//Threshold of tint level to obscure vision fully
+
+// defines for AFK theft
+/// How many messages you can remember while logged out before you stop remembering new ones
+#define AFK_THEFT_MAX_MESSAGES 10
+/// If someone logs back in and there are entries older than this, just tell them they can't remember who it was or when
+#define AFK_THEFT_FORGET_DETAILS_TIME 5 MINUTES
+/// The index of the entry in 'afk_thefts' with the person's visible name at the time
+#define AFK_THEFT_NAME 1
+/// The index of the entry in 'afk_thefts' with the text
+#define AFK_THEFT_MESSAGE 2
+/// The index of the entry in 'afk_thefts' with the time it happened
+#define AFK_THEFT_TIME 3
 
 //Allowed equipment lists for security vests and hardsuits.
 

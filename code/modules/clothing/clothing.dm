@@ -445,7 +445,7 @@ BLIND     // can't see anything
 		..()
 
 //Species-restricted clothing check. - Thanks Oraclestation, BS13, /vg/station etc.
-/obj/item/clothing/mob_can_equip(mob/M, slot, disable_warning = TRUE)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (also cuts down on spam)
 	if(!..())

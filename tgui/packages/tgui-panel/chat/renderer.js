@@ -176,9 +176,7 @@ class ChatRenderer {
       this.highlightColor = null;
       return;
     }
-    // citadel update - ig changed to i for flags,
-    // to fix issues with highlighting only working for every other word.
-    const allowedRegex = /^[a-z0-9_\-\s]+$/i;
+    const allowedRegex = /^[a-z0-9_\-\s]+$/ig;
     const lines = String(text)
       .split(',')
       .map(str => str.trim())

@@ -44,7 +44,7 @@ export const Bepis = (props, context) => {
             <Grid.Column size={1.5}>
               <Section title="Stored Data and Statistics">
                 <LabeledList>
-                  <LabeledList.Item label="Deposited Credits">
+                  <LabeledList.Item label="Available Credits">
                     {data.stored_cash}
                   </LabeledList.Item>
                   <LabeledList.Item label="Investment Variability">

@@ -1287,7 +1287,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 				if(return_warning)
 					return_warning[1] = "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
+			if(I.slot_flags & ~ITEM_SLOT_POCKET)
 				return FALSE
 			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
 				return TRUE
@@ -1303,7 +1303,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 				if(return_warning)
 					return_warning[1] = "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
+			if(I.slot_flags & ~ITEM_SLOT_POCKET)
 				return FALSE
 			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
 				return TRUE
