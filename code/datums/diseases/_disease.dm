@@ -146,14 +146,19 @@
 	return FALSE
 
 
-/datum/disease/proc/Copy()
+/datum/disease/proc/Copy(default_values = FALSE)
+
+	var/datum/disease/D = copy_type ? new copy_type() : new type()
+
+	// the copy carries the default values
+	if(default_values)
+		return D
+
 	//note that stage is not copied over - the copy starts over at stage 1
 	var/static/list/copy_vars = list("name", "visibility_flags", "disease_flags", "spread_flags", "form", "desc", "agent", "spread_text",
 									"cure_text", "max_stages", "stage_prob", "viable_mobtypes", "cures", "infectivity", "cure_chance",
 									"bypasses_immunity", "permeability_mod", "severity", "required_organs", "needs_all_cures", "strain_data",
 									"infectable_biotypes", "process_dead")
-
-	var/datum/disease/D = copy_type ? new copy_type() : new type()
 	for(var/V in copy_vars)
 		var/val = vars[V]
 		if(islist(val))

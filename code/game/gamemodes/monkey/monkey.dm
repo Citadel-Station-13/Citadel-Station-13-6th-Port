@@ -126,6 +126,13 @@
 	M.on_removal()
 	return TRUE
 
+/proc/remove_monkey_leader(datum/mind/monkey_mind)
+	if(!is_monkey(monkey_mind))
+		return FALSE
+	var/datum/antagonist/monkey/M = monkey_mind.has_antag_datum(/datum/antagonist/monkey/leader)
+	M.on_removal()
+	return TRUE
+
 /proc/is_monkey_leader(datum/mind/monkey_mind)
 	return monkey_mind && monkey_mind.has_antag_datum(/datum/antagonist/monkey/leader)
 

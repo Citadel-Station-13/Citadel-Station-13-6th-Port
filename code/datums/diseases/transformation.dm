@@ -18,7 +18,7 @@
 	var/new_form = /mob/living/carbon/human
 	var/bantype
 
-/datum/disease/transformation/Copy()
+/datum/disease/transformation/Copy(default_values = FALSE)
 	var/datum/disease/transformation/D = ..()
 	D.stage1 = stage1?.Copy()
 	D.stage2 = stage2?.Copy()
@@ -92,22 +92,24 @@
 
 /datum/disease/transformation/jungle_fever
 	name = "Jungle Fever"
-	cure_text = "Death."
-	cures = list(/datum/reagent/medicine/adminordrazine)
+	cure_text = "Banana Juice and Holy Water"
+	cures = list(/datum/reagent/consumable/banana, /datum/reagent/water/holywater)
 	spread_text = "Monkey Bites"
 	spread_flags = DISEASE_SPREAD_SPECIAL
 	viable_mobtypes = list(/mob/living/carbon/monkey, /mob/living/carbon/human)
 	permeability_mod = 1
-	cure_chance = 1
-	disease_flags = CAN_CARRY|CAN_RESIST
+	cure_chance = 100	// inject cure = cured, no fuss or buzz
+	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
 	desc = "Monkeys with this disease will bite humans, causing humans to mutate into a monkey."
 	severity = DISEASE_SEVERITY_BIOHAZARD
-	stage_prob = 4
+	stage_prob = 8
 	visibility_flags = 0
+	form = "Unique Organism"
 	agent = "Kongey Vibrion M-909"
 	new_form = /mob/living/carbon/monkey
 	bantype = ROLE_MONKEY
-
+	infectable_biotypes = MOB_HUMANOID	// no organic check, everyone can be monkee
+	// don't look at me, xenos work with robots, so why not
 
 	stage1	= list()
 	stage2	= list()
@@ -120,9 +122,12 @@
 	if(affected_mob.mind && !is_monkey(affected_mob.mind))
 		add_monkey(affected_mob.mind)
 	if(ishuman(affected_mob))
-		var/mob/living/carbon/monkey/M = affected_mob.monkeyize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE)
-		M.AddElement(/datum/element/ventcrawling, given_tier = VENTCRAWLER_ALWAYS)
+		affected_mob.monkeyize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE)
 
+// lets never pass ANY values that the disease gained during lifetime to the next victim
+// exists to ensure copies are ALWAYS curable, and always with this name (due to Monkey antag)
+/datum/disease/transformation/jungle_fever/Copy(default_values = TRUE)
+	. = ..()
 
 /datum/disease/transformation/jungle_fever/stage_act()
 	..()
@@ -139,18 +144,9 @@
 				affected_mob.say(pick("Eeek, ook ook!", "Eee-eeek!", "Eeee!", "Ungh, ungh."), forced = "jungle fever")
 
 /datum/disease/transformation/jungle_fever/cure()
-	remove_monkey(affected_mob.mind)
-	..()
-
-/datum/disease/transformation/jungle_fever/monkeymode
-	visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
-	disease_flags = CAN_CARRY //no vaccines! no cure!
-
-/datum/disease/transformation/jungle_fever/monkeymode/after_add()
-	if(affected_mob && !is_monkey_leader(affected_mob.mind))
-		visibility_flags = NONE
-
-
+	remove_monkey(affected_mob.mind)	// mind this order, or you will have a bad time
+	affected_mob.humanize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE)	// keep it simple_animal
+	. = ..()
 
 /datum/disease/transformation/robot
 
