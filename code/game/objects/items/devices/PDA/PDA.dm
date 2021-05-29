@@ -1,14 +1,15 @@
+
 //The advanced pea-green monochrome lcd of tomorrow.
 
 GLOBAL_LIST_EMPTY(PDAs)
 
-#define PDA_SCANNER_NONE		0
-#define PDA_SCANNER_MEDICAL		1
-#define PDA_SCANNER_FORENSICS	2 //unused
-#define PDA_SCANNER_REAGENT		3
-#define PDA_SCANNER_HALOGEN		4
-#define PDA_SCANNER_GAS			5
-#define PDA_SPAM_DELAY		    2 MINUTES
+#define PDA_SCANNER_NONE 0
+#define PDA_SCANNER_MEDICAL 1
+#define PDA_SCANNER_FORENSICS 2 //unused
+#define PDA_SCANNER_REAGENT 3
+#define PDA_SCANNER_HALOGEN 4
+#define PDA_SCANNER_GAS 5
+#define PDA_SPAM_DELAY     2 MINUTES
 
 //pda icon overlays list defines
 #define PDA_OVERLAY_ALERT		1
@@ -19,7 +20,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 #define PDA_OVERLAY_PAI			6
 
 /obj/item/pda
-	name = "\improper PDA"
+	name = "\improper standard PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/pda_alt.dmi'
 	icon_state = "pda"
@@ -29,22 +30,22 @@ GLOBAL_LIST_EMPTY(PDAs)
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_ID | ITEM_SLOT_BELT
+	actions_types = list(/datum/action/item_action/toggle_light)
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+	// light_system = MOVABLE_LIGHT_DIRECTIONAL
+	light_range = 2.3
+	light_power = 0.6
+	light_color = "#FFCC66"
+	var/light_on = FALSE
+	custom_materials = list(/datum/material/iron=300, /datum/material/glass=100, /datum/material/plastic=100)
 
 	//Main variables
 	var/owner = null // String name of owner
 	var/default_cartridge = 0 // Access level defined by cartridge
 	var/obj/item/cartridge/cartridge = null //current cartridge
 	var/mode = 0 //Controls what menu the PDA will display. 0 is hub; the rest are either built in or based on cartridge.
-	var/list/overlays_icons = list('icons/obj/pda_alt.dmi' = list("pda-r", "screen_default", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay"))
-	var/static/list/standard_overlays_icons = list("pda-r", "blank", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay")
-	var/list/current_overlays //set on Initialize.
-
-	//variables exclusively used on 'update_overlays' (which should never be called directly, and 'update_icon' doesn't use args anyway)
-	var/new_overlays = FALSE
-	var/new_alert = FALSE
-
+	var/icon_alert = "pda-r" //Icon to be overlayed for message alerts. Taken from the pda icon file.
 	var/font_index = 0 //This int tells DM which font is currently selected and lets DM know when the last font has been selected so that it can cycle back to the first font when "toggle font" is pressed again.
 	var/font_mode = "font-family:monospace;" //The currently selected font.
 	var/background_color = "#808000" //The currently selected background color.
@@ -60,10 +61,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	//Secondary variables
 	var/scanmode = PDA_SCANNER_NONE
-	var/fon = FALSE //Is the flashlight function on?
-	var/f_lum = 2.3 //Luminosity for the flashlight function
-	var/f_pow = 0.6 //Power for the flashlight function
-	var/f_col = "#FFCC66" //Color for the flashlight function
 	var/silent = FALSE //To beep or not to beep, that is the question
 	var/toff = FALSE //If TRUE, messenger disabled
 	var/tnote = null //Current Texts
@@ -76,27 +73,37 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant! To help with navigation, we have provided the following definitions. North: Fore. South: Aft. West: Port. East: Starboard. Quarter is either side of aft." //Current note in the notepad function
 	var/notehtml = ""
 	var/notescanned = FALSE // True if what is in the notekeeper was from a paper.
-	var/detonatable = TRUE // Can the PDA be blown up?
 	var/hidden = FALSE // Is the PDA hidden from the PDA list?
 	var/emped = FALSE
 	var/equipped = FALSE  //used here to determine if this is the first time its been picked up
-	var/allow_emojis = TRUE //if the pda can send emojis and actually have them parsed as such
+	var/allow_emojis = FALSE //if the pda can send emojis and actually have them parsed as such
+	var/sort_by_job = FALSE // If this is TRUE, will sort PDA list by job.
 
 	var/obj/item/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
 
-	var/obj/item/paicard/pai = null	// A slot for a personal AI device
+	var/obj/item/paicard/pai = null // A slot for a personal AI device
 
 	var/datum/picture/picture //Scanned photo
 
 	var/list/contained_item = list(/obj/item/pen, /obj/item/toy/crayon, /obj/item/lipstick, /obj/item/flashlight/pen, /obj/item/clothing/mask/cigarette)
 	var/obj/item/inserted_item //Used for pen, crayon, and lipstick insertion or removal. Same as above.
+
+	var/underline_flag = TRUE //flag for underline
+
+	//cit vars
+	var/list/overlays_icons = list('icons/obj/pda_alt.dmi' = list("pda-r", "screen_default", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay"))
+	var/static/list/standard_overlays_icons = list("pda-r", "blank", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay")
+	var/list/current_overlays //set on Initialize.
 	var/list/overlays_offsets // offsets to use for certain overlays
 	var/overlays_x_offset = 0
 	var/overlays_y_offset = 0
 
-	var/underline_flag = TRUE //flag for underline
-
+	//variables exclusively used on 'update_overlays' (which should never be called directly, and 'update_icon' doesn't use args anyway)
+	var/new_overlays = FALSE
+	var/new_alert = FALSE
+	var/detonatable = TRUE // Can the PDA be blown up?
+	/// Blacklist of pdas
 	var/list/blocked_pdas
 
 /obj/item/pda/suicide_act(mob/living/carbon/user)
@@ -109,16 +116,26 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda/examine(mob/user)
 	. = ..()
-	. += id ? "<span class='notice'>Alt-click to remove the id.</span>" : ""
+	if(!id && !inserted_item)
+		return
+
+	if(id)
+		. += "<span class='notice'>Alt-click to remove the ID.</span>" //won't name ID on examine in case it's stolen
+
 	if(inserted_item && (!isturf(loc)))
-		. += "<span class='notice'>Ctrl-click to remove [inserted_item].</span>"
+		. += "<span class='notice'>Ctrl-click to remove [inserted_item].</span>" //traitor pens are disguised so we're fine naming them on examine
+
+	// if((!isnull(cartridge)))
+	// 	. += "<span class='notice'>Ctrl+Alt-click to remove the cartridge.</span>" //won't name cart on examine in case it's Detomatix
+
 	if(LAZYLEN(GLOB.pda_reskins))
 		. += "<span class='notice'>Ctrl-shift-click it to reskin it.</span>"
 
 /obj/item/pda/Initialize()
 	. = ..()
-	if(fon)
-		set_light(f_lum, f_pow, f_col)
+
+	if(light_on)
+		set_light(light_range, light_power, light_color)
 
 	GLOB.PDAs += src
 	if(default_cartridge)
@@ -126,9 +143,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if(inserted_item)
 		inserted_item = new inserted_item(src)
 	else
-		inserted_item =	new /obj/item/pen(src)
+		inserted_item = new /obj/item/pen(src)
 	new_overlays = TRUE
-	update_icon()
+	// RegisterSignal(src, COMSIG_LIGHT_EATER_ACT, .proc/on_light_eater)
+
+	update_appearance()
 
 /obj/item/pda/CtrlShiftClick(mob/living/user)
 	. = ..()
@@ -207,6 +226,12 @@ GLOBAL_LIST_EMPTY(PDAs)
 	else
 		return ..()
 
+// /obj/item/pda/get_id_examine_strings(mob/user)
+// 	. = ..()
+// 	if(id)
+// 		. += "\The [src] is displaying [id]."
+// 		. += id.get_id_examine_strings(user)
+
 /obj/item/pda/GetID()
 	return id
 
@@ -237,7 +262,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if(inserted_item)
 		overlay.icon_state = current_overlays[PDA_OVERLAY_ITEM]
 		. += new /mutable_appearance(overlay)
-	if(fon)
+	if(light_on)
 		overlay.icon_state = current_overlays[PDA_OVERLAY_LIGHT]
 		. += new /mutable_appearance(overlay)
 	if(pai)
@@ -252,9 +277,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 		return attack_self(M)
 	return ..()
 
+
 /obj/item/pda/attack_self_tk(mob/user)
 	to_chat(user, "<span class='warning'>The PDA's capacitive touch screen doesn't seem to respond!</span>")
-	return
+	return // COMPONENT_CANCEL_ATTACK_CHAIN
+
 
 /obj/item/pda/interact(mob/user)
 	if(!user.IsAdvancedToolUser())
@@ -304,7 +331,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += text("<br><a href='?src=[REF(src)];choice=UpdateInfo'>[id ? "Update PDA Info" : ""]</A><br><br>")
 
 				dat += "[STATION_TIME_TIMESTAMP("hh:mm:ss", world.time)]<br>" //:[world.time / 100 % 6][world.time / 100 % 10]"
-				dat += "[time2text(world.realtime, "MMM DD")] [GLOB.year_integer]"
+				dat += "[time2text(world.realtime, "MMM DD")] [GLOB.year_integer+540]"
 
 				dat += "<br><br>"
 
@@ -312,6 +339,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "<ul>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=1'>[PDAIMG(notes)]Notekeeper</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=2'>[PDAIMG(mail)]Messenger</a></li>"
+				// dat += "<li><a href='byond://?src=[REF(src)];choice=6'>[PDAIMG(skills)]Skill Tracker</a></li>"
 
 				if (cartridge)
 					if (cartridge.access & CART_CLOWN)
@@ -370,11 +398,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 					if (cartridge.access & CART_DRONEPHONE)
 						dat += "<li><a href='byond://?src=[REF(src)];choice=Drone Phone'>[PDAIMG(dronephone)]Drone Phone</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=3'>[PDAIMG(atmos)]Atmospheric Scan</a></li>"
-				dat += "<li><a href='byond://?src=[REF(src)];choice=Light'>[PDAIMG(flashlight)][fon ? "Disable" : "Enable"] Flashlight</a></li>"
+				dat += "<li><a href='byond://?src=[REF(src)];choice=Light'>[PDAIMG(flashlight)][light_on ? "Disable" : "Enable"] Flashlight</a></li>"
 				if (pai)
 					if(pai.loc != src)
 						pai = null
-						update_icon()
+						update_appearance()
 					else
 						dat += "<li><a href='byond://?src=[REF(src)];choice=pai;option=1'>pAI Device Configuration</a></li>"
 						dat += "<li><a href='byond://?src=[REF(src)];choice=pai;option=2'>Eject pAI Device</a></li>"
@@ -393,6 +421,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "<a href='byond://?src=[REF(src)];choice=Toggle Messenger'>[PDAIMG(mail)]Send / Receive: [toff == 1 ? "Off" : "On"]</a> | "
 				dat += "<a href='byond://?src=[REF(src)];choice=Ringtone'>[PDAIMG(bell)]Set Ringtone</a> | "
 				dat += "<a href='byond://?src=[REF(src)];choice=21'>[PDAIMG(mail)]Messages</a><br>"
+				dat += "<a href='byond://?src=[REF(src)];choice=Sorting Mode'>Sorted by: [sort_by_job ? "Job" : "Name"]</a>"
 
 				if(cartridge)
 					dat += cartridge.message_header()
@@ -403,13 +432,13 @@ GLOBAL_LIST_EMPTY(PDAs)
 				var/count = 0
 
 				if (!toff)
-					for (var/obj/item/pda/P in sortNames(get_viewable_pdas()))
+					for (var/obj/item/pda/P in get_viewable_pdas(sort_by_job))
 						if (P == src)
 							continue
 						if(P.owner in blocked_pdas)
 							dat += "<li><a href='byond://?src=[REF(src)];choice=unblock_pda;target=[P.owner]'>(BLOCKED - CLICK TO UNBLOCK) [P]</a>"
 						else
-							dat += "<li><a href='byond://?src=[REF(src)];choice=Message;target=[REF(P)]'>[P]</a>"
+							dat += "<li><a href='byond://?src=[REF(src)];choice=Message;target=[REF(P)]'>[P.owner] ([P.ownjob])</a>"
 						if(cartridge)
 							dat += cartridge.message_special(P)
 						dat += "</li>"
@@ -417,9 +446,36 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "</ul>"
 				if (count == 0)
 					dat += "None detected.<br>"
-				else if(cartridge && cartridge.spam_enabled)
+				else if(cartridge?.spam_enabled)
 					dat += "<a href='byond://?src=[REF(src)];choice=MessageAll'>Send To All</a>"
-
+			// if(6)
+			// 	dat += "<h4>[PDAIMG(mail)] ExperTrak® Skill Tracker V4.26.2</h4>"
+			// 	dat += "<i>Thank you for choosing ExperTrak® brand software! ExperTrak® inc. is proud to be a Nanotrasen employee expertise and effectiveness department subsidary!</i>"
+			// 	dat += "<br><br>This software is designed to track and monitor your skill development as a Nanotrasen employee. Your job performance across different fields has been quantified and categorized below.<br>"
+			// 	var/datum/mind/targetmind = user.mind
+			// 	if(targetmind)
+			// 		for (var/type in GLOB.skill_types)
+			// 			var/datum/skill/S = GetSkillRef(type)
+			// 			var/lvl_num = targetmind.get_skill_level(type)
+			// 			var/lvl_name = uppertext(targetmind.get_skill_level_name(type))
+			// 			var/exp = targetmind.get_skill_exp(type)
+			// 			var/xp_prog_to_level = targetmind.exp_needed_to_level_up(type)
+			// 			var/xp_req_to_level = 0
+			// 			if (xp_prog_to_level)//is it even possible to level up?
+			// 				xp_req_to_level = SKILL_EXP_LIST[lvl_num+1] - SKILL_EXP_LIST[lvl_num]
+			// 			dat += "<HR><b>[S.name]</b>"
+			// 			dat += "<br><i>[S.desc]</i>"
+			// 			dat += "<ul><li>EMPLOYEE SKILL LEVEL: <b>[lvl_name]</b>"
+			// 			if (exp && xp_req_to_level)
+			// 				var/progress_percent = (xp_req_to_level-xp_prog_to_level)/xp_req_to_level
+			// 				var/overall_percent = exp / SKILL_EXP_LIST[length(SKILL_EXP_LIST)]
+			// 				dat += "<br>PROGRESS TO NEXT SKILL LEVEL:"
+			// 				dat += "<br>" + num2loadingbar(progress_percent) + "([progress_percent*100])%"
+			// 				dat += "<br>OVERALL DEVELOPMENT PROGRESS:"
+			// 				dat += "<br>" + num2loadingbar(overall_percent) + "([overall_percent*100])%"
+			// 			if (lvl_num >= length(SKILL_EXP_LIST) && !(type in targetmind.skills_rewarded))
+			// 				dat += "<br><a href='byond://?src=[REF(src)];choice=SkillReward;skill=[type]'>Contact the Professional [S.title] Association</a>"
+			// 			dat += "</li></ul>"
 			if(21)
 				dat += "<h4>[PDAIMG(mail)] SpaceMessenger V3.9.6</h4>"
 				dat += "<a href='byond://?src=[REF(src)];choice=Clear'>[PDAIMG(blank)]Clear Messages</a>"
@@ -469,7 +525,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/mob/living/U = usr
 	//Looking for master was kind of pointless since PDAs don't appear to have one.
 
-	if(usr.canUseTopic(src, BE_CLOSE, FALSE, NO_TK, FALSE) && !href_list["close"])
+	if(usr.canUseTopic(src, BE_CLOSE, FALSE, NO_TK) && !href_list["close"])
 		add_fingerprint(U)
 		U.set_machine(src)
 
@@ -478,8 +534,8 @@ GLOBAL_LIST_EMPTY(PDAs)
 //BASIC FUNCTIONS===================================
 
 			if("Refresh")//Refresh, goes to the end of the proc.
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 
 			if ("Toggle_Font")
 				//CODE REVISION 2
@@ -494,9 +550,8 @@ GLOBAL_LIST_EMPTY(PDAs)
 						font_mode = FONT_ORBITRON
 					if (MODE_VT)
 						font_mode = FONT_VT
-						if (!silent)
-							playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if ("Change_Color")
 				var/new_color = input("Please enter a color name or hex value (Default is \'#808000\').",background_color)as color
 				background_color = new_color
@@ -505,8 +560,8 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 			if ("Toggle_Underline")
 				underline_flag = !underline_flag
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 
 			if("Return")//Return
 				if(mode<=9)
@@ -515,109 +570,94 @@ GLOBAL_LIST_EMPTY(PDAs)
 					mode = round(mode/10)
 					if(mode==4 || mode == 5)//Fix for cartridges. Redirects to hub.
 						mode = 0
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if ("Authenticate")//Checks for ID
 				id_check(U)
-
 			if("UpdateInfo")
 				ownjob = id.assignment
 				if(istype(id, /obj/item/card/id/syndicate))
 					owner = id.registered_name
 				update_label()
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_processing.ogg', 15, 1)
-				addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/machines/terminal_success.ogg', 15, 1), 13)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_processing.ogg', 15, TRUE)
+					addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/machines/terminal_success.ogg', 15, TRUE), 1.3 SECONDS)
 			if("Eject")//Ejects the cart, only done from hub.
-				if (!isnull(cartridge))
-					U.put_in_hands(cartridge)
-					to_chat(U, "<span class='notice'>You remove [cartridge] from [src].</span>")
-					scanmode = PDA_SCANNER_NONE
-					cartridge.host_pda = null
-					cartridge = null
-					update_icon()
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_eject_disc.ogg', 50, 1)
+				eject_cart(U)
+				// if(!silent)
+				// 	playsound(src, 'sound/machines/terminal_eject.ogg', 50, TRUE)
 
 //MENU FUNCTIONS===================================
 
 			if("0")//Hub
 				mode = 0
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("1")//Notes
 				mode = 1
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("2")//Messenger
 				mode = 2
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("21")//Read messeges
 				mode = 21
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("3")//Atmos scan
 				mode = 3
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("4")//Redirects to hub
 				mode = 0
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 
 
 //MAIN FUNCTIONS===================================
 
 			if("Light")
-				toggle_light()
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				toggle_light(U)
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("Medical Scan")
 				if(scanmode == PDA_SCANNER_MEDICAL)
 					scanmode = PDA_SCANNER_NONE
 				else if((!isnull(cartridge)) && (cartridge.access & CART_MEDICAL))
 					scanmode = PDA_SCANNER_MEDICAL
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("Reagent Scan")
 				if(scanmode == PDA_SCANNER_REAGENT)
 					scanmode = PDA_SCANNER_NONE
 				else if((!isnull(cartridge)) && (cartridge.access & CART_REAGENT_SCANNER))
 					scanmode = PDA_SCANNER_REAGENT
 				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 
 			if("Halogen Counter")
 				if(scanmode == PDA_SCANNER_HALOGEN)
 					scanmode = PDA_SCANNER_NONE
 				else if((!isnull(cartridge)) && (cartridge.access & CART_ENGINE))
 					scanmode = PDA_SCANNER_HALOGEN
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("Honk")
 				if ( !(last_noise && world.time < last_noise + 20) )
-					playsound(src, 'sound/items/bikehorn.ogg', 50, 1)
+					playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
 					last_noise = world.time
-
 			if("Trombone")
 				if ( !(last_noise && world.time < last_noise + 20) )
-					playsound(src, 'sound/misc/sadtrombone.ogg', 50, 1)
+					playsound(src, 'sound/misc/sadtrombone.ogg', 50, TRUE)
 					last_noise = world.time
-
 			if("Gas Scan")
 				if(scanmode == PDA_SCANNER_GAS)
 					scanmode = PDA_SCANNER_NONE
 				else if((!isnull(cartridge)) && (cartridge.access & CART_ATMOS))
 					scanmode = PDA_SCANNER_GAS
-				if (!silent)
-					playsound(src, 'sound/machines/terminal_select.ogg', 15, 1)
-
+				if(!silent)
+					playsound(src, 'sound/machines/terminal_select.ogg', 15, TRUE)
 			if("Drone Phone")
 				var/alert_s = input(U,"Alert severity level","Ping Drones",null) as null|anything in list("Low","Medium","High","Critical")
 				var/area/A = get_area(U)
@@ -625,8 +665,8 @@ GLOBAL_LIST_EMPTY(PDAs)
 					var/msg = "<span class='boldnotice'>NON-DRONE PING: [U.name]: [alert_s] priority alert in [A.name]!</span>"
 					_alert_drones(msg, TRUE, U)
 					to_chat(U, msg)
-					if (!silent)
-						playsound(src, 'sound/machines/terminal_success.ogg', 15, 1)
+					if(!silent)
+						playsound(src, 'sound/machines/terminal_success.ogg', 15, TRUE)
 
 
 //NOTEKEEPER FUNCTIONS===================================
@@ -662,7 +702,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 					U << browse(null, "window=pda")
 					return
 			if("Message")
-				create_message(U, locate(href_list["target"]))
+				create_message(U, locate(href_list["target"]) in GLOB.PDAs)
+
+			if("Sorting Mode")
+				sort_by_job = !sort_by_job
 
 			if("MessageAll")
 				if(cartridge?.spam_enabled)
@@ -696,14 +739,23 @@ GLOBAL_LIST_EMPTY(PDAs)
 								M.close()
 
 //pAI FUNCTIONS===================================
+
 			if("pai")
 				switch(href_list["option"])
-					if("1")		// Configure pAI device
+					if("1") // Configure pAI device
 						pai.attack_self(U)
-					if("2")		// Eject pAI device
-						var/turf/T = get_turf(loc)
-						if(T)
-							pai.forceMove(T)
+					if("2") // Eject pAI device
+						usr.put_in_hands(pai)
+						to_chat(usr, "<span class='notice'>You remove the pAI from the [name].</span>")
+
+//SKILL FUNCTIONS===================================
+
+			// if("SkillReward")
+			// 	var/type = text2path(href_list["skill"])
+			// 	var/datum/skill/S = GetSkillRef(type)
+			// 	var/datum/mind/mind = U.mind
+			// 	var/new_level = mind.get_skill_level(type)
+			// 	S.try_skill_reward(mind, new_level)
 
 //LINK FUNCTIONS===================================
 
@@ -718,11 +770,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 //EXTRA FUNCTIONS===================================
 
 	if (mode == 2 || mode == 21)//To clear message overlays.
-		update_icon()
+		update_appearance()
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
-		playsound(src, 'sound/items/bikehorn.ogg', 30, 1)
+		playsound(src, 'sound/items/bikehorn.ogg', 30, TRUE)
 
 	if(U.machine == src && href_list["skiprefresh"]!="1")//Final safety.
 		attack_self(U)//It auto-closes the menu prior if the user is not in range and so on.
@@ -732,9 +784,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	return
 
 /obj/item/pda/proc/remove_id(mob/user)
-	if(hasSiliconAccessInArea(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+	if(issilicon(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
 	do_remove_id(user)
+
 
 /obj/item/pda/proc/do_remove_id(mob/user)
 	if(!id)
@@ -747,21 +800,26 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	. = id
 	id = null
-	update_icon()
+	updateSelfDialog()
+	update_appearance()
+	// playsound(src, 'sound/machines/terminal_eject.ogg', 50, TRUE)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		if(H.wear_id == src)
 			H.sec_hud_set_ID()
 
+	update_slot_icon()
+
+
 /obj/item/pda/proc/msg_input(mob/living/U = usr)
 	var/t = stripped_input(U, "Please enter message", name)
 	if (!t || toff)
 		return
-	if(!U.canUseTopic(src, BE_CLOSE, FALSE, NO_TK, FALSE))
+	if(!U.canUseTopic(src, BE_CLOSE))
 		return
 	if(emped)
-		t = Gibberish(t, 100)
+		t = Gibberish(t, TRUE)
 	return t
 
 /obj/item/pda/proc/send_message(mob/living/user, list/obj/item/pda/targets, everyone)
@@ -775,11 +833,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 	// Send the signal
 	var/list/string_targets = list()
 	var/list/string_blocked
-	for(var/obj/item/pda/P in targets)
+	for (var/obj/item/pda/P in targets)
 		if(owner in P.blocked_pdas)
 			LAZYADD(string_blocked, P.owner)
 			continue
-		if(P.owner && P.ownjob)  // != src is checked by the UI
+		if (P.owner && P.ownjob)  // != src is checked by the UI
 			string_targets += "[P.owner] ([P.ownjob])"
 	if(string_blocked)
 		string_blocked = english_list(string_blocked)
@@ -793,7 +851,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if (!string_targets.len)
 		return
 
-	var/datum/signal/subspace/pda/signal = new(src, list(
+	var/datum/signal/subspace/messaging/pda/signal = new(src, list(
 		"name" = "[owner]",
 		"job" = "[ownjob]",
 		"message" = message,
@@ -807,38 +865,42 @@ GLOBAL_LIST_EMPTY(PDAs)
 	// If it didn't reach, note that fact
 	if (!signal.data["done"])
 		to_chat(user, "<span class='notice'>ERROR: Server isn't responding.</span>")
-		if (!silent)
-			playsound(src, 'sound/machines/terminal_error.ogg', 15, 1)
+		if(!silent)
+			playsound(src, 'sound/machines/terminal_error.ogg', 15, TRUE)
 		return
 
 	var/target_text = signal.format_target()
 	if(allow_emojis)
 		message = emoji_parse(message)//already sent- this just shows the sent emoji as one to the sender in the to_chat
 		signal.data["message"] = emoji_parse(signal.data["message"])
+
 	// Log it in our logs
 	tnote += "<i><b>&rarr; To [target_text]:</b></i><br>[signal.format_message()]<br>"
 	// Show it to ghosts
 	var/ghost_message = "<span class='name'>[owner] </span><span class='game say'>PDA Message</span> --> <span class='name'>[target_text]</span>: <span class='message'>[signal.format_message()]</span>"
-	for(var/i in GLOB.dead_mob_list)
-		var/mob/M = i
-		if(M?.client && M.client.prefs.chat_toggles & CHAT_GHOSTPDA)
+	for(var/mob/M in GLOB.player_list)
+		if(isobserver(M) && (M.client.prefs.chat_toggles & CHAT_GHOSTPDA))
 			to_chat(M, "[FOLLOW_LINK(M, user)] [ghost_message]")
-	to_chat(user, "<span class='info'>Message sent to [target_text]: \"[message]\"</span>")
 	// Log in the talk log
-	user.log_talk(message, LOG_PDA, tag="PDA: [initial(name)] to [target_text] (BLOCKED:[string_blocked])")
-	if (!silent)
-		playsound(src, 'sound/machines/terminal_success.ogg', 15, 1)
+	user.log_talk(message, LOG_PDA, tag="PDA: [initial(name)] to [target_text]")
+	to_chat(user, "<span class='info'>PDA message sent to [target_text]: \"[message]\"</span>")
+	if(!silent)
+		playsound(src, 'sound/machines/terminal_success.ogg', 15, TRUE)
 	// Reset the photo
 	picture = null
 	last_text = world.time
 	if (everyone)
 		last_everyone = world.time
 
-/obj/item/pda/proc/receive_message(datum/signal/subspace/pda/signal)
-	tnote += "<i><b>&larr; From <a href='byond://?src=[REF(src)];choice=Message;target=[REF(signal.source)]'>[signal.data["name"]]</a> ([signal.data["job"]]):</b></i> <a href='byond://?src=[REF(src)];choice=toggle_block;target=[signal.data["name"]]'>(BLOCK/UNBLOCK)</a><br>[signal.format_message()]<br>"
+/obj/item/pda/proc/receive_message(datum/signal/subspace/messaging/pda/signal)
+	tnote += "<i><b>&larr; From <a href='byond://?src=[REF(src)];choice=Message;target=[REF(signal.source)]'>[signal.data["name"]]</a> ([signal.data["job"]]):</b></i><br>[signal.format_message()]<br>"
+
 	if (!silent)
-		playsound(src, 'sound/machines/twobeep.ogg', 50, 1)
-		audible_message("[icon2html(src, hearers(src))] *[ttone]*", null, 3)
+		// if(HAS_TRAIT(SSstation, STATION_TRAIT_PDA_GLITCHED))
+		// 	playsound(src, pick('sound/machines/twobeep_voice1.ogg', 'sound/machines/twobeep_voice2.ogg'), 50, TRUE)
+		// else
+		playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
+		audible_message("<span class='infoplain'>[icon2html(src, hearers(src))] *[ttone]*</span>", null, 3)
 	//Search for holder of the PDA.
 	var/mob/living/L = null
 	if(loc && isliving(loc))
@@ -847,25 +909,29 @@ GLOBAL_LIST_EMPTY(PDAs)
 	else
 		L = get(src, /mob/living/silicon)
 
-	if(L && L.stat != UNCONSCIOUS)
+	if(L && (L.stat == CONSCIOUS || L.stat == SOFT_CRIT))
+		var/reply = "(<a href='byond://?src=[REF(src)];choice=Message;skiprefresh=1;target=[REF(signal.source)]'>Reply</a>)"
 		var/hrefstart
 		var/hrefend
 		if (isAI(L))
 			hrefstart = "<a href='?src=[REF(L)];track=[html_encode(signal.data["name"])]'>"
 			hrefend = "</a>"
 
+		if(signal.data["automated"])
+			reply = "\[Automated Message\]"
+
 		var/inbound_message = signal.format_message()
 		if(signal.data["emojis"] == TRUE)//so will not parse emojis as such from pdas that don't send emojis
 			inbound_message = emoji_parse(inbound_message)
 
-		to_chat(L, "[icon2html(src)] <b>Message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] (<a href='byond://?src=[REF(src)];choice=Message;skiprefresh=1;target=[REF(signal.source)]'>Reply</a>) (<a href='byond://?src=[REF(src)];choice=toggle_block;target=[signal.data["name"]]'>BLOCK/UNBLOCK</a>)")
+		to_chat(L, "<span class='infoplain'>[icon2html(src)] <b>PDA message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] [reply]</span>")
 
-	new_alert = TRUE
-	update_icon(TRUE)
+	update_appearance()
+	add_overlay(icon_alert)
 
 /obj/item/pda/proc/send_to_all(mob/living/U)
 	if (last_everyone && world.time < last_everyone + PDA_SPAM_DELAY)
-		to_chat(U,"<span class='warning'>Send To All function is still on cooldown.")
+		to_chat(U,"<span class='warning'>Send To All function is still on cooldown.</span>")
 		return
 	send_message(U,get_viewable_pdas(), TRUE)
 
@@ -887,14 +953,12 @@ GLOBAL_LIST_EMPTY(PDAs)
 	LAZYREMOVE(blocked_pdas, target)
 
 /obj/item/pda/AltClick(mob/user)
-	. = ..()
+	..()
+
 	if(id)
 		remove_id(user)
-		playsound(src, 'sound/machines/terminal_eject_disc.ogg', 50, 1)
 	else
 		remove_pen(user)
-		playsound(src, 'sound/machines/button4.ogg', 50, 1)
-	return TRUE
 
 /obj/item/pda/CtrlClick(mob/user)
 	..()
@@ -904,11 +968,16 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	remove_pen(user)
 
-/obj/item/pda/verb/verb_toggle_light()
-	set category = "Object"
-	set name = "Toggle Flashlight"
+// /obj/item/pda/CtrAltClick(mob/user)
+// 	..()
+// 	eject_cart(user)
 
-	toggle_light()
+/obj/item/pda/verb/verb_toggle_light()
+	set name = "Toggle light"
+	set category = "Object"
+	set src in oview(1)
+
+	toggle_light(usr)
 
 /obj/item/pda/verb/verb_remove_id()
 	set category = "Object"
@@ -925,31 +994,63 @@ GLOBAL_LIST_EMPTY(PDAs)
 	set name = "Remove Pen"
 	set src in usr
 
-	remove_pen()
+	remove_pen(usr)
 
-/obj/item/pda/proc/toggle_light()
-	if(hasSiliconAccessInArea(usr) || !usr.canUseTopic(src, BE_CLOSE))
+/obj/item/pda/verb/verb_eject_cart()
+	set category = "Object"
+	set name = "Eject Cartridge"
+	set src in usr
+
+	eject_cart(usr)
+
+/obj/item/pda/proc/toggle_light(mob/user)
+	if(issilicon(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
-	if(fon)
-		fon = FALSE
+	if(light_on)
+		light_on = FALSE
 		set_light(0)
-	else if(f_lum)
-		fon = TRUE
-		set_light(f_lum, f_pow, f_col)
-	update_icon()
+	else
+		light_on = TRUE
+		set_light(2.3)
+	update_appearance()
+	for(var/X in actions)
+		var/datum/action/A = X
+		A.UpdateButtonIcon()
 
-/obj/item/pda/proc/remove_pen()
+/// Special light eater handling
+// /obj/item/pda/proc/on_light_eater(obj/item/pda/source, datum/light_eater)
+// 	SIGNAL_HANDLER
+// 	set_light_on(FALSE)
+// 	set_light_range(0) //We won't be turning on again.
+// 	update_appearance()
+// 	visible_message("<span class='danger'>The light in [src] shorts out!</span>")
+// 	return COMPONENT_BLOCK_LIGHT_EATER
 
-	if(hasSiliconAccessInArea(usr) || !usr.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+/obj/item/pda/proc/remove_pen(mob/user)
+
+	if(issilicon(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK)) //TK doesn't work even with this removed but here for readability
 		return
 
 	if(inserted_item)
-		usr.put_in_hands(inserted_item)
-		to_chat(usr, "<span class='notice'>You remove [inserted_item] from [src].</span>")
+		user.put_in_hands(inserted_item)
+		to_chat(user, "<span class='notice'>You remove [inserted_item] from [src].</span>")
 		inserted_item = null
-		update_icon()
+		update_appearance()
+		playsound(src, 'sound/machines/button.ogg', 50, TRUE)
 	else
-		to_chat(usr, "<span class='warning'>This PDA does not have a pen in it!</span>")
+		to_chat(user, "<span class='warning'>This PDA does not have a pen in it!</span>")
+
+/obj/item/pda/proc/eject_cart(mob/user)
+	if(issilicon(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK)) //TK disabled to stop cartridge teleporting into hand
+		return
+	if (!isnull(cartridge))
+		user.put_in_hands(cartridge)
+		to_chat(user, "<span class='notice'>You eject [cartridge] from [src].</span>")
+		scanmode = PDA_SCANNER_NONE
+		cartridge.host_pda = null
+		cartridge = null
+		updateSelfDialog()
+		update_appearance()
 
 //trying to insert or remove an id
 /obj/item/pda/proc/id_check(mob/user, obj/item/card/id/I)
@@ -966,9 +1067,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 		if(!user.transferItemToLoc(I, src))
 			return FALSE
 		insert_id(I, user)
-		update_icon()
-		playsound(src, 'sound/machines/button.ogg', 50, 1)
+		update_appearance()
+		playsound(src, 'sound/machines/button.ogg', 50, TRUE)
 	return TRUE
+
 
 /obj/item/pda/proc/insert_id(obj/item/card/id/inserting_id, mob/user)
 	var/obj/old_id = id
@@ -983,60 +1085,85 @@ GLOBAL_LIST_EMPTY(PDAs)
 		else
 			old_id.forceMove(get_turf(src))
 
+	update_slot_icon()
+
+
+/obj/item/pda/pre_attack(obj/target, mob/living/user, params)
+	if(!ismachinery(target))
+		return ..()
+	var/obj/machinery/target_machine = target
+	if(!target_machine.panel_open && !istype(target, /obj/machinery/computer))
+		return ..()
+	if(!istype(cartridge, /obj/item/cartridge/virus/clown))
+		return ..()
+	var/obj/item/cartridge/virus/installed_cartridge = cartridge
+
+	if(installed_cartridge.charges <=0)
+		to_chat(user, "<span class='notice'>Out of charges.</span>")
+		return ..()
+	to_chat(user, "<span class='notice'>You upload the virus to the airlock controller!</span>")
+	// var/sig_list
+	// if(istype(target,/obj/machinery/door/airlock))
+	// 	sig_list += list(COMSIG_AIRLOCK_OPEN, COMSIG_AIRLOCK_CLOSE)
+	// else
+	// sig_list += list(COMSIG_ATOM_ATTACK_HAND)
+	// target.AddComponent(/datum/component/sound_player, amount = (rand(15,20)), signal_or_sig_list = sig_list)
+	installed_cartridge.charges --
+	return TRUE
+
+
 // access to status display signals
 /obj/item/pda/attackby(obj/item/C, mob/user, params)
-	if(istype(C, /obj/item/cartridge) && !cartridge)
+	if(istype(C, /obj/item/cartridge))
 		if(!user.transferItemToLoc(C, src))
 			return
+		eject_cart(user)
 		cartridge = C
 		cartridge.host_pda = src
 		to_chat(user, "<span class='notice'>You insert [cartridge] into [src].</span>")
-		update_icon()
-		playsound(src, 'sound/machines/button.ogg', 50, 1)
+		updateSelfDialog()
+		update_appearance()
+		playsound(src, 'sound/machines/button.ogg', 50, TRUE)
 
 	else if(istype(C, /obj/item/card/id))
 		var/obj/item/card/id/idcard = C
 		if(!idcard.registered_name)
 			to_chat(user, "<span class='warning'>\The [src] rejects the ID!</span>")
-			if (!silent)
-				playsound(src, 'sound/machines/terminal_error.ogg', 15, 1)
+			if(!silent)
+				playsound(src, 'sound/machines/terminal_error.ogg', 50, TRUE)
 			return
-
 		if(!owner)
 			owner = idcard.registered_name
 			ownjob = idcard.assignment
 			update_label()
 			to_chat(user, "<span class='notice'>Card scanned.</span>")
-			if (!silent)
-				playsound(src, 'sound/machines/terminal_success.ogg', 15, 1)
+			if(!silent)
+				playsound(src, 'sound/machines/terminal_success.ogg', 50, TRUE)
 		else
-			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
-			if(((src in user.contents) || (isturf(loc) && in_range(src, user))) && (C in user.contents))
-				if(!id_check(user, idcard))
-					return
-				to_chat(user, "<span class='notice'>You put the ID into \the [src]'s slot.</span>")
-				updateSelfDialog()//Update self dialog on success.
-			return	//Return in case of failed check or when successful.
+			if(!id_check(user, idcard))
+				return
+			to_chat(user, "<span class='notice'>You put the ID into \the [src]'s slot.</span>")
+			updateSelfDialog()//Update self dialog on success.
+
+			return //Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
 	else if(istype(C, /obj/item/paicard) && !pai)
 		if(!user.transferItemToLoc(C, src))
 			return
 		pai = C
 		to_chat(user, "<span class='notice'>You slot \the [C] into [src].</span>")
-		update_icon()
+		update_appearance()
 		updateUsrDialog()
 	else if(is_type_in_list(C, contained_item)) //Checks if there is a pen
 		if(inserted_item)
 			to_chat(user, "<span class='warning'>There is already \a [inserted_item] in \the [src]!</span>")
-			return ..()
 		else
 			if(!user.transferItemToLoc(C, src))
 				return
 			to_chat(user, "<span class='notice'>You slide \the [C] into \the [src].</span>")
 			inserted_item = C
-			update_icon()
-			playsound(src, 'sound/machines/button.ogg', 50, 1)
-
+			update_appearance()
+			playsound(src, 'sound/machines/button.ogg', 50, TRUE)
 	else if(istype(C, /obj/item/photo))
 		var/obj/item/photo/P = C
 		picture = P.picture
@@ -1049,12 +1176,12 @@ GLOBAL_LIST_EMPTY(PDAs)
 		switch(scanmode)
 
 			if(PDA_SCANNER_MEDICAL)
-				C.visible_message("<span class='alert'>[user] has analyzed [C]'s vitals!</span>")
+				C.visible_message("<span class='notice'>[user] analyzes [C]'s vitals.</span>")
 				healthscan(user, C, 1)
 				add_fingerprint(user)
 
 			if(PDA_SCANNER_HALOGEN)
-				C.visible_message("<span class='warning'>[user] has analyzed [C]'s radiation levels!</span>")
+				C.visible_message("<span class='notice'>[user] analyzes [C]'s radiation levels.</span>")
 
 				user.show_message("<span class='notice'>Analyzing Results for [C]:</span>")
 				if(C.radiation)
@@ -1098,8 +1225,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 
 /obj/item/pda/proc/explode() //This needs tuning.
-	if(!detonatable)
-		return
 	var/turf/T = get_turf(src)
 
 	if (ismob(loc))
@@ -1131,12 +1256,39 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 //AI verb and proc for sending PDA messages.
 
+/mob/living/silicon/ai/verb/cmd_toggle_pda_receiver()
+	set category = "AI Commands"
+	set name = "PDA - Toggle Sender/Receiver"
+
+
+	if(usr.stat == DEAD)
+		return //won't work if dead
+	if(!isnull(aiPDA))
+		aiPDA.toff = !aiPDA.toff
+		to_chat(usr, "<span class='notice'>PDA sender/receiver toggled [(aiPDA.toff ? "Off" : "On")]!</span>")
+	else
+		to_chat(usr, "You do not have a PDA. You should make an issue report about this.")
+
+/mob/living/silicon/ai/verb/cmd_toggle_pda_silent()
+	set category = "AI Commands"
+	set name = "PDA - Toggle Ringer"
+
+
+	if(usr.stat == DEAD)
+		return //won't work if dead
+	if(!isnull(aiPDA))
+		//0
+		aiPDA.silent = !aiPDA.silent
+		to_chat(usr, "<span class='notice'>PDA ringer toggled [(aiPDA.silent ? "Off" : "On")]!</span>")
+	else
+		to_chat(usr, "You do not have a PDA. You should make an issue report about this.")
+
 /mob/living/silicon/ai/proc/cmd_send_pdamesg(mob/user)
 	var/list/plist = list()
 	var/list/namecounts = list()
 
 	if(aiPDA.toff)
-		to_chat(user, "Turn on your receiver in order to send messages.")
+		to_chat(user, "<span class='alert'>Turn on your receiver in order to send messages.</span>")
 		return
 
 	for (var/obj/item/pda/P in get_viewable_pdas())
@@ -1165,30 +1317,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	aiPDA.create_message(src, selected)
 
-
-/mob/living/silicon/ai/verb/cmd_toggle_pda_receiver()
-	set category = "AI Commands"
-	set name = "PDA - Toggle Sender/Receiver"
-	if(usr.stat == DEAD)
-		return //won't work if dead
-	if(!isnull(aiPDA))
-		aiPDA.toff = !aiPDA.toff
-		to_chat(usr, "<span class='notice'>PDA sender/receiver toggled [(aiPDA.toff ? "Off" : "On")]!</span>")
-	else
-		to_chat(usr, "You do not have a PDA. You should make an issue report about this.")
-
-/mob/living/silicon/ai/verb/cmd_toggle_pda_silent()
-	set category = "AI Commands"
-	set name = "PDA - Toggle Ringer"
-	if(usr.stat == DEAD)
-		return //won't work if dead
-	if(!isnull(aiPDA))
-		//0
-		aiPDA.silent = !aiPDA.silent
-		to_chat(usr, "<span class='notice'>PDA ringer toggled [(aiPDA.silent ? "Off" : "On")]!</span>")
-	else
-		to_chat(usr, "You do not have a PDA. You should make an issue report about this.")
-
 /mob/living/silicon/ai/proc/cmd_show_message_log(mob/user)
 	if(incapacitated())
 		return
@@ -1196,8 +1324,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		var/HTML = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>AI PDA Message Log</title></head><body>[aiPDA.tnote]</body></html>"
 		user << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
 	else
-		to_chat(user, "You do not have a PDA. You should make an issue report about this.")
-
+		to_chat(user, "<span class='warning'>You do not have a PDA! You should make an issue report about this.</span>")
 
 // Pass along the pulse to atoms in contents, largely added so pAIs are vulnerable to EMP
 /obj/item/pda/emp_act(severity)
@@ -1206,17 +1333,28 @@ GLOBAL_LIST_EMPTY(PDAs)
 		for(var/atom/A in src)
 			A.emp_act(severity)
 	if (!(. & EMP_PROTECT_SELF))
-		emped += 1
-		spawn(2 * severity)
-			emped -= 1
+		emped++
+		addtimer(CALLBACK(src, .proc/emp_end), 200 * severity)
 
-/proc/get_viewable_pdas()
+/obj/item/pda/proc/emp_end()
+	emped--
+
+/proc/get_viewable_pdas(sort_by_job = FALSE)
 	. = list()
-	// Returns a list of PDAs which can be viewed from another PDA/message monitor.
-	for(var/obj/item/pda/P in GLOB.PDAs)
+	// Returns a list of PDAs which can be viewed from another PDA/message monitor.,
+	var/sortmode
+	if(sort_by_job)
+		sortmode = /proc/cmp_pdajob_asc
+	else
+		sortmode = /proc/cmp_pdaname_asc
+
+	for(var/obj/item/pda/P in sortList(GLOB.PDAs, sortmode))
 		if(!P.owner || P.toff || P.hidden)
 			continue
 		. += P
+
+// /obj/item/pda/proc/pda_no_detonate()
+// 	return COMPONENT_PDA_NO_DETONATE
 
 #undef PDA_SCANNER_NONE
 #undef PDA_SCANNER_MEDICAL

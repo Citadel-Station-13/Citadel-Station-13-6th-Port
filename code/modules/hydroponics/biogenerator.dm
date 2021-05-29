@@ -36,7 +36,7 @@
 	..()
 	if(A == beaker)
 		beaker = null
-		update_icon()
+		update_appearance()
 
 /obj/machinery/biogenerator/RefreshParts()
 	var/E = 0
@@ -57,19 +57,22 @@
 		. += "<span class='notice'>The status display reads: Productivity at <b>[productivity*100]%</b>.<br>Matter consumption reduced by <b>[(efficiency*25)-25]</b>%.<br>Machine can hold up to <b>[max_items]</b> pieces of produce.</span>"
 
 /obj/machinery/biogenerator/on_reagent_change(changetype)			//When the reagents change, change the icon as well.
-	update_icon()
+	update_appearance()
 
 /obj/machinery/biogenerator/update_icon_state()
 	if(panel_open)
 		icon_state = "biogen-empty-o"
-	else if(!src.beaker)
+		return ..()
+	if(!beaker)
 		icon_state = "biogen-empty"
-	else if(!src.processing)
+		return ..()
+	if(!processing)
 		icon_state = "biogen-stand"
-	else
-		icon_state = "biogen-work"
+		return ..()
+	icon_state = "biogen-work"
+	return ..()
 
-/obj/machinery/biogenerator/attackby(obj/item/O, mob/user, params)
+/obj/machinery/biogenerator/attackby(obj/item/O, mob/living/user, params)
 	if(user.a_intent == INTENT_HARM)
 		return ..()
 
@@ -82,7 +85,7 @@
 			var/obj/item/reagent_containers/glass/B = beaker
 			B.forceMove(drop_location())
 			beaker = null
-		update_icon()
+		update_appearance()
 		return
 
 	if(default_deconstruction_crowbar(O))
@@ -98,7 +101,7 @@
 					return
 				beaker = O
 				to_chat(user, "<span class='notice'>You add the container to the machine.</span>")
-				update_icon()
+				update_appearance()
 		else
 			to_chat(user, "<span class='warning'>Close the maintenance panel first.</span>")
 		return
@@ -155,15 +158,15 @@
 		detach(user)
 
 /**
-  * activate: Activates biomass processing and converts all inserted grown products into biomass
-  *
-  * Arguments:
-  * * user The mob starting the biomass processing
-  */
+ * activate: Activates biomass processing and converts all inserted grown products into biomass
+ *
+ * Arguments:
+ * * user The mob starting the biomass processing
+ */
 /obj/machinery/biogenerator/proc/activate(mob/user)
 	if(user.stat != CONSCIOUS)
 		return
-	if(stat != NONE)
+	if(machine_stat != NONE)
 		return
 	if(processing)
 		to_chat(user, "<span class='warning'>The biogenerator is in the process of working.</span>")
@@ -178,14 +181,14 @@
 		qdel(I)
 	if(S)
 		processing = TRUE
-		update_icon()
+		update_appearance()
 		playsound(loc, 'sound/machines/blender.ogg', 50, TRUE)
 		use_power(S * 30)
 		sleep(S + 15 / productivity)
 		if(QDELETED(src)) //let's not.
 			return
 		processing = FALSE
-		update_icon()
+		update_appearance()
 
 /obj/machinery/biogenerator/proc/check_cost(list/materials, multiplier = 1, remove_points = TRUE)
 	if(materials.len != 1 || materials[1] != SSmaterials.GetMaterialRef(/datum/material/biomass))
@@ -195,7 +198,7 @@
 	else
 		if(remove_points)
 			points -= materials[SSmaterials.GetMaterialRef(/datum/material/biomass)]*multiplier/efficiency
-		update_icon()
+		update_appearance()
 		return TRUE
 
 /obj/machinery/biogenerator/proc/check_container_volume(list/reagents, multiplier = 1)
@@ -236,7 +239,7 @@
 				beaker.reagents.add_reagent(R, D.make_reagents[R])
 			. = 1
 			--i
-	update_icon()
+	update_appearance()
 	return .
 
 /obj/machinery/biogenerator/proc/detach(mob/living/user)
@@ -246,10 +249,10 @@
 		else
 			beaker.drop_location(get_turf(src))
 		beaker = null
-		update_icon()
+		update_appearance()
 
 /obj/machinery/biogenerator/ui_status(mob/user)
-	if(stat & BROKEN || panel_open)
+	if(machine_stat & BROKEN || panel_open)
 		return UI_CLOSE
 	return ..()
 
@@ -304,7 +307,8 @@
 	return data
 
 /obj/machinery/biogenerator/ui_act(action, list/params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)

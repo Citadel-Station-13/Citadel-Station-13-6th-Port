@@ -6,6 +6,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	desc = "An automated announcement system that handles minor announcements over the radio."
 	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "AAS_On"
+	// base_icon_state = "AAS"
 
 	verb_say = "coldly states"
 	verb_ask = "queries"
@@ -18,10 +19,9 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 
 	var/obj/item/radio/headset/radio
 	var/arrival = "%PERSON has signed up as %RANK"
-	var/arrivalToggle = TRUE
+	var/arrivalToggle = 1
 	var/newhead = "%PERSON, %RANK, is the department head."
-	var/newheadToggle = TRUE
-	var/cryostorage = "%PERSON, %RANK, has been moved into cryogenic storage." // this shouldnt be changed
+	var/newheadToggle = 1
 
 	var/greenlight = "Light_Green"
 	var/pinklight = "Light_Pink"
@@ -31,13 +31,14 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	. = ..()
 	GLOB.announcement_systems += src
 	radio = new /obj/item/radio/headset/silicon/ai(src)
-	update_icon()
+	update_appearance()
 
 /obj/machinery/announcement_system/update_icon_state()
-	if(is_operational())
+	if(is_operational)
 		icon_state = (panel_open ? "AAS_On_Open" : "AAS_On")
 	else
 		icon_state = (panel_open ? "AAS_Off_Open" : "AAS_Off")
+	return ..()
 
 /obj/machinery/announcement_system/update_overlays()
 	. = ..()
@@ -47,7 +48,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	if(newheadToggle)
 		. += pinklight
 
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		. += errorlight
 
 /obj/machinery/announcement_system/Destroy()
@@ -60,13 +61,13 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 		P.play_tool_sound(src)
 		panel_open = !panel_open
 		to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>")
-		update_icon()
+		update_appearance()
 	else if(default_deconstruction_crowbar(P))
 		return
-	else if(P.tool_behaviour == TOOL_MULTITOOL && panel_open && (stat & BROKEN))
+	else if(P.tool_behaviour == TOOL_MULTITOOL && panel_open && (machine_stat & BROKEN))
 		to_chat(user, "<span class='notice'>You reset [src]'s firmware.</span>")
-		stat &= ~BROKEN
-		update_icon()
+		set_machine_stat(machine_stat & ~BROKEN)
+		update_appearance()
 	else
 		return ..()
 
@@ -76,7 +77,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	return str
 
 /obj/machinery/announcement_system/proc/announce(message_type, user, rank, list/channels)
-	if(!is_operational())
+	if(!is_operational)
 		return
 
 	var/message
@@ -86,10 +87,21 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	else if(message_type == "NEWHEAD" && newheadToggle)
 		message = CompileText(newhead, user, rank)
 	else if(message_type == "CRYOSTORAGE")
-		message = CompileText(cryostorage, user, rank)
+		message = "[user][rank ? ", [rank]" : ""] has been moved to cryo storage."
 	else if(message_type == "ARRIVALS_BROKEN")
 		message = "The arrivals shuttle has been damaged. Docking for repairs..."
 
+	broadcast(message, channels)
+
+/// Announces a new security officer joining over the radio
+/obj/machinery/announcement_system/proc/announce_officer(mob/officer, department)
+	if (!is_operational)
+		return
+
+	broadcast("Officer [officer.real_name] has been assigned to [department].", list(RADIO_CHANNEL_SECURITY))
+
+/// Sends a message to the appropriate channels.
+/obj/machinery/announcement_system/proc/broadcast(message, list/channels)
 	if(channels.len == 0)
 		radio.talk_into(src, message, null)
 	else
@@ -114,9 +126,9 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	. = ..()
 	if(.)
 		return
-	if(!usr.canUseTopic(src, !hasSiliconAccessInArea(usr)))
+	if(!usr.canUseTopic(src, !issilicon(usr)))
 		return
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		visible_message("<span class='warning'>[src] buzzes.</span>", "<span class='hear'>You hear a faint buzz.</span>")
 		playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, TRUE)
 		return
@@ -137,19 +149,19 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 				log_game("The head announcement was updated: [NewMessage] by:[key_name(usr)]")
 		if("NewheadToggle")
 			newheadToggle = !newheadToggle
-			update_icon()
+			update_appearance()
 		if("ArrivalToggle")
 			arrivalToggle = !arrivalToggle
-			update_icon()
+			update_appearance()
 	add_fingerprint(usr)
 
 /obj/machinery/announcement_system/attack_robot(mob/living/silicon/user)
 	. = attack_ai(user)
 
 /obj/machinery/announcement_system/attack_ai(mob/user)
-	if(!user.canUseTopic(src, !hasSiliconAccessInArea(user)))
+	if(!user.canUseTopic(src, !issilicon(user)))
 		return
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		to_chat(user, "<span class='warning'>[src]'s firmware appears to be malfunctioning!</span>")
 		return
 	interact(user)
@@ -163,7 +175,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 
 /obj/machinery/announcement_system/emp_act(severity)
 	. = ..()
-	if(!(stat & (NOPOWER|BROKEN)) && !(. & EMP_PROTECT_SELF) && severity >= 30)
+	if(!(machine_stat & (NOPOWER|BROKEN)) && !(. & EMP_PROTECT_SELF))
 		act_up()
 
 /obj/machinery/announcement_system/emag_act()

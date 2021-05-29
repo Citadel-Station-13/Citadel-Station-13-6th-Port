@@ -10,7 +10,7 @@
 	idle_power_usage = 20
 	active_power_usage = 100
 	circuit = /obj/item/circuitboard/computer/powermonitor
-	tgui_id = "PowerMonitor"
+	var/tgui_id = "PowerMonitor"
 
 	var/obj/structure/cable/attached_wire
 	var/obj/machinery/power/apc/local_apc
@@ -60,7 +60,7 @@
 		local_apc = null
 
 /obj/machinery/computer/monitor/proc/get_powernet() //keep in sync with /datum/computer_file/program/power_monitor's version
-	if(attached_wire || (local_apc && local_apc.terminal))
+	if(attached_wire || (local_apc?.terminal))
 		return attached_wire ? attached_wire.powernet : local_apc.terminal.powernet
 	return FALSE
 

@@ -24,7 +24,7 @@
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 30
 	active_power_usage = 200
-	power_channel = EQUIP
+	power_channel = AREA_USAGE_EQUIP
 	max_integrity = 300
 	integrity_failure = 0.33
 	/// A reference to an `/obj/item/paper` inside the copier, if one is inserted. Otherwise null.

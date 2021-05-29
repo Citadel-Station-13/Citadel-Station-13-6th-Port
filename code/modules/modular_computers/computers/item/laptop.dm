@@ -17,23 +17,16 @@
 	// No running around with open laptops in hands.
 	item_flags = SLOWS_WHILE_IN_HAND
 
-	screen_on = FALSE 		// Starts closed
-	var/start_open = TRUE	// unless this var is set to 1
+	screen_on = FALSE // Starts closed
+	var/start_open = TRUE // unless this var is set to 1
 	var/icon_state_closed = "laptop-closed"
 	var/w_class_open = WEIGHT_CLASS_BULKY
 	var/slowdown_open = TRUE
 
 /obj/item/modular_computer/laptop/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Drag it in your hand or on yourself to pick it up.</span>"
-	. += "<span class='notice'>Ctrl+Shift-click to [screen_on ? "close" : "open"] it.</span>"
-	var/obj/item/computer_hardware/card_slot/card_slot = all_components[MC_CARD]
-	var/obj/item/computer_hardware/card_slot/card_slot2 = all_components[MC_CARD2]
-	if(card_slot || card_slot2)
-		if(card_slot.stored_card)
-			. += "<span class='notice'>\The [src] has \a [card_slot] with an id inside, Alt-click to remove the id.</span>"
-		if(card_slot2.stored_card)
-			. += "<span class='notice'>\The [src] has \a [card_slot2] with an id inside, Alt-click to remove the id.</span>"
+	if(screen_on)
+		. += "<span class='notice'>Alt-click to close it.</span>"
 
 /obj/item/modular_computer/laptop/Initialize()
 	. = ..()
@@ -44,15 +37,14 @@
 /obj/item/modular_computer/laptop/update_icon_state()
 	if(!screen_on)
 		icon_state = icon_state_closed
-	else
-		. = ..()
+		return
+	return ..()
 
 /obj/item/modular_computer/laptop/update_overlays()
-	if(screen_on)
-		return ..()
-	else
+	if(!screen_on)
 		cut_overlays()
-		icon_state = icon_state_closed
+		return
+	return ..()
 
 /obj/item/modular_computer/laptop/attack_self(mob/user)
 	if(!screen_on)
@@ -68,13 +60,13 @@
 	try_toggle_open(usr)
 
 /obj/item/modular_computer/laptop/MouseDrop(obj/over_object, src_location, over_location)
-	if(istype(over_object, /obj/screen/inventory/hand) || over_object == usr)
+	. = ..()
+	if(over_object == usr || over_object == src)
+		try_toggle_open(usr)
+		return
+	if(istype(over_object, /obj/screen/inventory/hand))
 		var/obj/screen/inventory/hand/H = over_object
 		var/mob/M = usr
-
-		if(!istype(over_object, /obj/screen/inventory/hand))
-			M.put_in_active_hand(src)
-			return
 
 		if(M.stat != CONSCIOUS || M.restrained())
 			return
@@ -85,7 +77,7 @@
 /obj/item/modular_computer/laptop/on_attack_hand(mob/user)
 	if(screen_on && isturf(loc))
 		return attack_self(user)
-	..()
+	. = ..()
 
 /obj/item/modular_computer/laptop/proc/try_toggle_open(mob/living/user)
 	if(issilicon(user))
@@ -98,8 +90,11 @@
 	toggle_open(user)
 
 
-/obj/item/modular_computer/laptop/CtrlShiftClick(mob/user)
-	try_toggle_open(user)
+/obj/item/modular_computer/laptop/AltClick(mob/user)
+	if(screen_on) // Close it.
+		try_toggle_open(user)
+	else
+		return ..()
 
 /obj/item/modular_computer/laptop/proc/toggle_open(mob/living/user=null)
 	if(screen_on)
@@ -113,7 +108,7 @@
 
 	screen_on = !screen_on
 	display_overlays = screen_on
-	update_icon()
+	update_appearance()
 
 
 

@@ -71,7 +71,7 @@
 
 	var/turf/T = get_turf(patient)
 	var/obj/structure/table/optable/table = locate(/obj/structure/table/optable, T)
-	if(table?.computer && !CHECK_BITFIELD(table.computer.stat, NOPOWER|BROKEN))
+	if(table?.computer && !CHECK_BITFIELD(table.computer.machine_stat, NOPOWER|BROKEN))
 		advanced_surgeries |= table.computer.advanced_surgeries
 
 	if(istype(tool, /obj/item/surgical_drapes/advanced))

@@ -3,6 +3,7 @@
 	name = "chemical press"
 	desc = "A press that makes pills, patches and bottles."
 	icon_state = "pill_press"
+
 	///maximum size of a pill
 	var/max_pill_volume = 50
 	///maximum size of a patch
@@ -26,15 +27,16 @@
 	///list of products stored in the machine, so we dont have 610 pills on one tile
 	var/list/stored_products = list()
 	///max amount of pills allowed on our tile before we start storing them instead
-	var/max_floor_products = 50 //haha massive pill piles
+	var/max_floor_products = 10
 
 /obj/machinery/plumbing/pill_press/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>The [name] currently has [stored_products.len] stored. There needs to be less than [max_floor_products ] on the floor to continue dispensing.</span>"
+	. += "<span class='notice'>The [name] currently has [stored_products.len] stored. There needs to be less than [max_floor_products] on the floor to continue dispensing.</span>"
 
-/obj/machinery/plumbing/pill_press/Initialize(mapload, bolt)
+/obj/machinery/plumbing/pill_press/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_demand, bolt)
+
+	AddComponent(/datum/component/plumbing/simple_demand, bolt, layer)
 
 	//expertly copypasted from chemmasters
 	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
@@ -45,9 +47,8 @@
 		SL["class_name"] = assets.icon_class_name("pill[x]")
 		pill_styles += list(SL)
 
-
 /obj/machinery/plumbing/pill_press/process()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		return
 	if(reagents.total_volume >= current_volume)
 		if (product == "pill")
@@ -73,7 +74,9 @@
 			stored_products += P
 	if(stored_products.len)
 		var/pill_amount = 0
-		for(var/obj/item/reagent_containers/pill/P in loc)
+		for(var/thing in loc)
+			if(!istype(thing, /obj/item/reagent_containers/glass/bottle) && !istype(thing, /obj/item/reagent_containers/pill))
+				continue
 			pill_amount++
 			if(pill_amount >= max_floor_products) //too much so just stop
 				break
@@ -106,7 +109,8 @@
 	return data
 
 /obj/machinery/plumbing/pill_press/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	. = TRUE
 	switch(action)

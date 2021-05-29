@@ -8,9 +8,9 @@
 	layer = ABOVE_ALL_MOB_LAYER // Overhead
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/recycler
-	var/safety_mode = FALSE // Temporarily stops machine if it detects a mob, or upon deconstruction.
+	var/safety_mode = FALSE // Temporarily stops machine if it detects a mob
 	var/icon_name = "grinder-o"
-	var/blood = 0
+	var/bloody = FALSE
 	var/eat_dir = WEST
 	var/amount_produced = 50
 	var/crush_damage = 1000
@@ -19,14 +19,22 @@
 
 /obj/machinery/recycler/Initialize()
 	AddComponent(/datum/component/butchering/recycler, 1, amount_produced,amount_produced/5)
-	AddComponent(/datum/component/material_container, list(/datum/material/iron, /datum/material/glass, /datum/material/silver, /datum/material/plasma, /datum/material/gold, /datum/material/diamond, /datum/material/plastic, /datum/material/uranium, /datum/material/bananium, /datum/material/titanium, /datum/material/bluespace), INFINITY, FALSE, null, null, null, TRUE)
+	var/list/allowed_materials = list(/datum/material/iron,
+									/datum/material/glass,
+									/datum/material/silver,
+									/datum/material/plasma,
+									/datum/material/gold,
+									/datum/material/diamond,
+									/datum/material/plastic,
+									/datum/material/uranium,
+									/datum/material/bananium,
+									/datum/material/titanium,
+									/datum/material/bluespace
+									)
+	AddComponent(/datum/component/material_container, allowed_materials, INFINITY)
 	. = ..()
-	update_icon()
-	req_one_access = get_all_accesses() + get_all_centcom_access()
-
-/obj/machinery/recycler/deconstruct(disassembled = TRUE)
-	safety_mode = TRUE //to stop stock parts and circuit from being deleted.
-	return ..()
+	update_appearance(UPDATE_ICON)
+	req_one_access =get_all_accesses() + get_all_centcom_access()
 
 /obj/machinery/recycler/RefreshParts()
 	var/amt_made = 0
@@ -46,13 +54,9 @@
 /obj/machinery/recycler/examine(mob/user)
 	. = ..()
 	. += "<span class='notice'>Reclaiming <b>[amount_produced]%</b> of materials salvaged.</span>"
-	. += {"The power light is [(stat & NOPOWER) ? "off" : "on"].
+	. += {"The power light is [(machine_stat & NOPOWER) ? "off" : "on"].
 	The safety-mode light is [safety_mode ? "on" : "off"].
 	The safety-sensors status light is [obj_flags & EMAGGED ? "off" : "on"]."}
-
-/obj/machinery/recycler/power_change()
-	..()
-	update_icon()
 
 
 /obj/machinery/recycler/attackby(obj/item/I, mob/user, params)
@@ -76,22 +80,22 @@
 	obj_flags |= EMAGGED
 	if(safety_mode)
 		safety_mode = FALSE
-		update_icon()
-	playsound(src, "sparks", 75, 1, -1)
+		update_appearance()
+	playsound(src, "sparks", 75, TRUE, SILENCED_SOUND_EXTRARANGE)
 	to_chat(user, "<span class='notice'>You use the cryptographic sequencer on [src].</span>")
 	return TRUE
 
 /obj/machinery/recycler/update_icon_state()
-	var/is_powered = !(stat & (BROKEN|NOPOWER))
+	var/is_powered = !(machine_stat & (BROKEN|NOPOWER))
 	if(safety_mode)
 		is_powered = FALSE
-	icon_state = icon_name + "[is_powered]" + "[(blood ? "bld" : "")]" // add the blood tag at the end
+	icon_state = icon_name + "[is_powered]" + "[(bloody ? "bld" : "")]" // add the blood tag at the end
+	return ..()
 
 /obj/machinery/recycler/CanPass(atom/movable/AM)
 	. = ..()
 	if(!anchored)
 		return
-
 	var/move_dir = get_dir(loc, AM.loc)
 	if(move_dir == eat_dir)
 		return TRUE
@@ -101,9 +105,11 @@
 	. = ..()
 
 /obj/machinery/recycler/proc/eat(atom/movable/AM0, sound=TRUE)
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		return
 	if(safety_mode)
+		return
+	if(iseffect(AM0))
 		return
 	if(!isturf(AM0.loc))
 		return //I don't know how you called Crossed() but stop it.
@@ -141,7 +147,6 @@
 	if(not_eaten)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', (50 + not_eaten*5), FALSE, not_eaten, ignore_walls = (not_eaten - 10)) // Ditto.
 	if(!ismob(AM0))
-		AM0.moveToNullspace()
 		qdel(AM0)
 	else // Lets not move a mob to nullspace and qdel it, yes?
 		for(var/i in AM0.contents)
@@ -151,22 +156,13 @@
 
 /obj/machinery/recycler/proc/recycle_item(obj/item/I)
 
-	. = list()
-	for(var/A in I)
-		var/atom/movable/AM = A
-		AM.forceMove(loc)
-		if(AM.loc == loc)
-			. += AM
-
-	I.forceMove(loc)
 	var/obj/item/grown/log/L = I
 	if(istype(L))
 		var/seed_modifier = 0
 		if(L.seed)
 			seed_modifier = round(L.seed.potency / 25)
-		new L.plank_type(src.loc, 1 + seed_modifier)
+		new L.plank_type(loc, 1 + seed_modifier)
 		qdel(L)
-		return
 	else
 		var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
 		var/material_amount = materials.get_item_material_amount(I)
@@ -178,37 +174,34 @@
 		materials.retrieve_all()
 
 
-/obj/machinery/recycler/proc/emergency_stop(mob/living/L)
-	playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 0)
+/obj/machinery/recycler/proc/emergency_stop()
+	playsound(src, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
 	safety_mode = TRUE
-	update_icon()
-	L.forceMove(loc)
+	update_appearance()
 	addtimer(CALLBACK(src, .proc/reboot), SAFETY_COOLDOWN)
 
 /obj/machinery/recycler/proc/reboot()
-	playsound(src, 'sound/machines/ping.ogg', 50, 0)
+	playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
 	safety_mode = FALSE
-	update_icon()
+	update_appearance()
 
 /obj/machinery/recycler/proc/crush_living(mob/living/L)
 
-	. = list()
 	L.forceMove(loc)
 
 	if(issilicon(L))
-		playsound(src, 'sound/items/welder.ogg', 50, 1)
+		playsound(src, 'sound/items/welder.ogg', 50, TRUE)
 	else
-		playsound(src, 'sound/effects/splat.ogg', 50, 1)
+		playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
 
-	// By default, the emagged recycler will gib all non-carbons. (human simple animal mobs don't count)
 	if(iscarbon(L))
 		if(L.stat == CONSCIOUS)
 			L.say("ARRRRRRRRRRRGH!!!", forced="recycler grinding")
 		add_mob_blood(L)
 
-	if(!blood && !issilicon(L))
-		blood = TRUE
-		update_icon()
+	if(!bloody && !issilicon(L))
+		bloody = TRUE
+		update_appearance()
 
 	// Remove and recycle the equipped items
 	if(eat_victim_items)
@@ -228,6 +221,6 @@
 
 /obj/item/paper/guides/recycler
 	name = "paper - 'garbage duty instructions'"
-	info = "_New Assignment_\n\n You have been assigned to collect garbage from trash bins, located around the station. The crewmembers will put their trash into it and you will collect the said trash.<br><br>There is a recycling machine near your closet, inside maintenance; use it to recycle the trash for a small chance to get useful minerals. Then deliver these minerals to cargo or engineering. You are our last hope for a clean station, do not screw this up!"
+	info = "<h2>New Assignment</h2> You have been assigned to collect garbage from trash bins, located around the station. The crewmembers will put their trash into it and you will collect the said trash.<br><br>There is a recycling machine near your closet, inside maintenance; use it to recycle the trash for a small chance to get useful minerals. Then deliver these minerals to cargo or engineering. You are our last hope for a clean station, do not screw this up!"
 
 #undef SAFETY_COOLDOWN

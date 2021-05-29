@@ -1,6 +1,7 @@
 /datum/computer_file/program/ntnet_dos
 	filename = "ntn_dos"
 	filedesc = "DoS Traffic Generator"
+	category = PROGRAM_CATEGORY_MISC
 	program_icon_state = "hostile"
 	extended_desc = "This advanced script can perform denial of service attacks against NTNet quantum relays. The system administrator will probably notice this. Multiple devices can run this program together against same relay for increased effect"
 	size = 20
@@ -26,7 +27,7 @@
 			dos_speed = NTNETSPEED_ETHERNET * 10
 	if(target && executed)
 		target.dos_overload += dos_speed
-		if(!target.is_operational())
+		if(!target.is_operational)
 			target.dos_sources.Remove(src)
 			target = null
 			error = "Connection to destination relay lost."

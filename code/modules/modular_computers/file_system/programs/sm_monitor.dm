@@ -1,6 +1,7 @@
 /datum/computer_file/program/supermatter_monitor
 	filename = "ntcims"
 	filedesc = "NT CIMS"
+	category = PROGRAM_CATEGORY_ENGI
 	ui_header = "smmon_0.gif"
 	program_icon_state = "smmon_0"
 	extended_desc = "Crystal Integrity Monitoring System, connects to specially calibrated supermatter sensors to provide information on the status of supermatter-based engines."
@@ -12,7 +13,7 @@
 	alert_able = TRUE
 	var/last_status = SUPERMATTER_INACTIVE
 	var/list/supermatters
-	var/obj/machinery/power/supermatter_crystal/active		// Currently selected supermatter crystal.
+	var/obj/machinery/power/supermatter_crystal/active // Currently selected supermatter crystal.
 
 /datum/computer_file/program/supermatter_monitor/Destroy()
 	clear_signals()
@@ -27,7 +28,7 @@
 		ui_header = "smmon_[last_status].gif"
 		program_icon_state = "smmon_[last_status]"
 		if(istype(computer))
-			computer.update_icon()
+			computer.update_appearance()
 
 /datum/computer_file/program/supermatter_monitor/run_program(mob/living/user)
 	. = ..(user)
@@ -67,9 +68,9 @@
  * the signal and exit.
  */
 /datum/computer_file/program/supermatter_monitor/proc/set_signals()
-	// if(active)
-	// 	RegisterSignal(active, COMSIG_SUPERMATTER_DELAM_ALARM, .proc/send_alert, override = TRUE)
-	// 	RegisterSignal(active, COMSIG_SUPERMATTER_DELAM_START_ALARM, .proc/send_start_alert, override = TRUE)
+	if(active)
+		RegisterSignal(active, COMSIG_SUPERMATTER_DELAM_ALARM, .proc/send_alert, override = TRUE)
+		RegisterSignal(active, COMSIG_SUPERMATTER_DELAM_START_ALARM, .proc/send_start_alert, override = TRUE)
 
 /**
  * Removes the signal listener for Supermatter delaminations from the selected supermatter.
@@ -77,9 +78,9 @@
  * Pretty much does what it says.
  */
 /datum/computer_file/program/supermatter_monitor/proc/clear_signals()
-	// if(active)
-	// 	UnregisterSignal(active, COMSIG_SUPERMATTER_DELAM_ALARM)
-	// 	UnregisterSignal(active, COMSIG_SUPERMATTER_DELAM_START_ALARM)
+	if(active)
+		UnregisterSignal(active, COMSIG_SUPERMATTER_DELAM_ALARM)
+		UnregisterSignal(active, COMSIG_SUPERMATTER_DELAM_START_ALARM)
 
 /**
  * Sends an SM delam alert to the computer.
@@ -130,9 +131,10 @@
 		data["SM_power"] = active.power
 		data["SM_ambienttemp"] = air.return_temperature()
 		data["SM_ambientpressure"] = air.return_pressure()
-		//data["SM_EPR"] = round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
-		var/list/gasdata = list()
+		// data["SM_bad_moles_amount"] = MOLE_PENALTY_THRESHOLD / active.gasefficency
+		data["SM_moles"] = 0
 
+		var/list/gasdata = list()
 
 		if(air.total_moles())
 			for(var/gasid in air.get_gases())

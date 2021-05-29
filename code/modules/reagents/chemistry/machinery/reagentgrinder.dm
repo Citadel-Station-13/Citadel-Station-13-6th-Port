@@ -1,4 +1,3 @@
-
 #define MILK_TO_BUTTER_COEFF 15
 
 /obj/machinery/reagentgrinder
@@ -6,6 +5,7 @@
 	desc = "From BlenderTech. Will It Blend? Let's test it out!"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "juicer1"
+	var/base_icon_state = "juicer"
 	layer = BELOW_OBJ_LAYER
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 5
@@ -29,13 +29,21 @@
 	. = ..()
 	holdingitems = list()
 	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
-	beaker.desc += " May contain blended dust. Don't breathe this in!"
+	warn_of_dust()
+
+/// Add a description to the current beaker warning of blended dust, if it doesn't already have that warning.
+/obj/machinery/reagentgrinder/proc/warn_of_dust()
+	// if(HAS_TRAIT(beaker, TRAIT_MAY_CONTAIN_BLENDED_DUST))
+	// 	return
+
+	beaker.desc += " May contain blended dust. Don't breathe this!"
+	// ADD_TRAIT(beaker, TRAIT_MAY_CONTAIN_BLENDED_DUST, TRAIT_GENERIC)
 
 /obj/machinery/reagentgrinder/constructed/Initialize()
 	. = ..()
 	holdingitems = list()
 	QDEL_NULL(beaker)
-	update_icon()
+	update_appearance()
 
 /obj/machinery/reagentgrinder/Destroy()
 	if(beaker)
@@ -52,11 +60,44 @@
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		speed = M.rating
 
+/obj/machinery/reagentgrinder/examine(mob/user)
+	. = ..()
+	if(!in_range(user, src) && !issilicon(user) && !isobserver(user))
+		. += "<span class='warning'>You're too far away to examine [src]'s contents and display!</span>"
+		return
+
+	if(operating)
+		. += "<span class='warning'>\The [src] is operating.</span>"
+		return
+
+	if(beaker || length(holdingitems))
+		. += "<span class='notice'>\The [src] contains:</span>"
+		if(beaker)
+			. += "<span class='notice'>- \A [beaker].</span>"
+		for(var/i in holdingitems)
+			var/obj/item/O = i
+			. += "<span class='notice'>- \A [O.name].</span>"
+
+	if(!(machine_stat & (NOPOWER|BROKEN)))
+		. += "<span class='notice'>The status display reads:</span>\n"+\
+		"<span class='notice'>- Grinding reagents at <b>[speed*100]%</b>.</span>"
+		if(beaker)
+			for(var/datum/reagent/R in beaker.reagents.reagent_list)
+				. += "<span class='notice'>- [R.volume] units of [R.name].</span>"
+
+/obj/machinery/reagentgrinder/AltClick(mob/user)
+	. = ..()
+	if(!can_interact(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+		return
+	if(operating)//Prevent alt click early removals
+		return
+	replace_beaker(user)
+
 /obj/machinery/reagentgrinder/handle_atom_del(atom/A)
 	. = ..()
 	if(A == beaker)
 		beaker = null
-		update_icon()
+		update_appearance()
 	if(holdingitems[A])
 		holdingitems -= A
 
@@ -67,24 +108,21 @@
 	holdingitems = list()
 
 /obj/machinery/reagentgrinder/update_icon_state()
-	if(beaker)
-		icon_state = "juicer1"
-	else
-		icon_state = "juicer0"
+	icon_state = "[base_icon_state][beaker ? 1 : 0]"
+	return ..()
 
 /obj/machinery/reagentgrinder/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
+	if(!user)
+		return FALSE
 	if(beaker)
-		beaker.forceMove(drop_location())
-		if(user && Adjacent(user) && user.can_hold_items())
-			user.put_in_hands(beaker)
+		try_put_in_hand(beaker, user)
+		beaker = null
 	if(new_beaker)
 		beaker = new_beaker
-	else
-		beaker = null
-	update_icon()
+	update_appearance()
 	return TRUE
 
-/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/user, params)
+/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/living/user, params)
 	//You can only screw open empty grinder
 	if(!beaker && !length(holdingitems) && default_deconstruction_screwdriver(user, icon_state, icon_state, I))
 		return
@@ -100,13 +138,13 @@
 
 	if (istype(I, /obj/item/reagent_containers) && !(I.item_flags & ABSTRACT) && I.is_open_container())
 		var/obj/item/reagent_containers/B = I
-		. = TRUE
+		. = TRUE //no afterattack
 		if(!user.transferItemToLoc(B, src))
 			return
 		replace_beaker(user, B)
 		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
-		update_icon()
-		return
+		update_appearance()
+		return TRUE //no afterattack
 
 	if(holdingitems.len >= limit)
 		to_chat(user, "<span class='warning'>[src] is filled to capacity!</span>")
@@ -142,7 +180,7 @@
 /obj/machinery/reagentgrinder/ui_interact(mob/user) // The microwave Menu //I am reasonably certain that this is not a microwave
 	. = ..()
 
-	if(operating || !user.canUseTopic(src, !hasSiliconAccessInArea(user)))
+	if(operating || !user.canUseTopic(src, !issilicon(user)))
 		return
 
 	var/list/options = list()
@@ -151,7 +189,7 @@
 		options["eject"] = radial_eject
 
 	if(isAI(user))
-		if(stat & NOPOWER)
+		if(machine_stat & NOPOWER)
 			return
 		options["examine"] = radial_examine
 
@@ -170,10 +208,10 @@
 		for(var/key in options)
 			choice = key
 	else
-		choice = show_radial_menu(user, src, options, require_near = !hasSiliconAccessInArea(user))
+		choice = show_radial_menu(user, src, options, require_near = !issilicon(user))
 
 	// post choice verification
-	if(operating || (isAI(user) && stat & NOPOWER) || !user.canUseTopic(src, !hasSiliconAccessInArea(user)))
+	if(operating || (isAI(user) && machine_stat & NOPOWER) || !user.canUseTopic(src, !issilicon(user)))
 		return
 
 	switch(choice)
@@ -187,36 +225,6 @@
 			mix(user)
 		if("examine")
 			examine(user)
-
-/obj/machinery/reagentgrinder/examine(mob/user)
-	. = ..()
-	if(!in_range(user, src) && !hasSiliconAccessInArea(user) && !isobserver(user))
-		. += "<span class='warning'>You're too far away to examine [src]'s contents and display!</span>"
-		return
-
-	if(operating)
-		. += "<span class='warning'>\The [src] is operating.</span>"
-		return
-
-	if(beaker || length(holdingitems))
-		. += "<span class='notice'>\The [src] contains:</span>"
-		if(beaker)
-			. += "<span class='notice'>- \A [beaker].</span>"
-		for(var/i in holdingitems)
-			var/obj/item/O = i
-			. += "<span class='notice'>- \A [O.name].</span>"
-
-	if(!(stat & (NOPOWER|BROKEN)))
-		. += "<span class='notice'>The status display reads:</span>"
-		. += "<span class='notice'>- Grinding reagents at <b>[speed*100]%</b>.<span>"
-		if(beaker)
-			for(var/datum/reagent/R in beaker.reagents.reagent_list)
-				. += "<span class='notice'>- [R.volume] units of [R.name].</span>"
-
-/obj/machinery/reagentgrinder/AltClick(mob/user)
-	. = ..()
-	if(istype(user) && user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
-		replace_beaker(user)
 
 /obj/machinery/reagentgrinder/proc/eject(mob/user)
 	for(var/i in holdingitems)
@@ -245,9 +253,9 @@
 	operating = TRUE
 	if(!silent)
 		if(!juicing)
-			playsound(src, 'sound/machines/blender.ogg', 50, 1)
+			playsound(src, 'sound/machines/blender.ogg', 50, TRUE)
 		else
-			playsound(src, 'sound/machines/juicer.ogg', 20, 1)
+			playsound(src, 'sound/machines/juicer.ogg', 20, TRUE)
 	addtimer(CALLBACK(src, .proc/stop_operating), time / speed)
 
 /obj/machinery/reagentgrinder/proc/stop_operating()
@@ -255,7 +263,7 @@
 
 /obj/machinery/reagentgrinder/proc/juice()
 	power_change()
-	if(!beaker || stat & (NOPOWER|BROKEN) || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+	if(!beaker || machine_stat & (NOPOWER|BROKEN) || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 		return
 	operate_for(50, juicing = TRUE)
 	for(var/obj/item/i in holdingitems)
@@ -272,31 +280,32 @@
 	beaker.reagents.add_reagent_list(I.juice_results)
 	remove_object(I)
 
-/obj/machinery/reagentgrinder/proc/grind()
+/obj/machinery/reagentgrinder/proc/grind(mob/user)
 	power_change()
-	if(!beaker || stat & (NOPOWER|BROKEN) || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+	if(!beaker || machine_stat & (NOPOWER|BROKEN) || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 		return
 	operate_for(60)
+	warn_of_dust() // don't breathe this.
 	for(var/i in holdingitems)
 		if(beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 			break
 		var/obj/item/I = i
 		if(I.grind_results)
-			grind_item(i)
+			grind_item(i, user)
 
-/obj/machinery/reagentgrinder/proc/grind_item(obj/item/I) //Grind results can be found in respective object definitions
+/obj/machinery/reagentgrinder/proc/grind_item(obj/item/I, mob/user) //Grind results can be found in respective object definitions
 	if(I.on_grind(src) == -1) //Call on_grind() to change amount as needed, and stop grinding the item if it returns -1
 		to_chat(usr, "<span class='danger'>[src] shorts out as it tries to grind up [I], and transfers it back to storage.</span>")
 		return
 	beaker.reagents.add_reagent_list(I.grind_results)
 	if(I.reagents)
-		I.reagents.trans_to(beaker, I.reagents.total_volume)
+		I.reagents.trans_to(beaker, I.reagents.total_volume) //, transfered_by = user)
 	remove_object(I)
 
 /obj/machinery/reagentgrinder/proc/mix(mob/user)
 	//For butter and other things that would change upon shaking or mixing
 	power_change()
-	if(!beaker || stat & (NOPOWER|BROKEN))
+	if(!beaker || machine_stat & (NOPOWER|BROKEN))
 		return
 	operate_for(50, juicing = TRUE)
 	addtimer(CALLBACK(src, /obj/machinery/reagentgrinder/proc/mix_complete), 50)

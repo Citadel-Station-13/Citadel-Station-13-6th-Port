@@ -29,8 +29,7 @@
 	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS, null, CALLBACK(src, .proc/can_be_rotated))
 
 /obj/machinery/plumbing/proc/can_be_rotated(mob/user,rotation_type)
-	return TRUE
-
+	return !anchored
 
 /obj/machinery/plumbing/examine(mob/user)
 	. = ..()
@@ -42,9 +41,9 @@
 	return TRUE
 
 /obj/machinery/plumbing/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
-	to_chat(user, "<span class='notice'>You start furiously plunging [name].")
+	to_chat(user, "<span class='notice'>You start furiously plunging [name].</span>")
 	if(do_after(user, 30, target = src))
-		to_chat(user, "<span class='notice'>You finish plunging the [name].")
+		to_chat(user, "<span class='notice'>You finish plunging the [name].</span>")
 		reagents.reaction(get_turf(src), TOUCH) //splash on the floor
 		reagents.clear_reagents()
 
@@ -68,9 +67,9 @@
 	rcd_cost = 5
 	rcd_delay = 5
 
-/obj/machinery/plumbing/input/Initialize(mapload, bolt)
+/obj/machinery/plumbing/input/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_supply, bolt)
+	AddComponent(/datum/component/plumbing/simple_supply, bolt, layer)
 
 ///We can fill beakers in here and everything. we dont inheret from input because it has nothing that we need
 /obj/machinery/plumbing/output
@@ -81,9 +80,9 @@
 	rcd_cost = 5
 	rcd_delay = 5
 
-/obj/machinery/plumbing/output/Initialize(mapload, bolt)
+/obj/machinery/plumbing/output/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_demand, bolt)
+	AddComponent(/datum/component/plumbing/simple_demand, bolt, layer)
 
 /obj/machinery/plumbing/tank
 	name = "chemical tank"
@@ -93,6 +92,21 @@
 	rcd_cost = 25
 	rcd_delay = 20
 
-/obj/machinery/plumbing/tank/Initialize(mapload, bolt)
+/obj/machinery/plumbing/tank/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/tank, bolt)
+	AddComponent(/datum/component/plumbing/tank, bolt, layer)
+
+
+///Layer manifold machine that connects a bunch of layers
+/obj/machinery/plumbing/layer_manifold
+	name = "layer manifold"
+	desc = "A plumbing manifold for layers."
+	icon_state = "manifold"
+	density = FALSE
+
+/obj/machinery/plumbing/layer_manifold/Initialize(mapload, bolt, layer)
+	. = ..()
+
+	AddComponent(/datum/component/plumbing/manifold, bolt, SECOND_DUCT_LAYER)
+	AddComponent(/datum/component/plumbing/manifold, bolt, THIRD_DUCT_LAYER)
+	AddComponent(/datum/component/plumbing/manifold, bolt, FOURTH_DUCT_LAYER)

@@ -56,16 +56,22 @@
 
 	if(panel_open)
 		if(I.tool_behaviour == TOOL_MULTITOOL)
-			I.buffer = src
+			if(!multitool_check_buffer(user, I))
+				return
+			var/obj/item/multitool/M = I
+			M.buffer = src
 			to_chat(user, "<span class='notice'>You save the data in [I]'s buffer. It can now be saved to pads with closed panels.</span>")
 			return TRUE
 	else if(I.tool_behaviour == TOOL_MULTITOOL)
-		if(istype(I.buffer, /obj/machinery/quantumpad))
-			if(I.buffer == src)
+		if(!multitool_check_buffer(user, I))
+			return
+		var/obj/item/multitool/M = I
+		if(istype(M.buffer, /obj/machinery/quantumpad))
+			if(M.buffer == src)
 				to_chat(user, "<span class='warning'>You cannot link a pad to itself!</span>")
 				return TRUE
 			else
-				linked_pad = I.buffer
+				linked_pad = M.buffer
 				to_chat(user, "<span class='notice'>You link [src] to the one in [I]'s buffer.</span>")
 				return TRUE
 		else
@@ -106,14 +112,14 @@
 		to_chat(user, "<span class='warning'>Target pad is busy. Please wait.</span>")
 		return
 
-	if(target_pad.stat & NOPOWER)
+	if(target_pad.machine_stat & NOPOWER)
 		to_chat(user, "<span class='warning'>Target pad is not responding to ping.</span>")
 		return
 	add_fingerprint(user)
 	doteleport(user, target_pad)
 
 /obj/machinery/quantumpad/proc/sparks()
-	var/datum/effect_system/spark_spread/quantum/s = new
+	var/datum/effect_system/spark_spread/quantum/s = new /datum/effect_system/spark_spread/quantum
 	s.set_up(5, 1, get_turf(src))
 	s.start()
 
@@ -135,11 +141,11 @@
 			if(!src || QDELETED(src))
 				teleporting = FALSE
 				return
-			if(stat & NOPOWER)
+			if(machine_stat & NOPOWER)
 				to_chat(user, "<span class='warning'>[src] is unpowered!</span>")
 				teleporting = FALSE
 				return
-			if(!target_pad || QDELETED(target_pad) || target_pad.stat & NOPOWER)
+			if(!target_pad || QDELETED(target_pad) || target_pad.machine_stat & NOPOWER)
 				to_chat(user, "<span class='warning'>Linked pad is not responding to ping. Teleport aborted.</span>")
 				teleporting = FALSE
 				return
@@ -167,11 +173,10 @@
 						//only TP living mobs buckled to non anchored items
 						if(!L.buckled || L.buckled.anchored)
 							continue
-						else
-							continue
-					//Don't TP camera mobs
+					//Don't TP ghosts
 					else if(!isobserver(ROI))
 						continue
+
 				do_teleport(ROI, get_turf(target_pad),null,TRUE,null,null,null,null,TRUE, channel = TELEPORT_CHANNEL_QUANTUM)
 				CHECK_TICK
 

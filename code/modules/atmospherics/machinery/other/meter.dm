@@ -4,7 +4,7 @@
 	icon = 'icons/obj/atmospherics/pipes/meter.dmi'
 	icon_state = "meterX"
 	layer = GAS_PUMP_LAYER
-	power_channel = ENVIRON
+	power_channel = AREA_USAGE_ENVIRON
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	active_power_usage = 4
@@ -17,6 +17,12 @@
 
 /obj/machinery/meter/atmos
 	frequency = FREQ_ATMOS_STORAGE
+
+// /obj/machinery/meter/atmos/layer2
+// 	target_layer = 2
+
+// /obj/machinery/meter/atmos/layer4
+// 	target_layer = 4
 
 /obj/machinery/meter/atmos/atmos_waste_loop
 	name = "waste loop gas flow meter"
@@ -44,8 +50,6 @@
 	for(var/obj/machinery/atmospherics/pipe/pipe in loc)
 		if(pipe.piping_layer == target_layer)
 			candidate = pipe
-			if(pipe.level == 2)
-				break
 	if(candidate)
 		target = candidate
 		setAttachLayer(candidate.piping_layer)
@@ -57,18 +61,18 @@
 /obj/machinery/meter/process_atmos()
 	if(!(target?.flags_1 & INITIALIZED_1))
 		icon_state = "meterX"
-		return 0
+		return FALSE
 
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		icon_state = "meter0"
-		return 0
+		return FALSE
 
 	use_power(5)
 
 	var/datum/gas_mixture/environment = target.return_air()
 	if(!environment)
 		icon_state = "meterX"
-		return 0
+		return FALSE
 
 	var/env_pressure = environment.return_pressure()
 	if(env_pressure <= 0.15*ONE_ATMOSPHERE)
@@ -114,12 +118,13 @@
 	. += status()
 
 /obj/machinery/meter/wrench_act(mob/user, obj/item/I)
+	..()
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	if (I.use_tool(src, user, 40, volume=50))
 		user.visible_message(
 			"[user] unfastens \the [src].",
 			"<span class='notice'>You unfasten \the [src].</span>",
-			"<span class='italics'>You hear ratchet.</span>")
+			"<span class='hear'>You hear ratchet.</span>")
 		deconstruct()
 	return TRUE
 
@@ -129,7 +134,7 @@
 	qdel(src)
 
 /obj/machinery/meter/interact(mob/user)
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	else
 		to_chat(user, status())
@@ -140,7 +145,7 @@
 		deconstruct()
 
 // TURF METER - REPORTS A TILE'S AIR CONTENTS
-//	why are you yelling?
+// why are you yelling?
 /obj/machinery/meter/turf
 
 /obj/machinery/meter/turf/reattach_to_layer()

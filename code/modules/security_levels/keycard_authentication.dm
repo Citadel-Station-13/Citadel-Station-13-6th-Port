@@ -13,18 +13,15 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	active_power_usage = 6
-	power_channel = ENVIRON
+	power_channel = AREA_USAGE_ENVIRON
 	req_access = list(ACCESS_KEYCARD_AUTH)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	ui_x = 375
-	ui_y = 125
 
 	var/datum/callback/ev
 	var/event = ""
 	var/obj/machinery/keycard_auth/event_source
 	var/mob/triggerer = null
-	var/obj/item/card/id/first_id = null
-	var/waiting = 0
+	var/waiting = FALSE
 
 /obj/machinery/keycard_auth/Initialize()
 	. = ..()
@@ -62,64 +59,59 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	return ..()
 
 /obj/machinery/keycard_auth/ui_act(action, params)
-	if(..() || waiting)
-		return
-	var/obj/item/card/id/ID = usr.get_idcard(TRUE)
-	if(!ID || !istype(ID))
-		return
-	if(!check_access(ID))
+	. = ..()
+
+	if(. || waiting || !allowed(usr))
 		return
 	switch(action)
 		if("red_alert")
 			if(!event_source)
-				sendEvent(KEYCARD_RED_ALERT, ID)
+				sendEvent(KEYCARD_RED_ALERT)
 				. = TRUE
 		if("emergency_maint")
 			if(!event_source)
-				sendEvent(KEYCARD_EMERGENCY_MAINTENANCE_ACCESS, ID)
+				sendEvent(KEYCARD_EMERGENCY_MAINTENANCE_ACCESS)
 				. = TRUE
 		if("auth_swipe")
-			if(event_source && ID != first_id && first_id)
+			if(event_source)
 				event_source.trigger_event(usr)
 				event_source = null
 				. = TRUE
 		if("bsa_unlock")
 			if(!event_source)
-				sendEvent(KEYCARD_BSA_UNLOCK, ID)
+				sendEvent(KEYCARD_BSA_UNLOCK)
 				. = TRUE
 
-/obj/machinery/keycard_auth/proc/sendEvent(event_type, trigger_id)
+/obj/machinery/keycard_auth/proc/sendEvent(event_type)
 	triggerer = usr
 	event = event_type
-	waiting = 1
-	GLOB.keycard_events.fireEvent("triggerEvent", src, trigger_id)
+	waiting = TRUE
+	GLOB.keycard_events.fireEvent("triggerEvent", src)
 	addtimer(CALLBACK(src, .proc/eventSent), 20)
 
 /obj/machinery/keycard_auth/proc/eventSent()
 	triggerer = null
 	event = ""
-	waiting = 0
+	waiting = FALSE
 
-/obj/machinery/keycard_auth/proc/triggerEvent(source, trigger_id)
+/obj/machinery/keycard_auth/proc/triggerEvent(source)
 	icon_state = "auth_on"
-	first_id = trigger_id
 	event_source = source
 	addtimer(CALLBACK(src, .proc/eventTriggered), 20)
 
 /obj/machinery/keycard_auth/proc/eventTriggered()
 	icon_state = "auth_off"
 	event_source = null
-	first_id = null
 
 /obj/machinery/keycard_auth/proc/trigger_event(confirmer)
 	log_game("[key_name(triggerer)] triggered and [key_name(confirmer)] confirmed event [event]")
 	message_admins("[ADMIN_LOOKUPFLW(triggerer)] triggered and [ADMIN_LOOKUPFLW(confirmer)] confirmed event [event]")
 
 	var/area/A1 = get_area(triggerer)
-	deadchat_broadcast(" triggered [event] at <span class='name'>[A1.name]</span>.", "<span class='name'>[triggerer]</span>", triggerer)
+	deadchat_broadcast(" triggered [event] at <span class='name'>[A1.name]</span>.", "<span class='name'>[triggerer]</span>", triggerer) //, message_type=DEADCHAT_ANNOUNCEMENT)
 
 	var/area/A2 = get_area(confirmer)
-	deadchat_broadcast(" confirmed [event] at <span class='name'>[A2.name]</span>.", "<span class='name'>[confirmer]</span>", confirmer)
+	deadchat_broadcast(" confirmed [event] at <span class='name'>[A2.name]</span>.", "<span class='name'>[confirmer]</span>", confirmer) //, message_type=DEADCHAT_ANNOUNCEMENT)
 	switch(event)
 		if(KEYCARD_RED_ALERT)
 			set_security_level(SEC_LEVEL_RED)
@@ -133,7 +125,7 @@ GLOBAL_VAR_INIT(emergency_access, FALSE)
 	for(var/area/maintenance/A in world)
 		for(var/obj/machinery/door/airlock/D in A)
 			D.emergency = TRUE
-			D.update_icon(0)
+			D.update_icon(ALL, 0)
 	minor_announce("Access restrictions on maintenance and external airlocks have been lifted.", "Attention! Station-wide emergency declared!",1)
 	GLOB.emergency_access = TRUE
 	SSblackbox.record_feedback("nested tally", "keycard_auths", 1, list("emergency maintenance access", "enabled"))
@@ -142,7 +134,7 @@ GLOBAL_VAR_INIT(emergency_access, FALSE)
 	for(var/area/maintenance/A in world)
 		for(var/obj/machinery/door/airlock/D in A)
 			D.emergency = FALSE
-			D.update_icon(0)
+			D.update_icon(ALL, 0)
 	minor_announce("Access restrictions in maintenance areas have been restored.", "Attention! Station-wide emergency rescinded:")
 	GLOB.emergency_access = FALSE
 	SSblackbox.record_feedback("nested tally", "keycard_auths", 1, list("emergency maintenance access", "disabled"))

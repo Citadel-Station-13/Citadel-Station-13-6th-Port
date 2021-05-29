@@ -51,6 +51,20 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Early returns mob.face_atom()
 #define BLOCK_FACE_ATOM_1			(1<<17)
 
+// Update flags for [/atom/proc/update_appearance]
+/// Update the atom's name
+#define UPDATE_NAME (1<<0)
+/// Update the atom's desc
+#define UPDATE_DESC (1<<1)
+/// Update the atom's icon state
+#define UPDATE_ICON_STATE (1<<2)
+/// Update the atom's overlays
+#define UPDATE_OVERLAYS (1<<3)
+/// Update the atom's greyscaling
+#define UPDATE_GREYSCALE (1<<4)
+/// Update the atom's icon
+#define UPDATE_ICON (UPDATE_ICON_STATE|UPDATE_OVERLAYS)
+
 //turf-only flags
 #define NOJAUNT_1 (1<<0)
 #define UNUSED_RESERVATION_TURF_1 (1<<1)

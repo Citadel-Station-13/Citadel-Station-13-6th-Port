@@ -4,9 +4,9 @@
 	desc = "Produces a single chemical at a given volume. Must be plumbed. Most effective when working in unison with other chemical synthesizers, heaters and filters."
 
 	icon_state = "synthesizer"
-	icon = 'icons/obj/plumbing/plumbers.dmi'
 	rcd_cost = 25
 	rcd_delay = 15
+	icon = 'icons/obj/plumbing/plumbers.dmi'
 
 	///Amount we produce for every process. Ideally keep under 5 since thats currently the standard duct capacity
 	var/amount = 1
@@ -46,16 +46,16 @@
 		/datum/reagent/fuel,
 	)
 
-/obj/machinery/plumbing/synthesizer/Initialize(mapload, bolt)
+/obj/machinery/plumbing/synthesizer/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_supply, bolt)
+	AddComponent(/datum/component/plumbing/simple_supply, bolt, layer)
 
-/obj/machinery/plumbing/synthesizer/process()
-	if(stat & NOPOWER || !reagent_id || !amount)
+/obj/machinery/plumbing/synthesizer/process(delta_time)
+	if(machine_stat & NOPOWER || !reagent_id || !amount)
 		return
-	if(reagents.total_volume >= amount) //otherwise we get leftovers, and we need this to be precise
+	if(reagents.total_volume >= amount*delta_time*0.5) //otherwise we get leftovers, and we need this to be precise
 		return
-	reagents.add_reagent(reagent_id, amount)
+	reagents.add_reagent(reagent_id, amount*delta_time*0.5)
 
 /obj/machinery/plumbing/synthesizer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -84,7 +84,8 @@
 	return data
 
 /obj/machinery/plumbing/synthesizer/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	. = TRUE
 	switch(action)
@@ -98,14 +99,11 @@
 			if(new_reagent in dispensable_reagents)
 				reagent_id = new_reagent
 				. = TRUE
-	update_icon()
+	update_appearance()
 	reagents.clear_reagents()
 
 /obj/machinery/plumbing/synthesizer/update_overlays()
 	. = ..()
 	var/mutable_appearance/r_overlay = mutable_appearance(icon, "[icon_state]_overlay")
-	if(reagent_id)
-		r_overlay.color = initial(reagent_id.color)
-	else
-		r_overlay.color = "#FFFFFF"
+	r_overlay.color = reagent_id ? initial(reagent_id.color) : "#FFFFFF"
 	. += r_overlay

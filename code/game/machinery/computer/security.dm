@@ -5,6 +5,7 @@
 	icon_keyboard = "security_key"
 	req_one_access = list(ACCESS_SECURITY, ACCESS_FORENSICS_LOCKERS)
 	circuit = /obj/item/circuitboard/computer/secure_data
+	light_color = LIGHT_COLOR_RED
 	var/rank = null
 	var/screen = null
 	var/datum/data/record/active1 = null
@@ -18,7 +19,6 @@
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
 
-	light_color = LIGHT_COLOR_RED
 
 /obj/machinery/computer/secure_data/syndie
 	icon_keyboard = "syndie_key"
@@ -56,7 +56,7 @@
 					dat += {"
 
 		<head>
-			<script src="jquery.min.js"></script>
+			<script src="[SSassets.transport.get_asset_url("jquery.min.js")]"></script>
 			<script type='text/javascript'>
 
 				function updateSearch(){
@@ -266,7 +266,7 @@ What a mess.*/
 		active2 = null
 	if(!authenticated && href_list["choice"] != "Log In") // logging in is the only action you can do if not logged in
 		return
-	if(usr.contents.Find(src) || (in_range(src, usr) && isturf(loc)) || hasSiliconAccessInArea(usr) || IsAdminGhost(usr))
+	if(usr.contents.Find(src) || (in_range(src, usr) && isturf(loc)) || issilicon(usr) || IsAdminGhost(usr))
 		usr.set_machine(src)
 		switch(href_list["choice"])
 // SORTING!
@@ -298,19 +298,20 @@ What a mess.*/
 				playsound(src, 'sound/machines/terminal_off.ogg', 50, FALSE)
 
 			if("Log In")
-				var/mob/M = usr
-				var/obj/item/card/id/I = M.get_idcard(TRUE)
-				if(hasSiliconAccessInArea(M))
-					var/mob/living/silicon/borg = M
+				var/obj/item/card/id/I
+				if(isliving(usr))
+					var/mob/living/L = usr
+					I = L.get_idcard(TRUE)
+				if(issilicon(usr))
 					active1 = null
 					active2 = null
-					authenticated = borg.name
+					authenticated = usr.name
 					rank = "AI"
 					screen = 1
-				else if(IsAdminGhost(M))
+				else if(IsAdminGhost(usr))
 					active1 = null
 					active2 = null
-					authenticated = M.client.holder.admin_signature
+					authenticated = usr.client.holder.admin_signature
 					rank = "Central Command"
 					screen = 1
 				else if(I && check_access(I))
@@ -340,12 +341,31 @@ What a mess.*/
 							active2 = E
 					screen = 3
 
+			// if("Pay")
+			// 	for(var/datum/data/crime/p in active2.fields["citation"])
+			// 		if(p.dataId == text2num(href_list["cdataid"]))
+			// 			var/obj/item/holochip/C = usr.is_holding_item_of_type(/obj/item/holochip)
+			// 			if(C && istype(C))
+			// 				var/pay = C.get_item_credit_value()
+			// 				if(!pay)
+			// 					to_chat(usr, "<span class='warning'>[C] doesn't seem to be worth anything!</span>")
+			// 				else
+			// 					var/diff = p.fine - p.paid
+			// 					GLOB.data_core.payCitation(active2.fields["id"], text2num(href_list["cdataid"]), pay)
+			// 					to_chat(usr, "<span class='notice'>You have paid [pay] credit\s towards your fine.</span>")
+			// 					if (pay == diff || pay > diff || pay >= diff)
+			// 						investigate_log("Citation Paid off: <strong>[p.crimeName]</strong> Fine: [p.fine] | Paid off by [key_name(usr)]", INVESTIGATE_RECORDS)
+			// 						to_chat(usr, "<span class='notice'>The fine has been paid in full.</span>")
+			// 					qdel(C)
+			// 					playsound(src, "terminal_type", 25, FALSE)
+			// 			else
+			// 				to_chat(usr, "<span class='warning'>Fines can only be paid with holochips!</span>")
 
 			if("Print Record")
 				if(!( printing ))
 					printing = 1
 					GLOB.data_core.securityPrintCount++
-					playsound(loc, 'sound/items/poster_being_created.ogg', 100, 1)
+					playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
 					sleep(30)
 					var/obj/item/paper/P = new /obj/item/paper( loc )
 					P.info = "<CENTER><B>Security Record - (SR-[GLOB.data_core.securityPrintCount])</B></CENTER><BR>"
@@ -401,7 +421,7 @@ What a mess.*/
 						P.info += "<B>Security Record Lost!</B><BR>"
 						P.name = text("SR-[] '[]'", GLOB.data_core.securityPrintCount, "Record Lost")
 					P.info += "</TT>"
-					P.update_icon()
+					P.update_appearance()
 					printing = null
 			if("Print Poster")
 				if(!( printing ))
@@ -425,7 +445,7 @@ What a mess.*/
 
 						var/info = stripped_multiline_input(usr, "Please input a description for the poster:", "Print Wanted Poster", default_description, null)
 						if(info)
-							playsound(loc, 'sound/items/poster_being_created.ogg', 100, 1)
+							playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
 							printing = 1
 							sleep(30)
 							if((istype(active1, /datum/data/record) && GLOB.data_core.general.Find(active1)))//make sure the record still exists.
@@ -457,7 +477,7 @@ What a mess.*/
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
-				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [] [], []<BR>[]", src.authenticated, src.rank, STATION_TIME_TIMESTAMP("hh:mm:ss", world.time), time2text(world.realtime, "MMM DD"), GLOB.year_integer, t1)
+				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [] [], []<BR>[]", src.authenticated, src.rank, STATION_TIME_TIMESTAMP("hh:mm:ss", world.time), time2text(world.realtime, "MMM DD"), GLOB.year_integer+540, t1)
 
 			if("Delete Record (ALL)")
 				if(active1)
@@ -520,19 +540,19 @@ What a mess.*/
 
 				//Medical Record
 				var/datum/data/record/M = new /datum/data/record()
-				M.fields["id"]			= active1.fields["id"]
-				M.fields["name"]		= active1.fields["name"]
-				M.fields["blood_type"]	= "?"
-				M.fields["b_dna"]		= "?????"
-				M.fields["mi_dis"]		= "None"
-				M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
-				M.fields["ma_dis"]		= "None"
-				M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
-				M.fields["alg"]			= "None"
-				M.fields["alg_d"]		= "No allergies have been detected in this patient."
-				M.fields["cdi"]			= "None"
-				M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
-				M.fields["notes"]		= "No notes."
+				M.fields["id"] = active1.fields["id"]
+				M.fields["name"] = active1.fields["name"]
+				M.fields["blood_type"] = "?"
+				M.fields["b_dna"] = "?????"
+				M.fields["mi_dis"] = "None"
+				M.fields["mi_dis_d"] = "No minor disabilities have been declared."
+				M.fields["ma_dis"] = "None"
+				M.fields["ma_dis_d"] = "No major disabilities have been diagnosed."
+				M.fields["alg"] = "None"
+				M.fields["alg_d"] = "No allergies have been detected in this patient."
+				M.fields["cdi"] = "None"
+				M.fields["cdi_d"] = "No diseases have been diagnosed at the moment."
+				M.fields["notes"] = "No notes."
 				GLOB.data_core.medical += M
 
 
@@ -577,7 +597,11 @@ What a mess.*/
 								active1.fields["gender"] = "Male"
 					if("age")
 						if(istype(active1, /datum/data/record))
-							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null) as num
+							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null) as num|null
+
+							if (!t1)
+								return
+
 							if(!canUseSecurityRecordsConsole(usr, "age", a1))
 								return
 							active1.fields["age"] = t1
@@ -663,7 +687,7 @@ What a mess.*/
 								GLOB.data_core.removeMajorCrime(active1.fields["id"], href_list["cdataid"])
 					if("notes")
 						if(istype(active2, /datum/data/record))
-							var/t1 = stripped_multiline_input(usr, "Please summarize notes:", "Secure records", active2.fields["notes"], 8192)
+							var/t1 = stripped_input(usr, "Please summarize notes:", "Secure. records", active2.fields["notes"], null)
 							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
 								return
 							active2.fields["notes"] = t1
@@ -694,7 +718,7 @@ What a mess.*/
 				switch(href_list["choice"])
 					if("Change Rank")
 						if(active1)
-							active1.fields["rank"] = href_list["rank"]
+							active1.fields["rank"] = strip_html(href_list["rank"])
 							if(href_list["rank"] in get_all_jobs())
 								active1.fields["real_rank"] = href_list["real_rank"]
 
@@ -713,7 +737,8 @@ What a mess.*/
 								if("released")
 									active2.fields["criminal"] = "Discharged"
 							investigate_log("[active1.fields["name"]] has been set from [old_field] to [active2.fields["criminal"]] by [key_name(usr)].", INVESTIGATE_RECORDS)
-							for(var/mob/living/carbon/human/H in GLOB.carbon_list)
+							for(var/i in GLOB.human_list)
+								var/mob/living/carbon/human/H = i
 								H.sec_hud_set_security_status()
 					if("Delete Record (Security) Execute")
 						investigate_log("[key_name(usr)] has deleted the security records for [active1.fields["name"]].", INVESTIGATE_RECORDS)
@@ -767,11 +792,11 @@ What a mess.*/
 /obj/machinery/computer/secure_data/emp_act(severity)
 	. = ..()
 
-	if(stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_SELF)
+	if(machine_stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_SELF)
 		return
 
 	for(var/datum/data/record/R in GLOB.data_core.security)
-		if(prob(severity/10))
+		if(prob(10/severity))
 			switch(rand(1,8))
 				if(1)
 					if(prob(10))
@@ -796,18 +821,16 @@ What a mess.*/
 					R.fields["photo_side"] = G.fields["photo_side"]
 			continue
 
-		else if(prob(severity/80))
+		else if(prob(1))
 			qdel(R)
 			continue
 
 /obj/machinery/computer/secure_data/proc/canUseSecurityRecordsConsole(mob/user, message1 = 0, record1, record2)
-	if(user)
-		if(authenticated)
-			if(user.canUseTopic(src, !hasSiliconAccessInArea(user)))
-				if(!trim(message1))
-					return 0
-				if(!record1 || record1 == active1)
-					if(!record2 || record2 == active2)
-						return 1
-	return 0
-
+	if(user && authenticated)
+		if(user.canUseTopic(src, !issilicon(user)))
+			if(!trim(message1))
+				return FALSE
+			if(!record1 || record1 == active1)
+				if(!record2 || record2 == active2)
+					return TRUE
+	return FALSE

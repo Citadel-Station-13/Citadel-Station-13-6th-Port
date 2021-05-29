@@ -4,7 +4,7 @@
 #define CHARS_PER_LINE 5
 #define FONT_SIZE "5pt"
 #define FONT_COLOR "#09f"
-#define FONT_STYLE "Arial Black"
+#define FONT_STYLE "Small Fonts"
 #define SCROLL_SPEED 2
 
 #define SD_BLANK 0  // 0 = Blank
@@ -12,10 +12,7 @@
 #define SD_MESSAGE 2  // 2 = Arbitrary message(s)
 #define SD_PICTURE 3  // 3 = alert picture
 
-#define SD_AI_EMOTE 1  // 1 = AI emoticon
-#define SD_AI_BSOD 2  // 2 = Blue screen of death
-
-/// Status display which can show images and scrolling text. !!!USE /obj/machinery/status_display/evac NOT THIS!!!
+/// Status display which can show images and scrolling text.
 /obj/machinery/status_display
 	name = "status display"
 	desc = null
@@ -28,10 +25,11 @@
 
 	maptext_height = 26
 	maptext_width = 32
+	maptext_y = -1
 
-	var/message1 = ""	// message line 1
-	var/message2 = ""	// message line 2
-	var/index1			// display index for scrolling messages or 0 if non-scrolling
+	var/message1 = "" // message line 1
+	var/message2 = "" // message line 2
+	var/index1 // display index for scrolling messages or 0 if non-scrolling
 	var/index2
 
 /// Immediately blank the display.
@@ -47,6 +45,8 @@
 
 /// Immediately change the display to the given two lines.
 /obj/machinery/status_display/proc/update_display(line1, line2)
+	line1 = uppertext(line1)
+	line2 = uppertext(line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
@@ -71,14 +71,14 @@
 
 // Timed process - performs default marquee action if so needed.
 /obj/machinery/status_display/process()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		// No power, no processing.
 		remove_display()
 		return PROCESS_KILL
 
 	var/line1 = message1
 	if(index1)
-		line1 = copytext_char("[message1]|[message1]", index1, index1+CHARS_PER_LINE)
+		line1 = copytext_char("[message1]|[message1]", index1, index1 + CHARS_PER_LINE)
 		var/message1_len = length_char(message1)
 		index1 += SCROLL_SPEED
 		if(index1 > message1_len + 1)
@@ -86,8 +86,8 @@
 
 	var/line2 = message2
 	if(index2)
-		line2 = copytext_char("[message2]|[message2]", index2, index2+CHARS_PER_LINE)
-		var/message2_len = length(message2)
+		line2 = copytext_char("[message2]|[message2]", index2, index2 + CHARS_PER_LINE)
+		var/message2_len = length_char(message2)
 		index2 += SCROLL_SPEED
 		if(index2 > message2_len + 1)
 			index2 -= (message2_len + 1)
@@ -99,7 +99,7 @@
 
 /// Update the display and, if necessary, re-enable processing.
 /obj/machinery/status_display/proc/update()
-	if (process() != PROCESS_KILL)
+	if (process(SSMACHINES_DT) != PROCESS_KILL)
 		START_PROCESSING(SSmachines, src)
 
 /obj/machinery/status_display/power_change()
@@ -108,7 +108,7 @@
 
 /obj/machinery/status_display/emp_act(severity)
 	. = ..()
-	if(stat & (NOPOWER|BROKEN) || . & EMP_PROTECT_SELF)
+	if(machine_stat & (NOPOWER|BROKEN) || . & EMP_PROTECT_SELF)
 		return
 	set_picture("ai_bsod")
 
@@ -117,9 +117,9 @@
 	if (message1 || message2)
 		. += "The display says:"
 		if (message1)
-			. += "\t<tt>[html_encode(message1)]</tt>"
+			. += "<br>\t<tt>[html_encode(message1)]</tt>"
 		if (message2)
-			. += "\t<tt>[html_encode(message2)]</tt>"
+			. += "<br>\t<tt>[html_encode(message2)]</tt>"
 
 // Helper procs for child display types.
 /obj/machinery/status_display/proc/display_shuttle_status(obj/docking_port/mobile/shuttle)
@@ -168,7 +168,7 @@
 	return ..()
 
 /obj/machinery/status_display/evac/process()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		// No power, no processing.
 		remove_display()
 		return PROCESS_KILL
@@ -224,7 +224,7 @@
 	name = "supply display"
 
 /obj/machinery/status_display/supply/process()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		// No power, no processing.
 		remove_display()
 		return PROCESS_KILL
@@ -268,7 +268,7 @@
 	var/shuttle_id
 
 /obj/machinery/status_display/shuttle/process()
-	if(!shuttle_id || (stat & NOPOWER))
+	if(!shuttle_id || (machine_stat & NOPOWER))
 		// No power, no processing.
 		remove_display()
 		return PROCESS_KILL
@@ -290,8 +290,8 @@
 		if(NAMEOF(src, shuttle_id))
 			update()
 
-/obj/machinery/status_display/shuttle/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
-	if (port && (shuttle_id == initial(shuttle_id) || override))
+/obj/machinery/status_display/shuttle/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
+	if(port)
 		shuttle_id = port.id
 	update()
 
@@ -301,8 +301,27 @@
 	name = "\improper AI display"
 	desc = "A small screen which the AI can use to present itself."
 
-	var/mode = SD_BLANK
-	var/emotion = "Neutral"
+	var/emotion = AI_EMOTION_BLANK
+
+	/// A mapping between AI_EMOTION_* string constants, which also double as user readable descriptions, and the name of the iconfile.
+	var/static/list/emotion_map = list(
+		AI_EMOTION_BLANK = "ai_off",
+		AI_EMOTION_VERY_HAPPY = "ai_veryhappy",
+		AI_EMOTION_HAPPY = "ai_happy",
+		AI_EMOTION_NEUTRAL = "ai_neutral",
+		AI_EMOTION_UNSURE = "ai_unsure",
+		AI_EMOTION_CONFUSED = "ai_confused",
+		AI_EMOTION_SAD = "ai_sad",
+		AI_EMOTION_BSOD = "ai_bsod",
+		AI_EMOTION_PROBLEMS = "ai_trollface",
+		AI_EMOTION_AWESOME = "ai_awesome",
+		AI_EMOTION_DORFY = "ai_urist",
+		AI_EMOTION_THINKING = "ai_thinking",
+		AI_EMOTION_FACEPALM = "ai_facepalm",
+		AI_EMOTION_FRIEND_COMPUTER = "ai_friend",
+		AI_EMOTION_BLUE_GLOW = "ai_sal",
+		AI_EMOTION_RED_GLOW = "ai_hal",
+	)
 
 /obj/machinery/status_display/ai/Initialize()
 	. = ..()
@@ -313,54 +332,27 @@
 	. = ..()
 
 /obj/machinery/status_display/ai/attack_ai(mob/living/silicon/ai/user)
-	if(isAI(user))
-		user.ai_statuschange()
+	if(!isAI(user))
+		return
+	user.ai_statuschange() //OLD, SIGNAL BASED
+	// var/list/choices = list()
+	// for(var/emotion_const in emotion_map)
+	// 	var/icon_state = emotion_map[emotion_const]
+	// 	choices[emotion_const] = image(icon = 'icons/obj/status_display.dmi', icon_state = icon_state)
+
+	// var/emotion_result = show_radial_menu(user, src, choices, tooltips = TRUE)
+	// var/datum/emote/ai/emotion_display/emote = _emote
+	// if(initial(emote.emotion) == emotion_result)
+	// 	user.emote(initial(emote.key))
+	// 	break
 
 /obj/machinery/status_display/ai/process()
-	if(mode == SD_BLANK || (stat & NOPOWER))
+	if(machine_stat & NOPOWER)
 		remove_display()
 		return PROCESS_KILL
 
-	if(mode == SD_AI_EMOTE)
-		switch(emotion)
-			if("Very Happy")
-				set_picture("ai_veryhappy")
-			if("Happy")
-				set_picture("ai_happy")
-			if("Neutral")
-				set_picture("ai_neutral")
-			if("Unsure")
-				set_picture("ai_unsure")
-			if("Confused")
-				set_picture("ai_confused")
-			if("Sad")
-				set_picture("ai_sad")
-			if("BSOD")
-				set_picture("ai_bsod")
-			if("Blank")
-				set_picture("ai_off")
-			if("Problems?")
-				set_picture("ai_trollface")
-			if("Awesome")
-				set_picture("ai_awesome")
-			if("Dorfy")
-				set_picture("ai_urist")
-			if("Thinking")
-				set_picture("ai_thinking")
-			if("Facepalm")
-				set_picture("ai_facepalm")
-			if("Friend Computer")
-				set_picture("ai_friend")
-			if("Blue Glow")
-				set_picture("ai_sal")
-			if("Red Glow")
-				set_picture("ai_hal")
-		return PROCESS_KILL
-
-	if(mode == SD_AI_BSOD)
-		set_picture("ai_bsod")
-		return PROCESS_KILL
-
+	set_picture(emotion_map[emotion])
+	return PROCESS_KILL
 
 #undef CHARS_PER_LINE
 #undef FONT_SIZE

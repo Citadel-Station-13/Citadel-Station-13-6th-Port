@@ -5,8 +5,7 @@
 	icon_keyboard = "teleport_key"
 	light_color = LIGHT_COLOR_BLUE
 	circuit = /obj/item/circuitboard/computer/teleporter
-	ui_x = 475
-	ui_y = 130
+
 	var/regime_set = "Teleporter"
 	var/id
 	var/obj/machinery/teleport/station/power_station
@@ -31,6 +30,7 @@
 	for(var/direction in GLOB.cardinals)
 		power_station = locate(/obj/machinery/teleport/station, get_step(src, direction))
 		if(power_station)
+			power_station.link_console_and_hub()
 			break
 	return power_station
 
@@ -56,7 +56,8 @@
 	return data
 
 /obj/machinery/computer/teleporter/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	if(!check_hub_connection())
@@ -69,13 +70,13 @@
 	switch(action)
 		if("regimeset")
 			power_station.engaged = FALSE
-			power_station.teleporter_hub.update_icon()
+			power_station.teleporter_hub.update_appearance()
 			power_station.teleporter_hub.calibrated = FALSE
 			reset_regime()
 			. = TRUE
 		if("settarget")
 			power_station.engaged = FALSE
-			power_station.teleporter_hub.update_icon()
+			power_station.teleporter_hub.update_appearance()
 			power_station.teleporter_hub.calibrated = FALSE
 			set_target(usr)
 			. = TRUE
@@ -89,9 +90,15 @@
 
 			say("Processing hub calibration to target...")
 			calibrating = TRUE
-			power_station.update_icon()
+			power_station.update_appearance()
 			addtimer(CALLBACK(src, .proc/finish_calibration), 50 * (3 - power_station.teleporter_hub.accuracy)) //Better parts mean faster calibration
 			. = TRUE
+
+/obj/machinery/computer/teleporter/proc/set_teleport_target(new_target)
+	if (target == new_target)
+		return
+	// SEND_SIGNAL(src, COMSIG_TELEPORTER_NEW_TARGET, new_target)
+	target = new_target
 
 /obj/machinery/computer/teleporter/proc/finish_calibration()
 	calibrating = FALSE
@@ -100,7 +107,7 @@
 		say("Calibration complete.")
 	else
 		say("Error: Unable to detect hub.")
-	power_station.update_icon()
+	power_station.update_appearance()
 
 /obj/machinery/computer/teleporter/proc/check_hub_connection()
 	if(!power_station)
@@ -110,7 +117,7 @@
 	return TRUE
 
 /obj/machinery/computer/teleporter/proc/reset_regime()
-	target = null
+	set_teleport_target(null)
 	if(imp_t)
 		UnregisterSignal(imp_t, COMSIG_IMPLANT_REMOVING)
 		imp_t = null
@@ -125,24 +132,25 @@
 	if(regime_set == "Teleporter")
 		for(var/obj/item/beacon/R in GLOB.teleportbeacons)
 			if(is_eligible(R))
-				var/area/A = get_area(R)
-				L[avoid_assoc_duplicate_keys(A.name, areaindex)] = R
+				if(R.renamed)
+					L[avoid_assoc_duplicate_keys("[R.name] ([get_area(R)])", areaindex)] = R
+				else
+					var/area/A = get_area(R)
+					L[avoid_assoc_duplicate_keys(A.name, areaindex)] = R
 
 		for(var/obj/item/implant/tracking/I in GLOB.tracked_implants)
-			if(!I.imp_in || !I.allow_teleport || !isliving(I.imp_in))
+			if(!I.imp_in || !isliving(I.loc) || !I.allow_teleport)
 				continue
 			else
-				var/mob/living/M = I.imp_in
+				var/mob/living/M = I.loc
 				if(M.stat == DEAD)
 					if(M.timeofdeath + I.lifespan_postmortem < world.time)
 						continue
-				if(is_eligible(M))
-					L[avoid_assoc_duplicate_keys(M.real_name, areaindex)] = M
+				if(is_eligible(I))
+					L[avoid_assoc_duplicate_keys("[M.real_name] ([get_area(M)])", areaindex)] = I
 
-		var/desc = input("Please select a location to lock in.", "Locking Computer") as null|anything in L
-		if(!user.canUseTopic(src, !hasSiliconAccessInArea(user), NO_DEXTERY)) //check if we are still around
-			return
-		target = L[desc]
+		var/desc = input("Please select a location to lock in.", "Locking Computer") as null|anything in sortList(L)
+		set_teleport_target(L[desc])
 		if(imp_t)
 			UnregisterSignal(imp_t, COMSIG_IMPLANT_REMOVING)
 			imp_t = null
@@ -167,23 +175,21 @@
 		if(!L.len)
 			to_chat(user, "<span class='alert'>No active connected stations located.</span>")
 			return
-		var/desc = input("Please select a station to lock in.", "Locking Computer") as null|anything in L
-		if(!user.canUseTopic(src, !hasSiliconAccessInArea(user), NO_DEXTERY)) //again, check if we are still around
-			return
+		var/desc = input("Please select a station to lock in.", "Locking Computer") as null|anything in sortList(L)
 		var/obj/machinery/teleport/station/target_station = L[desc]
 		if(!target_station || !target_station.teleporter_hub)
 			return
 		var/turf/T = get_turf(target_station)
 		log_game("[key_name(user)] has set the teleporter target to [target_station] at [AREACOORD(T)]")
-		target = target_station.teleporter_hub
+		set_teleport_target(target_station.teleporter_hub)
 		target_station.linked_stations |= power_station
-		target_station.stat &= ~NOPOWER
+		target_station.set_machine_stat(target_station.machine_stat & ~NOPOWER)
 		if(target_station.teleporter_hub)
-			target_station.teleporter_hub.stat &= ~NOPOWER
-			target_station.teleporter_hub.update_icon()
+			target_station.teleporter_hub.set_machine_stat(target_station.teleporter_hub.machine_stat & ~NOPOWER)
+			target_station.teleporter_hub.update_appearance()
 		if(target_station.teleporter_console)
-			target_station.teleporter_console.stat &= ~NOPOWER
-			target_station.teleporter_console.update_icon()
+			target_station.teleporter_console.set_machine_stat(target_station.teleporter_console.machine_stat & ~NOPOWER)
+			target_station.teleporter_console.update_appearance()
 
 /obj/machinery/computer/teleporter/proc/untarget_implant() //untargets from mob the racker was once implanted in to prevent issues.
 	target = null
@@ -200,6 +206,6 @@
 	if(is_centcom_level(T.z) || is_away_level(T.z))
 		return FALSE
 	var/area/A = get_area(T)
-	if(!A || (A.area_flags & NOTELEPORT))
+	if(!A ||(A.area_flags & NOTELEPORT))
 		return FALSE
 	return TRUE

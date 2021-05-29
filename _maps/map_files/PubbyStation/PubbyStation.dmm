@@ -3423,8 +3423,7 @@
 /area/security/execution/transfer)
 "aiw" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -46923,8 +46922,7 @@
 /area/engineering/main)
 "cdT" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 4;
-	state = 2
+	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -58358,8 +58356,7 @@
 /area/maintenance/disposal/incinerator)
 "oHa" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 8;
-	state = 2
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "0-4"

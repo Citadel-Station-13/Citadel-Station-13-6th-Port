@@ -12,8 +12,9 @@
 	var/brightness_on = 1
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
+	var/time_to_screwdrive = 20
+	var/authenticated = 0
 	var/clockwork = FALSE
-	var/authenticated = FALSE
 
 /obj/machinery/computer/Initialize(mapload, obj/item/circuitboard/C)
 	. = ..()
@@ -24,7 +25,7 @@
 	. = ..()
 
 /obj/machinery/computer/process()
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return FALSE
 	return TRUE
 
@@ -46,43 +47,38 @@
 
 /obj/machinery/computer/update_overlays()
 	. = ..()
-	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		. += "[icon_keyboard]_off"
 		return
 	. += icon_keyboard
 
 	// This whole block lets screens ignore lighting and be visible even in the darkest room
-	// We can't do this for many things that emit light unfortunately because it layers over things that would be on top of it
 	var/overlay_state = icon_screen
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		overlay_state = "[icon_state]_broken"
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, layer, plane, dir)
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha=128)
+	. += mutable_appearance(icon, overlay_state, layer, plane)
+	. += mutable_appearance(icon, overlay_state, layer, EMISSIVE_PLANE)
 
 /obj/machinery/computer/power_change()
-	..()
-	if(stat & NOPOWER)
+	. = ..()
+	if(machine_stat & NOPOWER)
 		set_light(0)
 	else
 		set_light(brightness_on)
-	update_icon()
-	return
 
 /obj/machinery/computer/screwdriver_act(mob/living/user, obj/item/I)
 	if(..())
 		return TRUE
 	if(circuit && !(flags_1&NODECONSTRUCT_1))
 		to_chat(user, "<span class='notice'>You start to disconnect the monitor...</span>")
-		if(I.use_tool(src, user, 20, volume=50))
+		if(I.use_tool(src, user, time_to_screwdrive, volume=50))
 			deconstruct(TRUE, user)
 	return TRUE
-
 
 /obj/machinery/computer/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
-			if(stat & BROKEN)
+			if(machine_stat & BROKEN)
 				playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, TRUE)
 			else
 				playsound(src.loc, 'sound/effects/glasshit.ogg', 75, TRUE)
@@ -93,11 +89,9 @@
 	if(!circuit) //no circuit, no breaking
 		return
 	. = ..()
-	if(. && !(stat & BROKEN))
-		stat |= BROKEN
+	if(.)
 		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
 		set_light(0)
-		update_icon()
 
 /obj/machinery/computer/emp_act(severity)
 	. = ..()
@@ -120,7 +114,7 @@
 			// Circuit removal code is handled in /obj/machinery/Exited()
 			circuit.forceMove(A)
 			A.set_anchored(TRUE)
-			if(stat & BROKEN)
+			if(machine_stat & BROKEN)
 				if(user)
 					to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 				else
@@ -140,5 +134,5 @@
 
 /obj/machinery/computer/AltClick(mob/user)
 	. = ..()
-	if(!user.canUseTopic(src, !issilicon(user)) || !(stat & (NOPOWER|BROKEN)))
+	if(!user.canUseTopic(src, !issilicon(user)) || !is_operational)
 		return

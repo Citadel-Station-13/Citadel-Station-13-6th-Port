@@ -7,6 +7,7 @@
 	density = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
+	var/base_icon_state = "mixer"
 	use_power = TRUE
 	idle_power_usage = 20
 	resistance_flags = ACID_PROOF
@@ -18,7 +19,7 @@
 
 /obj/machinery/computer/pandemic/Initialize()
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/machinery/computer/pandemic/Destroy()
 	QDEL_NULL(beaker)
@@ -43,14 +44,14 @@
 /obj/machinery/computer/pandemic/handle_atom_del(atom/A)
 	if(A == beaker)
 		beaker = null
-		update_icon()
+		update_appearance()
 	return ..()
 
 /obj/machinery/computer/pandemic/proc/get_by_index(thing, index)
 	if(!beaker || !beaker.reagents)
 		return
 	var/datum/reagent/blood/B = locate() in beaker.reagents.reagent_list
-	if(B && B.data[thing])
+	if(B?.data[thing])
 		return B.data[thing][index]
 
 /obj/machinery/computer/pandemic/proc/get_virus_id_by_index(index)
@@ -123,14 +124,12 @@
 
 /obj/machinery/computer/pandemic/proc/reset_replicator_cooldown()
 	wait = FALSE
-	update_icon()
+	update_appearance()
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
 
 /obj/machinery/computer/pandemic/update_icon_state()
-	if(stat & BROKEN)
-		icon_state = (beaker ? "mixer1_b" : "mixer0_b")
-	else
-		icon_state = "mixer[(beaker) ? "1" : "0"][powered() ? "" : "_nopower"]"
+	icon_state = "[base_icon_state][beaker ? 1 : 0][(machine_stat & BROKEN) ? "_b" : (powered() ? null : "_nopower")]"
+	return ..()
 
 /obj/machinery/computer/pandemic/update_overlays()
 	. = ..()
@@ -139,12 +138,9 @@
 
 /obj/machinery/computer/pandemic/proc/eject_beaker()
 	if(beaker)
-		var/obj/item/reagent_containers/B = beaker
-		beaker.forceMove(drop_location())
+		try_put_in_hand(beaker, usr)
 		beaker = null
-		update_icon()
-		return B
-	return null
+		update_appearance()
 
 /obj/machinery/computer/pandemic/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -161,7 +157,7 @@
 		var/datum/reagent/blood/B = locate() in beaker.reagents.reagent_list
 		if(B)
 			data["has_blood"] = TRUE
-			data["blood"] = list() //wha why the fuck are we sending pathtypes to tgui frontend?
+			data["blood"] = list()
 			data["blood"]["dna"] = B.data["blood_DNA"] || "none"
 			data["blood"]["type"] = B.data["blood_type"] || "none"
 			data["viruses"] = get_viruses_data(B)
@@ -175,7 +171,8 @@
 	return data
 
 /obj/machinery/computer/pandemic/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("eject_beaker")
@@ -196,7 +193,7 @@
 			if(!A.mutable)
 				return
 			if(A)
-				var/new_name = sanitize_name(html_encode(trim(params["name"], 50)))//, allow_numbers = TRUE)
+				var/new_name = sanitize_name(html_encode(params["name"]), allow_numbers = TRUE)
 				if(!new_name || ..())
 					return
 				A.AssignName(new_name)
@@ -214,9 +211,9 @@
 			var/obj/item/reagent_containers/glass/bottle/B = new(drop_location())
 			B.name = "[A.name] culture bottle"
 			B.desc = "A small bottle. Contains [A.agent] culture in synthblood medium."
-			B.reagents.add_reagent(/datum/reagent/blood/synthetics, 10, data)
+			B.reagents.add_reagent(/datum/reagent/blood, 20, data)
 			wait = TRUE
-			update_icon()
+			update_appearance()
 			var/turf/source_turf = get_turf(src)
 			log_virus("A culture bottle was printed for the virus [A.admin_details()] at [loc_name(source_turf)] by [key_name(usr)]")
 			addtimer(CALLBACK(src, .proc/reset_replicator_cooldown), 50)
@@ -230,7 +227,7 @@
 			B.name = "[D.name] vaccine bottle"
 			B.reagents.add_reagent(/datum/reagent/vaccine, 15, list(id))
 			wait = TRUE
-			update_icon()
+			update_appearance()
 			addtimer(CALLBACK(src, .proc/reset_replicator_cooldown), 200)
 			. = TRUE
 
@@ -238,20 +235,17 @@
 /obj/machinery/computer/pandemic/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers) && !(I.item_flags & ABSTRACT) && I.is_open_container())
 		. = TRUE //no afterattack
-		if(stat & (NOPOWER|BROKEN))
+		if(machine_stat & (NOPOWER|BROKEN))
 			return
-		var/obj/item/reagent_containers/B
 		if(beaker)
-			B = eject_beaker() //now with 100% more swapping
+			to_chat(user, "<span class='warning'>A container is already loaded into [src]!</span>")
+			return
 		if(!user.transferItemToLoc(I, src))
 			return
-		if(B)
-			if(user && Adjacent(user) && user.can_hold_items())
-				user.put_in_hands(B)
+
 		beaker = I
-		if(B) to_chat(user, "<span class='notice'>You remove [B] and insert [I] into [src].</span>")
-		else to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
-		update_icon()
+		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		update_appearance()
 	else
 		return ..()
 

@@ -55,8 +55,8 @@
 	productivity = P
 
 /obj/machinery/bloodbankgen/update_icon_state()
-	if(is_operational())
-		icon_state = "bloodbank-[is_operational() ? "on" : "off"]"
+	if(is_operational)
+		icon_state = "bloodbank-[is_operational ? "on" : "off"]"
 
 /obj/machinery/bloodbankgen/update_overlays()
 	. = ..()
@@ -114,7 +114,12 @@
 			. += filling_overlay
 
 /obj/machinery/bloodbankgen/process()
-	if(!is_operational())
+	if (!anchored)
+		set_is_operational(FALSE)
+	else
+		set_is_operational(TRUE)
+
+	if(!is_operational)
 		return
 
 	var/transfer_amount = 20
@@ -153,6 +158,10 @@
 	playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
 
 /obj/machinery/bloodbankgen/attackby(obj/item/O, mob/user, params)
+	if (!anchored)
+		set_is_operational(FALSE)
+	else
+		set_is_operational(TRUE)
 	if(user.a_intent == INTENT_HARM)
 		return ..()
 
@@ -200,13 +209,10 @@
 	else
 		to_chat(user, "<span class='warning'>You cannot put this in [src]!</span>")
 
-/obj/machinery/bloodbankgen/is_operational()
-	return ..() && anchored
-
 /obj/machinery/bloodbankgen/ui_interact(mob/user)
 	. = ..()
 
-	if(!is_operational())
+	if(!is_operational)
 		return
 
 	var/dat
@@ -316,7 +322,7 @@
 
 /obj/machinery/bloodbankgen/Topic(href, href_list)
 	. = ..()
-	if(. | !is_operational())
+	if(. | !is_operational)
 		return
 
 	usr.set_machine(src)

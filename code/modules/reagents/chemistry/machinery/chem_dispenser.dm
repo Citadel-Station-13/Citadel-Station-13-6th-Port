@@ -123,7 +123,7 @@
 
 /obj/machinery/chem_dispenser/process()
 	if (recharge_counter >= 4)
-		if(!is_operational())
+		if(!is_operational)
 			return
 		var/usedpower = cell.give(recharge_amount)
 		if(usedpower)
@@ -249,14 +249,14 @@
 		return
 	switch(action)
 		if("amount")
-			if(!is_operational() || QDELETED(beaker))
+			if(!is_operational || QDELETED(beaker))
 				return
 			var/target = text2num(params["target"])
 			SetAmount(target)
 			work_animation()
 			. = TRUE
 		if("dispense")
-			if(!is_operational() || QDELETED(cell))
+			if(!is_operational || QDELETED(cell))
 				return
 			var/reagent_name = params["reagent"]
 			if(!recording_recipe)
@@ -277,7 +277,7 @@
 				recording_recipe[reagent_name] += amount
 			. = TRUE
 		if("remove")
-			if(!is_operational() || recording_recipe)
+			if(!is_operational || recording_recipe)
 				return
 			var/amount = text2num(params["amount"])
 			beaker.reagents.remove_all(amount) //This should be set correctly in "amount"
@@ -287,7 +287,7 @@
 			replace_beaker(usr)
 			. = TRUE
 		if("dispense_recipe")
-			if(!is_operational() || QDELETED(cell))
+			if(!is_operational || QDELETED(cell))
 				return
 			var/list/chemicals_to_dispense = saved_recipes[params["recipe"]]
 			if(!LAZYLEN(chemicals_to_dispense))
@@ -320,19 +320,19 @@
 				log_reagent("DISPENSER: [key_name(usr)] dispensed recipe [params["recipe"]] with chemicals [logstring] to [beaker] ([REF(beaker)])[earlyabort? " (aborted early)":""]")
 			. = TRUE
 		if("clear_recipes")
-			if(!is_operational())
+			if(!is_operational)
 				return
 			var/yesno = alert("Clear all recipes?",, "Yes","No")
 			if(yesno == "Yes")
 				saved_recipes = list()
 			. = TRUE
 		if("record_recipe")
-			if(!is_operational())
+			if(!is_operational)
 				return
 			recording_recipe = list()
 			. = TRUE
 		if("save_recording")
-			if(!is_operational())
+			if(!is_operational)
 				return
 			var/name = stripped_input(usr,"Name","What do you want to name this recipe?", "Recipe", MAX_NAME_LEN)
 			if(!usr.canUseTopic(src, !hasSiliconAccessInArea(usr)))
@@ -355,14 +355,14 @@
 				log_reagent("DISPENSER: [key_name(usr)] recorded recipe [name] with chemicals [logstring]")
 				. = TRUE
 		if("cancel_recording")
-			if(!is_operational())
+			if(!is_operational)
 				return
 			recording_recipe = null
 			. = TRUE
 
 		//Storing and unstoring reagents
 		if("store")
-			if(!is_operational() || QDELETED(cell))
+			if(!is_operational || QDELETED(cell))
 				return
 			if(!beaker)
 				return
@@ -383,7 +383,7 @@
 			. = TRUE
 
 		if("unstore")
-			if(!is_operational() || QDELETED(cell))
+			if(!is_operational || QDELETED(cell))
 				return
 			if(!beaker)
 				return

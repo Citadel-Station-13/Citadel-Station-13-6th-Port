@@ -84,7 +84,7 @@
 
 /obj/machinery/computer/holodeck/power_change()
 	. = ..()
-	toggle_power(!stat)
+	INVOKE_ASYNC(src, .proc/toggle_power, !machine_stat)
 
 /obj/machinery/computer/holodeck/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -256,7 +256,7 @@
 		HE.safety(active)
 
 /obj/machinery/computer/holodeck/proc/load_program(area/A, force = FALSE, add_delay = TRUE)
-	if(!is_operational())
+	if(!is_operational)
 		A = offline_program
 		force = TRUE
 
@@ -308,7 +308,7 @@
 
 /obj/machinery/computer/holodeck/proc/derez(obj/O, silent = TRUE, forced = FALSE)
 	// Emagging a machine creates an anomaly in the derez systems.
-	if(O && (obj_flags & EMAGGED) && !stat && !forced)
+	if(O && (obj_flags & EMAGGED) && !machine_stat && !forced)
 		if((ismob(O) || ismob(O.loc)) && prob(50))
 			addtimer(CALLBACK(src, .proc/derez, O, silent), 50) // may last a disturbingly long time
 			return

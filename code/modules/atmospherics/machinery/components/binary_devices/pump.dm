@@ -60,11 +60,11 @@
 	return ..()
 
 /obj/machinery/atmospherics/components/binary/pump/update_icon_nopipes()
-	icon_state = (on && is_operational()) ? "pump_on" : "pump_off"
+	icon_state = (on && is_operational) ? "pump_on" : "pump_off"
 
 /obj/machinery/atmospherics/components/binary/pump/process_atmos()
 //	..()
-	if(!on || !is_operational())
+	if(!on || !is_operational)
 		return
 
 	var/datum/gas_mixture/air1 = airs[1]
@@ -185,7 +185,7 @@
 /obj/machinery/atmospherics/components/binary/pump/can_unwrench(mob/user)
 	. = ..()
 	var/area/A = get_area(src)
-	if(. && on && is_operational())
+	if(. && on && is_operational)
 		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 	else

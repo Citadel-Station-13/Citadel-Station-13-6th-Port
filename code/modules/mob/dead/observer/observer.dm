@@ -171,14 +171,15 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 /*
  * This proc will update the icon of the ghost itself, with hair overlays, as well as the ghost image.
- * Please call update_icon(icon_state) from now on when you want to update the icon_state of the ghost,
+ * Please call update_icon(updates, icon_state) from now on when you want to update the icon_state of the ghost,
  * or you might end up with hair on a sprite that's not supposed to get it.
  * Hair will always update its dir, so if your sprite has no dirs the haircut will go all over the place.
  * |- Ricotez
  */
-/mob/dead/observer/update_icon(new_form)
+/mob/dead/observer/update_icon(updates=ALL, new_form)
 	. = ..()
-	if(client) //We update our preferences in case they changed right before update_icon was called.
+
+	if(client) //We update our preferences in case they changed right before update_appearance was called.
 		ghost_accs = client.prefs.ghost_accs
 		ghost_others = client.prefs.ghost_others
 
@@ -201,8 +202,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(ghost_accs >= GHOST_ACCS_DIR && (icon_state in GLOB.ghost_forms_with_directions_list)) //if this icon has dirs AND the client wants to show them, we make sure we update the dir on movement
 		updatedir = 1
 	else
-		updatedir = 0	//stop updating the dir in case we want to show accessories with dirs on a ghost sprite without dirs
-		setDir(2 		)//reset the dir to its default so the sprites all properly align up
+		updatedir = 0 //stop updating the dir in case we want to show accessories with dirs on a ghost sprite without dirs
+		setDir(2 )//reset the dir to its default so the sprites all properly align up
 
 	if(ghost_accs == GHOST_ACCS_FULL && (icon_state in GLOB.ghost_forms_with_accessories_list)) //check if this form supports accessories and if the client wants to show them
 		var/datum/sprite_accessory/S
@@ -239,7 +240,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(color_format == 3)
 		r_val = hex2num(copytext(input_color, 1, 2)) * 16
 		g_val = hex2num(copytext(input_color, 2, 3)) * 16
-		b_val = hex2num(copytext(input_color, 3, 0)) * 16
+		b_val = hex2num(copytext(input_color, 3, 4)) * 16
 	else if(color_format == 6)
 		r_val = hex2num(copytext(input_color, 1, 3))
 		g_val = hex2num(copytext(input_color, 3, 5))

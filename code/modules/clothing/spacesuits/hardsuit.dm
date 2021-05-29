@@ -483,13 +483,13 @@
 	resistance_flags = ACID_PROOF | FIRE_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 5, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 80, "wound" = 15)
-	var/obj/machinery/doppler_array/integrated/bomb_radar
-	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS | SCAN_REAGENTS
+	var/explosion_detection_dist = 21
+	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | SCAN_REAGENTS | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS
 	actions_types = list(/datum/action/item_action/toggle_helmet_light, /datum/action/item_action/toggle_research_scanner)
 
 /obj/item/clothing/head/helmet/space/hardsuit/rd/Initialize()
 	. = ..()
-	bomb_radar = new /obj/machinery/doppler_array/integrated(src)
+	RegisterSignal(SSdcs, COMSIG_GLOB_EXPLOSION, .proc/sense_explosion)
 
 /obj/item/clothing/head/helmet/space/hardsuit/rd/equipped(mob/living/carbon/human/user, slot)
 	..()
@@ -503,17 +503,28 @@
 		var/datum/atom_hud/DHUD = GLOB.huds[DATA_HUD_DIAGNOSTIC_BASIC]
 		DHUD.remove_hud_from(user)
 
+/obj/item/clothing/head/helmet/space/hardsuit/rd/proc/sense_explosion(datum/source, turf/epicenter, devastation_range, heavy_impact_range,
+		light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)
+	var/turf/T = get_turf(src)
+	if(T.z != epicenter.z)
+		return
+	if(get_dist(epicenter, T) > explosion_detection_dist)
+		return
+	display_visor_message("Explosion detected! Epicenter: [devastation_range], Outer: [heavy_impact_range], Shock: [light_impact_range]")
+
 /obj/item/clothing/suit/space/hardsuit/rd
-	icon_state = "hardsuit-rd"
 	name = "prototype hardsuit"
 	desc = "A prototype suit that protects against hazardous, low pressure environments. Fitted with extensive plating for handling explosives and dangerous research materials."
+	icon_state = "hardsuit-rd"
 	item_state = "hardsuit-rd"
+	// inhand_icon_state = "hardsuit-rd"
 	resistance_flags = ACID_PROOF | FIRE_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT //Same as an emergency firesuit. Not ideal for extended exposure.
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/gun/energy/wormhole_projector,
 	/obj/item/hand_tele, /obj/item/aicard)
 	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 5, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 80, "wound" = 15)
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/rd
+	// cell = /obj/item/stock_parts/cell/super
 
 	//Security hardsuit
 /obj/item/clothing/head/helmet/space/hardsuit/security
@@ -656,14 +667,23 @@
 	brightness_on = 16
 	flash_protect = 5 //We will not be flash by bombs
 	tint = 1
-	var/obj/machinery/doppler_array/integrated/bomb_radar
+	var/explosion_detection_dist = 20
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS | SCAN_REAGENTS
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/head/helmet/space/hardsuit/ancient/mason/Initialize()
 	. = ..()
-	bomb_radar = new /obj/machinery/doppler_array/integrated(src)
+	RegisterSignal(SSdcs, COMSIG_GLOB_EXPLOSION, .proc/sense_explosion)
+
+/obj/item/clothing/head/helmet/space/hardsuit/ancient/mason/proc/sense_explosion(datum/source, turf/epicenter, devastation_range, heavy_impact_range,
+		light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)
+	var/turf/T = get_turf(src)
+	if(T.z != epicenter.z)
+		return
+	if(get_dist(epicenter, T) > explosion_detection_dist)
+		return
+	display_visor_message("Explosion detected! Epicenter: [devastation_range], Outer: [heavy_impact_range], Shock: [light_impact_range]")
 
 /obj/item/clothing/head/helmet/space/hardsuit/ancient/mason/equipped(mob/living/carbon/human/user, slot)
 	..()

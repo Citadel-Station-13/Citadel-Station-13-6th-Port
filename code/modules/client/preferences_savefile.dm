@@ -493,7 +493,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	verify_keybindings_valid()		// one of these days this will runtime and you'll be glad that i put it in a different proc so no one gets their saves wiped
 
 	if(S["unlockable_loadout"])
-		unlockable_loadout_data = safe_json_decode(S["unlockable_loadout"])
+		try
+			unlockable_loadout_data = safe_json_decode(S["unlockable_loadout"])
+		catch
+			unlockable_loadout_data = list()
 	else
 		unlockable_loadout_data = list()
 
@@ -716,21 +719,30 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/limbmodstr
 	S["modified_limbs"] >> limbmodstr
 	if(length(limbmodstr))
-		modified_limbs = safe_json_decode(limbmodstr)
+		try
+			modified_limbs = safe_json_decode(limbmodstr)
+		catch
+			modified_limbs = list()
 	else
 		modified_limbs = list()
 
 	var/tcgcardstr
 	S["tcg_cards"] >> tcgcardstr
 	if(length(tcgcardstr))
-		tcg_cards = safe_json_decode(tcgcardstr)
+		try
+			tcg_cards = safe_json_decode(tcgcardstr)
+		catch
+			tcg_cards = list()
 	else
 		tcg_cards = list()
 
 	var/tcgdeckstr
 	S["tcg_decks"] >> tcgdeckstr
 	if(length(tcgdeckstr))
-		tcg_decks = safe_json_decode(tcgdeckstr)
+		try
+			tcg_decks = safe_json_decode(tcgdeckstr)
+		catch
+			tcg_decks = list()
 	else
 		tcg_decks = list()
 
@@ -829,7 +841,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//gear loadout
 	if(S["loadout"])
-		loadout_data = safe_json_decode(S["loadout"])
+		try
+			loadout_data = safe_json_decode(S["loadout"])
+		catch
+			loadout_data = list()
 	else
 		loadout_data = list()
 

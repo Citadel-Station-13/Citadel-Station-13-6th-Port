@@ -6,11 +6,14 @@
 	lefthand_file = 'icons/mob/inhands/misc/books_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/books_righthand.dmi'
 	w_class = WEIGHT_CLASS_SMALL
+	// attack_verb_continuous = list("baps")
+	// attack_verb_simple = list("bap")
 	attack_verb = list("bapped")
+	resistance_flags = FLAMMABLE
 	var/screen = 0
 	var/pages = 0
 	var/curr_page = 0
-	var/list/datum/news/feed_channel/news_content = list()
+	var/list/datum/newscaster/feed_channel/news_content = list()
 	var/scribble=""
 	var/scribble_page = null
 	var/wantedAuthor
@@ -24,8 +27,8 @@
 	user.say(";JOURNALISM IS MY CALLING! EVERYBODY APPRECIATES UNBIASED REPORTI-GLORF", forced="newspaper suicide")
 	var/mob/living/carbon/human/H = user
 	var/obj/W = new /obj/item/reagent_containers/food/drinks/bottle/whiskey(H.loc)
-	playsound(H.loc, 'sound/items/drink.ogg', rand(10,50), 1)
-	W.reagents.trans_to(H, W.reagents.total_volume)
+	playsound(H.loc, 'sound/items/drink.ogg', rand(10,50), TRUE)
+	W.reagents.trans_to(H, W.reagents.total_volume) //, transfered_by = user)
 	user.visible_message("<span class='suicide'>[user] downs the contents of [W.name] in one gulp! Shoulda stuck to sudoku!</span>")
 
 	return(TOXLOSS)
@@ -39,19 +42,19 @@
 			if(0) //Cover
 				dat+="<DIV ALIGN='center'><B><FONT SIZE=6>The Griffon</FONT></B></div>"
 				dat+="<DIV ALIGN='center'><FONT SIZE=2>Nanotrasen-standard newspaper, for use on Nanotrasen? Space Facilities</FONT></div><HR>"
-				if(isemptylist(news_content))
+				if(!length(news_content))
 					if(wantedAuthor)
 						dat+="Contents:<BR><ul><B><FONT COLOR='red'>**</FONT>Important Security Announcement<FONT COLOR='red'>**</FONT></B> <FONT SIZE=2>\[page [pages+2]\]</FONT><BR></ul>"
 					else
 						dat+="<I>Other than the title, the rest of the newspaper is unprinted...</I>"
 				else
 					dat+="Contents:<BR><ul>"
-					for(var/datum/news/feed_channel/NP in news_content)
+					for(var/datum/newscaster/feed_channel/NP in news_content)
 						pages++
 					if(wantedAuthor)
 						dat+="<B><FONT COLOR='red'>**</FONT>Important Security Announcement<FONT COLOR='red'>**</FONT></B> <FONT SIZE=2>\[page [pages+2]\]</FONT><BR>"
 					var/temp_page=0
-					for(var/datum/news/feed_channel/NP in news_content)
+					for(var/datum/newscaster/feed_channel/NP in news_content)
 						temp_page++
 						dat+="<B>[NP.channel_name]</B> <FONT SIZE=2>\[page [temp_page+1]\]</FONT><BR>"
 					dat+="</ul>"
@@ -59,18 +62,18 @@
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[scribble]\"</I>"
 				dat+= "<HR><DIV STYLE='float:right;'><A href='?src=[REF(src)];next_page=1'>Next Page</A></DIV> <div style='float:left;'><A href='?src=[REF(human_user)];mach_close=newspaper_main'>Done reading</A></DIV>"
 			if(1) // X channel pages inbetween.
-				for(var/datum/news/feed_channel/NP in news_content)
+				for(var/datum/newscaster/feed_channel/NP in news_content)
 					pages++
-				var/datum/news/feed_channel/C = news_content[curr_page]
+				var/datum/newscaster/feed_channel/C = news_content[curr_page]
 				dat += "<FONT SIZE=4><B>[C.channel_name]</B></FONT><FONT SIZE=1> \[created by: <FONT COLOR='maroon'>[C.returnAuthor(notContent(C.authorCensorTime))]</FONT>\]</FONT><BR><BR>"
 				if(notContent(C.DclassCensorTime))
 					dat+="This channel was deemed dangerous to the general welfare of the station and therefore marked with a <B><FONT COLOR='red'>D-Notice</B></FONT>. Its contents were not transferred to the newspaper at the time of printing."
 				else
-					if(isemptylist(C.messages))
+					if(!length(C.messages))
 						dat+="No Feed stories stem from this channel..."
 					else
 						var/i = 0
-						for(var/datum/news/feed_message/MESSAGE in C.messages)
+						for(var/datum/newscaster/feed_message/MESSAGE in C.messages)
 							if(MESSAGE.creationTime > creationTime)
 								if(i == 0)
 									dat+="No Feed stories stem from this channel..."
@@ -88,7 +91,7 @@
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[scribble]\"</I>"
 				dat+= "<BR><HR><DIV STYLE='float:left;'><A href='?src=[REF(src)];prev_page=1'>Previous Page</A></DIV> <DIV STYLE='float:right;'><A href='?src=[REF(src)];next_page=1'>Next Page</A></DIV>"
 			if(2) //Last page
-				for(var/datum/news/feed_channel/NP in news_content)
+				for(var/datum/newscaster/feed_channel/NP in news_content)
 					pages++
 				if(wantedAuthor!=null)
 					dat+="<DIV STYLE='float:center;'><FONT SIZE=4><B>Wanted Issue:</B></FONT SIZE></DIV><BR><BR>"
@@ -109,21 +112,21 @@
 		human_user << browse(dat, "window=newspaper_main;size=300x400")
 		onclose(human_user, "newspaper_main")
 	else
-		to_chat(user, "The paper is full of unintelligible symbols!")
+		to_chat(user, "<span class='warning'>The paper is full of unintelligible symbols!</span>")
 
 /obj/item/newspaper/proc/notContent(list/L)
 	if(!L.len)
-		return 0
+		return FALSE
 	for(var/i=L.len;i>0;i--)
 		var/num = abs(L[i])
 		if(creationTime <= num)
 			continue
 		else
 			if(L[i] > 0)
-				return 1
+				return TRUE
 			else
-				return 0
-	return 0
+				return FALSE
+	return FALSE
 
 /obj/item/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr
@@ -139,7 +142,7 @@
 				if(curr_page == 0) //We're at the start, get to the middle
 					screen=1
 			curr_page++
-			playsound(loc, "pageturn", 50, 1)
+			playsound(loc, "pageturn", 50, TRUE)
 		else if(href_list["prev_page"])
 			if(curr_page == 0)
 				return
@@ -149,17 +152,20 @@
 				if(curr_page == pages+1) //we're at the end, let's go back to the middle.
 					screen = 1
 			curr_page--
-			playsound(loc, "pageturn", 50, 1)
+			playsound(loc, "pageturn", 50, TRUE)
 		if(ismob(loc))
 			attack_self(loc)
 
-/obj/item/newspaper/attackby(obj/item/W, mob/user, params)
+/obj/item/newspaper/attackby(obj/item/W, mob/living/user, params)
+	if(burn_paper_product_attackby_check(W, user))
+		return
+
 	if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
 			to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
 			return
 		if(scribble_page == curr_page)
-			to_chat(user, "<span class='notice'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</span>")
+			to_chat(user, "<span class='warning'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</span>")
 		else
 			var/s = stripped_input(user, "Write something", "Newspaper")
 			if (!s)
@@ -169,5 +175,6 @@
 			scribble_page = curr_page
 			scribble = s
 			attack_self(user)
+			add_fingerprint(user)
 	else
 		return ..()

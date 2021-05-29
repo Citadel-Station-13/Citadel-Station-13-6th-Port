@@ -76,12 +76,12 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 	)
 ))
 
-GLOBAL_LIST_INIT(fluid_duct_recipes, list(
-	"Fluid Ducts" = list(
-		new /datum/pipe_info/plumbing("Duct",				/obj/machinery/duct, PIPE_ONEDIR),
-		new /datum/pipe_info/plumbing/multilayer("Duct Layer-Manifold",/obj/machinery/duct/multilayered, PIPE_STRAIGHT)
-	)
-))
+// GLOBAL_LIST_INIT(fluid_duct_recipes, list(
+// 	"Fluid Ducts" = list(
+// 		new /datum/pipe_info/plumbing("Duct",				/obj/machinery/duct, PIPE_ONEDIR),
+// 		new /datum/pipe_info/plumbing/multilayer("Duct Layer-Manifold",/obj/machinery/duct/multilayered, PIPE_STRAIGHT)
+// 	)
+// ))
 
 /datum/pipe_info
 	var/name
@@ -293,8 +293,8 @@ GLOBAL_LIST_INIT(fluid_duct_recipes, list(
 			recipes = GLOB.disposal_pipe_recipes
 		if(TRANSIT_CATEGORY)
 			recipes = GLOB.transit_tube_recipes
-		if(PLUMBING_CATEGORY)
-			recipes = GLOB.fluid_duct_recipes
+		// if(PLUMBING_CATEGORY)
+		// 	recipes = GLOB.fluid_duct_recipes
 	for(var/c in recipes)
 		var/list/cat = recipes[c]
 		var/list/r = list()

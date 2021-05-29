@@ -11,18 +11,17 @@
 	interaction_flags_machine = INTERACT_MACHINE_OPEN | INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON
 	obj_flags = CAN_BE_HIT | USES_TGUI
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
-	var/datum/gas_mixture/air_contents	// internal reservoir
+
+	var/datum/gas_mixture/air_contents // internal reservoir
 	var/full_pressure = FALSE
 	var/pressure_charging = TRUE
-	var/flush = 0	// true if flush handle is pulled
+	var/flush = 0 // true if flush handle is pulled
 	var/obj/structure/disposalpipe/trunk/trunk = null // the attached pipe trunk
-	var/flushing = 0	// true if flushing in progress
+	var/flushing = 0 // true if flushing in progress
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
 	var/obj/structure/disposalconstruct/stored
-	ui_x = 300
-	ui_y = 180
 	// create a new disposal
 	// find the attached trunk (if present) and init gas resvr.
 
@@ -40,8 +39,9 @@
 	trunk_check()
 
 	air_contents = new /datum/gas_mixture()
-	//air_contents.set_volume(1.05 * CELLSTANDARD)
-	update_icon()
+	//gas.volume = 1.05 * CELLSTANDARD
+	update_appearance()
+	// RegisterSignal(src, COMSIG_RAT_INTERACT, .proc/on_rat_rummage)
 
 	return INITIALIZE_HINT_LATELOAD //we need turfs to have air
 
@@ -62,6 +62,11 @@
 		trunk.linked = null
 	return ..()
 
+/obj/machinery/disposal/handle_atom_del(atom/A)
+	if(A == stored && !QDELETED(src))
+		stored = null
+		deconstruct(FALSE)
+
 /obj/machinery/disposal/singularity_pull(S, current_size)
 	..()
 	if(current_size >= STAGE_FIVE)
@@ -76,7 +81,7 @@
 	air_contents.merge(removed)
 	trunk_check()
 
-/obj/machinery/disposal/attackby(obj/item/I, mob/user, params)
+/obj/machinery/disposal/attackby(obj/item/I, mob/living/user, params)
 	add_fingerprint(user)
 	if(!pressure_charging && !full_pressure && !flush)
 		if(I.tool_behaviour == TOOL_SCREWDRIVER)
@@ -98,10 +103,29 @@
 		if((I.item_flags & ABSTRACT) || !user.temporarilyRemoveItemFromInventory(I))
 			return
 		place_item_in_disposal(I, user)
-		update_icon()
-		return TRUE //no afterattack
+		update_appearance()
+		return 1 //no afterattack
 	else
 		return ..()
+
+// /obj/machinery/disposal/proc/rat_rummage(mob/living/simple_animal/hostile/regalrat/king)
+// 	king.visible_message("<span class='warning'>[king] starts rummaging through [src].</span>","<span class='notice'>You rummage through [src]...</span>")
+// 	if (do_mob(king, src, 2 SECONDS, interaction_key = "regalrat"))
+// 		var/loot = rand(1,100)
+// 		switch(loot)
+// 			if(1 to 5)
+// 				to_chat(king, "<span class='notice'>You find some leftover coins. More for the royal treasury!</span>")
+// 				var/pickedcoin = pick(GLOB.ratking_coins)
+// 				for(var/i = 1 to rand(1,3))
+// 					new pickedcoin(get_turf(king))
+// 			if(6 to 33)
+// 				say(pick("Treasure!","Our precious!","Cheese!"))
+// 				to_chat(king, "<span class='notice'>Score! You find some cheese!</span>")
+// 				new /obj/item/food/cheese(get_turf(king))
+// 			else
+// 				var/pickedtrash = pick(GLOB.ratking_trash)
+// 				to_chat(king, "<span class='notice'>You just find more garbage and dirt. Lovely, but beneath you now.</span>")
+// 				new pickedtrash(get_turf(king))
 
 /obj/machinery/disposal/proc/place_item_in_disposal(obj/item/I, mob/user)
 	if(istype(I, /obj/item/clothing/head/mob_holder))
@@ -112,9 +136,9 @@
 			user.start_pulling(m, 1)
 			stuff_mob_in(m,user)
 		return//you don't want this going into disposals ever
-	if(user.temporarilyRemoveItemFromInventory(I)) //double-checks never hurt
-		I.forceMove(src)
-		user.visible_message("[user.name] places \the [I] into \the [src].", "<span class='notice'>You place \the [I] into \the [src].</span>")
+	I.forceMove(src)
+	user.visible_message("<span class='notice'>[user.name] places \the [I] into \the [src].</span>", "<span class='notice'>You place \the [I] into \the [src].</span>")
+
 //mouse drop another mob or self
 /obj/machinery/disposal/MouseDrop_T(mob/living/target, mob/living/user)
 	if(istype(target))
@@ -125,7 +149,7 @@
 		return
 	add_fingerprint(user)
 	if(user == target)
-		user.visible_message("[user] starts climbing into [src].", "<span class='notice'>You start climbing into [src]...</span>")
+		user.visible_message("<span class='warning'>[user] starts climbing into [src].</span>", "<span class='notice'>You start climbing into [src]...</span>")
 	else
 		target.visible_message("<span class='danger'>[user] starts putting [target] into [src].</span>", "<span class='userdanger'>[user] starts putting you into [src]!</span>")
 	if(do_mob(user, target, 20))
@@ -133,12 +157,14 @@
 			return
 		target.forceMove(src)
 		if(user == target)
-			user.visible_message("[user] climbs into [src].", "<span class='notice'>You climb into [src].</span>")
+			user.visible_message("<span class='warning'>[user] climbs into [src].</span>", "<span class='notice'>You climb into [src].</span>")
+			. = TRUE
 		else
-			target.visible_message("<span class='danger'>[user] has placed [target] in [src].</span>", "<span class='userdanger'>[user] has placed [target] in [src].</span>")
+			target.visible_message("<span class='danger'>[user] places [target] in [src].</span>", "<span class='userdanger'>[user] places you in [src].</span>")
 			log_combat(user, target, "stuffed", addition="into [src]")
-			target.LAssailant = WEAKREF(user)
-		update_icon()
+			target.LAssailant = user
+			. = TRUE
+		update_appearance()
 
 /obj/machinery/disposal/proc/can_stuff_mob_in(mob/living/target, mob/living/user, pushing = FALSE)
 	if(!pushing && !iscarbon(user) && !(SEND_SIGNAL(user, COMSIG_CHECK_VENTCRAWL))) //only carbon and ventcrawlers can climb into disposal by themselves.
@@ -153,12 +179,11 @@
 	if(target.buckled || target.has_buckled_mobs())
 		return FALSE
 	if(target.mob_size > MOB_SIZE_HUMAN)
-		if(!pushing)
-			to_chat(user, "<span class='warning'>[target] doesn't fit inside [src]!</span>")
+		to_chat(user, "<span class='warning'>[target] doesn't fit inside [src]!</span>")
 		return FALSE
 	return TRUE
 
-/obj/machinery/disposal/relaymove(mob/user)
+/obj/machinery/disposal/relaymove(mob/living/user, direction)
 	attempt_escape(user)
 
 // resist to escape the bin
@@ -173,14 +198,16 @@
 // leave the disposal
 /obj/machinery/disposal/proc/go_out(mob/user)
 	user.forceMove(loc)
-	update_icon()
+	update_appearance()
 
-// monkeys and xenos can only pull the flush lever
+// clumsy monkeys and xenos can only pull the flush lever
 /obj/machinery/disposal/attack_paw(mob/user)
-	if(stat & BROKEN)
+	if(user.IsAdvancedToolUser())
+		return ..()
+	if(machine_stat & BROKEN)
 		return
 	flush = !flush
-	update_icon()
+	update_appearance()
 
 
 // eject the contents of the disposal unit
@@ -189,14 +216,14 @@
 	for(var/atom/movable/AM in src)
 		AM.forceMove(T)
 		AM.pipe_eject(0)
-	update_icon()
+	update_appearance()
 
 /obj/machinery/disposal/proc/flush()
 	flushing = TRUE
 	flushAnimation()
 	sleep(10)
 	if(last_sound < world.time + 1)
-		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
+		playsound(src, 'sound/machines/disposalflush.ogg', 50, FALSE, FALSE)
 		last_sound = world.time
 	sleep(5)
 	if(QDELETED(src))
@@ -217,18 +244,14 @@
 /obj/machinery/disposal/proc/flushAnimation()
 	flick("[icon_state]-flush", src)
 
-// called when area power changes
-/obj/machinery/disposal/power_change()
-	..()	// do default setting/reset of stat NOPOWER bit
-	update_icon()	// update icon
-
 // called when holder is expelled from a disposal
 /obj/machinery/disposal/proc/expel(obj/structure/disposalholder/H)
 	H.active = FALSE
 
 	var/turf/T = get_turf(src)
 	var/turf/target
-	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
+
+	playsound(src, 'sound/machines/hiss.ogg', 50, FALSE, FALSE)
 
 	for(var/A in H)
 		var/atom/movable/AM = A
@@ -248,9 +271,9 @@
 		if(stored)
 			stored.forceMove(T)
 			src.transfer_fingerprints_to(stored)
-			stored.anchored = FALSE
+			stored.set_anchored(FALSE)
 			stored.density = TRUE
-			stored.update_icon()
+			stored.update_appearance()
 	for(var/atom/movable/AM in src) //out, out, darned crowbar!
 		AM.forceMove(T)
 	..()
@@ -263,7 +286,7 @@
 	. = ..()
 	if(.)
 		return
-	for(var/obj/item/I in src_object.contents())
+	for(var/obj/item/I in src_object.parent)
 		if(user.active_storage != src_object)
 			if(I.on_found(user))
 				return
@@ -281,19 +304,17 @@
 	name = "disposal unit"
 	desc = "A pneumatic waste disposal unit."
 	icon_state = "disposal"
-	var/datum/oracle_ui/themed/nano/ui
-	obj_flags = CAN_BE_HIT | USES_TGUI | SHOVABLE_ONTO
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/bin/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/storage/bag/trash))	//Not doing component overrides because this is a specific type.
+	if(istype(I, /obj/item/storage/bag/trash)) //Not doing component overrides because this is a specific type.
 		var/obj/item/storage/bag/trash/T = I
 		var/datum/component/storage/STR = T.GetComponent(/datum/component/storage)
 		to_chat(user, "<span class='warning'>You empty the bag.</span>")
 		for(var/obj/item/O in T.contents)
 			STR.remove_from_storage(O,src)
-		T.update_icon()
-		update_icon()
+		T.update_appearance()
+		update_appearance()
 	else
 		return ..()
 
@@ -303,7 +324,7 @@
 	return GLOB.notcontained_state
 
 /obj/machinery/disposal/bin/ui_interact(mob/user, datum/tgui/ui)
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -321,46 +342,41 @@
 	return data
 
 /obj/machinery/disposal/bin/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)
 		if("handle-0")
 			flush = FALSE
-			update_icon()
+			update_appearance()
 			. = TRUE
 		if("handle-1")
 			if(!panel_open)
 				flush = TRUE
-				update_icon()
+				update_appearance()
 			. = TRUE
 		if("pump-0")
 			if(pressure_charging)
 				pressure_charging = FALSE
-				update_icon()
+				update_appearance()
 			. = TRUE
 		if("pump-1")
 			if(!pressure_charging)
 				pressure_charging = TRUE
-				update_icon()
+				update_appearance()
 			. = TRUE
 		if("eject")
 			eject()
 			. = TRUE
 
-/obj/machinery/disposal/bin/alt_attack_hand(mob/user)
-	if(can_interact(usr))
-		flush = !flush
-		update_icon()
-		return TRUE
-	return FALSE
 
-/obj/machinery/disposal/bin/hitby(atom/movable/AM, skipcatch = FALSE, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
+/obj/machinery/disposal/bin/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(isitem(AM) && AM.CanEnterDisposals())
 		if(prob(75))
 			AM.forceMove(src)
 			visible_message("<span class='notice'>[AM] lands in [src].</span>")
-			update_icon()
+			update_appearance()
 		else
 			visible_message("<span class='notice'>[AM] bounces off of [src]'s rim!</span>")
 			return ..()
@@ -381,13 +397,18 @@
 	..()
 	full_pressure = FALSE
 	pressure_charging = TRUE
-	update_icon()
+	update_appearance()
+
+/obj/machinery/disposal/bin/update_appearance(updates)
+	. = ..()
+	if((machine_stat & (BROKEN|NOPOWER)) || panel_open)
+		luminosity = 0
+		return
+	luminosity = 1
 
 /obj/machinery/disposal/bin/update_overlays()
 	. = ..()
-	if(stat & BROKEN)
-		pressure_charging = FALSE
-		flush = FALSE
+	if(machine_stat & BROKEN)
 		return
 
 	//flush handle
@@ -395,18 +416,21 @@
 		. += "dispover-handle"
 
 	//only handle is shown if no power
-	if(stat & NOPOWER || panel_open)
+	if(machine_stat & NOPOWER || panel_open)
 		return
 
 	//check for items in disposal - occupied light
 	if(contents.len > 0)
 		. += "dispover-full"
+		. += mutable_appearance(icon, "dispover-full", 0, EMISSIVE_PLANE, alpha)
 
 	//charging and ready light
 	if(pressure_charging)
 		. += "dispover-charge"
+		. += mutable_appearance(icon, "dispover-charge-glow", 0, EMISSIVE_PLANE, alpha)
 	else if(full_pressure)
 		. += "dispover-ready"
+		. += mutable_appearance(icon, "dispover-ready-glow", 0, EMISSIVE_PLANE, alpha)
 
 /obj/machinery/disposal/bin/proc/do_flush()
 	set waitfor = FALSE
@@ -414,8 +438,8 @@
 
 //timed process
 //charge the gas reservoir and perform flush if ready
-/obj/machinery/disposal/bin/process()
-	if(stat & BROKEN) //nothing can happen if broken
+/obj/machinery/disposal/bin/process(delta_time)
+	if(machine_stat & BROKEN) //nothing can happen if broken
 		return
 
 	flush_count++
@@ -425,10 +449,12 @@
 				do_flush()
 		flush_count = 0
 
+	updateDialog()
+
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE) // flush can happen even without power
 		do_flush()
 
-	if(stat & NOPOWER) // won't charge if no power
+	if(machine_stat & NOPOWER) // won't charge if no power
 		return
 
 	use_power(100) // base power usage
@@ -450,14 +476,13 @@
 		//Actually transfer the gas
 		var/datum/gas_mixture/removed = env.remove(transfer_moles)
 		air_contents.merge(removed)
-		air_update_turf()
-
+		air_update_turf(FALSE)
 
 	//if full enough, switch to ready mode
 	if(air_contents.return_pressure() >= SEND_PRESSURE)
 		full_pressure = TRUE
 		pressure_charging = FALSE
-		update_icon()
+		update_appearance()
 	return
 
 /obj/machinery/disposal/bin/get_remote_view_fullscreens(mob/user)
@@ -477,7 +502,7 @@
 	. = ..()
 	trunk = locate() in loc
 	if(trunk)
-		trunk.linked = src	// link the pipe trunk to self
+		trunk.linked = src // link the pipe trunk to self
 
 /obj/machinery/disposal/deliveryChute/place_item_in_disposal(obj/item/I, mob/user)
 	if(I.CanEnterDisposals())
@@ -485,7 +510,7 @@
 		flush()
 
 /obj/machinery/disposal/deliveryChute/Bumped(atom/movable/AM) //Go straight into the chute
-	if(!AM.CanEnterDisposals())
+	if(QDELETED(AM) || !AM.CanEnterDisposals())
 		return
 	switch(dir)
 		if(NORTH)
@@ -524,5 +549,15 @@
 /obj/mecha/CanEnterDisposals()
 	return
 
+/obj/machinery/disposal/bin/newHolderDestination(obj/structure/disposalholder/H)
+	H.destinationTag = 1
+
 /obj/machinery/disposal/deliveryChute/newHolderDestination(obj/structure/disposalholder/H)
 	H.destinationTag = 1
+
+
+/obj/machinery/disposal/proc/on_rat_rummage(mob/living/simple_animal/hostile/regalrat/king)
+	SIGNAL_HANDLER
+
+	// INVOKE_ASYNC(src, /obj/machinery/disposal/.proc/rat_rummage, king)
+

@@ -5,6 +5,7 @@
 	max_occurrences = 1
 	min_players = 10
 	earliest_start = 30 MINUTES
+	// dynamic_should_hijack = TRUE
 	gamemode_blacklist = list("nuclear")
 
 #define PIRATES_ROGUES "Rogues"
@@ -132,7 +133,7 @@
 
 /obj/machinery/shuttle_scrambler/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/machinery/shuttle_scrambler/process()
 	if(active)
@@ -163,7 +164,7 @@
 		if(active || !user.canUseTopic(src, BE_CLOSE))
 			return
 		toggle_on(user)
-		update_icon()
+		update_appearance()
 		send_notification()
 	else
 		dump_loot(user)
@@ -171,7 +172,7 @@
 //interrupt_research
 /obj/machinery/shuttle_scrambler/proc/interrupt_research()
 	for(var/obj/machinery/rnd/server/S in GLOB.machines)
-		if(S.stat & (NOPOWER|BROKEN))
+		if(S.machine_stat & (NOPOWER|BROKEN))
 			continue
 		S.emp_act(80)
 		new /obj/effect/temp_visual/emp(get_turf(S))

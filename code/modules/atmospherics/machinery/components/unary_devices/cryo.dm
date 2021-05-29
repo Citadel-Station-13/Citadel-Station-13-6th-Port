@@ -123,7 +123,7 @@
 		occupant_overlay.dir = SOUTH
 		occupant_overlay.pixel_y = 22
 
-		if(on && !running_anim && is_operational())
+		if(on && !running_anim && is_operational)
 			icon_state = "pod-on"
 			running_anim = TRUE
 			run_anim(TRUE, occupant_overlay)
@@ -132,7 +132,7 @@
 			add_overlay(occupant_overlay)
 			add_overlay("cover-off")
 
-	else if(on && is_operational())
+	else if(on && is_operational)
 		icon_state = "pod-on"
 		add_overlay("cover-on")
 	else
@@ -140,7 +140,7 @@
 		add_overlay("cover-off")
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/proc/run_anim(anim_up, image/occupant_overlay)
-	if(!on || !occupant || !is_operational())
+	if(!on || !occupant || !is_operational)
 		running_anim = FALSE
 		return
 	cut_overlays()
@@ -162,7 +162,7 @@
 
 	if(!on)
 		return
-	if(!is_operational())
+	if(!is_operational)
 		on = FALSE
 		update_icon()
 		return

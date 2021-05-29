@@ -226,8 +226,9 @@
 	air_contents.set_moles(/datum/gas/nitrogen, (N2STANDARD * maximum_pressure * filled) * air_contents.return_volume() / (R_IDEAL_GAS_EQUATION * air_contents.return_temperature()))
 
 /obj/machinery/portable_atmospherics/canister/update_icon_state()
-	if(stat & BROKEN)
-		icon_state = "[icon_state]-1"
+	if(machine_stat & BROKEN)
+		icon_state = "[initial(icon_state)]-1"
+	return ..()
 
 /obj/machinery/portable_atmospherics/canister/update_overlays()
 	. = ..()
@@ -251,14 +252,14 @@
 
 
 /obj/machinery/portable_atmospherics/canister/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(!(stat & BROKEN))
-			canister_break()
-		if(disassembled)
-			new /obj/item/stack/sheet/metal (loc, 10)
-		else
-			new /obj/item/stack/sheet/metal (loc, 5)
-	qdel(src)
+	if((flags_1 & NODECONSTRUCT_1))
+		return
+	if(!(machine_stat & BROKEN))
+		canister_break()
+	if(disassembled)
+		new /obj/item/stack/sheet/metal (drop_location(), 5)
+		qdel(src)
+		return
 
 /obj/machinery/portable_atmospherics/canister/welder_act(mob/living/user, obj/item/I)
 	..()
@@ -280,19 +281,29 @@
 	return TRUE
 
 /obj/machinery/portable_atmospherics/canister/obj_break(damage_flag)
-	if((stat & BROKEN) || (flags_1 & NODECONSTRUCT_1))
+	. = ..()
+	if(!.)
 		return
-	stat |= BROKEN
 	canister_break()
 
+/**
+ * Handle canisters disassemble, releases the gas content in the turf
+ */
 /obj/machinery/portable_atmospherics/canister/proc/canister_break()
 	disconnect()
 	var/datum/gas_mixture/expelled_gas = air_contents.remove(air_contents.total_moles())
+	var/expelled_pressure = expelled_gas?.return_pressure()
 	var/turf/T = get_turf(src)
 	T.assume_air(expelled_gas)
-	air_update_turf()
-
+	air_update_turf(FALSE)
 	obj_break()
+
+	if(expelled_pressure > 1e14)
+		var/pressure_dif = expelled_pressure - 1e14
+		var/max_pressure_difference = 20000
+		var/explosion_range = CEILING(min(pressure_dif, max_pressure_difference) / 1000, 1)
+		explosion(T, 0, 0, explosion_range, 0, smoke = FALSE)
+
 	density = FALSE
 	playsound(src.loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
 	investigate_log("was destroyed.", INVESTIGATE_ATMOS)
@@ -301,19 +312,22 @@
 		holding.forceMove(T)
 		holding = null
 
+	animate(src, 0.5 SECONDS, transform=turn(transform, rand(-179, 180)), easing=BOUNCE_EASING)
+
 /obj/machinery/portable_atmospherics/canister/replace_tank(mob/living/user, close_valve)
 	. = ..()
-	if(.)
-		if(close_valve)
-			valve_open = FALSE
-			update_icon()
-			investigate_log("Valve was <b>closed</b> by [key_name(user)].<br>", INVESTIGATE_ATMOS)
-		else if(valve_open && holding)
-			investigate_log("[key_name(user)] started a transfer into [holding].<br>", INVESTIGATE_ATMOS)
+	if(!.)
+		return
+	if(close_valve)
+		valve_open = FALSE
+		update_appearance()
+		investigate_log("Valve was <b>closed</b> by [key_name(user)].", INVESTIGATE_ATMOS)
+	else if(valve_open && holding)
+		investigate_log("[key_name(user)] started a transfer into [holding].", INVESTIGATE_ATMOS)
 
 /obj/machinery/portable_atmospherics/canister/process_atmos()
 	..()
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		return PROCESS_KILL
 	if(timing && valve_timer < world.time)
 		valve_open = !valve_open
@@ -332,7 +346,7 @@
 	// currently unused
 	// if(our_temperature > heat_limit || our_pressure > pressure_limit)
 	// 	take_damage(clamp((our_temperature/heat_limit) * (our_pressure/pressure_limit) * delta_time * 2, 5, 50), BURN, 0)
-	update_icon()
+	update_appearance()
 
 /obj/machinery/portable_atmospherics/canister/ui_state(mob/user)
 	return GLOB.physical_state

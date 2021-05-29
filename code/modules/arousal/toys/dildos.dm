@@ -20,7 +20,7 @@
 	var/is_knotted		= FALSE
 	//Lists moved to _cit_helpers.dm as globals so they're not instanced individually
 
-/obj/item/dildo/proc/update_appearance()
+/obj/item/dildo/update_icon(updates)
 	icon_state = "[dildo_type]_[dildo_shape]_[dildo_size]"
 	var/sizeword = ""
 	switch(dildo_size)
@@ -34,6 +34,7 @@
 			sizeword = "gigantic "
 
 	name = "[sizeword][dildo_shape] [can_customize ? "custom " : ""][dildo_type]"
+	. = ..()
 
 /obj/item/dildo/AltClick(mob/living/user)
 	. = ..()

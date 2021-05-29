@@ -140,7 +140,7 @@
 			return FALSE
 	return TRUE
 
-/obj/structure/closet/proc/dump_contents(override = TRUE) //Override is for not revealing the locker electronics when you open the locker, for example
+/obj/structure/closet/dump_contents(override = TRUE) //Override is for not revealing the locker electronics when you open the locker, for example
 	var/atom/L = drop_location()
 	for(var/atom/movable/AM in src)
 		if(AM == lockerelectronics && override) // this stops the electronics from being dumped out? huh

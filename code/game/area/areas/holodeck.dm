@@ -8,8 +8,7 @@
 
 	var/obj/machinery/computer/holodeck/linked
 	var/restricted = FALSE // if true, program goes on emag list
-	// network_root_id = "HOLODECK"
-
+	network_root_id = "HOLODECK"
 /*
 	Power tracking: Use the holodeck computer's power grid
 	Asserts are to avoid the inevitable infinite loops
@@ -25,37 +24,30 @@
 			LAZYADD(target[A], info_this)
 		SSholodeck.rejected_areas -= type
 
-/area/holodeck/powered(var/chan)
+/area/holodeck/powered(chan)
 	if(!requires_power)
-		return 1
+		return TRUE
 	if(always_unpowered)
-		return 0
+		return FALSE
 	if(!linked)
-		return 0
+		return FALSE
 	var/area/A = get_area(linked)
 	ASSERT(!istype(A, /area/holodeck))
 	return A.powered(chan)
-
-/area/holodeck/usage(var/chan)
-	if(!linked)
-		return 0
-	var/area/A = get_area(linked)
-	ASSERT(!istype(A, /area/holodeck))
-	return A.usage(chan)
 
 /area/holodeck/addStaticPower(value, powerchannel)
 	if(!linked)
 		return
 	var/area/A = get_area(linked)
 	ASSERT(!istype(A, /area/holodeck))
-	return A.addStaticPower(value,powerchannel)
+	return ..()
 
-/area/holodeck/use_power(var/amount, var/chan)
+/area/holodeck/use_power(amount, chan)
 	if(!linked)
-		return 0
+		return FALSE
 	var/area/A = get_area(linked)
 	ASSERT(!istype(A, /area/holodeck))
-	return A.use_power(amount,chan)
+	return ..()
 
 
 /*

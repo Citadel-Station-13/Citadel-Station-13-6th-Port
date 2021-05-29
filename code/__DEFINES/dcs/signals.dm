@@ -74,16 +74,45 @@
 	#define EXAMINE_POSITION_BEFORE (1<<1)
 	//End positions
 	#define COMPONENT_EXNAME_CHANGED (1<<0)
-#define COMSIG_ATOM_UPDATE_ICON "atom_update_icon"				//from base of atom/update_icon(): ()
-	#define COMSIG_ATOM_NO_UPDATE_ICON_STATE 1
-	#define COMSIG_ATOM_NO_UPDATE_OVERLAYS		2
-#define COMSIG_ATOM_UPDATE_OVERLAYS "atom_update_overlays"		//from base of atom/update_overlays(): (list/new_overlays)
-#define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"			//from base of atom/update_icon(): (signalOut, did_anything)
-#define COMSIG_ATOM_ENTERED "atom_entered"                      //from base of atom/Entered(): (atom/movable/entering, /atom)
-#define COMSIG_ATOM_EXIT "atom_exit"							//from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
-	#define COMPONENT_ATOM_BLOCK_EXIT 1
-#define COMSIG_ATOM_EXITED "atom_exited"						//from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
-/// From base of atom/wave_ex_act(): (datum/wave_explosion/explosion, args)
+
+///from base of [/atom/proc/update_appearance]: (updates)
+#define COMSIG_ATOM_UPDATE_APPEARANCE "atom_update_appearance"
+	/// If returned from [COMSIG_ATOM_UPDATE_APPEARANCE] it prevents the atom from updating its name.
+	#define COMSIG_ATOM_NO_UPDATE_NAME UPDATE_NAME
+	/// If returned from [COMSIG_ATOM_UPDATE_APPEARANCE] it prevents the atom from updating its desc.
+	#define COMSIG_ATOM_NO_UPDATE_DESC UPDATE_DESC
+	/// If returned from [COMSIG_ATOM_UPDATE_APPEARANCE] it prevents the atom from updating its icon.
+	#define COMSIG_ATOM_NO_UPDATE_ICON UPDATE_ICON
+///from base of [/atom/proc/update_name]: (updates)
+#define COMSIG_ATOM_UPDATE_NAME "atom_update_name"
+///from base of [/atom/proc/update_desc]: (updates)
+#define COMSIG_ATOM_UPDATE_DESC "atom_update_desc"
+///from base of [/atom/update_icon]: ()
+#define COMSIG_ATOM_UPDATE_ICON "atom_update_icon"
+	/// If returned from [COMSIG_ATOM_UPDATE_ICON] it prevents the atom from updating its icon state.
+	#define COMSIG_ATOM_NO_UPDATE_ICON_STATE UPDATE_ICON_STATE
+	/// If returned from [COMSIG_ATOM_UPDATE_ICON] it prevents the atom from updating its overlays.
+	#define COMSIG_ATOM_NO_UPDATE_OVERLAYS UPDATE_OVERLAYS
+///from base of [atom/update_icon_state]: ()
+#define COMSIG_ATOM_UPDATE_ICON_STATE "atom_update_icon_state"
+///from base of [/atom/update_overlays]: (list/new_overlays)
+#define COMSIG_ATOM_UPDATE_OVERLAYS "atom_update_overlays"
+///from base of [/atom/update_greyscale]: (list/colors)
+#define COMSIG_ATOM_UPDATE_GREYSCALE "atom_update_greyscale"
+///from base of [/atom/update_icon]: (signalOut, did_anything)
+#define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"
+///from base of atom/Entered(): (atom/movable/entering, /atom/oldLoc)
+#define COMSIG_ATOM_ENTERED "atom_entered"
+/// Sent from the atom that just Entered src. From base of atom/Entered(): (/atom/entered_atom, /atom/oldLoc)
+// #define COMSIG_ATOM_ENTERING "atom_entering"
+///from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
+#define COMSIG_ATOM_EXIT "atom_exit"
+	#define COMPONENT_ATOM_BLOCK_EXIT (1<<0)
+///from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
+#define COMSIG_ATOM_EXITED "atom_exited"
+///from base of atom/Bumped(): (/atom/movable)
+// #define COMSIG_ATOM_BUMPED "atom_bumped"
+/// From base of atom/wave_ex_act(): (datum/wave_explosion/explosion, args) (CIT SPECIFIC)
 #define COMSIG_ATOM_WAVE_EX_ACT "atom_wave_ex_act"
 ///from base of atom/ex_act(): (severity, target)
 #define COMSIG_ATOM_EX_ACT "atom_ex_act"
@@ -112,6 +141,8 @@
 ///from obj/machinery/bsa/full/proc/fire(): ()
 #define COMSIG_ATOM_BSA_BEAM "atom_bsa_beam_pass"
 	#define COMSIG_ATOM_BLOCKS_BSA_BEAM (1<<0)
+///from /obj/machinery/doppler_array/proc/sense_explosion(...): Runs when an explosion is succesfully detected by a doppler array(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)
+#define COMSIG_DOPPLER_ARRAY_EXPLOSION_DETECTED "atom_dopplerarray_explosion_detected"
 ///from base of atom/set_light(): (l_range, l_power, l_color)
 #define COMSIG_ATOM_SET_LIGHT "atom_set_light"
 ///from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.
@@ -198,23 +229,49 @@
 #define COMSIG_MOVABLE_IMPACT_ZONE "item_impact_zone"			//from base of mob/living/hitby(): (mob/living/target, hit_zone)
 #define COMSIG_MOVABLE_BUCKLE "buckle"							//from base of atom/movable/buckle_mob(): (mob, force)
 #define COMSIG_MOVABLE_UNBUCKLE "unbuckle"						//from base of atom/movable/unbuckle_mob(): (mob, force)
-#define COMSIG_MOVABLE_PRE_THROW "movable_pre_throw"			//from base of atom/movable/throw_at(): (list/args)
-	#define COMPONENT_CANCEL_THROW 1
-#define COMSIG_MOVABLE_POST_THROW "movable_post_throw"			//from base of atom/movable/throw_at(): (datum/thrownthing, spin)
-#define COMSIG_MOVABLE_Z_CHANGED "movable_ztransit" 			//from base of atom/movable/onTransitZ(): (old_z, new_z)
-#define COMSIG_MOVABLE_SECLUDED_LOCATION "movable_secluded" 	//called when the movable is placed in an unaccessible area, used for stationloving: ()
-#define COMSIG_MOVABLE_HEAR "movable_hear"						//from base of atom/movable/Hear(): (message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, atom/movable/source)
+///from base of atom/movable/throw_at(): (list/args)
+#define COMSIG_MOVABLE_PRE_THROW "movable_pre_throw"
+	#define COMPONENT_CANCEL_THROW (1<<0)
+///from base of atom/movable/throw_at(): (datum/thrownthing, spin)
+#define COMSIG_MOVABLE_POST_THROW "movable_post_throw"
+///from base of atom/movable/onTransitZ(): (old_z, new_z)
+#define COMSIG_MOVABLE_Z_CHANGED "movable_ztransit"
+///called when the movable is placed in an unaccessible area, used for stationloving: ()
+#define COMSIG_MOVABLE_SECLUDED_LOCATION "movable_secluded"
+///from base of atom/movable/Hear(): (proc args list(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list()))
+#define COMSIG_MOVABLE_HEAR "movable_hear"
 	#define HEARING_MESSAGE 1
 	#define HEARING_SPEAKER 2
-//	#define HEARING_LANGUAGE 3
+	// #define HEARING_LANGUAGE 3
 	#define HEARING_RAW_MESSAGE 4
-//	 #define HEARING_RADIO_FREQ 5
-//	#define HEARING_SPANS 6
+	// #define HEARING_RADIO_FREQ 5
+	// #define HEARING_SPANS 6
 	#define HEARING_MESSAGE_MODE 7
-//	#define HEARING_SOURCE 8
-#define COMSIG_MOVABLE_DISPOSING "movable_disposing"			//called when the movable is added to a disposal holder object for disposal movement: (obj/structure/disposalholder/holder, obj/machinery/disposal/source)
+
+///called when the movable is added to a disposal holder object for disposal movement: (obj/structure/disposalholder/holder, obj/machinery/disposal/source)
+#define COMSIG_MOVABLE_DISPOSING "movable_disposing"
+// CIT SPEC.
 #define COMSIG_MOVABLE_TELEPORTED "movable_teleported"			//from base of do_teleport(): (channel, turf/origin, turf/destination)
 #define COMSIG_MOVABLE_CHASM_DROP "movable_chasm_drop"			//from base of /datum/component/chasm/drop() (/datum/component/chasm)
+// END
+// called when movable is expelled from a disposal pipe, bin or outlet on obj/pipe_eject: (direction)
+#define COMSIG_MOVABLE_PIPE_EJECTING "movable_pipe_ejecting"
+///called when the movable sucessfully has it's anchored var changed, from base atom/movable/set_anchored(): (value)
+#define COMSIG_MOVABLE_SET_ANCHORED "movable_set_anchored"
+///from base of atom/movable/setGrabState(): (newstate)
+#define COMSIG_MOVABLE_SET_GRAB_STATE "living_set_grab_state"
+///Called when the movable tries to change its dynamic light color setting, from base atom/movable/lighting_overlay_set_color(): (color)
+#define COMSIG_MOVABLE_LIGHT_OVERLAY_SET_RANGE "movable_light_overlay_set_color"
+///Called when the movable tries to change its dynamic light power setting, from base atom/movable/lighting_overlay_set_power(): (power)
+#define COMSIG_MOVABLE_LIGHT_OVERLAY_SET_POWER "movable_light_overlay_set_power"
+///Called when the movable tries to change its dynamic light range setting, from base atom/movable/lighting_overlay_set_range(): (range)
+#define COMSIG_MOVABLE_LIGHT_OVERLAY_SET_COLOR "movable_light_overlay_set_range"
+///Called when the movable tries to toggle its dynamic light LIGHTING_ON status, from base atom/movable/lighting_overlay_toggle_on(): (new_state)
+#define COMSIG_MOVABLE_LIGHT_OVERLAY_TOGGLE_ON "movable_light_overlay_toggle_on"
+///called when the movable's glide size is updated: (new_glide_size)
+#define COMSIG_MOVABLE_UPDATE_GLIDE_SIZE "movable_glide_size"
+///Called when a movable is hit by a plunger in layer mode, from /obj/item/plunger/attack_obj()
+#define COMSIG_MOVABLE_CHANGE_DUCT_LAYER "movable_change_duct_layer"
 
 // /mind signals
 #define  COMSIG_PRE_MIND_TRANSFER "pre_mind_transfer"			//from base of mind/transfer_to() before it's done: (new_character, old_character)
@@ -359,10 +416,17 @@
 	#define COMPONENT_STOP_GENERIC_ATTACK 1
 
 
-// /machinery signals
+// /obj/machinery signals
 #define COMSIG_MACHINE_EJECT_OCCUPANT "eject_occupant"			//from base of obj/machinery/dropContents() (occupant)
 
+// /obj/machinery/power/supermatter_crystal signals
+/// from /obj/machinery/power/supermatter_crystal/process_atmos(); when the SM delam reaches the point of sounding alarms
+#define COMSIG_SUPERMATTER_DELAM_START_ALARM "sm_delam_start_alarm"
+/// from /obj/machinery/power/supermatter_crystal/process_atmos(); when the SM sounds an audible alarm
+#define COMSIG_SUPERMATTER_DELAM_ALARM "sm_delam_alarm"
+
 // /obj/item signals
+
 #define COMSIG_ITEM_ATTACK "item_attack"						//from base of obj/item/attack(): (/mob/living/target, /mob/living/user)
 #define COMSIG_ITEM_ATTACK_SELF "item_attack_self"				//from base of obj/item/attack_self(): (/mob)
 	#define COMPONENT_NO_INTERACT 1
@@ -408,9 +472,33 @@
 #define COMSIG_GRENADE_PRIME "grenade_prime"					//called in /obj/item/gun/process_fire (user, target, params, zone_override)
 #define COMSIG_GRENADE_ARMED "grenade_armed"					//called in /obj/item/gun/process_fire (user, target, params, zone_override)
 
+
+// /obj signals for economy
+///called when the payment component tries to charge an account.
+#define COMSIG_OBJ_ATTEMPT_CHARGE "obj_attempt_simple_charge"
+	#define COMPONENT_OBJ_CANCEL_CHARGE  (1<<0)
+///Called when a payment component changes value
+#define COMSIG_OBJ_ATTEMPT_CHARGE_CHANGE "obj_attempt_simple_charge_change"
+
+// /obj/item signals for economy
+///called when an item is sold by the exports subsystem
+#define COMSIG_ITEM_SOLD "item_sold"
+///called when a wrapped up structure is opened by hand
+#define COMSIG_STRUCTURE_UNWRAPPED "structure_unwrapped"
+///called when a wrapped up item is opened by hand
+#define COMSIG_ITEM_UNWRAPPED "item_unwrapped"
+	#define COMSIG_ITEM_SPLIT_VALUE  (1<<0)
+///called when getting the item's exact ratio for cargo's profit.
+#define COMSIG_ITEM_SPLIT_PROFIT "item_split_profits"
+///called when getting the item's exact ratio for cargo's profit, without selling the item.
+#define COMSIG_ITEM_SPLIT_PROFIT_DRY "item_split_profits_dry"
+
 // /obj/item/clothing signals
-#define COMSIG_SHOES_STEP_ACTION "shoes_step_action"			//from base of obj/item/clothing/shoes/proc/step_action(): ()
-#define COMSIG_SUIT_MADE_HELMET "suit_made_helmet"				//from base of obj/item/clothing/suit/MakeHelmet(): (helmet)
+
+///from [/mob/living/carbon/human/Move]: ()
+#define COMSIG_SHOES_STEP_ACTION "shoes_step_action"
+///from base of /obj/item/clothing/suit/space/proc/toggle_spacesuit(): (obj/item/clothing/suit/space/suit)
+#define COMSIG_SUIT_MADE_HELMET "suit_made_helmet"
 
 // /obj/item/implant signals
 #define COMSIG_IMPLANT_ACTIVATED "implant_activated"			//from base of /obj/item/implant/proc/activate(): ()

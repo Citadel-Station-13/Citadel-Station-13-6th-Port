@@ -21,7 +21,7 @@
 	var/list/cam_plane_masters
 	var/obj/screen/background/cam_background
 
-	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_SET_MACHINE //| INTERACT_MACHINE_REQUIRES_SIGHT
+	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_SET_MACHINE | INTERACT_MACHINE_REQUIRES_SIGHT
 
 /obj/machinery/computer/security/Initialize()
 	. = ..()
@@ -56,10 +56,10 @@
 	qdel(cam_background)
 	return ..()
 
-/obj/machinery/computer/security/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
+/obj/machinery/computer/security/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	for(var/i in network)
 		network -= i
-		network += "[idnum][i]"
+		network += "[port.id]_[i]"
 
 /obj/machinery/computer/security/ui_interact(mob/user, datum/tgui/ui)
 	// Update UI
@@ -260,8 +260,9 @@
 
 /obj/machinery/computer/security/telescreen/update_icon_state()
 	icon_state = initial(icon_state)
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		icon_state += "b"
+	return ..()
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
@@ -361,6 +362,11 @@
 	desc = "A telescreen that connects to the AI upload's camera network."
 	network = list("aiupload")
 
+/obj/machinery/computer/security/telescreen/bar
+	name = "bar monitor"
+	desc = "A telescreen that connects to the bar's camera network. Perfect for checking on customers."
+	network = list("bar")
+
 // Subtype that connects to shuttles.
 /obj/machinery/computer/security/shuttle
 	circuit = /obj/item/circuitboard/computer/security/shuttle
@@ -368,6 +374,6 @@
 /obj/machinery/computer/security/shuttle/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
 	for(var/i in network)
 		network -= i
-		network += "[idnum][i]"
+		network += "[idnum][i]" //TODO: MOVE TO NEW ID SCHEME
 
 #undef DEFAULT_MAP_SIZE

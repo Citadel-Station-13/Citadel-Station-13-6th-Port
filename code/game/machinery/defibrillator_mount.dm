@@ -9,7 +9,7 @@
 	density = FALSE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 1
-	power_channel = EQUIP
+	power_channel = AREA_USAGE_EQUIP
 	req_one_access = list(ACCESS_MEDICAL, ACCESS_HEADS, ACCESS_SECURITY) //used to control clamps
 	var/obj/item/defibrillator/defib //this mount's defibrillator
 	var/clamps_locked = FALSE //if true, and a defib is loaded, it can't be removed without unlocking the clamps
@@ -33,7 +33,7 @@
 			. += "<span class='notice'>Its locking clamps can be [clamps_locked ? "dis" : ""]engaged by swiping an ID with access.</span>"
 
 /obj/machinery/defibrillator_mount/process()
-	if(defib && defib.cell && defib.cell.charge < defib.cell.maxcharge && is_operational())
+	if(defib && defib.cell && defib.cell.charge < defib.cell.maxcharge && is_operational)
 		use_power(200)
 		defib.cell.give(180) //90% efficiency, slightly better than the cell charger's 87.5%
 		update_icon()

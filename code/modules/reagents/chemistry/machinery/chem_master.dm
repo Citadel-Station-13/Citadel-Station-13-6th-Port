@@ -61,20 +61,27 @@
 	. = ..()
 	if(A == beaker)
 		beaker = null
-		update_icon()
+		update_appearance()
 	if(A == bottle)
 		bottle = null
-		update_icon()
+		update_appearance()
+
+/obj/machinery/chem_master/handle_atom_del(atom/A)
+	..()
+	if(A == beaker)
+		beaker = null
+		reagents.clear_reagents()
+		update_appearance()
+	else if(A == bottle)
+		bottle = null
 
 /obj/machinery/chem_master/update_icon_state()
-	if(beaker)
-		icon_state = "mixer1"
-	else
-		icon_state = "mixer0"
+	icon_state = "mixer[beaker ? 1 : 0]"
+	return ..()
 
 /obj/machinery/chem_master/update_overlays()
 	. = ..()
-	if (stat & BROKEN)
+	if(machine_stat & BROKEN)
 		. += "waitlight"
 
 /obj/machinery/chem_master/blob_act(obj/structure/blob/B)

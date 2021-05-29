@@ -435,7 +435,7 @@
 		if(!GLOB.news_network)
 			alert("No news network found on station. Aborting.")
 		var/channelexists = 0
-		for(var/datum/news/feed_channel/FC in GLOB.news_network.network_channels)
+		for(var/datum/newscaster/feed_channel/FC in GLOB.news_network.network_channels)
 			if(FC.channel_name == "Nanotrasen Book Club")
 				channelexists = 1
 				break
@@ -579,7 +579,7 @@
 		return ..()
 
 /obj/machinery/bookbinder/proc/bind_book(mob/user, obj/item/paper/P)
-	if(stat)
+	if(machine_stat)
 		return
 	if(busy)
 		to_chat(user, "<span class='warning'>The book binder is busy. Please wait for completion of previous operation.</span>")
@@ -592,7 +592,7 @@
 	sleep(rand(200,400))
 	busy = FALSE
 	if(P)
-		if(!stat)
+		if(!machine_stat)
 			visible_message("<span class='notice'>[src] whirs as it prints and binds a new book.</span>")
 			var/obj/item/book/B = new(src.loc)
 			B.dat = P.info

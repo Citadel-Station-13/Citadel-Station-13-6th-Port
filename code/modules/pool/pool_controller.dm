@@ -15,6 +15,8 @@
 	density = TRUE
 	use_power = TRUE
 	idle_power_usage = 75
+	processing_flags = START_PROCESSING_ON_INIT
+	subsystem_type = /datum/controller/subsystem/processing/fastprocess
 	/// How far it scans for pool objects
 	var/scan_range = 6
 	/// Is pool mist currently on?
@@ -26,15 +28,13 @@
 	/// All mobs in pool
 	var/list/mob/living/mobs_in_pool = list()
 	/// Is the pool bloody?
-	var/bloody = 0
+	var/bloody = FALSE
 	/// Last time we process_reagents()'d
 	var/last_reagent_process = 0
 	/// Maximum amount we will take from a beaker
 	var/max_beaker_transfer = 100
 	/// Minimum amount of a reagent for it to work on us
 	var/min_reagent_amount = 10
-	/// ADMINBUS ONLY - WHETHER OR NOT WE HAVE NOREACT ;)
-	var/noreact_reagents = FALSE
 	/// how fast in deciseconds between reagent processes
 	var/reagent_tick_interval = 5
 	/// Can we use unsafe temperatures
@@ -59,22 +59,22 @@
 	var/draining = FALSE
 	/// Reagent blacklisting
 	var/respect_reagent_blacklist = TRUE
+	/// ADMINBUS ONLY - WHETHER OR NOT WE HAVE NOREACT ;)
+	var/noreact_reagents = FALSE
 
 /obj/machinery/pool/controller/examine(mob/user)
 	. = ..()
 	. += "<span class='boldnotice'>Alt click to drain reagents.</span>"
 
 /obj/machinery/pool/controller/Initialize()
+	wires = new /datum/wires/poolcontroller(src)
 	. = ..()
-	START_PROCESSING(SSfastprocess, src)
 	create_reagents(1000)
 	if(noreact_reagents)
 		reagents.reagents_holder_flags |= NO_REACT
-	wires = new /datum/wires/poolcontroller(src)
 	scan_things()
 
 /obj/machinery/pool/controller/Destroy()
-	STOP_PROCESSING(SSprocessing, src)
 	linked_drain = null
 	linked_filter = null
 	linked_turfs.Cut()
@@ -106,6 +106,7 @@
 		drainable = TRUE
 		log_game("[key_name(user)] emagged [src]")
 		message_admins("[key_name_admin(user)] emagged [src]")
+		return TRUE
 	else
 		to_chat(user, "<span class='warning'>The interface on [src] is already too damaged to short it again.</span>")
 		return
@@ -115,6 +116,8 @@
 	if(!istype(user))
 		return FALSE
 	if(!user.Adjacent(src) || !user.CanReach(src) || !CHECK_MOBILITY(user, MOBILITY_USE))
+		return FALSE
+	if(!reagents.total_volume || draining)
 		return FALSE
 	visible_message("<span class='boldwarning'>[user] starts to drain [src]!</span>")
 	draining = TRUE
@@ -129,50 +132,49 @@
 	return TRUE
 
 /obj/machinery/pool/controller/attackby(obj/item/W, mob/user)
-	if(shocked && !(stat & NOPOWER))
+	if(shocked && !(machine_stat & NOPOWER))
 		shock(user,50)
-	if(stat & (BROKEN))
-		return
+	if(machine_stat & (BROKEN))
+		return // it's already broken, don't bash it pls
 	if(istype(W,/obj/item/reagent_containers))
-		if(W.reagents.total_volume) //check if there's reagent
-			user.visible_message("<span class='boldwarning'>[user] is feeding [src] some chemicals from [W].</span>")
-			if(do_after(user, 50, target = src))
-				for(var/datum/reagent/R in W.reagents.reagent_list)
-					if(R.type in GLOB.blacklisted_pool_reagents)
-						to_chat(user, "[src] cannot accept [R.name].")
-						return
-					if(R.reagent_state == SOLID)
-						to_chat(user, "The pool cannot accept reagents in solid form!.")
-						return
-				reagents.clear_reagents()
-				// This also reacts them. No nitroglycerin deathpools, sorry gamers :(
-				W.reagents.trans_to(reagents, max_beaker_transfer, log = "pool fill from reagent container")
-				user.visible_message("<span class='notice'>[src] makes a slurping noise.</span>", "<span class='notice'>All of the contents of [W] are quickly suctioned out by the machine!</span")
-				updateUsrDialog()
-				var/list/reagent_names = list()
-				var/list/rejected = list()
-				for(var/datum/reagent/R in reagents.reagent_list)
-					if((R.volume >= min_reagent_amount) && (!respect_reagent_blacklist || R.can_synth))
-						reagent_names += R.name
-					else
-						reagents.remove_reagent(R.type, INFINITY)
-						rejected += R.name
-				if(length(reagent_names))
-					reagent_names = english_list(reagent_names)
-					var/msg = "POOL: [key_name(user)] has changed [src]'s chems to [reagent_names]"
-					log_game(msg)
-					message_admins(msg)
-				if(length(rejected))
-					rejected = english_list(rejected)
-					to_chat(user, "<span class='warning'>[src] rejects the following chemicals as they do not have at least [min_reagent_amount] units of volume: [rejected]</span>")
-				update_color()
-		else
+		if(!W.reagents.total_volume) //check if there's reagent
 			to_chat(user, "<span class='notice'>[src] beeps unpleasantly as it rejects the beaker. Why are you trying to feed it an empty beaker?</span>")
-			return
+			return // do not call parent, would look dumb punching it with a beaker
+		user.visible_message("<span class='boldwarning'>[user] is feeding [src] some chemicals from [W].</span>")
+		if(!do_after(user, 50, target = src))
+			return // no
+		for(var/datum/reagent/R in W.reagents.reagent_list)
+			if(R.type in GLOB.blacklisted_pool_reagents)
+				to_chat(user, "[src] cannot accept [R.name].")
+				return
+			if(R.reagent_state == SOLID)
+				to_chat(user, "The pool cannot accept reagents in solid form!.")
+				return
+		reagents.clear_reagents()
+		// This also reacts them. No nitroglycerin deathpools, sorry gamers :(
+		W.reagents.trans_to(reagents, max_beaker_transfer, log = "pool fill from reagent container")
+		user.visible_message("<span class='hear'>[src] makes a slurping noise.</span>", "<span class='notice'>All of the contents of [W] are quickly suctioned out by the machine!</span")
+		updateUsrDialog()
+		var/list/reagent_names = list()
+		var/list/rejected = list()
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if((R.volume >= min_reagent_amount) && (!respect_reagent_blacklist || R.can_synth))
+				reagent_names += R.name
+			else
+				reagents.remove_reagent(R.type, INFINITY)
+				rejected += R.name
+		if(length(reagent_names))
+			reagent_names = english_list(reagent_names)
+			var/msg = "POOL: [key_name(user)] has changed [src]'s chems to [reagent_names]"
+			log_game(msg)
+			message_admins(msg)
+			if(length(rejected))
+				rejected = english_list(rejected)
+				to_chat(user, "<span class='warning'>[src] rejects the following chemicals as they do not have at least [min_reagent_amount] units of volume: [rejected]</span>")
+		update_color()
 	else if(panel_open && is_wire_tool(W))
 		wires.interact(user)
-	else
-		return ..()
+	return ..()
 
 /obj/machinery/pool/controller/screwdriver_act(mob/living/user, obj/item/W)
 	. = ..()
@@ -188,7 +190,7 @@
 
 //procs
 /obj/machinery/pool/controller/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
+	if(machine_stat & (BROKEN|NOPOWER))		// unpowered, no shock
 		return FALSE
 	if(!prob(prb))
 		return FALSE
@@ -197,8 +199,7 @@
 	s.start()
 	if(electrocute_mob(user, get_area(src), src, 0.7))
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /obj/machinery/pool/controller/proc/process_reagents()
 	if(last_reagent_process > world.time + reagent_tick_interval)
@@ -220,7 +221,7 @@
 
 /obj/machinery/pool/controller/process()
 	updateUsrDialog()
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	if(drained)
 		return
@@ -298,6 +299,7 @@
 	update_icon()
 
 /obj/machinery/pool/controller/update_icon_state()
+	. = ..()
 	icon_state = "poolc_[temperature]"
 
 /obj/machinery/pool/controller/proc/CanUpTemp(mob/user)
@@ -372,11 +374,11 @@
 	. = ..()
 	if(.)
 		return
-	if(shocked && !(stat & NOPOWER))
+	if(shocked && !(machine_stat & NOPOWER))
 		shock(user,50)
 	if(panel_open && !isAI(user))
 		return wires.interact(user)
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	var/datum/browser/popup = new(user, "Pool Controller", name, 300, 450)
 	var/dat = ""

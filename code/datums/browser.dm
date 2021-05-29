@@ -290,7 +290,7 @@
 	if (A.selectedbutton)
 		return list("button" = A.selectedbutton, "values" = A.valueslist)
 
-/proc/input_bitfield(var/mob/User, title, bitfield, current_value, nwidth = 350, nheight = 350, nslidecolor, allowed_edit_list = null)
+/proc/input_bitfield(mob/User, title, bitfield, current_value, nwidth = 350, nheight = 350, nslidecolor, allowed_edit_list = null)
 	if (!User || !(bitfield in GLOB.bitfields))
 		return
 	var/list/pickerlist = list()

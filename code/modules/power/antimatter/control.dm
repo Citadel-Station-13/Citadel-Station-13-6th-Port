@@ -35,25 +35,23 @@
 	linked_shielding = list()
 	linked_cores = list()
 
-
 /obj/machinery/power/am_control_unit/Destroy()//Perhaps damage and run stability checks rather than just del on the others
-	for(var/obj/machinery/am_shielding/AMS in linked_shielding)
-		AMS.control_unit = null
-		qdel(AMS)
+	QDEL_LIST(linked_shielding)
 	QDEL_NULL(fueljar)
 	return ..()
 
-/obj/machinery/power/am_control_unit/process()
+/obj/machinery/power/am_control_unit/process(delta_time)
 	if(exploding)
 		explosion(get_turf(src),8,12,18,12)
 		if(src)
 			qdel(src)
+			return PROCESS_KILL
 
 	if(update_shield_icons && !shield_icon_delay)
 		check_shield_icons()
-		update_shield_icons = 0
+		update_shield_icons = FALSE
 
-	if(stat & (NOPOWER|BROKEN) || !active)//can update the icons even without power
+	if(machine_stat & (NOPOWER|BROKEN) || !active)//can update the icons even without power
 		return
 
 	if(!fueljar)//No fuel but we are on, shutdown
@@ -74,7 +72,7 @@
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/core_power = reported_core_efficiency//Effectively how much fuel we can safely deal with
 	if(core_power <= 0)
-		return 0//Something is wrong
+		return FALSE //Something is wrong
 	var/core_damage = 0
 	var/fuel = fueljar.usefuel(fuel_injection)
 
@@ -82,19 +80,18 @@
 	//Now check if the cores could deal with it safely, this is done after so you can overload for more power if needed, still a bad idea
 	if(fuel > (2*core_power))//More fuel has been put in than the current cores can deal with
 		if(prob(50))
-			core_damage = 1//Small chance of damage
+			core_damage = 1 //Small chance of damage
 		if((fuel-core_power) > 5)
-			core_damage = 5//Now its really starting to overload the cores
+			core_damage = 5 //Now its really starting to overload the cores
 		if((fuel-core_power) > 10)
-			core_damage = 20//Welp now you did it, they wont stand much of this
+			core_damage = 20 //Welp now you did it, they wont stand much of this
 		if(core_damage == 0)
 			return
 		for(var/obj/machinery/am_shielding/AMS in linked_cores)
 			AMS.stability -= core_damage
-			AMS.check_stability(1)
-		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1)
+			AMS.check_stability(TRUE)
+		playsound(src.loc, 'sound/effects/bang.ogg', 50, TRUE)
 	return
-
 
 /obj/machinery/power/am_control_unit/emp_act(severity)
 	. = ..()
@@ -102,11 +99,12 @@
 		return
 	if(active)
 		toggle_power()
-	stability -= rand(round(severity/5),round(severity/3))
+	stability -= rand(round(severity/5), round(severity/3))
+	return TRUE
 
 /obj/machinery/power/am_control_unit/blob_act()
 	stability -= 20
-	if(prob(100-stability))//Might infect the rest of the machine
+	if(prob(100 - stability))//Might infect the rest of the machine
 		for(var/obj/machinery/am_shielding/AMS in linked_shielding)
 			AMS.blob_act()
 		qdel(src)
@@ -115,7 +113,7 @@
 	return
 
 /obj/machinery/power/am_control_unit/ex_act(severity, target)
-	stability -= (80 - (severity * 20))
+	stability -= clamp(80 - (severity * 20), 0, 100) // tbombs CANNOT heal this
 	check_stability()
 	return
 
@@ -126,24 +124,19 @@
 		check_stability()
 
 /obj/machinery/power/am_control_unit/power_change()
-	..()
-	if(stat & NOPOWER)
+	. = ..()
+	if(machine_stat & NOPOWER)
 		if(active)
-			toggle_power(1)
+			toggle_power(TRUE)
 		else
 			use_power = NO_POWER_USE
 
-	else if(!stat && anchored)
+	if(!machine_stat && anchored)
 		use_power = IDLE_POWER_USE
 
-	return
-
 /obj/machinery/power/am_control_unit/update_icon_state()
-	if(active)
-		icon_state = "control_on"
-	else
-		icon_state = "control"
-	//No other icons for it atm
+	. = ..()
+	icon_state = "control[active ? "_on" : null]"
 
 /obj/machinery/power/am_control_unit/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_WRENCH)
@@ -265,7 +258,7 @@
 
 /obj/machinery/power/am_control_unit/ui_interact(mob/user)
 	. = ..()
-	if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
+	if((get_dist(src, user) > 1) || (machine_stat & (BROKEN|NOPOWER)))
 		if(!isAI(user))
 			user.unset_machine()
 			user << browse(null, "window=AMcontrol")

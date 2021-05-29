@@ -1,11 +1,24 @@
 // channel numbers for power
-#define EQUIP			1
-#define LIGHT			2
-#define ENVIRON			3
-#define TOTAL			4	//for total power used only
-#define STATIC_EQUIP 	5
-#define STATIC_LIGHT	6
-#define STATIC_ENVIRON	7
+// These are indexes in a list, and indexes for "dynamic" and static channels should be kept contiguous
+#define AREA_USAGE_EQUIP 1
+#define AREA_USAGE_LIGHT 2
+#define AREA_USAGE_ENVIRON 3
+#define AREA_USAGE_STATIC_EQUIP 4
+#define AREA_USAGE_STATIC_LIGHT 5
+#define AREA_USAGE_STATIC_ENVIRON 6
+#define AREA_USAGE_LEN AREA_USAGE_STATIC_ENVIRON // largest idx
+/// Index of the first dynamic usage channel
+#define AREA_USAGE_DYNAMIC_START AREA_USAGE_EQUIP
+/// Index of the last dynamic usage channel
+#define AREA_USAGE_DYNAMIC_END AREA_USAGE_ENVIRON
+/// Index of the first static usage channel
+#define AREA_USAGE_STATIC_START AREA_USAGE_STATIC_EQUIP
+/// Index of the last static usage channel
+#define AREA_USAGE_STATIC_END AREA_USAGE_STATIC_ENVIRON
+
+/// Bitflags for a machine's preferences on when it should start processing. For use with machinery's `processing_flags` var.
+#define START_PROCESSING_ON_INIT (1<<0) /// Indicates the machine will automatically start processing right after it's `Initialize()` is ran.
+#define START_PROCESSING_MANUALLY (1<<1) /// Machines with this flag will not start processing when it's spawned. Use this if you want to manually control when a machine starts processing.
 
 //Power use
 #define NO_POWER_USE 0
@@ -51,29 +64,35 @@
 
 //NTNet stuff, for modular computers
 									// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
-#define NTNET_SOFTWAREDOWNLOAD 1 	// Downloads of software from NTNet
-#define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
-#define NTNET_COMMUNICATION 3		// Communication (messaging)
-#define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
+#define NTNET_SOFTWAREDOWNLOAD 1 // Downloads of software from NTNet
+#define NTNET_PEERTOPEER 2 // P2P transfers of files between devices
+#define NTNET_COMMUNICATION 3 // Communication (messaging)
+#define NTNET_SYSTEMCONTROL 4 // Control of various systems, RCon, air alarm control, etc.
 
 //NTNet transfer speeds, used when downloading/uploading a file/program.
-#define NTNETSPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
-#define NTNETSPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
-#define NTNETSPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
+#define NTNETSPEED_LOWSIGNAL 0.5 // GQ/s transfer speed when the device is wirelessly connected and on Low signal
+#define NTNETSPEED_HIGHSIGNAL 1 // GQ/s transfer speed when the device is wirelessly connected and on High signal
+#define NTNETSPEED_ETHERNET 2 // GQ/s transfer speed when the device is using wired connection
 
 //Caps for NTNet logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
 #define MAX_NTNET_LOGS 300
 #define MIN_NTNET_LOGS 10
 
 //Program bitflags
-#define PROGRAM_ALL		(~0)
-#define PROGRAM_CONSOLE	(1<<0)
-#define PROGRAM_LAPTOP	(1<<1)
-#define PROGRAM_TABLET	(1<<2)
+#define PROGRAM_ALL (~0)
+#define PROGRAM_CONSOLE (1<<0)
+#define PROGRAM_LAPTOP (1<<1)
+#define PROGRAM_TABLET (1<<2)
 //Program states
 #define PROGRAM_STATE_KILLED 0
 #define PROGRAM_STATE_BACKGROUND 1
 #define PROGRAM_STATE_ACTIVE 2
+//Program categories
+#define PROGRAM_CATEGORY_CREW "Crew"
+#define PROGRAM_CATEGORY_ENGI "Engineering"
+#define PROGRAM_CATEGORY_ROBO "Robotics"
+#define PROGRAM_CATEGORY_SUPL "Supply"
+#define PROGRAM_CATEGORY_MISC "Other"
 
 #define FIREDOOR_OPEN 1
 #define FIREDOOR_CLOSED 2

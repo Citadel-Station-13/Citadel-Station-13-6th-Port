@@ -11,18 +11,18 @@
 	. = ..()
 	if(href_list["show_news_channel"])
 		var/datum/D = locate(href_list["show_news_channel"])
-		if(istype(D, /datum/news/feed_channel))		//safety
+		if(istype(D, /datum/newscaster/feed_channel))		//safety
 			render_news_channel(D)
 
 /mob/dead/observer/proc/render_news_channel_list()
-	var/datum/news_network/news_network = GLOB.news_network
+	var/datum/newscaster/feed_network/all_nes_chan = GLOB.news_network
 	var/list/content = list()
-	for(var/i in news_network.network_channels)
-		var/datum/news/feed_channel/FC = i
+	for(var/i in all_nes_chan.network_channels)
+		var/datum/newscaster/feed_channel/FC = i
 		content += "<b><a href='?_src_=[REF(src)];show_news_channel=[REF(FC)]'>[FC.channel_name] ([length(FC.messages)] messages)[FC.locked? " (LOCKED)":""][FC.censored? " (CENSORED)":""][FC.is_admin_channel? " (ADMIN)":""]</a></b>"
 	return content.Join("<br>")
 
-/mob/dead/observer/proc/render_news_channel(datum/news/feed_channel/FC)
+/mob/dead/observer/proc/render_news_channel(datum/newscaster/feed_channel/FC)
 	var/list/content = list()
 	content += "<B>[FC.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[FC.returnAuthor(-1)]</FONT>\]</FONT><HR>"
 	if(FC.censored)
@@ -32,7 +32,7 @@
 		content += "<b>This channel is empty.<b><BR>"
 	else
 		for(var/i in FC.messages)
-			var/datum/news/feed_message/FM = i
+			var/datum/newscaster/feed_message/FM = i
 			content += "-[FM.returnBody(-1)] <BR>"
 			if(FM.img)
 				src << browse_rsc(FM.img, "tmp_photo[i].png")
@@ -43,7 +43,7 @@
 			content += "<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[FM.returnAuthor(-1)] </FONT>\] - ([FM.time_stamp])</FONT><BR>"
 			content += "<b><font size=1>[FM.comments.len] comment[FM.comments.len > 1 ? "s" : ""]</font></b><br>"
 			for(var/c in FM.comments)
-				var/datum/news/feed_comment/comment = c
+				var/datum/newscaster/feed_comment/comment = c
 				content += "<font size=1><small>[comment.body]</font><br><font size=1><small><small><small>[comment.author] [comment.time_stamp]</small></small></small></small></font><br>"
 			if(FM.locked)
 				content += "<b>Comments locked</b><br>"

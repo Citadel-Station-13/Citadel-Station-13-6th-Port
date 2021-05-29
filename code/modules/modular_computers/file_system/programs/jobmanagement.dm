@@ -1,6 +1,10 @@
+/// The time since the last job opening was created
+// GLOBAL_VAR_INIT(time_last_changed_position, 0)
+
 /datum/computer_file/program/job_management
 	filename = "plexagoncore"
 	filedesc = "Plexagon HR Core"
+	category = PROGRAM_CATEGORY_CREW
 	program_icon_state = "id"
 	extended_desc = "Program for viewing and changing job slot avalibility."
 	transfer_access = ACCESS_HEADS
@@ -44,7 +48,7 @@
 
 /datum/computer_file/program/job_management/proc/can_close_job(datum/job/job)
 	if(!(job?.title in blacklisted))
-		if(job.total_positions > job.current_positions)
+		if(job.total_positions > job.current_positions) // no scaling on cits
 			var/delta = (world.time / 10) - GLOB.time_last_changed_position
 			if((change_position_cooldown < delta) || (opened_positions[job.title] > 0))
 				return TRUE
@@ -68,7 +72,7 @@
 			if(!j || !can_open_job(j))
 				return
 			if(opened_positions[edit_job_target] >= 0)
-				GLOB.time_last_changed_position = world.time / 10 // global cd
+				GLOB.time_last_changed_position = world.time / 10
 			j.total_positions++
 			opened_positions[edit_job_target]++
 			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)

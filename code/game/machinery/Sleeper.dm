@@ -90,7 +90,7 @@
 	. = ..()
 	if (. & EMP_PROTECT_SELF)
 		return
-	if(is_operational() && occupant)
+	if(is_operational && occupant)
 		var/datum/reagent/R = pick(reagents.reagent_list) //cit specific
 		inject_chem(R.type, occupant)
 		open_machine()
@@ -230,7 +230,7 @@
 			. = TRUE
 		if("inject")
 			var/chem = text2path(params["chem"])
-			if(!is_operational() || !mob_occupant || isnull(chem))
+			if(!is_operational || !mob_occupant || isnull(chem))
 				return
 			if(mob_occupant.health < min_health && chem != /datum/reagent/medicine/epinephrine)
 				return

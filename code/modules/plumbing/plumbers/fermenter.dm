@@ -1,36 +1,30 @@
-/obj/machinery/plumbing/fermenter //FULLY AUTOMATIC BEER BREWING. TRULY, THE FUTURE.
+/obj/machinery/plumbing/fermenter
 	name = "chemical fermenter"
 	desc = "Turns plants into various types of booze."
 	icon_state = "fermenter"
 	layer = ABOVE_ALL_MOB_LAYER
+
 	reagent_flags = TRANSPARENT | DRAINABLE
 	rcd_cost = 30
 	rcd_delay = 30
 	buffer = 400
+
 	///input dir
 	var/eat_dir = SOUTH
 
-/obj/machinery/plumbing/fermenter/Initialize(mapload, bolt)
+/obj/machinery/plumbing/fermenter/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_supply, bolt)
+	AddComponent(/datum/component/plumbing/simple_supply, bolt, layer)
 
-/obj/machinery/plumbing/fermenter/can_be_rotated(mob/user,rotation_type)
+/obj/machinery/plumbing/fermenter/can_be_rotated(mob/user, rotation_type)
 	if(anchored)
 		to_chat(user, "<span class='warning'>It is fastened to the floor!</span>")
 		return FALSE
-	switch(eat_dir)
-		if(WEST)
-			eat_dir = NORTH
-			return TRUE
-		if(EAST)
-			eat_dir = SOUTH
-			return TRUE
-		if(NORTH)
-			eat_dir = EAST
-			return TRUE
-		if(SOUTH)
-			eat_dir = WEST
-			return TRUE
+	return TRUE
+
+/obj/machinery/plumbing/fermenter/setDir(newdir)
+	. = ..()
+	eat_dir = newdir
 
 /obj/machinery/plumbing/fermenter/CanPass(atom/movable/AM)
 	. = ..()
@@ -44,8 +38,9 @@
 	. = ..()
 	ferment(AM)
 
+/// uses fermentation proc similar to fermentation barrels
 /obj/machinery/plumbing/fermenter/proc/ferment(atom/AM)
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		return
 	if(reagents.holder_full())
 		return

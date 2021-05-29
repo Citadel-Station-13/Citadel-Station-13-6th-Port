@@ -15,7 +15,6 @@
 
 	var/id = 0
 	var/obj/machinery/power/solar_control/control
-	var/obj/item/solar_assembly/assembly
 
 /obj/machinery/power/tracker/Initialize(mapload, obj/item/solar_assembly/S)
 	. = ..()
@@ -42,20 +41,19 @@
 
 ///Tell the controller to turn the solar panels
 /obj/machinery/power/tracker/proc/sun_update(datum/source, datum/sun/primary_sun, list/datum/sun/suns)
+	SIGNAL_HANDLER
+
 	setDir(angle2dir(primary_sun.azimuth))
 	if(control && control.track == SOLAR_TRACK_AUTO)
 		control.set_panels(primary_sun.azimuth)
 
 /obj/machinery/power/tracker/proc/Make(obj/item/solar_assembly/S)
 	if(!S)
-		assembly = new /obj/item/solar_assembly
-		assembly.glass_type = new /obj/item/stack/sheet/glass(null, 2)
-		assembly.tracker = TRUE
-		assembly.anchored = TRUE
-	else
-		S.moveToNullspace()
-		assembly = S
-	update_icon()
+		S = new /obj/item/solar_assembly(src)
+		S.glass_type = /obj/item/stack/sheet/glass
+		S.tracker = 1
+		S.set_anchored(TRUE)
+	S.forceMove(src)
 
 /obj/machinery/power/tracker/crowbar_act(mob/user, obj/item/I)
 	playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
@@ -67,21 +65,29 @@
 	return TRUE
 
 /obj/machinery/power/tracker/obj_break(damage_flag)
-	if(!(stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
+	. = ..()
+	if(.)
 		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
 		unset_control()
 
 /obj/machinery/power/tracker/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
+		var/obj/item/solar_assembly/S = locate() in src
 		if(disassembled)
-			if(assembly)
-				assembly.forceMove(loc)
-				assembly.give_glass(stat & BROKEN)
+			if(S)
+				S.forceMove(loc)
+				S.give_glass(machine_stat & BROKEN)
 		else
 			playsound(src, "shatter", 70, TRUE)
-			var/shard = assembly?.glass_type ? assembly.glass_type.shard_type : /obj/item/shard
-			new shard(loc)
-			new shard(loc)
+			if(S)
+				var/shard = /obj/item/shard
+				if(S)
+					var/obj/item/stack/sheet/virtual_glass = new S() // pain
+					shard = virtual_glass.shard_type
+					qdel(virtual_glass)
+				if(shard)
+					new shard(loc)
+					new shard(loc)
 	qdel(src)
 
 // Tracker Electronic

@@ -281,54 +281,19 @@ Nothing else in the console has ID requirements.
 
 /obj/machinery/computer/rdconsole/proc/ui_protolathe_category_view()	//Legacy code
 	RDSCREEN_UI_LATHE_CHECK
-	var/list/l = list()
-	l += ui_protolathe_header()
-	l += "<div class='statusDisplay'><h3>Browsing [selected_category]:</h3>"
-	for(var/v in stored_research.researched_designs)
-		var/datum/design/D = SSresearch.techweb_design_by_id(v)
-		if(!(selected_category in D.category)|| !(D.build_type & PROTOLATHE))
+	var/list/entry_text = list()
+	entry_text += ui_protolathe_header()
+	entry_text += "<div class='statusDisplay'><h3>Browsing [selected_category]:</h3>"
+
+	for(var/k in stored_research.researched_designs)
+		var/datum/design/design = SSresearch.techweb_design_by_id(k)
+		if(!(selected_category in design.category)|| !(design.build_type & PROTOLATHE))
 			continue
-		if(!(isnull(linked_lathe.allowed_department_flags) || (D.departmental_flags & linked_lathe.allowed_department_flags)))
+		if(!(isnull(linked_lathe.allowed_department_flags) || (design.departmental_flags & linked_lathe.allowed_department_flags)))
 			continue
-		var/temp_material
-		var/c = 50
-		var/coeff = linked_lathe.print_cost_coeff
-		if(!linked_lathe.efficient_with(D.build_path))
-			coeff = 1
+		entry_text += linked_lathe.design_menu_entry(design)
 
-		var/all_materials = D.materials + D.reagents_list
-		for(var/M in all_materials)
-			var/t = linked_lathe.check_mat(D, M)
-			temp_material += " | "
-			if (t < 1)
-				temp_material += "<span class='bad'>[all_materials[M] * coeff] [CallMaterialName(M)]</span>"
-			else
-				temp_material += " [all_materials[M] * coeff] [CallMaterialName(M)]"
-			c = min(c,t)
-
-		var/clearance = !(linked_lathe.obj_flags & EMAGGED) && (linked_lathe.offstation_security_levels || is_station_level(linked_lathe.z))
-		var/sec_text = ""
-		if(clearance && (D.min_security_level > SEC_LEVEL_GREEN || D.max_security_level < SEC_LEVEL_DELTA))
-			sec_text = " (Allowed security levels: "
-			for(var/n in D.min_security_level to D.max_security_level)
-				sec_text += NUM2SECLEVEL(n)
-				if(n + 1 <= D.max_security_level)
-					sec_text += ", "
-			sec_text += ")"
-
-		clearance = !clearance || ISINRANGE(GLOB.security_level, D.min_security_level, D.max_security_level)
-		if (c >= 1 && clearance)
-			l += "<A href='?src=[REF(src)];build=[D.id];amount=1'>[D.name]</A>[RDSCREEN_NOBREAK]"
-			if(c >= 5)
-				l += "<A href='?src=[REF(src)];build=[D.id];amount=5'>x5</A>[RDSCREEN_NOBREAK]"
-			if(c >= 10)
-				l += "<A href='?src=[REF(src)];build=[D.id];amount=10'>x10</A>[RDSCREEN_NOBREAK]"
-			l += "[temp_material][sec_text][RDSCREEN_NOBREAK]"
-		else
-			l += "<span class='linkOff'>[D.name]</span>[temp_material][sec_text][RDSCREEN_NOBREAK]"
-		l += ""
-	l += "</div>"
-	return l
+	return entry_text
 
 /obj/machinery/computer/rdconsole/proc/ui_protolathe()		//Legacy code
 	RDSCREEN_UI_LATHE_CHECK
@@ -351,36 +316,7 @@ Nothing else in the console has ID requirements.
 	RDSCREEN_UI_LATHE_CHECK
 	var/list/l = list()
 	l += ui_protolathe_header()
-	for(var/id in matching_design_ids)
-		var/datum/design/D = SSresearch.techweb_design_by_id(id)
-		if(!(isnull(linked_lathe.allowed_department_flags) || (D.departmental_flags & linked_lathe.allowed_department_flags)))
-			continue
-		var/temp_material
-		var/c = 50
-		var/all_materials = D.materials + D.reagents_list
-		var/coeff = linked_lathe.print_cost_coeff
-		if(!linked_lathe.efficient_with(D.build_path))
-			coeff = 1
-		for(var/M in all_materials)
-			var/t = linked_lathe.check_mat(D, M)
-			temp_material += " | "
-			if (t < 1)
-				temp_material += "<span class='bad'>[all_materials[M] * coeff] [CallMaterialName(M)]</span>"
-			else
-				temp_material += " [all_materials[M] * coeff] [CallMaterialName(M)]"
-			c = min(c,t)
-
-		if (c >= 1)
-			l += "<A href='?src=[REF(src)];build=[D.id];amount=1'>[D.name]</A>[RDSCREEN_NOBREAK]"
-			if(c >= 5)
-				l += "<A href='?src=[REF(src)];build=[D.id];amount=5'>x5</A>[RDSCREEN_NOBREAK]"
-			if(c >= 10)
-				l += "<A href='?src=[REF(src)];build=[D.id];amount=10'>x10</A>[RDSCREEN_NOBREAK]"
-			l += "[temp_material][RDSCREEN_NOBREAK]"
-		else
-			l += "<span class='linkOff'>[D.name]</span>[temp_material][RDSCREEN_NOBREAK]"
-		l += ""
-	l += "</div>"
+	l += linked_lathe.ui_screen_search()
 	return l
 
 /obj/machinery/computer/rdconsole/proc/ui_protolathe_materials()		//Legacy code
@@ -445,66 +381,25 @@ Nothing else in the console has ID requirements.
 
 /obj/machinery/computer/rdconsole/proc/ui_circuit_category_view()	//Legacy code
 	RDSCREEN_UI_IMPRINTER_CHECK
-	var/list/l = list()
-	l += ui_circuit_header()
-	l += "<div class='statusDisplay'><h3>Browsing [selected_category]:</h3>"
+	var/list/entry_text = list()
+	entry_text += ui_circuit_header()
+	entry_text += "<div class='statusDisplay'><h3>Browsing [selected_category]:</h3>"
 
-	for(var/v in stored_research.researched_designs)
-		var/datum/design/D = SSresearch.techweb_design_by_id(v)
-		if(!(selected_category in D.category) || !(D.build_type & IMPRINTER))
+	for(var/k in stored_research.researched_designs)
+		var/datum/design/design = SSresearch.techweb_design_by_id(k)
+		if(!(selected_category in design.category)|| !(design.build_type & IMPRINTER))
 			continue
-		if(!(isnull(linked_imprinter.allowed_department_flags) || (D.departmental_flags & linked_imprinter.allowed_department_flags)))
+		if(!(isnull(linked_imprinter.allowed_department_flags) || (design.departmental_flags & linked_lathe.allowed_department_flags)))
 			continue
-		var/temp_materials
-		var/check_materials = TRUE
+		entry_text += linked_imprinter.design_menu_entry(design)
 
-		var/all_materials = D.materials + D.reagents_list
-		var/coeff = linked_imprinter.print_cost_coeff
-		if(!linked_imprinter.efficient_with(D.build_path))
-			coeff = 1
-
-		for(var/M in all_materials)
-			temp_materials += " | "
-			if (!linked_imprinter.check_mat(D, M))
-				check_materials = FALSE
-				temp_materials += " <span class='bad'>[all_materials[M] * coeff] [CallMaterialName(M)]</span>"
-			else
-				temp_materials += " [all_materials[M] * coeff] [CallMaterialName(M)]"
-		if (check_materials)
-			l += "<A href='?src=[REF(src)];imprint=[D.id]'>[D.name]</A>[temp_materials]"
-		else
-			l += "<span class='linkOff'>[D.name]</span>[temp_materials]"
-	l += "</div>"
-	return l
+	return entry_text
 
 /obj/machinery/computer/rdconsole/proc/ui_circuit_search()	//Legacy code
 	RDSCREEN_UI_IMPRINTER_CHECK
 	var/list/l = list()
 	l += ui_circuit_header()
-	l += "<div class='statusDisplay'><h3>Search results:</h3>"
-
-	for(var/id in matching_design_ids)
-		var/datum/design/D = SSresearch.techweb_design_by_id(id)
-		if(!(isnull(linked_imprinter.allowed_department_flags) || (D.departmental_flags & linked_imprinter.allowed_department_flags)))
-			continue
-		var/temp_materials
-		var/check_materials = TRUE
-		var/all_materials = D.materials + D.reagents_list
-		var/coeff = linked_imprinter.print_cost_coeff
-		if(!linked_imprinter.efficient_with(D.build_path))
-			coeff = 1
-		for(var/M in all_materials)
-			temp_materials += " | "
-			if (!linked_imprinter.check_mat(D, M))
-				check_materials = FALSE
-				temp_materials += " <span class='bad'>[all_materials[M] * coeff] [CallMaterialName(M)]</span>"
-			else
-				temp_materials += " [all_materials[M] * coeff] [CallMaterialName(M)]"
-		if (check_materials)
-			l += "<A href='?src=[REF(src)];imprint=[D.id]'>[D.name]</A>[temp_materials]"
-		else
-			l += "<span class='linkOff'>[D.name]</span>[temp_materials]"
-	l += "</div>"
+	l += linked_imprinter.ui_screen_search()
 	return l
 
 /obj/machinery/computer/rdconsole/proc/ui_circuit_chemicals()		//legacy code
@@ -1114,20 +1009,20 @@ Nothing else in the console has ID requirements.
 		if(findtext(D.name,searchstring))
 			matching_design_ids.Add(D.id)
 
-/obj/machinery/computer/rdconsole/proc/check_canprint(datum/design/D, buildtype)
+/obj/machinery/computer/rdconsole/proc/check_canprint(datum/design/design, buildtype)
 	var/amount = 50
 	if(buildtype == IMPRINTER)
 		if(QDELETED(linked_imprinter))
 			return FALSE
-		for(var/M in D.materials + D.reagents_list)
-			amount = min(amount, linked_imprinter.check_mat(D, M))
+		for(var/M in design.materials + design.reagents_list)
+			amount = min(amount, linked_imprinter.check_material_req(design, M))
 			if(amount < 1)
 				return FALSE
 	else if(buildtype == PROTOLATHE)
 		if(QDELETED(linked_lathe))
 			return FALSE
-		for(var/M in D.materials + D.reagents_list)
-			amount = min(amount, linked_lathe.check_mat(D, M))
+		for(var/M in design.materials + design.reagents_list)
+			amount = min(amount, linked_lathe.check_material_req(design, M))
 			if(amount < 1)
 				return FALSE
 	else

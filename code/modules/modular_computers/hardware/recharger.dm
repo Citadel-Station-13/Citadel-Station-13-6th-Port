@@ -41,8 +41,8 @@
 		if(!istype(A))
 			return FALSE
 
-		if(A.powered(EQUIP))
-			A.use_power(amount, EQUIP)
+		if(A.powered(AREA_USAGE_EQUIP))
+			A.use_power(amount, AREA_USAGE_EQUIP)
 			return TRUE
 	return FALSE
 
@@ -96,3 +96,4 @@
 
 /obj/item/computer_hardware/recharger/lambda/use_power(amount, charging=0)
 	return 1
+

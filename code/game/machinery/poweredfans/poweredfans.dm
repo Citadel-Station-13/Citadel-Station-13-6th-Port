@@ -4,7 +4,7 @@
 	name = "micro powered fan"
 	desc = "A handmade fan, releasing a thin gust of air."
 	use_power = ACTIVE_POWER_USE
-	power_channel = ENVIRON
+	power_channel = AREA_USAGE_ENVIRON
 	idle_power_usage = 5
 	active_power_usage = 10
 	max_integrity = 150
@@ -19,9 +19,8 @@
 		if(!assembly)
 			assembly = new()
 		assembly.forceMove(drop_location())
-		assembly.stat = 2
-		assembly.setAnchored(TRUE)
-		assembly.setDir(dir)
+		assembly.construction_stat = FAN_CONSTRUCTION_WELDED
+		assembly.set_anchored(TRUE)
 		assembly = null
 		new /obj/item/stack/cable_coil(loc, 2)
 	qdel(src)
@@ -39,7 +38,7 @@
 		assembly = FA
 	else
 		assembly = new(src)
-		assembly.stat = 3
+		assembly.construction_stat = FAN_CONSTRUCTION_WIRED
 	air_update_turf(1)
 
 /obj/machinery/poweredfans/power_change()
@@ -47,10 +46,10 @@
 	if(powered())
 		icon_state = "mfan_powered"
 		CanAtmosPass = ATMOS_PASS_NO
-		air_update_turf(1)
+		air_update_turf(TRUE)
 	else
 		icon_state = "mfan_unpowered"
 		CanAtmosPass = ATMOS_PASS_YES
-		air_update_turf(1)
+		air_update_turf(TRUE)
 	update_icon_state()
-	
+

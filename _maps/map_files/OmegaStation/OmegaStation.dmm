@@ -28554,8 +28554,7 @@
 /area/engineering/main)
 "aSV" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /obj/structure/cable/white,
 /obj/machinery/light,

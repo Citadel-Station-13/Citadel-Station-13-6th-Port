@@ -50,16 +50,8 @@
 
 // update the icon_state
 /obj/machinery/magnetic_module/update_icon_state()
-	var/state="floor_magnet"
-	var/onstate=""
-	if(!on)
-		onstate="0"
-
-	if(invisibility)
-		icon_state = "[state][onstate]-f"	// if invisible, set icon to faded version
-											// in case of being revealed by T-scanner
-	else
-		icon_state = "[state][onstate]"
+	icon_state = "floor_magnet[on ? 0 : null][invisibility ? "-f" : null]"
+	return ..()
 
 /obj/machinery/magnetic_module/receive_signal(datum/signal/signal)
 
@@ -134,7 +126,7 @@
 
 
 /obj/machinery/magnetic_module/process()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		on = FALSE
 
 	// Sanity checks:
@@ -327,7 +319,7 @@
 
 	while(moving && length(rpath) >= 1)
 
-		if(stat & (BROKEN|NOPOWER))
+		if(machine_stat & (BROKEN|NOPOWER))
 			break
 
 		looping = 1

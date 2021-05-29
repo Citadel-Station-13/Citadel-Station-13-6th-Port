@@ -6,8 +6,6 @@
 	req_access = list(ACCESS_ROBOTICS)
 	circuit = /obj/item/circuitboard/computer/robotics
 	light_color = LIGHT_COLOR_PINK
-	ui_x = 500
-	ui_y = 460
 
 /obj/machinery/computer/robotics/proc/can_control(mob/user, mob/living/silicon/robot/R)
 	. = FALSE
@@ -82,7 +80,8 @@
 	return data
 
 /obj/machinery/computer/robotics/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)
@@ -118,7 +117,8 @@
 					log_game("[key_name(usr)] emagged [key_name(R)] using robotic console!")
 					message_admins("[ADMIN_LOOKUPFLW(usr)] emagged cyborg [key_name_admin(R)] using robotic console!")
 					R.SetEmagged(TRUE)
-		if("convert")
+					R.logevent("WARN: root privleges granted to PID [num2hex(rand(1,65535), -1)][num2hex(rand(1,65535), -1)].") //random eight digit hex value. Two are used because rand(1,4294967295) throws an error
+		if("convert") //todo: fancy logevent
 			if(isAI(usr) && is_servant_of_ratvar(usr))
 				var/mob/living/silicon/robot/R = locate(params["ref"]) in GLOB.silicon_mobs
 				if(istype(R) && !is_servant_of_ratvar(R) && R.connected_ai == usr)

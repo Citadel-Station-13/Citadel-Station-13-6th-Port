@@ -12,7 +12,7 @@
 	harm_intent_damage = 5
 	icon_living = "grey baby slime"
 	icon_dead = "grey baby slime dead"
-	response_help_continuous  = "pets"
+	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "shoos"
 	response_disarm_simple = "shoo"
@@ -31,7 +31,6 @@
 	gender = NEUTER
 	blood_volume = 0 //Until someome reworks for them to have slime jelly
 	nutrition = 700
-
 	see_in_dark = 8
 
 	verb_say = "blorbles"
@@ -42,6 +41,8 @@
 	// canstun and canknockdown don't affect slimes because they ignore stun and knockdown variables
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANUNCONSCIOUS|CANPUSH
+
+	footstep_type = FOOTSTEP_MOB_SLIME
 
 	var/cores = 1 // the number of /obj/item/slime_extract's the slime has left inside
 	var/mutation_chance = 30 // Chance of mutating, should be between 25 and 35
@@ -90,6 +91,7 @@
 	initialize_mutations()
 	var/datum/action/innate/slime/feed/F = new
 	F.Grant(src)
+	// ADD_TRAIT(src, TRAIT_CANT_RIDE, INNATE_TRAIT)
 
 	is_adult = new_is_adult
 
@@ -113,6 +115,9 @@
 	for (var/A in actions)
 		var/datum/action/AC = A
 		AC.Remove(src)
+	Target = null
+	Leader = null
+	Friends = null
 	return ..()
 
 /mob/living/simple_animal/slime/proc/initialize_mutations()
@@ -129,11 +134,12 @@
 	coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
 	regenerate_icons()
 
-/mob/living/simple_animal/slime/proc/update_name()
+/mob/living/simple_animal/slime/update_name()
 	if(slime_name_regex.Find(name))
 		number = rand(1, 1000)
 		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
 		real_name = name
+	return ..()
 
 /mob/living/simple_animal/slime/proc/random_colour()
 	set_colour(pick(slime_colours))
@@ -150,6 +156,11 @@
 		icon_state = icon_dead
 	..()
 
+/**
+ * Snowflake handling of reagent movespeed modifiers
+ *
+ * Should be moved to the reagents at some point in the future. As it is I'm in a hurry.
+ */
 /mob/living/simple_animal/slime/on_reagent_change()
 	. = ..()
 	remove_movespeed_modifier(/datum/movespeed_modifier/slime_reagentmod)
@@ -177,10 +188,11 @@
 	. = ..()
 	var/mod = 0
 	if(bodytemperature >= 330.23) // 135 F or 57.08 C
-		mod = -1	// slimes become supercharged at high temperatures
-	else if(bodytemperature < 183.222)
+		mod = -1 // slimes become supercharged at high temperatures
+	else if(bodytemperature < 283.222)
 		mod = min(15, (283.222 - bodytemperature) / 10 * 1.75)
-	add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_tempmod, multiplicative_slowdown = mod)
+	if(mod)
+		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_tempmod, multiplicative_slowdown = mod)
 
 /mob/living/simple_animal/slime/ObjBump(obj/O)
 	if(!client && powerlevel > 0)
@@ -203,9 +215,8 @@
 				if(nutrition <= get_hunger_nutrition() && !Atkcool)
 					if (is_adult || prob(5))
 						O.attack_slime(src)
-						Atkcool = 1
-						spawn(45)
-							Atkcool = 0
+						Atkcool = TRUE
+						addtimer(VARSET_CALLBACK(src, Atkcool, FALSE), 4.5 SECONDS)
 
 /mob/living/simple_animal/slime/Process_Spacemove(movement_dir = 0)
 	return 2
@@ -220,7 +231,8 @@
 		else
 			. += "You can evolve!"
 
-		if(stat == UNCONSCIOUS)
+	switch(stat)
+		if(UNCONSCIOUS)
 			. += "You are knocked out by high levels of BZ!"
 		else
 			. += "Power Level: [powerlevel]"
@@ -231,13 +243,14 @@
 		amount = -abs(amount)
 	return ..() //Heals them
 
-/mob/living/simple_animal/slime/bullet_act(obj/item/projectile/Proj)
+/mob/living/simple_animal/slime/bullet_act(obj/item/projectile/Proj, def_zone)
 	attacked += 10
 	if((Proj.damage_type == BURN))
 		adjustBruteLoss(-abs(Proj.damage)) //fire projectiles heals slimes.
-		Proj.on_hit(src)
-		return BULLET_ACT_BLOCK
-	return ..()
+		Proj.on_hit(src, 0)
+	else
+		. = ..(Proj)
+	. = . || BULLET_ACT_BLOCK
 
 /mob/living/simple_animal/slime/emp_act(severity)
 	. = ..()
@@ -252,90 +265,93 @@
 			Feedon(Food)
 	return ..()
 
-/mob/living/simple_animal/slime/doUnEquip(obj/item/W, silent = FALSE)
+/mob/living/simple_animal/slime/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE)
 	return
 
 /mob/living/simple_animal/slime/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
 	return
 
-/mob/living/simple_animal/slime/attack_ui(slot)
+/mob/living/simple_animal/slime/attack_ui(slot, params)
 	return
 
 /mob/living/simple_animal/slime/attack_slime(mob/living/simple_animal/slime/M)
-	. = ..()
-	if(!. || M == src) //unsuccessful slime shock
-		return
-	if(buckled)
-		Feedstop(silent = TRUE)
-		visible_message("<span class='danger'>[M] pulls [src] off!</span>")
-		return
-	attacked += 5
-	if(nutrition >= 100) //steal some nutrition. negval handled in life()
-		adjust_nutrition(-50 - (40 * M.is_adult))
+	if(..()) //successful slime attack
+		if(M == src)
+			return
+		if(buckled)
+			Feedstop(silent = TRUE)
+			visible_message("<span class='danger'>[M] pulls [src] off!</span>", \
+				"<span class='danger'>You pull [src] off!</span>")
+			return
+		attacked += 5
+		if(nutrition >= 100) //steal some nutrition. negval handled in life()
+			adjust_nutrition(-(50 + (40 * M.is_adult)))
 		M.adjust_nutrition(50 + (40 * M.is_adult), get_max_nutrition(), TRUE)
-	if(health > 0)
-		M.adjustBruteLoss(-10 + (-10 * M.is_adult))
-		M.updatehealth()
+		if(health > 0)
+			M.adjustBruteLoss(-10 + (-10 * M.is_adult))
+			M.updatehealth()
 
-/mob/living/simple_animal/slime/attack_animal(mob/living/simple_animal/M)
+/mob/living/simple_animal/slime/attack_animal(mob/living/simple_animal/user)
 	. = ..()
 	if(.)
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_paw(mob/living/carbon/monkey/M)
-	. = ..()
-	if(.)//successful monkey bite.
+
+/mob/living/simple_animal/slime/attack_paw(mob/living/carbon/human/user)
+	if(..()) //successful monkey bite.
 		attacked += 10
 
 /mob/living/simple_animal/slime/attack_larva(mob/living/carbon/alien/larva/L)
-	. = ..()
-	if(.) //successful larva bite.
+	if(..()) //successful larva bite.
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
-	if(user.a_intent == INTENT_HARM)
-		discipline_slime(user)
-		return ..()
+/mob/living/simple_animal/slime/attack_hulk(mob/living/carbon/human/user)
+	. = ..()
+	if(!.)
+		return
+	discipline_slime(user)
 
-/mob/living/simple_animal/slime/on_attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/slime/on_attack_hand(mob/living/carbon/human/user)
 	if(buckled)
-		M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
-		if(buckled == M)
+		user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		if(buckled == user)
 			if(prob(60))
-				visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off!</span>")
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				user.visible_message("<span class='warning'>[user] attempts to wrestle \the [name] off!</span>", \
+					"<span class='danger'>You attempt to wrestle \the [name] off!</span>")
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
 
 			else
-				visible_message("<span class='warning'>[M] manages to wrestle \the [name] off!</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				user.visible_message("<span class='warning'>[user] manages to wrestle \the [name] off!</span>", \
+					"<span class='notice'>You manage to wrestle \the [name] off!</span>")
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 
-				discipline_slime(M)
+				discipline_slime(user)
 
 		else
 			if(prob(30))
-				visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off of [buckled]!</span>")
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				buckled.visible_message("<span class='warning'>[user] attempts to wrestle \the [name] off of [buckled]!</span>", \
+					"<span class='warning'>[user] attempts to wrestle \the [name] off of you!</span>")
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
 
 			else
-				visible_message("<span class='warning'>[M] manages to wrestle \the [name] off of [buckled]!</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				buckled.visible_message("<span class='warning'>[user] manages to wrestle \the [name] off of [buckled]!</span>", \
+					"<span class='notice'>[user] manage to wrestle \the [name] off of you!</span>")
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 
-				discipline_slime(M)
+				discipline_slime(user)
 	else
 		if(stat == DEAD && surgeries.len)
-			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
+			if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)// || LAZYACCESS(modifiers, "right"))
 				for(var/datum/surgery/S in surgeries)
-					if(S.next_step(M,M.a_intent))
+					if(S.next_step(user, user.a_intent))
 						return 1
 		if(..()) //successful attack
 			attacked += 10
 
-/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/M)
-	. = ..()
-	if(!.) // the attack was blocked or was help/grab intent
-		return
-	attacked += 10
-	discipline_slime(M)
+/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/user)
+	if(..()) //if harm or disarm intent.
+		attacked += 10
+		discipline_slime(user)
 
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
@@ -383,7 +399,7 @@
 				hasFound = TRUE
 			if(applied >= SLIME_EXTRACT_CROSSING_REQUIRED)
 				to_chat(user, "<span class='notice'>You feed the slime as many of the extracts from the bag as you can, and it mutates!</span>")
-				playsound(src, 'sound/effects/attackblob.ogg', 50, 1)
+				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
 				spawn_corecross()
 				hasOutput = TRUE
 				break
@@ -392,14 +408,14 @@
 				to_chat(user, "<span class='warning'>There are no extracts in the bag that this slime will accept!</span>")
 			else
 				to_chat(user, "<span class='notice'>You feed the slime some extracts from the bag.</span>")
-				playsound(src, 'sound/effects/attackblob.ogg', 50, 1)
+				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
 		return
 	..()
 
 /mob/living/simple_animal/slime/proc/spawn_corecross()
 	var/static/list/crossbreeds = subtypesof(/obj/item/slimecross)
 	visible_message("<span class='danger'>[src] shudders, its mutated core consuming the rest of its body!</span>")
-	playsound(src, 'sound/magic/smoke.ogg', 50, 1)
+	playsound(src, 'sound/magic/smoke.ogg', 50, TRUE)
 	var/crosspath
 	for(var/X in crossbreeds)
 		var/obj/item/slimecross/S = X
@@ -422,16 +438,18 @@
 
 /mob/living/simple_animal/slime/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
-	if (src.stat == DEAD)
+	if (stat == DEAD)
 		. += "<span class='deadsay'>It is limp and unresponsive.</span>"
 	else
 		if (stat == UNCONSCIOUS) // Slime stasis
 			. += "<span class='deadsay'>It appears to be alive but unresponsive.</span>"
 		if (getBruteLoss())
+			. += "<span class='warning'>"
 			if (getBruteLoss() < 40)
-				. += "<span class='warning'>It has some punctures in its flesh!"
+				. += "It has some punctures in its flesh!"
 			else
-				. += "<span class='danger'>It has severe punctures and tears in its flesh!</span>"
+				. += "<B>It has severe punctures and tears in its flesh!</B>"
+			. += "</span>\n"
 
 		switch(powerlevel)
 			if(2 to 3)
@@ -465,14 +483,17 @@
 		Feedstop(silent = TRUE) //we unbuckle the slime from the mob it latched onto.
 
 	SStun = world.time + rand(20,60)
-	spawn(0)
-		DISABLE_BITFIELD(mobility_flags, MOBILITY_MOVE)
-		if(user)
-			step_away(src,user,15)
-		sleep(3)
-		if(user)
-			step_away(src,user,15)
-		update_mobility()
+
+	Stun(3)
+	if(user)
+		step_away(src,user,15)
+
+	addtimer(CALLBACK(src, .proc/slime_move, user), 0.3 SECONDS)
+
+/mob/living/simple_animal/slime/proc/slime_move(mob/user)
+	if(user)
+		step_away(src,user,15)
+
 
 /mob/living/simple_animal/slime/pet
 	docile = 1
@@ -492,3 +513,6 @@
 
 /mob/living/simple_animal/slime/random/Initialize(mapload, new_colour, new_is_adult)
 	. = ..(mapload, pick(slime_colours), prob(50))
+
+// /mob/living/simple_animal/slime/add_cell_sample()
+// 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_SLIME, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)

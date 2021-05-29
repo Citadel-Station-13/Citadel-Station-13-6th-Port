@@ -52,7 +52,7 @@
 	var/area/A = get_area(src)
 	if(!(A.area_flags & BLOBS_ALLOWED))
 		return FALSE
-	if(!A.powered(EQUIP))
+	if(!A.powered(AREA_USAGE_EQUIP))
 		return FALSE
 	if(!SSmapping.level_trait(T.z,ZTRAIT_STATION))
 		return FALSE

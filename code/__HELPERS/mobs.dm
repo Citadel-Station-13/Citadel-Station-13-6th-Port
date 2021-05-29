@@ -374,19 +374,29 @@ GLOBAL_LIST_EMPTY(species_datums)
 			for(var/i in 1 to step_count)
 				step(X, pick(NORTH, SOUTH, EAST, WEST))
 
-/proc/deadchat_broadcast(message, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR)
-	message = "<span class='linkify'>[message]</span>"
-	for(var/mob/M in GLOB.player_list)
-		var/datum/preferences/prefs
-		if(M.client && M.client.prefs)
-			prefs = M.client.prefs
-		else
-			prefs = new
+// Displays a message in deadchat, sent by source. source is not linkified, message is, to avoid stuff like character names to be linkified.
+// Automatically gives the class deadsay to the whole message (message + source)
+/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR, admin_only=FALSE)
+	message = "<span class='deadsay'>[source]<span class='linkify'>[message]</span></span>"
 
+	for(var/mob/M in GLOB.player_list)
+		var/chat_toggles = TOGGLES_DEFAULT_CHAT
+		var/toggles = TOGGLES_DEFAULT
+		var/list/ignoring
+		if(M.client.prefs)
+			var/datum/preferences/prefs = M.client.prefs
+			chat_toggles = prefs.chat_toggles
+			toggles = prefs.toggles
+			ignoring = prefs.ignoring
+		if(admin_only)
+			if (!M.client.holder)
+				return
+			else
+				message += "<span class='deadsay'> (This is viewable to admins only).</span>"
 		var/override = FALSE
-		if(M.client && M.client.holder && (prefs.chat_toggles & CHAT_DEAD))
+		if(M.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
-		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE))
+		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE) && message_type == DEADCHAT_REGULAR)
 			override = TRUE
 		if(SSticker.current_state == GAME_STATE_FINISHED)
 			override = TRUE
@@ -394,16 +404,22 @@ GLOBAL_LIST_EMPTY(species_datums)
 			continue
 		if(M.stat != DEAD && !override)
 			continue
-		if(speaker_key && (speaker_key in prefs.ignoring))
+		if(speaker_key && (speaker_key in ignoring))
 			continue
 
 		switch(message_type)
 			if(DEADCHAT_DEATHRATTLE)
-				if(prefs.toggles & DISABLE_DEATHRATTLE)
+				if(toggles & DISABLE_DEATHRATTLE)
 					continue
 			if(DEADCHAT_ARRIVALRATTLE)
-				if(prefs.toggles & DISABLE_ARRIVALRATTLE)
+				if(toggles & DISABLE_ARRIVALRATTLE)
 					continue
+			// if(DEADCHAT_LAWCHANGE)
+			// 	if(!(chat_toggles & CHAT_GHOSTLAWS))
+			// 		continue
+			// if(DEADCHAT_LOGIN_LOGOUT)
+			// 	if(!(chat_toggles & CHAT_LOGIN_LOGOUT))
+			// 		continue
 
 		if(isobserver(M))
 			var/rendered_message = message

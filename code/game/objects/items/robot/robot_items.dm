@@ -23,10 +23,10 @@
 	M.DefaultCombatKnockdown(100)
 	M.apply_effect(EFFECT_STUTTER, 5)
 
-	M.visible_message("<span class='danger'>[user] has prodded [M] with [src]!</span>", \
-					"<span class='userdanger'>[user] has prodded you with [src]!</span>")
+	M.visible_message("<span class='danger'>[user] prods [M] with [src]!</span>", \
+					"<span class='userdanger'>[user] prods you with [src]!</span>")
 
-	playsound(loc, 'sound/weapons/egloves.ogg', 50, 1, -1)
+	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
 
 	log_combat(user, M, "stunned", src, "(INTENT: [uppertext(user.a_intent)])")
 
@@ -62,17 +62,22 @@
 		if(3)
 			to_chat(user, "ERROR: ARM ACTUATORS OVERLOADED.")
 
-/obj/item/borg/cyborghug/attack(mob/living/M, mob/living/silicon/robot/user)
+/obj/item/borg/cyborghug/attack(mob/living/M, mob/living/silicon/robot/user, params)
 	if(M == user)
 		return
 	switch(mode)
 		if(0)
 			if(M.health >= 0)
+				if(isanimal(M))
+					var/list/modifiers = params2list(params)
+					if (user.a_intent != INTENT_HARM && !LAZYACCESS(modifiers, "right"))
+						M.attack_hand(user, modifiers) //This enables borgs to get the floating heart icon and mob emote from simple_animal's that have petbonus == true.
+					return
 				if(user.zone_selected == BODY_ZONE_HEAD)
 					user.visible_message("<span class='notice'>[user] playfully boops [M] on the head!</span>", \
 									"<span class='notice'>You playfully boop [M] on the head!</span>")
 					user.do_attack_animation(M, ATTACK_EFFECT_BOOP)
-					playsound(loc, 'sound/weapons/tap.ogg', 50, 1, -1)
+					playsound(loc, 'sound/weapons/tap.ogg', 50, TRUE, -1)
 				else if(ishuman(M))
 					if(M.lying)
 						user.visible_message("<span class='notice'>[user] shakes [M] trying to get [M.p_them()] up!</span>", \
@@ -85,7 +90,7 @@
 				else
 					user.visible_message("<span class='notice'>[user] pets [M]!</span>", \
 							"<span class='notice'>You pet [M]!</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 		if(1)
 			if(M.health >= 0)
 				if(ishuman(M))
@@ -104,7 +109,7 @@
 				else
 					user.visible_message("<span class='warning'>[user] bops [M] on the head!</span>", \
 							"<span class='warning'>You bop [M] on the head!</span>")
-				playsound(loc, 'sound/weapons/tap.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/tap.ogg', 50, TRUE, -1)
 		if(2)
 			if(scooldown < world.time)
 				if(M.health >= 0)
@@ -120,7 +125,7 @@
 						else
 							user.visible_message("<span class='userdanger'>[user] shocks [M]. It does not seem to have an effect</span>", \
 								"<span class='danger'>You shock [M] to no effect.</span>")
-					playsound(loc, 'sound/effects/sparks2.ogg', 50, 1, -1)
+					playsound(loc, 'sound/effects/sparks2.ogg', 50, TRUE, -1)
 					user.cell.charge -= 500
 					scooldown = world.time + 20
 		if(3)
@@ -132,7 +137,7 @@
 					else
 						user.visible_message("<span class='userdanger'>[user] crushes [M]!</span>", \
 								"<span class='danger'>You crush [M]!</span>")
-					playsound(loc, 'sound/weapons/smash.ogg', 50, 1, -1)
+					playsound(loc, 'sound/weapons/smash.ogg', 50, TRUE, -1)
 					M.adjustBruteLoss(15)
 					user.cell.charge -= 300
 					ccooldown = world.time + 10
@@ -153,6 +158,7 @@
 
 /obj/item/borg/charger/update_icon_state()
 	icon_state = "charger_[mode]"
+	return ..()
 
 /obj/item/borg/charger/attack_self(mob/user)
 	if(mode == "draw")
@@ -160,7 +166,7 @@
 	else
 		mode = "draw"
 	to_chat(user, "<span class='notice'>You toggle [src] to \"[mode]\" mode.</span>")
-	update_icon()
+	update_appearance()
 
 /obj/item/borg/charger/afterattack(obj/item/target, mob/living/silicon/robot/user, proximity_flag)
 	. = ..()
@@ -169,7 +175,7 @@
 	if(mode == "draw")
 		if(is_type_in_list(target, charge_machines))
 			var/obj/machinery/M = target
-			if((M.stat & (NOPOWER|BROKEN)) || !M.anchored)
+			if((M.machine_stat & (NOPOWER|BROKEN)) || !M.anchored)
 				to_chat(user, "<span class='warning'>[M] is unpowered!</span>")
 				return
 
@@ -178,7 +184,7 @@
 				if(!user || !user.cell || mode != "draw")
 					return
 
-				if((M.stat & (NOPOWER|BROKEN)) || !M.anchored)
+				if((M.machine_stat & (NOPOWER|BROKEN)) || !M.anchored)
 					break
 
 				if(!user.cell.give(150))
@@ -223,7 +229,7 @@
 					break
 				if(!user.cell.give(draw))
 					break
-				target.update_icon()
+				target.update_appearance()
 
 			to_chat(user, "<span class='notice'>You stop charging yourself.</span>")
 
@@ -261,7 +267,7 @@
 				break
 			if(!cell.give(draw))
 				break
-			target.update_icon()
+			target.update_appearance()
 
 		to_chat(user, "<span class='notice'>You stop charging [target].</span>")
 
@@ -290,7 +296,7 @@
 	if(iscyborg(user))
 		var/mob/living/silicon/robot/R = user
 		if(!R.cell || R.cell.charge < 1200)
-			to_chat(user, "<font color='red'>You don't have enough charge to do this!</font>")
+			to_chat(user, "<span class='warning'>You don't have enough charge to do this!</span>")
 			return
 		R.cell.charge -= 1000
 		if(R.emagged)
@@ -306,7 +312,7 @@
 		audible_message("<font color='red' size='7'>HUMAN HARM</font>")
 		playsound(get_turf(src), 'sound/effects/harmalarm.ogg', 70, 3)
 		cooldown = world.time + 200
-		log_game("[key_name(user)] used a Cyborg Harm Alarm in [AREACOORD(user)]")
+		user.log_message("used a Cyborg Harm Alarm in [AREACOORD(user)]", LOG_ATTACK)
 		if(iscyborg(user))
 			var/mob/living/silicon/robot/R = user
 			to_chat(R.connected_ai, "<br><span class='notice'>NOTICE - Peacekeeping 'HARM ALARM' used by: [user]</span><br>")
@@ -329,7 +335,7 @@
 					C.Jitter(25)
 		playsound(get_turf(src), 'sound/machines/warning-buzzer.ogg', 130, 3)
 		cooldown = world.time + 600
-		log_game("[key_name(user)] used an emagged Cyborg Harm Alarm in [AREACOORD(user)]")
+		user.log_message("used an emagged Cyborg Harm Alarm in [AREACOORD(user)]", LOG_ATTACK)
 
 #define DISPENSE_LOLLIPOP_MODE 1
 #define THROW_LOLLIPOP_MODE 2

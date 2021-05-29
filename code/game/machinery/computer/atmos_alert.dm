@@ -4,12 +4,12 @@
 	circuit = /obj/item/circuitboard/computer/atmos_alert
 	icon_screen = "alert:0"
 	icon_keyboard = "atmos_key"
+	light_color = LIGHT_COLOR_CYAN
 	var/list/priority_alarms = list()
 	var/list/minor_alarms = list()
 	var/receive_frequency = FREQ_ATMOS_ALARMS
 	var/datum/radio_frequency/radio_connection
 
-	light_color = LIGHT_COLOR_CYAN
 
 /obj/machinery/computer/atmos_alert/Initialize()
 	. = ..()
@@ -38,8 +38,10 @@
 	return data
 
 /obj/machinery/computer/atmos_alert/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("clear")
 			var/zone = params["zone"]
@@ -51,7 +53,7 @@
 				to_chat(usr, "<span class='notice'>Minor alarm for [zone] cleared.</span>")
 				minor_alarms -= zone
 				. = TRUE
-	update_icon()
+	update_appearance()
 
 /obj/machinery/computer/atmos_alert/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, receive_frequency)
@@ -74,23 +76,17 @@
 		priority_alarms += zone
 	else if (severity == "minor")
 		minor_alarms += zone
-	update_icon()
+	update_appearance()
 	return
 
 /obj/machinery/computer/atmos_alert/update_overlays()
 	. = ..()
-	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
-	var/overlay_state = icon_screen
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		. |= "[icon_keyboard]_off"
 		return
 	. |= icon_keyboard
 	if(priority_alarms.len)
-		overlay_state = "alert:2"
-	else if(minor_alarms.len)
-		overlay_state = "alert:1"
-	else
-		overlay_state = "alert:0"
-	. |= overlay_state
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, layer, plane, dir)
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha=128)
+		. += "alert:2"
+		return
+	if(minor_alarms.len)
+		. += "alert:1"

@@ -87,7 +87,7 @@
 		. += "<span class='notice'>The status display reads: Cloning speed at <b>[speed_coeff*50]%</b>.<br>Predicted amount of cellular damage: <b>[100-heal_level]%</b>.</span>"
 		if(efficiency > 5)
 			to_chat(user, "<span class='notice'>Pod has been upgraded to support autoprocessing.<span>")
-	if(is_operational() && mob_occupant)
+	if(is_operational && mob_occupant)
 		if(mob_occupant.stat != DEAD)
 			. += "Current clone cycle is [round(get_completion())]% complete."
 
@@ -210,7 +210,7 @@
 /obj/machinery/clonepod/process()
 	var/mob/living/mob_occupant = occupant
 
-	if(!is_operational()) //Autoeject if power is lost
+	if(!is_operational) //Autoeject if power is lost
 		if(mob_occupant)
 			go_out()
 			mob_occupant.copy_from_prefs_vr()

@@ -5,6 +5,8 @@
 	density = TRUE
 	use_power = NO_POWER_USE
 
+	circuit = /obj/item/circuitboard/machine/generator
+
 	var/obj/machinery/atmospherics/components/binary/circulator/cold_circ
 	var/obj/machinery/atmospherics/components/binary/circulator/hot_circ
 
@@ -18,8 +20,7 @@
 	find_circs()
 	connect_to_network()
 	SSair.atmos_machinery += src
-	update_icon()
-	component_parts = list(new /obj/item/circuitboard/machine/generator)
+	update_appearance()
 
 /obj/machinery/power/generator/ComponentInitialize()
 	. = ..()
@@ -32,16 +33,17 @@
 
 /obj/machinery/power/generator/update_overlays()
 	. = ..()
-	if(!(stat & (NOPOWER|BROKEN)))
-		var/L = min(round(lastgenlev/100000),11)
-		if(L != 0)
-			. += image('icons/obj/power.dmi', "teg-op[L]")
+	if(machine_stat & (NOPOWER|BROKEN))
+		return
 
-		if(hot_circ && cold_circ)
-			. += "teg-oc[lastcirc]"
+	var/L = min(round(lastgenlev / 100000), 11)
+	if(L != 0)
+		. += mutable_appearance('icons/obj/power.dmi', "teg-op[L]")
+	if(hot_circ && cold_circ)
+		. += "teg-oc[lastcirc]"
 
 
-#define GENRATE 800		// generator output coefficient from Q
+#define GENRATE 800 // generator output coefficient from Q
 
 /obj/machinery/power/generator/process_atmos()
 
@@ -85,12 +87,12 @@
 			var/datum/gas_mixture/cold_circ_air1 = cold_circ.airs[1]
 			cold_circ_air1.merge(cold_air)
 
-		update_icon()
+		update_appearance()
 
-	var/circ = "[cold_circ && cold_circ.last_pressure_delta > 0 ? "1" : "0"][hot_circ && hot_circ.last_pressure_delta > 0 ? "1" : "0"]"
+	var/circ = "[cold_circ?.last_pressure_delta > 0 ? "1" : "0"][hot_circ?.last_pressure_delta > 0 ? "1" : "0"]"
 	if(circ != lastcirc)
 		lastcirc = circ
-		update_icon()
+		update_appearance()
 
 	src.updateDialog()
 
@@ -154,9 +156,6 @@
 	return TRUE
 
 
-/obj/machinery/power/generator/power_change()
-	..()
-	update_icon()
 
 /obj/machinery/power/generator/proc/find_circs()
 	kill_circs()
@@ -191,9 +190,10 @@
 				C.generator = src
 
 /obj/machinery/power/generator/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
 	if(!panel_open)
 		return
-	anchored = !anchored
+	set_anchored(!anchored)
 	I.play_tool_sound(src)
 	if(!anchored)
 		kill_circs()
@@ -202,6 +202,7 @@
 	return TRUE
 
 /obj/machinery/power/generator/multitool_act(mob/living/user, obj/item/I)
+	. = ..()
 	if(!anchored)
 		return
 	find_circs()

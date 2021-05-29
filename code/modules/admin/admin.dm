@@ -247,7 +247,7 @@
 			if( !length(GLOB.news_network.network_channels) )
 				dat+="<I>No active channels found...</I>"
 			else
-				for(var/datum/news/feed_channel/CHANNEL in GLOB.news_network.network_channels)
+				for(var/datum/newscaster/feed_channel/CHANNEL in GLOB.news_network.network_channels)
 					if(CHANNEL.is_admin_channel)
 						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=[REF(src)];ac_show_channel=[REF(CHANNEL)]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
 					else
@@ -284,7 +284,7 @@
 			if(src.admincaster_feed_channel.channel_name =="" || src.admincaster_feed_channel.channel_name == "\[REDACTED\]")
 				dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
 			var/check = 0
-			for(var/datum/news/feed_channel/FC in GLOB.news_network.network_channels)
+			for(var/datum/newscaster/feed_channel/FC in GLOB.news_network.network_channels)
 				if(FC.channel_name == src.admincaster_feed_channel.channel_name)
 					check = 1
 					break
@@ -301,7 +301,7 @@
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					var/i = 0
-					for(var/datum/news/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+					for(var/datum/newscaster/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						i++
 						dat+="-[MESSAGE.returnBody(-1)] <BR>"
 						if(MESSAGE.img)
@@ -309,7 +309,7 @@
 							dat+="<img src='tmp_photo[i].png' width = '180'><BR><BR>"
 						dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.returnAuthor(-1)]</FONT>\]</FONT><BR>"
 						dat+="[MESSAGE.comments.len] comment[MESSAGE.comments.len > 1 ? "s" : ""]:<br>"
-						for(var/datum/news/feed_comment/comment in MESSAGE.comments)
+						for(var/datum/newscaster/feed_comment/comment in MESSAGE.comments)
 							dat+="[comment.body]<br><font size=1>[comment.author] [comment.time_stamp]</font><br>"
 						dat+="<br>"
 			dat+="<BR><HR><A href='?src=[REF(src)];[HrefToken()];ac_refresh=1'>Refresh</A>"
@@ -322,7 +322,7 @@
 			if(!length(GLOB.news_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/news/feed_channel/CHANNEL in GLOB.news_network.network_channels)
+				for(var/datum/newscaster/feed_channel/CHANNEL in GLOB.news_network.network_channels)
 					dat+="<A href='?src=[REF(src)];[HrefToken()];ac_pick_censor_channel=[REF(CHANNEL)]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ""]<BR>"
 			dat+="<BR><A href='?src=[REF(src)];[HrefToken()];ac_setScreen=[0]'>Cancel</A>"
 		if(11)
@@ -333,7 +333,7 @@
 			if(!length(GLOB.news_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/news/feed_channel/CHANNEL in GLOB.news_network.network_channels)
+				for(var/datum/newscaster/feed_channel/CHANNEL in GLOB.news_network.network_channels)
 					dat+="<A href='?src=[REF(src)];[HrefToken()];ac_pick_d_notice=[REF(CHANNEL)]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ""]<BR>"
 
 			dat+="<BR><A href='?src=[REF(src)];[HrefToken()];ac_setScreen=[0]'>Back</A>"
@@ -344,11 +344,11 @@
 			if( !length(src.admincaster_feed_channel.messages) )
 				dat+="<I>No feed messages found in channel...</I><BR>"
 			else
-				for(var/datum/news/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+				for(var/datum/newscaster/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 					dat+="-[MESSAGE.returnBody(-1)] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.returnAuthor(-1)]</FONT>\]</FONT><BR>"
 					dat+="<FONT SIZE=2><A href='?src=[REF(src)];[HrefToken()];ac_censor_channel_story_body=[REF(MESSAGE)]'>[(MESSAGE.bodyCensor) ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=[REF(src)];[HrefToken()];ac_censor_channel_story_author=[REF(MESSAGE)]'>[(MESSAGE.authorCensor) ? ("Undo Author Censorship") : ("Censor message Author")]</A></FONT><BR>"
 					dat+="[MESSAGE.comments.len] comment[MESSAGE.comments.len > 1 ? "s" : ""]: <a href='?src=[REF(src)];[HrefToken()];ac_lock_comment=[REF(MESSAGE)]'>[MESSAGE.locked ? "Unlock" : "Lock"]</a><br>"
-					for(var/datum/news/feed_comment/comment in MESSAGE.comments)
+					for(var/datum/newscaster/feed_comment/comment in MESSAGE.comments)
 						dat+="[comment.body] <a href='?src=[REF(src)];[HrefToken()];ac_del_comment=[REF(comment)];ac_del_comment_msg=[REF(MESSAGE)]'>X</a><br><font size=1>[comment.author] [comment.time_stamp]</font><br>"
 			dat+="<BR><A href='?src=[REF(src)];[HrefToken()];ac_setScreen=[10]'>Back</A>"
 		if(13)
@@ -361,7 +361,7 @@
 				if( !length(src.admincaster_feed_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
-					for(var/datum/news/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+					for(var/datum/newscaster/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						dat+="-[MESSAGE.returnBody(-1)] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.returnAuthor(-1)]</FONT>\]</FONT><BR>"
 			dat+="<BR><A href='?src=[REF(src)];[HrefToken()];ac_setScreen=[11]'>Back</A>"
 		if(14)

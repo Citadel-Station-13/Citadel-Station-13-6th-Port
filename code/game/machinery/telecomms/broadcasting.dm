@@ -1,5 +1,4 @@
-
-/**
+/*
 
 	Here is the big, bad function that broadcasts a message given the appropriate
 	parameters.
@@ -102,7 +101,8 @@
 	atom/movable/virtualspeaker/speaker,  // representation of the method's speaker
 	datum/language/language,  // the language of the message
 	message,  // the text content of the message
-	spans  // the list of spans applied to the message
+	spans,  // the list of spans applied to the message
+	list/message_mods // the list of modification applied to the message. Whispering, singing, ect
 )
 	src.source = source
 	src.frequency = frequency
@@ -115,7 +115,8 @@
 		"message" = message,
 		"compression" = rand(35, 65),
 		"language" = lang_instance.name,
-		"spans" = spans
+		"spans" = spans,
+		"mods" = message_mods
 	)
 	var/turf/T = get_turf(source)
 	levels = list(T.z)
@@ -137,7 +138,7 @@
 		return
 	var/compression = data["compression"]
 	if(compression > 0)
-		message = Gibberish(message, compression + 40)
+		message = Gibberish(message, compression >= 30)
 
 	// Assemble the list of radios
 	var/list/radios = list()
@@ -176,12 +177,13 @@
 
 	// Add observers who have ghost radio enabled.
 	for(var/mob/dead/observer/M in GLOB.player_list)
-		if(M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTRADIO))
+		if(M?.client.prefs.chat_toggles & CHAT_GHOSTRADIO)
 			receive |= M
 
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
 	var/spans = data["spans"]
+	// var/list/message_mods = data["mods"]
 	var/rendered = virt.compose_message(virt, language, message, frequency, spans)
 	for(var/atom/movable/hearer in receive)
 		hearer.Hear(rendered, virt, language, message, frequency, spans)

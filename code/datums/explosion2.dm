@@ -116,6 +116,7 @@
 		stop(FALSE)
 	return ..()
 
+/// IF THIS DOESN'T GET DETECTED BLAME @silicons IT'S NOT MY FUCKING FAULT
 /datum/wave_explosion/proc/start(list/turf/_starting)
 	if(running)
 		CRASH("Attempted to start() a running wave explosion")
@@ -152,10 +153,6 @@
 					else if(mob_potential_shake[M] < dist)
 						mob_potential_shake[M] = dist
 						closest_to[M] = starting
-
-		for(var/array in GLOB.doppler_arrays)
-			var/obj/machinery/doppler_array/A = array
-			A.sense_wave_explosion(starting, power_initial, cycle_speed)
 
 		// Flash mobs
 		if(flash_range)

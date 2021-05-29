@@ -421,6 +421,13 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	return .
 
+/obj/structure/cable/proc/get_machine_connections(powernetless_only)
+	. = list()
+	for(var/obj/machinery/power/P in get_turf(src))
+		if(!powernetless_only || !P.powernet)
+			if(P.anchored)
+				. += P
+
 //should be called after placing a cable which extends another cable, creating a "smooth" cable that no longer terminates in the centre of a turf.
 //needed as this can, unlike other placements, disconnect cables
 /obj/structure/cable/proc/denode()

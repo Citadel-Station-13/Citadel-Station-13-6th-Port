@@ -18,10 +18,10 @@ GLOBAL_PROTECT(href_token)
 
 	var/spamcooldown = 0
 
-	var/admincaster_screen = 0	//TODO: remove all these 5 variables, they are completly unacceptable
-	var/datum/news/feed_message/admincaster_feed_message = new /datum/news/feed_message
-	var/datum/news/wanted_message/admincaster_wanted_message = new /datum/news/wanted_message
-	var/datum/news/feed_channel/admincaster_feed_channel = new /datum/news/feed_channel
+	var/admincaster_screen = 0 //TODO: remove all these 5 variables, they are completly unacceptable
+	var/datum/newscaster/feed_message/admincaster_feed_message = new /datum/newscaster/feed_message
+	var/datum/newscaster/wanted_message/admincaster_wanted_message = new /datum/newscaster/wanted_message
+	var/datum/newscaster/feed_channel/admincaster_feed_channel = new /datum/newscaster/feed_channel
 	var/admin_signature
 
 	var/href_token

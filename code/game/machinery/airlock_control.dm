@@ -2,7 +2,9 @@
 
 // This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access)
 /obj/machinery/door/airlock
-	var/id_tag
+	/// The current state of the airlock, used to construct the airlock overlays
+	var/airlock_state
+	var/id_tag // ???
 	var/frequency
 	var/datum/radio_frequency/radio_connection
 
@@ -23,21 +25,21 @@
 
 		if("unlock")
 			locked = FALSE
-			update_icon()
+			update_appearance()
 
 		if("lock")
 			locked = TRUE
-			update_icon()
+			update_appearance()
 
 		if("secure_open")
 			locked = FALSE
-			update_icon()
+			update_appearance()
 
 			sleep(2)
 			open(1)
 
 			locked = TRUE
-			update_icon()
+			update_appearance()
 
 		if("secure_close")
 			locked = FALSE
@@ -45,7 +47,7 @@
 
 			locked = TRUE
 			sleep(2)
-			update_icon()
+			update_appearance()
 
 	send_status()
 
@@ -87,10 +89,11 @@
 /obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
+	// initial(icon_state) = "airlock_sensor"
 	name = "airlock sensor"
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	resistance_flags = FIRE_PROOF
 
-	power_channel = ENVIRON
+	power_channel = AREA_USAGE_ENVIRON
 
 	var/id_tag
 	var/master_tag
@@ -114,15 +117,19 @@
 	master_tag = INCINERATOR_SYNDICATELAVA_AIRLOCK_CONTROLLER
 
 /obj/machinery/airlock_sensor/update_icon_state()
-	if(on)
-		if(alert)
-			icon_state = "airlock_sensor_alert"
-		else
-			icon_state = "airlock_sensor_standby"
+	if(!on)
+		icon_state = "[initial(icon_state)]_off"
 	else
-		icon_state = "airlock_sensor_off"
+		if(alert)
+			icon_state = "[initial(icon_state)]_alert"
+		else
+			icon_state = "[initial(icon_state)]_standby"
+	return ..()
 
-/obj/machinery/airlock_sensor/on_attack_hand(mob/user, act_intent = user.a_intent, unarmed_attack_flags)
+/obj/machinery/airlock_sensor/attack_hand(mob/user, list/modifiers)
+	. = ..()
+	if(.)
+		return
 	var/datum/signal/signal = new(list(
 		"tag" = master_tag,
 		"command" = "cycle"
@@ -145,7 +152,7 @@
 
 		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
-	update_icon()
+	update_appearance()
 
 /obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)

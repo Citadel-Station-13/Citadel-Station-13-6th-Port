@@ -10,20 +10,20 @@
 
 	var/dodging = FALSE
 	var/approaching_target = FALSE //We should dodge now
-	var/in_melee = FALSE	//We should sidestep now
+	var/in_melee = FALSE //We should sidestep now
 	var/dodge_prob = 30
 	var/sidestep_per_cycle = 1 //How many sidesteps per npcpool cycle when in melee
 
-	var/projectiletype	//set ONLY it and NULLIFY casingtype var, if we have ONLY projectile
+	var/projectiletype //set ONLY it and NULLIFY casingtype var, if we have ONLY projectile
 	var/projectilesound
-	var/casingtype		//set ONLY it and NULLIFY projectiletype, if we have projectile IN CASING
+	var/casingtype //set ONLY it and NULLIFY projectiletype, if we have projectile IN CASING
 	var/move_to_delay = 3 //delay for the automated movement.
 	var/list/friends = list()
 	var/list/foes = list()
 	var/list/emote_taunt = list()
 	var/taunt_chance = 0
 
-	var/rapid_melee = 1			 //Number of melee attacks between each npc pool tick. Spread evenly.
+	var/rapid_melee = 1  //Number of melee attacks between each npc pool tick. Spread evenly.
 	var/melee_queue_distance = 4 //If target is close enough start preparing to hit them if we have rapid_melee enabled
 
 	var/ranged_message = "fires" //Fluff text for ranged mobs
@@ -43,12 +43,12 @@
 	var/search_objects_timer_id //Timer for regaining our old search_objects value after being attacked
 	var/search_objects_regain_time = 30 //the delay between being attacked and gaining our old search_objects value back
 	var/list/wanted_objects = list() //A typecache of objects types that will be checked against to attack, should we have search_objects enabled
-	var/stat_attack = CONSCIOUS //Mobs with stat_attack to UNCONSCIOUS will attempt to attack things that are unconscious, Mobs with stat_attack set to DEAD will attempt to attack the dead.
+	///Mobs ignore mob/living targets with a stat lower than that of stat_attack. If set to DEAD, then they'll include corpses in their targets, if to HARD_CRIT they'll keep attacking until they kill, and so on.
+	var/stat_attack = CONSCIOUS
 	var/stat_exclusive = FALSE //Mobs with this set to TRUE will exclusively attack things defined by stat_attack, stat_attack DEAD means they will only attack corpses
 	var/attack_same = 0 //Set us to 1 to allow us to attack our own faction
 	var/atom/targets_from = null //all range/attack/etc. calculations should be done from this atom, defaults to the mob itself, useful for Vehicles and such
 	var/attack_all_objects = FALSE //if true, equivalent to having a wanted_objects list containing ALL objects.
-
 	var/lose_patience_timer_id //id for a timer to call LoseTarget(), used to stop mobs fixating on a target they can't reach
 	var/lose_patience_timeout = 300 //30 seconds by default, so there's no major changes to AI behaviour, beyond actually bailing if stuck forever
 
@@ -79,14 +79,14 @@
 	foes = null
 	return ..()
 
-/mob/living/simple_animal/hostile/BiologicalLife(seconds, times_fired)
-	if(!(. = ..()))
+/mob/living/simple_animal/hostile/BiologicalLife(seconds = SSMOBS_DT, times_fired)
+	. = ..()
+	if(!.) //dead
 		walk(src, 0) //stops walking
-		return
 
 /mob/living/simple_animal/hostile/handle_automated_action()
 	if(AIStatus == AI_OFF)
-		return 0
+		return FALSE
 	var/list/possible_targets = ListTargets() //we look around for potential targets and make it a list for later use.
 
 	if(environment_smash)
@@ -96,8 +96,8 @@
 		if(!QDELETED(target) && !targets_from.Adjacent(target))
 			DestroyPathToTarget()
 		if(!MoveToTarget(possible_targets))     //if we lose our target
-			if(AIShouldSleep(possible_targets))	// we try to acquire a new one
-				toggle_ai(AI_IDLE)			// otherwise we go idle
+			if(AIShouldSleep(possible_targets)) // we try to acquire a new one
+				toggle_ai(AI_IDLE) // otherwise we go idle
 	return 1
 
 /mob/living/simple_animal/hostile/handle_automated_movement()
@@ -110,6 +110,10 @@
 				addtimer(cb, (i - 1)*sidestep_delay)
 		else //Otherwise randomize it to make the players guessing.
 			addtimer(cb,rand(1,SSnpcpool.wait))
+
+/mob/living/simple_animal/hostile/update_stamina()
+	. = ..()
+	move_to_delay = (initial(move_to_delay) + (staminaloss * 0.06))
 
 /mob/living/simple_animal/hostile/proc/sidestep()
 	if(!target || !isturf(target.loc) || !isturf(loc) || stat == DEAD)
@@ -128,7 +132,7 @@
 		Move(get_step(src,chosen_dir))
 		face_atom(target) //Looks better if they keep looking at you when dodging
 
-/mob/living/simple_animal/hostile/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
+/mob/living/simple_animal/hostile/attacked_by(obj/item/I, mob/living/user)
 	if(stat == CONSCIOUS && !target && AIStatus != AI_OFF && !client && user)
 		FindTarget(list(user), 1)
 	return ..()
@@ -142,7 +146,7 @@
 
 //////////////HOSTILE MOB TARGETTING AND AGGRESSION////////////
 
-/mob/living/simple_animal/hostile/proc/ListTargets()//Step 1, find out what we can see
+/mob/living/simple_animal/hostile/proc/ListTargets() //Step 1, find out what we can see
 	if(!search_objects)
 		. = hearers(vision_range, targets_from) - src //Remove self, so we don't suicide
 
@@ -153,12 +157,13 @@
 				. += HM
 	else
 		. = list() // The following code is only very slightly slower than just returning oview(vision_range, targets_from), but it saves us much more work down the line, particularly when bees are involved
+		// idk why cit does this 2 times
 		for (var/obj/A in oview(vision_range, targets_from))
 			. += A
 		for (var/mob/A in oview(vision_range, targets_from))
 			. += A
 
-/mob/living/simple_animal/hostile/proc/FindTarget(var/list/possible_targets, var/HasTargetsList = 0)//Step 2, filter down possible targets to things we actually care about
+/mob/living/simple_animal/hostile/proc/FindTarget(list/possible_targets, HasTargetsList = 0)//Step 2, filter down possible targets to things we actually care about
 	. = list()
 	if(!HasTargetsList)
 		possible_targets = ListTargets()
@@ -207,7 +212,7 @@
 
 // Please do not add one-off mob AIs here, but override this function for your mob
 /mob/living/simple_animal/hostile/CanAttack(atom/the_target)//Can we actually attack a possible target?
-	if(!the_target || the_target.type == /atom/movable/lighting_object || isturf(the_target)) // bail out on invalids
+	if(isturf(the_target) || !the_target || the_target.type == /atom/movable/lighting_object) // bail out on invalids
 		return FALSE
 
 	if(ismob(the_target)) //Target is in godmode, ignore it.
@@ -247,20 +252,22 @@
 				return FALSE
 			if(P.has_cover &&!P.raised) //Don't attack invincible turrets
 				return FALSE
-			if(P.stat & BROKEN) //Or turrets that are already broken
+			if(P.machine_stat & BROKEN) //Or turrets that are already broken
 				return FALSE
 			return TRUE
 
+		// ic circs
 		if(istype(the_target, /obj/item/electronic_assembly))
 			var/obj/item/electronic_assembly/O = the_target
 			if(O.combat_circuits)
 				return TRUE
-
+		// clock things
 		if(istype(the_target, /obj/structure/destructible/clockwork/ocular_warden))
 			var/obj/structure/destructible/clockwork/ocular_warden/OW = the_target
 			if(OW.target != src)
 				return FALSE
 			return TRUE
+
 	if(isobj(the_target))
 		if(attack_all_objects || is_type_in_typecache(the_target, wanted_objects))
 			return TRUE
@@ -361,25 +368,9 @@
 			FindTarget()
 
 
-/mob/living/simple_animal/hostile/proc/AttackingTarget()
+/mob/living/simple_animal/hostile/proc/AttackingTarget(atom/attacked_target)
 	SEND_SIGNAL(src, COMSIG_HOSTILE_ATTACKINGTARGET, target)
 	in_melee = TRUE
-	/* sorry for the simplemob vore fans
-	if(vore_active)
-		if(isliving(target))
-			var/mob/living/L = target
-			if(!client && L.Adjacent(src) && CHECK_BITFIELD(L.vore_flags,DEVOURABLE)) // aggressive check to ensure vore attacks can be made
-				if(prob(voracious_chance))
-					vore_attack(src,L,src)
-				else
-					return L.attack_animal(src)
-			else
-				return L.attack_animal(src) //literally every single fucking one of these need this I guess.
-		else
-			return target.attack_animal(src)
-	else
-		return target.attack_animal(src)
-	*/
 	return target.attack_animal(src)
 
 /mob/living/simple_animal/hostile/proc/Aggro()
@@ -409,7 +400,7 @@
 
 /mob/living/simple_animal/hostile/proc/summon_backup(distance, exact_faction_match)
 	do_alert_animation(src)
-	playsound(loc, 'sound/machines/chime.ogg', 50, 1, -1)
+	playsound(loc, 'sound/machines/chime.ogg', 50, TRUE, -1)
 	for(var/mob/living/simple_animal/hostile/M in oview(distance, targets_from))
 		if(faction_check_mob(M, TRUE))
 			if(M.AIStatus == AI_OFF)
@@ -429,7 +420,8 @@
 /mob/living/simple_animal/hostile/proc/OpenFire(atom/A)
 	if(CheckFriendlyFire(A))
 		return
-	visible_message("<span class='danger'><b>[src]</b> [ranged_message] at [A]!</span>")
+	if(!(simple_mob_flags & SILENCE_RANGED_MESSAGE))
+		visible_message("<span class='danger'><b>[src]</b> [ranged_message] at [A]!</span>")
 
 
 	if(rapid > 1)
@@ -447,11 +439,11 @@
 	var/turf/startloc = get_turf(targets_from)
 	if(casingtype)
 		var/obj/item/ammo_casing/casing = new casingtype(startloc)
-		playsound(src, projectilesound, 100, 1)
-		casing.fire_casing(targeted_atom, src, null, null, null, ran_zone(), 0, src)
+		playsound(src, projectilesound, 100, TRUE)
+		casing.fire_casing(targeted_atom, src, null, null, null, ran_zone(), 0,  src)
 	else if(projectiletype)
 		var/obj/item/projectile/P = new projectiletype(startloc)
-		playsound(src, projectilesound, 100, 1)
+		playsound(src, projectilesound, 100, TRUE)
 		P.starting = startloc
 		P.firer = src
 		P.fired_from = src
@@ -487,21 +479,25 @@
 
 /mob/living/simple_animal/hostile/proc/DestroyObjectsInDirection(direction)
 	var/turf/T = get_step(targets_from, direction)
-	if(T && T.Adjacent(targets_from))
+	if(QDELETED(T))
+		return
+	if(T.Adjacent(targets_from))
 		if(CanSmashTurfs(T))
 			T.attack_animal(src)
-		for(var/obj/O in T)
-			if(O.density && environment_smash >= ENVIRONMENT_SMASH_STRUCTURES && !O.IsObscured())
-				O.attack_animal(src)
-				return
-
+			return
+	for(var/obj/O in T.contents)
+		if(!O.Adjacent(targets_from))
+			continue
+		if((ismachinery(O) || isstructure(O)) && O.density && environment_smash >= ENVIRONMENT_SMASH_STRUCTURES && !O.IsObscured())
+			O.attack_animal(src)
+			return
 
 /mob/living/simple_animal/hostile/proc/DestroyPathToTarget()
 	if(environment_smash)
 		EscapeConfinement()
 		var/dir_to_target = get_dir(targets_from, target)
 		var/dir_list = list()
-		if(dir_to_target in GLOB.diagonals) //it's diagonal, so we need two directions to hit
+		if(ISDIAGONALDIR(dir_to_target)) //it's diagonal, so we need two directions to hit
 			for(var/direction in GLOB.cardinals)
 				if(direction & dir_to_target)
 					dir_list += direction
@@ -534,16 +530,17 @@
 			A.attack_animal(src)
 		return 1
 
-/mob/living/simple_animal/hostile/RangedAttack(atom/A, params) //Player firing
+
+/mob/living/simple_animal/hostile/RangedAttack(atom/A, modifiers) //Player firing
 	if(ranged && ranged_cooldown <= world.time)
 		target = A
 		OpenFire(A)
 		DelayNextAction()
-	. = ..()
-	return TRUE
+	return ..()
+
 
 ////// AI Status ///////
-/mob/living/simple_animal/hostile/proc/AICanContinue(var/list/possible_targets)
+/mob/living/simple_animal/hostile/proc/AICanContinue(list/possible_targets)
 	switch(AIStatus)
 		if(AI_ON)
 			. = 1
@@ -554,7 +551,7 @@
 			else
 				. = 0
 
-/mob/living/simple_animal/hostile/proc/AIShouldSleep(var/list/possible_targets)
+/mob/living/simple_animal/hostile/proc/AIShouldSleep(list/possible_targets)
 	return !FindTarget(possible_targets, 1)
 
 
@@ -605,7 +602,7 @@
 			FindTarget()
 		toggle_ai(AI_ON)
 
-/mob/living/simple_animal/hostile/proc/ListTargetsLazy(var/_Z)//Step 1, find out what we can see
+/mob/living/simple_animal/hostile/proc/ListTargetsLazy(_Z)//Step 1, find out what we can see
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha, /obj/structure/destructible/clockwork/ocular_warden))
 	. = list()
 	for (var/I in SSmobs.clients_by_zlevel[_Z])
@@ -616,12 +613,18 @@
 			else if (M.loc.type in hostile_machines)
 				. += M.loc
 
+// /mob/living/simple_animal/hostile/tamed(whomst)
+// 	. = ..()
+// 	if(isliving(whomst))
+// 		var/mob/living/fren = whomst
+// 		friends = fren
+// 		faction = fren.faction.Copy() // no frens :(
 
 /**
-  * Proc that handles a charge attack windup for a mob.
-  */
-/mob/living/simple_animal/hostile/proc/enter_charge(var/atom/target)
-	if((mobility_flags & (MOBILITY_MOVE | MOBILITY_STAND)) != (MOBILITY_MOVE | MOBILITY_STAND) || charge_state)
+ * Proc that handles a charge attack windup for a mob.
+ */
+/mob/living/simple_animal/hostile/proc/enter_charge(atom/target)
+	if(charge_state || (mobility_flags & (MOBILITY_MOVE | MOBILITY_STAND)) != (MOBILITY_MOVE | MOBILITY_STAND))
 		return FALSE
 
 	if(!(COOLDOWN_FINISHED(src, charge_cooldown)) || !has_gravity() || !target.has_gravity())
@@ -630,23 +633,23 @@
 	addtimer(CALLBACK(src, .proc/handle_charge_target, target), 1.5 SECONDS, TIMER_STOPPABLE)
 
 /**
-  * Proc that throws the mob at the target after the windup.
-  */
-/mob/living/simple_animal/hostile/proc/handle_charge_target(var/atom/target)
+ * Proc that throws the mob at the target after the windup.
+ */
+/mob/living/simple_animal/hostile/proc/handle_charge_target(atom/target)
 	charge_state = TRUE
 	throw_at(target, charge_distance, 1, src, FALSE, TRUE, callback = CALLBACK(src, .proc/charge_end))
 	COOLDOWN_START(src, charge_cooldown, charge_frequency)
 	return TRUE
 
 /**
-  * Proc that handles a charge attack after it's concluded.
-  */
+ * Proc that handles a charge attack after it's concluded.
+ */
 /mob/living/simple_animal/hostile/proc/charge_end()
 	charge_state = FALSE
 
 /**
-  * Proc that handles the charge impact of the charging mob.
-  */
+ * Proc that handles the charge impact of the charging mob.
+ */
 /mob/living/simple_animal/hostile/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!charge_state)
 		return ..()
@@ -666,11 +669,11 @@
 				L.visible_message("<span class='danger'>[src] charges on [L]!</span>", "<span class='userdanger'>[src] charges into you!</span>")
 				L.Knockdown(knockdown_time)
 			else
-				Stun((knockdown_time * 2), 1, 1)
+				Stun((knockdown_time * 2), ignore_canstun = TRUE)
 			charge_end()
 		else if(hit_atom.density && !hit_atom.CanPass(src))
 			visible_message("<span class='danger'>[src] smashes into [hit_atom]!</span>")
-			Stun((knockdown_time * 2), 1, 1)
+			Stun((knockdown_time * 2), ignore_canstun = TRUE)
 
 		if(charge_state)
 			charge_state = FALSE

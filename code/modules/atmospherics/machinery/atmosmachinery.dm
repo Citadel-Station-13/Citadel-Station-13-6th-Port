@@ -15,7 +15,7 @@
 	move_resist = INFINITY				//Moving a connected machine without actually doing the normal (dis)connection things will probably cause a LOT of issues.
 	idle_power_usage = 0
 	active_power_usage = 0
-	power_channel = ENVIRON
+	power_channel = AREA_USAGE_ENVIRON
 	layer = GAS_PIPE_HIDDEN_LAYER //under wires
 	plane = ABOVE_WALL_PLANE
 	resistance_flags = FIRE_PROOF
@@ -67,7 +67,6 @@
 	SSair.atmos_machinery -= src
 	SSair.pipenets_needing_rebuilt -= src
 
-	dropContents()
 	if(pipe_vision_img)
 		qdel(pipe_vision_img)
 

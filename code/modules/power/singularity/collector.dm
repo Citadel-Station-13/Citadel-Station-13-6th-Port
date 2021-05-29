@@ -1,56 +1,49 @@
-// stored_power += (pulse_strength-RAD_COLLECTOR_EFFICIENCY)*RAD_COLLECTOR_COEFFICIENT
-#define RAD_COLLECTOR_EFFICIENCY 80 	// radiation needs to be over this amount to get power
-#define RAD_COLLECTOR_COEFFICIENT 125
-#define RAD_COLLECTOR_STORED_OUT 0.05	// (this*100)% of stored power outputted per tick. Doesn't actualy change output total, lower numbers just means collectors output for longer in absence of a source
+// stored_energy += (pulse_strength-RAD_COLLECTOR_EFFICIENCY)*RAD_COLLECTOR_COEFFICIENT
+#define RAD_COLLECTOR_EFFICIENCY 80 // radiation needs to be over this amount to get power
+#define RAD_COLLECTOR_COEFFICIENT 100 // 125
+#define RAD_COLLECTOR_STORED_OUT 0.04 // 0.05 // (this*100)% of stored power outputted per tick. Doesn't actualy change output total, lower numbers just means collectors output for longer in absence of a source
 #define RAD_COLLECTOR_MINING_CONVERSION_RATE 0.00001 //This is gonna need a lot of tweaking to get right. This is the number used to calculate the conversion of watts to research points per process()
-#define RAD_COLLECTOR_OUTPUT min(stored_power, (stored_power*RAD_COLLECTOR_STORED_OUT)+1000) //Produces at least 1000 watts if it has more than that stored
-
+#define RAD_COLLECTOR_OUTPUT min(stored_energy, (stored_energy*RAD_COLLECTOR_STORED_OUT)+1000) //Produces at least 1000 watts if it has more than that stored
 /obj/machinery/power/rad_collector
 	name = "Radiation Collector Array"
-	desc = "A device which uses Hawking Radiation and plasma to produce power."
+	desc = "A device which uses radiation and plasma to produce power."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "ca"
 	anchored = FALSE
 	density = TRUE
-	req_access = list(ACCESS_ENGINE_EQUIP)
-//	use_power = NO_POWER_USE
+	req_access = list(ACCESS_ENGINE_EQUIP, ACCESS_ATMOSPHERICS)
 	max_integrity = 350
 	integrity_failure = 0.2
 	circuit = /obj/item/circuitboard/machine/rad_collector
+	rad_insulation = RAD_EXTREME_INSULATION
 	var/obj/item/tank/internals/plasma/loaded_tank = null
-	var/stored_power = 0
-	var/last_push
+	var/stored_energy = 0
+	var/last_push // last energy
 	var/active = 0
 	var/locked = FALSE
-	var/drainratio = 1
+	var/drainratio = 0.5
 	var/powerproduction_drain = 0.001
 
 	var/bitcoinproduction_drain = 0.15
 	var/bitcoinmining = FALSE
-	rad_insulation = RAD_EXTREME_INSULATION
-	var/obj/item/radio/Radio
 
-/obj/machinery/power/rad_collector/anchored
-	anchored = TRUE
-
-/obj/machinery/power/rad_collector/Initialize()
+/obj/machinery/power/rad_collector/anchored/Initialize()
 	. = ..()
-	Radio = new /obj/item/radio(src)
-	Radio.listening = 0
-	Radio.set_frequency(FREQ_ENGINEERING)
+	set_anchored(TRUE)
 
 /obj/machinery/power/rad_collector/Destroy()
-	QDEL_NULL(Radio)
 	return ..()
 
-/obj/machinery/power/rad_collector/process()
+/obj/machinery/power/rad_collector/should_have_node()
+	return anchored
+
+/obj/machinery/power/rad_collector/process(delta_time)
 	if(!loaded_tank)
 		return
 	if(!bitcoinmining)
 		if(loaded_tank.air_contents.get_moles(/datum/gas/plasma) < 0.0001)
 			investigate_log("<font color='red'>out of fuel</font>.", INVESTIGATE_SINGULO)
 			playsound(src, 'sound/machines/ding.ogg', 50, 1)
-			Radio.talk_into(src, "Insufficient plasma in [get_area(src)] [src], ejecting \the [loaded_tank].", FREQ_ENGINEERING)
 			eject()
 		else
 			var/gasdrained = min(powerproduction_drain*drainratio,loaded_tank.air_contents.get_moles(/datum/gas/plasma))
@@ -59,30 +52,29 @@
 
 			var/power_produced = RAD_COLLECTOR_OUTPUT
 			add_avail(power_produced)
-			stored_power-=power_produced
+			stored_energy-=power_produced
 	else if(is_station_level(z) && SSresearch.science_tech)
 		if(!loaded_tank.air_contents.get_moles(/datum/gas/tritium) || !loaded_tank.air_contents.get_moles(/datum/gas/oxygen))
 			playsound(src, 'sound/machines/ding.ogg', 50, 1)
-			Radio.talk_into(src, "Insufficient oxygen and tritium in [get_area(src)] [src] to produce research points, ejecting \the [loaded_tank].", FREQ_ENGINEERING)
 			eject()
 		else
 			var/gasdrained = bitcoinproduction_drain*drainratio
 			loaded_tank.air_contents.adjust_moles(/datum/gas/tritium, -gasdrained)
 			loaded_tank.air_contents.adjust_moles(/datum/gas/oxygen, -gasdrained)
 			loaded_tank.air_contents.adjust_moles(/datum/gas/carbon_dioxide, gasdrained*2)
-			var/bitcoins_mined = stored_power*RAD_COLLECTOR_MINING_CONVERSION_RATE
+			var/bitcoins_mined = stored_energy*RAD_COLLECTOR_MINING_CONVERSION_RATE
 			var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_ENG)
 			if(D)
 				D.adjust_money(bitcoins_mined)
 			SSresearch.science_tech.add_point_type(TECHWEB_POINT_TYPE_DEFAULT, bitcoins_mined)
-			last_push = stored_power
-			stored_power = 0
+			last_push = stored_energy
+			stored_energy = 0
 
 /obj/machinery/power/rad_collector/interact(mob/user)
 	if(anchored)
 		if(!src.locked)
 			toggle_power()
-			user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
+			user.visible_message("<span class='notice'>[user.name] turns the [src.name] [active? "on":"off"].</span>", \
 			"<span class='notice'>You turn the [src.name] [active? "on":"off"].</span>")
 			var/fuel = loaded_tank.air_contents.get_moles(/datum/gas/plasma)
 			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [key_name(user)]. [loaded_tank?"Fuel: [round(fuel/0.29)]%":"<font color='red'>It is empty</font>"].", INVESTIGATE_SINGULO)
@@ -98,13 +90,14 @@
 		return FAILED_UNFASTEN
 	return ..()
 
-/obj/machinery/power/rad_collector/default_unfasten_wrench(mob/user, obj/item/I, time = 20)
+/obj/machinery/power/rad_collector/set_anchored(anchorvalue)
 	. = ..()
-	if(. == SUCCESSFUL_UNFASTEN)
-		if(anchored)
-			connect_to_network()
-		else
-			disconnect_from_network()
+	if(isnull(.))
+		return //no need to process if we didn't change anything.
+	if(anchorvalue)
+		connect_to_network()
+	else
+		disconnect_from_network()
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/tank/internals/plasma))
@@ -120,7 +113,7 @@
 		if(!user.transferItemToLoc(W, src))
 			return
 		loaded_tank = W
-		update_icon()
+		update_appearance()
 	else if(W.GetID())
 		if(allowed(user))
 			if(active)
@@ -135,6 +128,7 @@
 		return ..()
 
 /obj/machinery/power/rad_collector/wrench_act(mob/living/user, obj/item/I)
+	..()
 	default_unfasten_wrench(user, I)
 	return TRUE
 
@@ -182,7 +176,11 @@
 	. = ..()
 	if(active)
 		if(!bitcoinmining)
-			. += "<span class='notice'>[src]'s display states that it has stored <b>[DisplayPower(stored_power)]</b>, and is processing <b>[DisplayPower((RAD_COLLECTOR_OUTPUT)*((60 SECONDS)/SSmachines.wait))]</b> per minute. <br>The <b>plasma</b> within it's tank is being irradiated into <b>tritium</b>.</span>"
+			// stored_energy is converted directly to watts every SSmachines.wait * 0.1 seconds.
+			// Therefore, its units are joules per SSmachines.wait * 0.1 seconds.
+			// So joules = stored_energy * SSmachines.wait * 0.1
+			var/joules = stored_energy * SSmachines.wait * 0.1
+			. += "<span class='notice'>[src]'s display states that it has stored <b>[DisplayJoules(joules)]</b>, and is processing <b>[DisplayPower(RAD_COLLECTOR_OUTPUT)]</b>.</span>"
 		else
 			. += "<span class='notice'>[src]'s display states that it's producing a total of <b>[(last_push*RAD_COLLECTOR_MINING_CONVERSION_RATE)*((60 SECONDS)/SSmachines.wait)]</b> research points per minute. <br>The <b>tritium</b> and <b>oxygen</b> within it's tank is being combusted into <b>carbon dioxide</b>.</span>"
 	else
@@ -192,9 +190,9 @@
 			. += "<span class='notice'><b>[src]'s display displays the words:</b> \"Research point production mode. Please insert <b>Tritium</b> and <b>Oxygen</b>. Use a multitool to change production modes.\"</span>"
 
 /obj/machinery/power/rad_collector/obj_break(damage_flag)
-	if(!(stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
+	. = ..()
+	if(.)
 		eject()
-		stat |= BROKEN
 
 /obj/machinery/power/rad_collector/proc/eject()
 	locked = FALSE
@@ -208,22 +206,21 @@
 	if(active)
 		toggle_power()
 	else
-		update_icon()
+		update_appearance()
 
 /obj/machinery/power/rad_collector/rad_act(pulse_strength)
 	. = ..()
 	if(loaded_tank && active && pulse_strength > RAD_COLLECTOR_EFFICIENCY)
-		stored_power += (pulse_strength-RAD_COLLECTOR_EFFICIENCY)*RAD_COLLECTOR_COEFFICIENT
+		stored_energy += (pulse_strength-RAD_COLLECTOR_EFFICIENCY)*RAD_COLLECTOR_COEFFICIENT
 
 /obj/machinery/power/rad_collector/update_overlays()
 	. = ..()
 	if(loaded_tank)
 		. += "ptank"
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	if(active)
-		. += "on"
-
+		. += loaded_tank ? "on" : "error"
 
 /obj/machinery/power/rad_collector/proc/toggle_power()
 	active = !active
@@ -233,7 +230,7 @@
 	else
 		icon_state = "ca"
 		flick("ca_deactive", src)
-	update_icon()
+	update_appearance()
 	return
 
 #undef RAD_COLLECTOR_EFFICIENCY

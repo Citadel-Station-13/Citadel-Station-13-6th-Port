@@ -1,7 +1,7 @@
 /datum/computer_file/program/budgetorders
 	filename = "orderapp"
 	filedesc = "NT IRN"
-	// category = PROGRAM_CATEGORY_SUPL
+	category = PROGRAM_CATEGORY_SUPL
 	program_icon_state = "request"
 	extended_desc = "Nanotrasen Internal Requisition Network interface for supply purchasing using a department budget account."
 	requires_ntnet = TRUE
@@ -20,7 +20,7 @@
 	///What do we say when the shuttle moves with living beings on it.
 	var/safety_warning = "For safety reasons, the automated supply shuttle \
 		cannot transport live organisms, human remains, classified nuclear weaponry, \
-		homing beacons or machinery housing any form of artificial intelligence."
+		homing beacons, unstable eigenstates or machinery housing any form of artificial intelligence."
 	///If you're being raided by pirates, what do you tell the crew?
 	var/blockade_warning = "Bluespace instability detected. Shuttle movement impossible."
 

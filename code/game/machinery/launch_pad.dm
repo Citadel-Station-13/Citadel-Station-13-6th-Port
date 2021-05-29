@@ -6,6 +6,7 @@
 	use_power = TRUE
 	idle_power_usage = 200
 	active_power_usage = 2500
+	hud_possible = list(DIAG_LAUNCHPAD_HUD)
 	circuit = /obj/item/circuitboard/machine/launchpad
 	var/icon_teleport = "lpad-beam"
 	var/stationary = TRUE //to prevent briefcase pad deconstruction and such
@@ -21,8 +22,29 @@
 /obj/machinery/launchpad/RefreshParts()
 	var/E = 0
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
-		E += M.rating*15
-	range = E
+		E += M.rating
+	range = initial(range)
+	range *= E
+
+/obj/machinery/launchpad/Initialize()
+	. = ..()
+	prepare_huds()
+	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
+		diag_hud.add_to_hud(src)
+
+	var/image/holder = hud_list[DIAG_LAUNCHPAD_HUD]
+	var/mutable_appearance/MA = new /mutable_appearance()
+	MA.icon = 'icons/effects/effects.dmi'
+	MA.icon_state = "launchpad_target"
+	MA.layer = ABOVE_OPEN_TURF_LAYER
+	MA.plane = 0
+	holder.appearance = MA
+
+	update_indicator()
+
+/obj/machinery/launchpad/Destroy()
+	qdel(hud_list[DIAG_LAUNCHPAD_HUD])
+	return ..()
 
 /obj/machinery/launchpad/examine(mob/user)
 	. = ..()
@@ -32,15 +54,17 @@
 /obj/machinery/launchpad/attackby(obj/item/I, mob/user, params)
 	if(stationary)
 		if(default_deconstruction_screwdriver(user, "lpad-idle-o", "lpad-idle", I))
+			update_indicator()
 			return
 
 		if(panel_open)
 			if(I.tool_behaviour == TOOL_MULTITOOL)
 				if(!multitool_check_buffer(user, I))
 					return
-				I.buffer = src
+				var/obj/item/multitool/M = I
+				M.buffer = src
 				to_chat(user, "<span class='notice'>You save the data in the [I.name]'s buffer.</span>")
-				return TRUE
+				return 1
 
 		if(default_deconstruction_crowbar(I))
 			return
@@ -56,12 +80,23 @@
 	var/turf/target = locate(target_x, target_y, z)
 	ghost.forceMove(target)
 
-/obj/machinery/launchpad/proc/isAvailable(silent = FALSE)
-	if(stat & NOPOWER)
+/obj/machinery/launchpad/proc/isAvailable()
+	if(machine_stat & NOPOWER)
 		return FALSE
 	if(panel_open)
 		return FALSE
 	return TRUE
+
+/obj/machinery/launchpad/proc/update_indicator()
+	var/image/holder = hud_list[DIAG_LAUNCHPAD_HUD]
+	var/turf/target_turf
+	if(isAvailable())
+		target_turf = locate(x + x_offset, y + y_offset, z)
+	if(target_turf)
+		holder.icon_state = indicator_icon
+		holder.loc = target_turf
+	else
+		holder.icon_state = null
 
 /obj/machinery/launchpad/proc/set_offset(x, y)
 	if(teleporting)
@@ -70,6 +105,7 @@
 		x_offset = clamp(x, -range, range)
 	if(!isnull(y))
 		y_offset = clamp(y, -range, range)
+	update_indicator()
 
 /obj/machinery/launchpad/proc/doteleport(mob/user, sending)
 	if(teleporting)
@@ -94,6 +130,7 @@
 		indicator_icon = "launchpad_launch"
 	else
 		indicator_icon = "launchpad_pull"
+	update_indicator()
 
 	playsound(get_turf(src), 'sound/weapons/flash.ogg', 25, TRUE)
 	teleporting = TRUE
@@ -103,6 +140,7 @@
 
 	//Set the indicator icon back to normal
 	indicator_icon = "launchpad_target"
+	update_indicator()
 
 	if(QDELETED(src) || !isAvailable())
 		return
@@ -181,23 +219,23 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 	teleport_speed = 20
-	range = 20
+	range = 8
 	stationary = FALSE
 	var/closed = TRUE
 	var/obj/item/storage/briefcase/launchpad/briefcase
 
-/obj/machinery/launchpad/briefcase/Initialize(mapload, briefcase)
-    . = ..()
-    if(!briefcase)
-        log_game("[src] has been spawned without a briefcase.")
-        return INITIALIZE_HINT_QDEL
-    src.briefcase = briefcase
+/obj/machinery/launchpad/briefcase/Initialize(mapload, _briefcase)
+	. = ..()
+	if(!_briefcase)
+		log_game("[src] has been spawned without a briefcase.")
+		return INITIALIZE_HINT_QDEL
+	briefcase = _briefcase
 
 /obj/machinery/launchpad/briefcase/Destroy()
 	QDEL_NULL(briefcase)
 	return ..()
 
-/obj/machinery/launchpad/briefcase/isAvailable(silent = FALSE)
+/obj/machinery/launchpad/briefcase/isAvailable()
 	if(closed)
 		return FALSE
 	return ..()
@@ -205,15 +243,14 @@
 /obj/machinery/launchpad/briefcase/MouseDrop(over_object, src_location, over_location)
 	. = ..()
 	if(over_object == usr)
-		if(!briefcase || !usr.can_hold_items())
-			return
-		if(!usr.canUseTopic(src, BE_CLOSE, ismonkey(usr)))
+		if(!briefcase || !usr.canUseTopic(src, BE_CLOSE, ismonkey(usr), FALSE))
 			return
 		usr.visible_message("<span class='notice'>[usr] starts closing [src]...</span>", "<span class='notice'>You start closing [src]...</span>")
 		if(do_after(usr, 30, target = usr))
 			usr.put_in_hands(briefcase)
 			moveToNullspace() //hides it from suitcase contents
 			closed = TRUE
+			update_indicator()
 
 /obj/machinery/launchpad/briefcase/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/launchpad_remote))
@@ -249,6 +286,7 @@
 	user.visible_message("<span class='notice'>[user] starts setting down [src]...", "You start setting up [pad]...</span>")
 	if(do_after(user, 30, target = user))
 		pad.forceMove(get_turf(src))
+		pad.update_indicator()
 		pad.closed = FALSE
 		user.transferItemToLoc(src, pad, TRUE)
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_HIDE_ALL)
@@ -280,6 +318,7 @@
 	. = ..()
 	ui_interact(user)
 	to_chat(user, "<span class='notice'>[src] projects a display onto your retina.</span>")
+
 
 /obj/item/launchpad_remote/ui_state(mob/user)
 	return GLOB.inventory_state
@@ -315,8 +354,10 @@
 	pad.doteleport(user, sending)
 
 /obj/item/launchpad_remote/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("set_pos")
 			var/new_x = text2num(params["x"])

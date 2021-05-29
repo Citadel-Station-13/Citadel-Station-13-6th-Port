@@ -492,13 +492,6 @@
 /obj/machinery/door/airlock/cult/canAIControl(mob/user)
 	return (iscultist(user) && !isAllPowerCut())
 
-/obj/machinery/door/airlock/cult/obj_break(damage_flag)
-	if(!(flags_1 & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
-		stat |= BROKEN
-		if(!panel_open)
-			panel_open = TRUE
-		update_icon()
-
 /obj/machinery/door/airlock/cult/isElectrified()
 	return FALSE
 
@@ -642,7 +635,8 @@
 	return TRUE //yes we do have power
 
 /obj/machinery/door/airlock/clockwork/obj_break(damage_flag)
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /obj/machinery/door/airlock/clockwork/deconstruct(disassembled = TRUE)
 	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)

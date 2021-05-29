@@ -27,22 +27,19 @@
 
 /obj/machinery/transformer/examine(mob/user)
 	. = ..()
-	if(cooldown && (hasSiliconAccessInArea(user) || isobserver(user)))
+	if(cooldown && (issilicon(user) || isobserver(user)))
 		. += "It will be ready in [DisplayTimeText(cooldown_timer - world.time)]."
 
 /obj/machinery/transformer/Destroy()
 	QDEL_NULL(countdown)
 	. = ..()
 
-/obj/machinery/transformer/power_change()
-	..()
-	update_icon()
-
 /obj/machinery/transformer/update_icon_state()
-	if(stat & (BROKEN|NOPOWER) || cooldown == 1)
+	if(machine_stat & (BROKEN|NOPOWER) || cooldown == 1)
 		icon_state = "separator-AO0"
 	else
 		icon_state = initial(icon_state)
+	return ..()
 
 /obj/machinery/transformer/Bumped(atom/movable/AM)
 	if(cooldown == 1)
@@ -57,36 +54,36 @@
 			AM.forceMove(drop_location())
 			do_transform(AM)
 
+
 /obj/machinery/transformer/CanPass(atom/movable/mover, turf/target)
 	// Allows items to go through,
 	// to stop them from blocking the conveyor belt.
 	if(!ishuman(mover))
-		var/dir = get_dir(src, mover)
-		if(dir == EAST)
+		if(get_dir(src, mover) == EAST)
 			return ..()
-	return 0
+	return FALSE
 
 /obj/machinery/transformer/process()
 	if(cooldown && (cooldown_timer <= world.time))
 		cooldown = FALSE
-		update_icon()
+		update_appearance()
 
 /obj/machinery/transformer/proc/do_transform(mob/living/carbon/human/H)
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		return
 	if(cooldown == 1)
 		return
 
 	if(!transform_dead && H.stat == DEAD)
-		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
 		return
 
 	// Activate the cooldown
 	cooldown = 1
 	cooldown_timer = world.time + cooldown_duration
-	update_icon()
+	update_appearance()
 
-	playsound(src.loc, 'sound/items/welder.ogg', 50, 1)
+	playsound(src.loc, 'sound/items/welder.ogg', 50, TRUE)
 	H.emote("scream") // It is painful
 	H.adjustBruteLoss(max(0, 80 - H.getBruteLoss())) // Hurt the human, don't try to kill them though.
 
@@ -97,7 +94,7 @@
 	var/mob/living/silicon/robot/R = H.Robotize()
 	R.cell = new /obj/item/stock_parts/cell/upgraded/plus(R, robot_cell_charge)
 
- 	// So he can't jump out the gate right away.
+	// So he can't jump out the gate right away.
 	R.SetLockdown()
 	if(masterAI)
 		R.set_connected_ai(masterAI)
@@ -106,7 +103,7 @@
 	addtimer(CALLBACK(src, .proc/unlock_new_robot, R), 50)
 
 /obj/machinery/transformer/proc/unlock_new_robot(mob/living/silicon/robot/R)
-	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, FALSE)
 	sleep(30)
 	if(R)
 		R.SetLockdown(0)

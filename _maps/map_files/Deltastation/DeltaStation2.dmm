@@ -68598,8 +68598,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /turf/open/floor/circuit/green,
 /area/engineering/atmospherics_engine)
@@ -97733,8 +97732,7 @@
 	pixel_y = 1
 	},
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /turf/open/floor/circuit/green,
 /area/engineering/atmospherics_engine)
@@ -120581,8 +120579,7 @@
 	pixel_y = 1
 	},
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /turf/open/floor/circuit/green,
 /area/engineering/atmospherics_engine)

@@ -51677,8 +51677,7 @@
 /area/commons/storage/primary)
 "cpo" = (
 /obj/machinery/field/generator{
-	anchored = 1;
-	state = 2
+	anchored = 1
 	},
 /turf/open/floor/plating,
 /area/engineering/storage)
@@ -53357,8 +53356,7 @@
 /area/engineering/main)
 "cty" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 4;
-	state = 2
+	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -54785,8 +54783,7 @@
 /area/engineering/storage_shared)
 "cwR" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -64838,8 +64835,7 @@
 /area/engineering/main)
 "fSW" = (
 /obj/machinery/field/generator{
-	anchored = 1;
-	state = 2
+	anchored = 1
 	},
 /turf/open/floor/plating/airless,
 /area/engineering/main)
@@ -67429,8 +67425,7 @@
 /area/engineering/break_room)
 "kZF" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 8;
-	state = 2
+	dir = 8
 	},
 /obj/structure/cable,
 /turf/open/floor/plating/airless,
@@ -72722,8 +72717,7 @@
 /area/maintenance/disposal/incinerator)
 "vQl" = (
 /obj/machinery/power/emitter/anchored{
-	dir = 1;
-	state = 2
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "0-8"

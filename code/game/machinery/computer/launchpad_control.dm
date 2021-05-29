@@ -4,8 +4,6 @@
 	icon_screen = "teleport"
 	icon_keyboard = "teleport_key"
 	circuit = /obj/item/circuitboard/computer/launchpad_console
-	ui_x = 475
-	ui_y = 260
 
 	var/selected_id
 	var/list/obj/machinery/launchpad/launchpads
@@ -15,7 +13,7 @@
 	launchpads = list()
 	. = ..()
 
-/obj/machinery/computer/launchpad/attack_paw(mob/user)
+/obj/machinery/computer/launchpad/attack_paw(mob/user) //, list/modifiers)
 	to_chat(user, "<span class='warning'>You are too primitive to use this computer!</span>")
 	return
 
@@ -23,10 +21,11 @@
 	if(W.tool_behaviour == TOOL_MULTITOOL)
 		if(!multitool_check_buffer(user, W))
 			return
-		if(W.buffer && istype(W.buffer, /obj/machinery/launchpad))
+		var/obj/item/multitool/M = W
+		if(M.buffer && istype(M.buffer, /obj/machinery/launchpad))
 			if(LAZYLEN(launchpads) < maximum_pads)
-				launchpads |= W.buffer
-				W.buffer = null
+				launchpads |= M.buffer
+				M.buffer = null
 				to_chat(user, "<span class='notice'>You upload the data from the [W.name]'s buffer.</span>")
 			else
 				to_chat(user, "<span class='warning'>[src] cannot handle any more connections!</span>")
@@ -67,7 +66,7 @@
 			var/list/this_pad = list()
 			this_pad["name"] = pad.display_name
 			this_pad["id"] = i
-			if(pad.stat & NOPOWER)
+			if(pad.machine_stat & NOPOWER)
 				this_pad["inactive"] = TRUE
 			pad_list += list(this_pad)
 		else
@@ -81,7 +80,7 @@
 		data["pad_name"] = current_pad.display_name
 		data["range"] = current_pad.range
 		data["selected_pad"] = current_pad
-		if(QDELETED(current_pad) || (current_pad.stat & NOPOWER))
+		if(QDELETED(current_pad) || (current_pad.machine_stat & NOPOWER))
 			data["pad_active"] = FALSE
 			return data
 		data["pad_active"] = TRUE
@@ -89,7 +88,8 @@
 	return data
 
 /obj/machinery/computer/launchpad/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	var/obj/machinery/launchpad/current_pad = launchpads[selected_id]
 	switch(action)

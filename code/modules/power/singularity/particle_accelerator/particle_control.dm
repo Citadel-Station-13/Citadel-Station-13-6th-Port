@@ -62,10 +62,7 @@
 		icon_state = "control_boxp1"
 	else
 		if(use_power)
-			if(assembled)
-				icon_state = "control_boxp"
-			else
-				icon_state = "ucontrol_boxp"
+			icon_state = "[assembled ? "u" : null]control_boxp"
 		else
 			switch(construction_state)
 				if(PA_CONSTRUCTION_UNSECURED, PA_CONSTRUCTION_UNWIRED)
@@ -74,6 +71,7 @@
 					icon_state = "control_boxw"
 				else
 					icon_state = "control_boxc"
+	return ..()
 
 /obj/machinery/particle_accelerator/control_box/proc/strength_change()
 	for(var/CP in connected_parts)
@@ -101,10 +99,10 @@
 
 /obj/machinery/particle_accelerator/control_box/power_change()
 	. = ..()
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		active = FALSE
 		use_power = NO_POWER_USE
-	else if(!stat && construction_state == PA_CONSTRUCTION_COMPLETE)
+	else if(!machine_stat && construction_state == PA_CONSTRUCTION_COMPLETE)
 		use_power = IDLE_POWER_USE
 
 /obj/machinery/particle_accelerator/control_box/process()

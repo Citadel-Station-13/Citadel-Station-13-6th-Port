@@ -7,10 +7,10 @@
 
 /datum/station_goal/bluespace_cannon/get_report()
 	return {"Our military presence is inadequate in your sector.
-	 We need you to construct BSA-[rand(1,99)] Artillery position aboard your station.
+		We need you to construct BSA-[rand(1,99)] Artillery position aboard your station.
 
-	 Base parts are available for shipping via cargo.
-	 -Nanotrasen Naval Command"}
+		Base parts are available for shipping via cargo.
+		-Nanotrasen Naval Command"}
 
 /datum/station_goal/bluespace_cannon/on_report()
 	//Unlock BSA parts
@@ -21,7 +21,7 @@
 	if(..())
 		return TRUE
 	var/obj/machinery/bsa/full/B = locate()
-	if(B && !B.stat)
+	if(B && !B.machine_stat)
 		return TRUE
 	return FALSE
 
@@ -41,11 +41,11 @@
 	icon_state = "power_box"
 
 /obj/machinery/bsa/back/multitool_act(mob/living/user, obj/item/I)
-	if(I.tool_behaviour == TOOL_MULTITOOL) // Lies and deception
-		I.buffer = src
-		to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
-	else
-		to_chat(user, "<span class='warning'>[I] has no data buffer!</span>")
+	if(!multitool_check_buffer(user, I)) //make sure it has a data buffer
+		return
+	var/obj/item/multitool/M = I
+	M.buffer = src
+	to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
 	return TRUE
 
 /obj/machinery/bsa/front
@@ -54,35 +54,35 @@
 	icon_state = "emitter_center"
 
 /obj/machinery/bsa/front/multitool_act(mob/living/user, obj/item/I)
-	if(I.tool_behaviour == TOOL_MULTITOOL) // Lies and deception
-		I.buffer = src
-		to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
-	else
-		to_chat(user, "<span class='warning'>[I] has no data buffer!</span>")
+	if(!multitool_check_buffer(user, I)) //make sure it has a data buffer
+		return
+	var/obj/item/multitool/M = I
+	M.buffer = src
+	to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
 	return TRUE
 
 /obj/machinery/bsa/middle
 	name = "Bluespace Artillery Fusor"
-	desc = "Contents classified by Nanotrasen Naval Command. Needs to be linked with the other BSA parts using multitool."
+	desc = "Contents classified by Nanotrasen Naval Command. Needs to be linked with the other BSA parts using a multitool."
 	icon_state = "fuel_chamber"
 	var/obj/machinery/bsa/back/back
 	var/obj/machinery/bsa/front/front
 
 /obj/machinery/bsa/middle/multitool_act(mob/living/user, obj/item/I)
-	if(I.tool_behaviour == TOOL_MULTITOOL) // Lies and deception
-		if(I.buffer)
-			if(istype(I.buffer, /obj/machinery/bsa/back))
-				back = I.buffer
-				I.buffer = null
-				to_chat(user, "<span class='notice'>You link [src] with [back].</span>")
-			else if(istype(I.buffer, /obj/machinery/bsa/front))
-				front = I.buffer
-				I.buffer = null
-				to_chat(user, "<span class='notice'>You link [src] with [front].</span>")
-		else
-			to_chat(user, "<span class='warning'>[I]'s data buffer is empty!</span>")
+	if(!multitool_check_buffer(user, I))
+		return
+	var/obj/item/multitool/M = I
+	if(M.buffer)
+		if(istype(M.buffer, /obj/machinery/bsa/back))
+			back = M.buffer
+			M.buffer = null
+			to_chat(user, "<span class='notice'>You link [src] with [back].</span>")
+		else if(istype(M.buffer, /obj/machinery/bsa/front))
+			front = M.buffer
+			M.buffer = null
+			to_chat(user, "<span class='notice'>You link [src] with [front].</span>")
 	else
-		to_chat(user, "<span class='warning'>[I] has no data buffer!</span>")
+		to_chat(user, "<span class='warning'>[I]'s data buffer is empty!</span>")
 	return TRUE
 
 /obj/machinery/bsa/middle/proc/check_completion()
@@ -199,7 +199,7 @@
 			break
 		else
 			tile.ex_act(EXPLODE_DEVASTATE)
-	point.Beam(target, icon_state = "bsa_beam", time = 50, maxdistance = world.maxx) //ZZZAP
+	point.Beam(target, icon_state = "bsa_beam", time = 5 SECONDS, maxdistance = world.maxx) //ZZZAP
 	new /obj/effect/temp_visual/bsa_splash(point, dir)
 
 	if(!blocker)
@@ -227,7 +227,7 @@
 	var/obj/machinery/parent
 
 /obj/structure/filler/ex_act()
-	return
+	return FALSE
 
 /obj/machinery/computer/bsa_control
 	name = "bluespace artillery control"
@@ -261,8 +261,10 @@
 	return data
 
 /obj/machinery/computer/bsa_control/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("build")
 			cannon = deploy()
@@ -273,7 +275,7 @@
 		if("recalibrate")
 			calibrate(usr)
 			. = TRUE
-	update_icon()
+	update_appearance()
 
 /obj/machinery/computer/bsa_control/proc/calibrate(mob/user)
 	if(!GLOB.bsa_unlock)
@@ -305,7 +307,7 @@
 		return get_turf(G.parent)
 
 /obj/machinery/computer/bsa_control/proc/fire(mob/user)
-	if(cannon.stat)
+	if(cannon.machine_stat)
 		notice = "Cannon unpowered!"
 		return
 	notice = null

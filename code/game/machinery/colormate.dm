@@ -36,7 +36,7 @@
 /obj/machinery/gear_painter/update_icon_state()
 	if(panel_open)
 		icon_state = "colormate_open"
-	else if(!is_operational())
+	else if(!is_operational)
 		icon_state = "colormate_off"
 	else if(inserted)
 		icon_state = "colormate_active"
@@ -70,7 +70,7 @@
 			H.release()
 		insert_mob(victim, user)
 
-	if(is_type_in_list(I, allowed_types) && is_operational())
+	if(is_type_in_list(I, allowed_types) && is_operational)
 		if(!user.transferItemToLoc(I, src))
 			to_chat(user, "<span class='warning'>[I] is stuck to your hand!</span>")
 			return
@@ -112,7 +112,7 @@
 	updateUsrDialog()
 
 /obj/machinery/gear_painter/ui_interact(mob/user)
-	if(!is_operational())
+	if(!is_operational)
 		return
 	user.set_machine(src)
 	var/list/dat = list("<TITLE>Color Mate Control Panel</TITLE><BR>")

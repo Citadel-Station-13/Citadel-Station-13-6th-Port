@@ -275,8 +275,8 @@
 				if(length(customsender) <= 0 || customsender == "")
 					customsender = "UNKNOWN"
 				//sanitize text!!!
-				var/datum/signal/subspace/pda/signal = new(src, list(
-					"name" = sanitize(customsender),
+				var/datum/signal/subspace/messaging/pda/signal = new(src, list(
+					"name" = sanitize_name(customsender),
 					"job" = sanitize(customjob),
 					"message" = sanitize(custommessage),
 					"emojis" = TRUE,

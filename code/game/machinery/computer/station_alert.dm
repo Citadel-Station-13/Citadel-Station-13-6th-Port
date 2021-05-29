@@ -33,34 +33,49 @@
 
 	return data
 
-/obj/machinery/computer/station_alert/proc/triggerAlarm(class, area/A, O, obj/source)
+/obj/machinery/computer/station_alert/proc/triggerAlarm(class, area/home, cameras, obj/source)
 	if(source.z != z)
 		return
-	if(stat & (BROKEN))
+	if(machine_stat & (BROKEN))
 		return
 
-	var/list/L = alarms[class]
-	for(var/I in L)
-		if (I == A.name)
-			var/list/alarm = L[I]
+	var/list/our_sort = alarms[class]
+	for(var/areaname in our_sort)
+		if (areaname == home.name)
+			var/list/alarm = our_sort[areaname]
 			var/list/sources = alarm[3]
 			if (!(source in sources))
 				sources += source
-			return 1
-	var/obj/machinery/camera/C = null
-	var/list/CL = null
-	if(O && islist(O))
-		CL = O
-		if (CL.len == 1)
-			C = CL[1]
-	else if(O && istype(O, /obj/machinery/camera))
-		C = O
-	L[A.name] = list(A, (C ? C : O), list(source))
-	return 1
+			return TRUE
 
+	var/obj/machinery/camera/cam = null
+	var/list/our_cams = null
+	if(cameras && islist(cameras))
+		our_cams = cameras
+		if (our_cams.len == 1)
+			cam = our_cams[1]
+	else if(cameras && istype(cameras, /obj/machinery/camera))
+		cam = cameras
+	our_sort[home.name] = list(home, (cam ? cam : cameras), list(source))
+	return TRUE
+
+/obj/machinery/computer/station_alert/proc/freeCamera(area/home, obj/machinery/camera/cam)
+	for(var/class in alarms)
+		var/our_area = alarms[class][home.name]
+		if(!our_area)
+			continue
+		var/cams = our_area[2] //Get the cameras
+		if(!cams)
+			continue
+		if(islist(cams))
+			cams -= cam
+			if(length(cams) == 1)
+				our_area[2] = cams[1]
+		else
+			our_area[2] = null
 
 /obj/machinery/computer/station_alert/proc/cancelAlarm(class, area/A, obj/origin)
-	if(stat & (BROKEN))
+	if(machine_stat & (BROKEN))
 		return
 	var/list/L = alarms[class]
 	var/cleared = 0
@@ -75,23 +90,18 @@
 				L -= I
 	return !cleared
 
+
 /obj/machinery/computer/station_alert/update_overlays()
 	. = ..()
-	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
-	var/overlay_state = icon_screen
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		. |= "[icon_keyboard]_off"
 		return
-	. |= icon_keyboard
 	var/active_alarms = FALSE
 	for(var/cat in alarms)
-		if(length(alarms[cat]))
+		var/list/L = alarms[cat]
+		if(L.len)
 			active_alarms = TRUE
-			break
 	if(active_alarms)
-		overlay_state = "alert:2"
+		. += "alert:2"
 	else
-		overlay_state = "alert:0"
-	. |= overlay_state
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, layer, plane, dir)
-	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha=128)
+		. += "alert:0"
