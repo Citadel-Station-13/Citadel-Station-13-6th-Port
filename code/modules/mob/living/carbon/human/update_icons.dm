@@ -53,19 +53,23 @@ There are several things that need to be remembered:
 	RegisterSignal(src, SIGNAL_TRAIT(TRAIT_HUMAN_NO_RENDER), /mob.proc/regenerate_icons)
 
 //HAIR OVERLAY
-/mob/living/carbon/human/update_hair()
+/mob/living/carbon/human/update_hair(send_signal = TRUE)
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
 		dna.species.handle_hair(src)
+		if(send_signal)
+			SEND_SIGNAL(src, COMSIG_HUMAN_HEAD_ICONS_UPDATED, "hair")
 
 //used when putting/removing clothes that hide certain mutant body parts to just update those and not update the whole body.
-/mob/living/carbon/human/proc/update_mutant_bodyparts()
+/mob/living/carbon/human/proc/update_mutant_bodyparts(send_signal = TRUE)
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
-		dna.species.handle_mutant_bodyparts(src)
+		dna.species.handle_mutant_bodyparts(src, FALSE, send_signal)
+		if(send_signal)
+			SEND_SIGNAL(src, COMSIG_HUMAN_HEAD_ICONS_UPDATED, "mutant")
 
-/mob/living/carbon/human/update_body(update_genitals = FALSE)
+/mob/living/carbon/human/update_body(update_genitals = FALSE, send_signal = TRUE)
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
 		remove_overlay(BODY_LAYER)
-		dna.species.handle_body(src)
+		dna.species.handle_body(src, send_signal)
 		..()
 		if(update_genitals)
 			update_genitals()
@@ -233,8 +237,7 @@ There are several things that need to be remembered:
 		overlays_standing[GLOVES_LAYER] = gloves_overlay
 		apply_overlay(GLOVES_LAYER)
 
-
-/mob/living/carbon/human/update_inv_glasses()
+/mob/living/carbon/human/update_inv_glasses(send_signal = TRUE)
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
 		remove_overlay(GLASSES_LAYER)
 
@@ -244,6 +247,15 @@ There are several things that need to be remembered:
 		if(client && hud_used)
 			var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_GLASSES]
 			inv.update_icon()
+
+		if(send_signal)
+			SEND_SIGNAL(src, COMSIG_HUMAN_HEAD_ICONS_UPDATED, "glasses")
+
+/mob/living/carbon/human/update_inv_ears(send_signal = TRUE)
+	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
+		//send signal early incase the proc returns early for some reason
+		if(send_signal)
+			SEND_SIGNAL(src, COMSIG_HUMAN_HEAD_ICONS_UPDATED, "ears")
 
 		if(glasses)
 			glasses.screen_loc = ui_glasses		//...draw the item in the inventory screen
@@ -278,14 +290,6 @@ There are several things that need to be remembered:
 				if(hud_used.inventory_shown)			//if the inventory is open
 					client.screen += ears					//add it to the client's screen
 			update_observer_view(ears,1)
-
-			overlays_standing[EARS_LAYER] = ears.build_worn_icon(default_layer = EARS_LAYER, default_icon_file = 'icons/mob/ears.dmi')
-			var/mutable_appearance/ears_overlay = overlays_standing[EARS_LAYER]
-			if(OFFSET_EARS in dna.species.offset_features)
-				ears_overlay.pixel_x += dna.species.offset_features[OFFSET_EARS][1]
-				ears_overlay.pixel_y += dna.species.offset_features[OFFSET_EARS][2]
-			overlays_standing[EARS_LAYER] = ears_overlay
-		apply_overlay(EARS_LAYER)
 
 /mob/living/carbon/human/update_inv_shoes()
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
@@ -349,18 +353,18 @@ There are several things that need to be remembered:
 			overlays_standing[SUIT_STORE_LAYER] = s_store_overlay
 		apply_overlay(SUIT_STORE_LAYER)
 
-/mob/living/carbon/human/update_inv_head()
+/mob/living/carbon/human/update_inv_head(send_signal = TRUE)
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
 		remove_overlay(HEAD_LAYER)
 
-		if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
-			return
+		if(send_signal)
+			SEND_SIGNAL(src, COMSIG_HUMAN_HEAD_ICONS_UPDATED, "head")
 
 		if(client && hud_used)
 			var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_HEAD]
 			inv.update_icon()
 
-		if(head)
+		if(get_bodypart(BODY_ZONE_HEAD) && head)
 			head.screen_loc = ui_head
 			if(client && hud_used && hud_used.hud_shown)
 				if(hud_used.inventory_shown)
@@ -387,7 +391,7 @@ There are several things that need to be remembered:
 				head_overlay.pixel_y += dna.species.offset_features[OFFSET_HEAD][2]
 			overlays_standing[HEAD_LAYER] = head_overlay
 		apply_overlay(HEAD_LAYER)
-		update_mutant_bodyparts()
+		update_mutant_bodyparts(send_signal)
 
 /mob/living/carbon/human/update_inv_belt()
 	if(!HAS_TRAIT(src, TRAIT_HUMAN_NO_RENDER))
@@ -739,9 +743,9 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		. += "-husk"
 
-/mob/living/carbon/human/load_limb_from_cache()
+/mob/living/carbon/human/load_limb_from_cache(send_signal = TRUE)
 	..()
-	update_hair()
+	update_hair(send_signal)
 
 /mob/living/carbon/human/proc/update_observer_view(obj/item/I, inventory)
 	if(observers && observers.len)

@@ -77,7 +77,7 @@
 	//For soft-restricting markings to species IDs
 	var/list/recommended_species
 
-/datum/sprite_accessory/proc/is_not_visible(var/mob/living/carbon/human/H, var/tauric) //return if the accessory shouldn't be shown
+/datum/sprite_accessory/proc/is_not_visible(mob/living/carbon/human/H, tauric, ignore_head = FALSE) //return if the accessory shouldn't be shown
 	return FALSE
 
 /datum/sprite_accessory/underwear

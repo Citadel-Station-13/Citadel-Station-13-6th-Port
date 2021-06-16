@@ -5,6 +5,7 @@
 /datum/sprite_accessory/screen
 	icon = 'modular_citadel/icons/mob/ipc_screens.dmi'
 	color_src = null
+	mutant_part_string = "ihead" //ipc head
 	relevant_layers = list(BODY_ADJ_LAYER)
 
 /datum/sprite_accessory/screen/blank

@@ -191,16 +191,15 @@
 /mob/living/carbon/proc/update_hud_back(obj/item/I)
 	return
 
-/mob/living/carbon/update_body()
-	update_body_parts()
+/mob/living/carbon/update_body(update_genitals = FALSE, send_signal = TRUE)
+	update_body_parts(send_signal)
 
-/mob/living/carbon/proc/update_body_parts()
+/mob/living/carbon/proc/update_body_parts(send_signal = TRUE)
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()
 	if(oldkey == icon_render_key)
 		return
-
 	remove_overlay(BODYPARTS_LAYER)
 
 	var/is_taur = FALSE
@@ -212,10 +211,9 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		BP.update_limb()
-
 	//LOAD ICONS
 	if(limb_icon_cache[icon_render_key])
-		load_limb_from_cache()
+		load_limb_from_cache(send_signal)
 		return
 
 	//GENERATE NEW LIMBS
@@ -229,10 +227,8 @@
 	if(new_limbs.len)
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
 		limb_icon_cache[icon_render_key] = new_limbs
-
 	apply_overlay(BODYPARTS_LAYER)
 	update_damage_overlays()
-
 
 
 /////////////////////

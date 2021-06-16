@@ -728,7 +728,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 
 	H.apply_overlay(HAIR_LAYER)
 
-/datum/species/proc/handle_body(mob/living/carbon/human/H)
+/datum/species/proc/handle_body(mob/living/carbon/human/H, send_signal = TRUE)
 	H.remove_overlay(BODY_LAYER)
 
 	var/list/standing = list()
@@ -820,9 +820,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		H.overlays_standing[BODY_LAYER] = standing
 
 	H.apply_overlay(BODY_LAYER)
-	handle_mutant_bodyparts(H)
+	handle_mutant_bodyparts(H, send_signal)
 
-/datum/species/proc/handle_mutant_bodyparts(mob/living/carbon/human/H, forced_colour)
+/datum/species/proc/handle_mutant_bodyparts(mob/living/carbon/human/H, forced_colour, send_signal = TRUE)
 	var/list/bodyparts_to_add = mutant_bodyparts.Copy()
 
 	H.remove_overlay(BODY_BEHIND_LAYER)
@@ -872,13 +872,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 			O.use_digitigrade = FULL_DIGITIGRADE
 			update_needed = TRUE
 	if(update_needed)
-		H.update_body_parts()
+		H.update_body_parts(send_signal)
 	if(not_digitigrade && (DIGITIGRADE in species_traits)) //Curse is lifted
 		species_traits -= DIGITIGRADE
 
 	if(!bodyparts_to_add)
 		return
-
 	var/list/relevant_layers = list()
 	var/list/dna_feature_as_text_string = list()
 

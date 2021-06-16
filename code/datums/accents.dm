@@ -95,9 +95,14 @@
 /datum/accent/dullahan/modify_speech(list/speech_args, datum/source, mob/living/carbon/owner)
 	if(owner)
 		if(isdullahan(owner))
-			var/datum/species/dullahan/D = owner.dna.species
-			if(isobj(D.myhead.loc))
-				var/obj/O = D.myhead.loc
+			var/datum/component/dullahan/D = owner.GetComponent(/datum/component/dullahan)
+			if(isobj(D.relay.loc))
+				var/obj/O = D.relay.loc
 				O.say(speech_args[SPEECH_MESSAGE])
+				if(D.stored_head)
+					var/worn_ear_item = D.stored_head.stored_items[3]
+					if(istype(worn_ear_item, /obj/item/radio))
+						owner.radio(speech_args[SPEECH_MESSAGE], owner.get_message_mode(speech_args[SPEECH_MESSAGE]), speech_args[SPEECH_SPANS])
+
 	speech_args[SPEECH_MESSAGE] = ""
 	return speech_args

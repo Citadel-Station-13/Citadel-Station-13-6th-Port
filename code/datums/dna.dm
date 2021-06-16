@@ -701,7 +701,10 @@
 						drop_all_held_items()
 						gib()
 				else
-					set_species(/datum/species/dullahan)
+					if(!isdullahan(src))
+						AddComponent(/datum/component/dullahan)
+					else
+						gib()
 
 /datum/dna/proc/update_body_size(old_size)
 	if(!holder || features["body_size"] == old_size)

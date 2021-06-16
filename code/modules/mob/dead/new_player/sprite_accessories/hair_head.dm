@@ -2,6 +2,7 @@
 // Hair Definitions //
 //////////////////////
 /datum/sprite_accessory/hair
+	mutant_part_string = "hair"
 	icon = 'icons/mob/hair.dmi'	  // default icon for all hairs
 
 	// please make sure they're sorted alphabetically and, where needed, categorized

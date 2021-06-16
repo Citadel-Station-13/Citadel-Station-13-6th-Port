@@ -216,9 +216,12 @@
 				visible_message("<b>[src]</b> raises an eyebrown, <span class='spooky'>\"It's 4 candies for that [gender]! Thems the rules!\"</span>")
 				jacqrunes("It's 4 candies for that [gender]! Thems the rules!", C)
 				return
+			if(C.GetComponent(/datum/component/dullahan))
+				visible_message("<b>[src]</b> raises an eyebrown, <span class='spooky'>\"Ye ae nae trickin' me [gender]!\"</span>")
+				return
 			visible_message("<b>[src]</b> waves their arms around, <span class='spooky'>\"Off comes your head, a pumpkin taking it's stead!\"</span>")
 			jacqrunes("Off comes your head, a pumpkin taking it's stead!", C)
-			C.reagents.add_reagent(/datum/reagent/mutationtoxin/pumpkinhead, 5)
+			C.AddComponent(/datum/component/dullahan, custom_head_icon = 'icons/obj/clothing/hats.dmi', custom_head_icon_state = "hardhat1_pumpkin_j") //makes them a pumpkin dullahan
 			sleep(20)
 			poof()
 			return
@@ -507,12 +510,6 @@
 		return
 	else
 		..()
-
-/datum/reagent/mutationtoxin/pumpkinhead
-	name = "Pumpkin head mutation toxin"
-	race = /datum/species/dullahan/pumpkin
-	mutationtext = "<span class='spooky'>The pain subsides. You feel your head roll off your shoulders... and you smell pumpkin."
-	//I couldn't get the replace head sprite with a pumpkin to work so, it is what it is.
 
 /mob/living/simple_animal/jacq/proc/check_candies(mob/living/carbon/C)
 	var/invs = C.get_contents()

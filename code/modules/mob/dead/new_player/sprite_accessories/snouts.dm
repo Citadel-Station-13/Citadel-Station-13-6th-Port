@@ -3,9 +3,9 @@
 	mutant_part_string = "snout"
 	relevant_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
 
-/datum/sprite_accessory/snouts/is_not_visible(var/mob/living/carbon/human/H, var/tauric)
+/datum/sprite_accessory/snouts/is_not_visible(mob/living/carbon/human/H, tauric, ignore_head = FALSE)
 	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
-	return ((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !HD || HD.is_robotic_limb(FALSE))
+	return ((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || (!ignore_head && (!HD || HD.is_robotic_limb(FALSE))))
 
 /datum/sprite_accessory/snouts/round
 	name = "Round"
@@ -155,9 +155,9 @@
 	recommended_species = list("mammal", "slimeperson", "insect", "podweak", "lizard")
 	relevant_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
 
-/datum/sprite_accessory/snouts/mam_snouts/is_not_visible(var/mob/living/carbon/human/H, var/tauric)
+/datum/sprite_accessory/snouts/mam_snouts/is_not_visible(mob/living/carbon/human/H, tauric, ignore_head = FALSE)
 	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
-	return ((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !HD || HD.is_robotic_limb(FALSE))
+	return ((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || (!ignore_head && (!HD || HD.is_robotic_limb(FALSE))))
 
 /datum/sprite_accessory/snouts/mam_snouts/none
 	name = "None"

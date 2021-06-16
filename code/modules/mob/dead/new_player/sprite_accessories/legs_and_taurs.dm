@@ -31,7 +31,7 @@
 	var/hide_legs = USE_QUADRUPED_CLIP_MASK
 	mutant_part_string = "taur"
 
-/datum/sprite_accessory/taur/is_not_visible(var/mob/living/carbon/human/H, var/tauric)
+/datum/sprite_accessory/taur/is_not_visible(mob/living/carbon/human/H, tauric)
 	return (!tauric || (H.wear_suit && (H.wear_suit.flags_inv & HIDETAUR)))
 
 /datum/sprite_accessory/taur/New()
