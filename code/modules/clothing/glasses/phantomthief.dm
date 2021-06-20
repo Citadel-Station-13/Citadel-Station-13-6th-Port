@@ -3,8 +3,8 @@
 	desc = "A cheap, Syndicate-branded paper face mask. They'll never see it coming."
 	mob_overlay_icon = 'icons/mob/clothing/mask.dmi'
 	icon = 'icons/obj/clothing/masks.dmi'
-	icon_state = "s-ninja"
-	item_state = "s-ninja"
+	icon_state = "ninjaOLD"
+	item_state = "ninjaOLD"
 
 /obj/item/clothing/glasses/phantomthief/ComponentInitialize()
 	. = ..()

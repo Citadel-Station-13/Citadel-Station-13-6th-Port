@@ -1147,3 +1147,72 @@
 	max_energy = 30
 	recharge_rate = 1
 	name = "Wrapping Paper Storage"
+
+/obj/item/robot_module/syndicate/spider// used for space ninja and their cyborg hacking special objective
+	name = "Spider Assault"
+	basic_modules = list(
+		/obj/item/assembly/flash/cyborg,
+		/obj/item/extinguisher/mini,
+		/obj/item/crowbar/cyborg,
+		/obj/item/melee/transforming/energy/sword/cyborg,
+		/obj/item/gun/energy/printer,
+		/obj/item/pinpointer/spider_cyborg)
+
+	cyborg_base_icon = "spider_sec"
+
+/obj/item/robot_module/syndicate_medical/spider// ditto
+	name = "Spider Medical"
+	basic_modules = list(
+		/obj/item/assembly/flash/cyborg,
+		/obj/item/extinguisher/mini,
+		/obj/item/crowbar/cyborg,
+		/obj/item/reagent_containers/borghypo/syndicate,
+		/obj/item/shockpaddles/syndicate,
+		/obj/item/healthanalyzer/advanced,
+		/obj/item/surgical_drapes/advanced,
+		/obj/item/retractor,
+		/obj/item/hemostat,
+		/obj/item/cautery,
+		/obj/item/surgicaldrill,
+		/obj/item/scalpel,
+		/obj/item/bonesetter,
+		/obj/item/stack/medical/bone_gel,
+		/obj/item/melee/transforming/energy/sword/cyborg/saw,
+		/obj/item/roller/robo,
+		/obj/item/stack/medical/gauze/cyborg,
+		/obj/item/gun/medbeam,
+		/obj/item/organ_storage,
+		/obj/item/pinpointer/spider_cyborg)
+
+	cyborg_base_icon = "spider_medical"
+
+/obj/item/robot_module/saboteur/spider// ditto
+	name = "Spider Saboteur"
+	basic_modules = list(
+		/obj/item/assembly/flash/cyborg,
+		/obj/item/borg/sight/thermal,
+		/obj/item/construction/rcd/borg/syndicate,
+		/obj/item/pipe_dispenser,
+		/obj/item/restraints/handcuffs/cable/zipties,
+		/obj/item/extinguisher,
+		/obj/item/weldingtool/largetank/cyborg,
+		/obj/item/screwdriver/nuke,
+		/obj/item/wrench/cyborg,
+		/obj/item/crowbar/cyborg,
+		/obj/item/wirecutters/cyborg,
+		/obj/item/multitool/cyborg,
+		/obj/item/storage/part_replacer/cyborg,
+		/obj/item/holosign_creator/atmos,
+		/obj/item/weapon/gripper,
+		/obj/item/lightreplacer/cyborg,
+		/obj/item/stack/sheet/metal/cyborg,
+		/obj/item/stack/sheet/glass/cyborg,
+		/obj/item/stack/sheet/rglass/cyborg,
+		/obj/item/stack/rods/cyborg,
+		/obj/item/stack/tile/plasteel/cyborg,
+		/obj/item/destTagger/borg,
+		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/borg_chameleon,
+		/obj/item/pinpointer/spider_cyborg)
+
+	cyborg_base_icon = "spider_engi"

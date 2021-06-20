@@ -811,6 +811,32 @@
 						<i>Help the operatives secure the disk at all costs!</i></b>"
 	set_module = /obj/item/robot_module/saboteur
 
+/mob/living/silicon/robot/modules/syndicate/spider// used for space ninja and their cyborg hacking special objective
+	bubble_icon = "spider"
+	playstyle_string = "<span class='big bold'>You are a Spider Clan assault cyborg!</span><br>\
+							<b>You are armed with powerful offensive tools to aid you in your mission: obey your ninja masters by any means necessary. \
+							Your cyborg LMG will slowly produce ammunition from your power supply, and your pinpointer will find and locate fellow members of the Spider Clan.</b>"
+	set_module = /obj/item/robot_module/syndicate/spider
+
+/mob/living/silicon/robot/modules/syndicate_medical/spider// ditto
+	bubble_icon = "spider"
+	var/playstyle_string = "<span class='big bold'>You are a Spider Clan medical cyborg!</span><br>\
+						<b>You are armed with powerful medical tools to aid you in your mission: obey your ninja masters by any means necessary. \
+						Your hypospray will produce Restorative Nanites, a wonder-drug that will heal most types of bodily damages, including clone and brain damage. It also produces morphine for offense. \
+						Your defibrillator paddles can revive allies through their hardsuits, or can be used on harm intent to shock enemies! \
+						Your energy saw functions as a circular saw, but can be activated to deal more damage, and your pinpointer will find and locate fellow members of the Spider Clan.</b>"
+	set_module = /obj/item/robot_module/syndicate_medical/spider
+
+/mob/living/silicon/robot/modules/saboteur/spider// ditto
+	bubble_icon = "spider"
+	var/playstyle_string = "<span class='big bold'>You are a Spider Clan saboteur cyborg!</span><br>\
+						<b>You are armed with robust engineering tools to aid you in your mission: obey your ninja masters by any means necessary. \
+						Your destination tagger will allow you to stealthily traverse the disposal network across the station. \
+						Your welder will can be used to repair yourself or any allied silicon units, while serving as an impromptu melee weapon.  \
+						Your cyborg chameleon projector allows you to assume the appearance and registered name of a Nanotrasen engineering borg, and undertake covert actions on the station, \
+						be aware that almost any physical contact or incidental damage will break your camouflage.</b>"
+	set_module = /obj/item/robot_module/saboteur/spider
+
 /mob/living/silicon/robot/proc/notify_ai(notifytype, oldname, newname)
 	if(!connected_ai)
 		return

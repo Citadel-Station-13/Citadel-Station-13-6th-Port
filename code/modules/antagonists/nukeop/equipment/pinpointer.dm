@@ -68,6 +68,11 @@
 	desc = "An integrated tracking device, jury-rigged to search for living Syndicate operatives."
 	flags_1 = NONE
 
+/obj/item/pinpointer/spider_cyborg // Cyborg pinpointers just look for a random space ninja.
+	name = "cyborg spider clan pinpointer"
+	desc = "An integrated tracking device, jury-rigged to search for living Spider Clan members."
+	flags_1 = NONE
+
 
 /obj/item/pinpointer/syndicate_cyborg/Initialize()
 	. = ..()
@@ -84,4 +89,21 @@
 	var/mob/living/closest_operative = get_closest_atom(/mob/living/carbon/human, possible_targets, here)
 	if(closest_operative)
 		target = closest_operative
+	..()
+
+/obj/item/pinpointer/spider_cyborg/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, CYBORG_ITEM_TRAIT)
+
+/obj/item/pinpointer/spider_cyborg/scan_for_target()
+	target = null
+	var/list/possible_targets = list()
+	var/turf/here = get_turf(src)
+	for(var/V in get_antag_minds(/datum/antagonist/ninja))
+		var/datum/mind/M = V
+		if(ishuman(M.current) && M.current.stat != DEAD)
+			possible_targets |= M.current
+	var/mob/living/closest_weeaboo = get_closest_atom(/mob/living/carbon/human, possible_targets, here)
+	if(closest_weeaboo)
+		target = closest_weeaboo
 	..()
