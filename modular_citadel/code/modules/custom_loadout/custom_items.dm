@@ -610,3 +610,48 @@
 	icon = 'icons/obj/custom.dmi'
 	mob_overlay_icon = 'icons/mob/clothing/custom_w.dmi'
 	mutantrace_variation = NONE
+
+/obj/item/coin/red
+	name = "red pokerchip"
+	desc = "A red pokerchip."
+	icon_state = "c_red"
+	item_state = "c_red"
+	icon = 'icons/obj/custom.dmi'
+
+/obj/item/coin/blue
+	name = "blue pokerchip"
+	desc = "A blue pokerchip."
+	icon_state = "c_nlue"
+	item_state = "c_blue"
+	icon = 'icons/obj/custom.dmi'
+
+/obj/item/coin/green
+	name = "green pokerchip"
+	desc = "A green pokerchip."
+	icon_state = "c_green"
+	item_state = "c_green"
+	icon = 'icons/obj/custom.dmi'
+
+/obj/item/coin/black
+	name = "black pokerchip"
+	desc = "A black pokerchip."
+	icon_state = "c_black"
+	item_state = "c_black"
+	icon = 'icons/obj/custom.dmi'
+
+/obj/item/storage/box/pockerchips
+	name = "tray of pocker chips"
+	desc = "A tray of green, red, blue, and black pocker chips."
+	icon_state = "c_holder"
+	icon = 'icons/obj/custom.dmi'
+	illustration=null
+
+/obj/item/storage/box/pokerchips/PopulateContents()
+	for(var/i in 1 to 5)
+		new /obj/item/coin/red(src)
+	for(var/i in 1 to 10)
+		new /obj/item/coin/blue(src)
+	for(var/i in 1 to 15)
+		new /obj/item/coin/black(src)
+	for(var/i in 1 to 20)
+		new /obj/item/coin/green(src)

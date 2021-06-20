@@ -554,3 +554,9 @@
 	slot = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/smaiden
 	ckeywhitelist = list("ultimarifox")
+
+/datum/gear/donator/pokerchips
+	name = "pokerchip set"
+	slot = SLOT_IN_BACKPACK
+	path = /obj/item/storage/box/pockerchips
+	ckeywhitelist = list("greed2323")
