@@ -610,3 +610,15 @@
 	icon = 'icons/obj/custom.dmi'
 	mob_overlay_icon = 'icons/mob/clothing/custom_w.dmi'
 	mutantrace_variation = NONE
+
+/obj/item/gun/ballistic/automatic/toy/pistol/custom
+	name = "Totally Real Gun"
+	desc = "A toy replica that has been passed down for a single generation."
+	icon_state = "pistol"
+	w_class = WEIGHT_CLASS_SMALL
+	mag_type = /obj/item/ammo_box/magazine/toy/pistol
+	fire_sound = 'sound/weapons/gunshot.ogg'
+	burst_size = 1
+	fire_delay = 0
+	actions_types = list()
+	automatic_burst_overlay = FALSE
