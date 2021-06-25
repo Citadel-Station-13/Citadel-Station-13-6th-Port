@@ -289,9 +289,6 @@
 				wash_obj(G)
 	else
 		soundloop.stop()
-		if(isopenturf(loc))
-			var/turf/open/tile = loc
-			tile.MakeSlippery(TURF_WET_WATER, min_wet_time = 5 SECONDS, wet_time_to_add = 1 SECONDS)
 
 /obj/machinery/shower/attackby(obj/item/I, mob/user, params)
 	if(I.type == /obj/item/analyzer)
@@ -365,6 +362,17 @@
 		tile.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 		tile.clean_blood()
 		SEND_SIGNAL(tile, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
+		if(isopenturf(loc))
+			var/turf/open/open = loc
+			var/temp
+			switch(watertemp)
+				if("freezing")
+					temp = T0C
+				if("boiling")
+					temp = T0C + 100
+				else
+					temp = T0C + 40
+			open.MakeWet(0.01, temp)
 		for(var/obj/effect/E in tile)
 			if(is_cleanable(E))
 				qdel(E)

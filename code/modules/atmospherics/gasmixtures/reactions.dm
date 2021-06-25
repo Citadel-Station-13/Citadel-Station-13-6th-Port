@@ -69,7 +69,7 @@
 	if (air.return_temperature() <= WATER_VAPOR_FREEZE)
 		if(location && location.freon_gas_act())
 			. = REACTING
-	else if(location && location.water_vapor_gas_act())
+	else if(location && location.water_vapor_gas_act(air.return_temperature()))
 		air.adjust_moles(/datum/gas/water_vapor,-MOLES_GAS_VISIBLE)
 		. = REACTING
 

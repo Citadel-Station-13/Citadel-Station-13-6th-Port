@@ -412,8 +412,8 @@
 		visible_message("<span class='warning'>The mutated core shudders, and collapses into a puddle, unable to maintain its form.</span>")
 	qdel(src)
 
-/mob/living/simple_animal/slime/proc/apply_water()
-	adjustBruteLoss(rand(15,20))
+/mob/living/simple_animal/slime/proc/apply_water(coeff)
+	adjustBruteLoss(coeff * rand(15,20))
 	if(!client)
 		if(Target) // Like cats
 			Target = null

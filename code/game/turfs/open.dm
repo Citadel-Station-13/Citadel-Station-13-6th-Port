@@ -253,18 +253,18 @@
 	MakeSlippery(TURF_WET_PERMAFROST, 50)
 	return 1
 
-/turf/open/proc/water_vapor_gas_act()
-	MakeSlippery(TURF_WET_WATER, min_wet_time = 100, wet_time_to_add = 50)
-
+/turf/open/proc/water_vapor_gas_act(gas_temp)
+	var/already_wet = MakeWet(MOLES_GAS_VISIBLE, gas_temp, forced = FALSE)
 	for(var/mob/living/simple_animal/slime/M in src)
 		M.apply_water()
 
-	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
-	clean_blood()
-	for(var/obj/effect/O in src)
-		if(is_cleanable(O))
-			qdel(O)
-	return TRUE
+	if(!already_wet)
+		SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
+		clean_blood()
+		for(var/obj/effect/O in src)
+			if(is_cleanable(O))
+				qdel(O)
+	return !already_wet
 
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube)
 	if(!(lube & FLYING_DOESNT_HELP) && (C.movement_type & FLYING || !has_gravity(src)))
@@ -311,6 +311,11 @@
 
 /turf/open/proc/MakeSlippery(wet_setting = TURF_WET_WATER, min_wet_time = 0, wet_time_to_add = 0, max_wet_time = MAXIMUM_WET_TIME, permanent)
 	AddComponent(/datum/component/wet_floor, wet_setting, min_wet_time, wet_time_to_add, max_wet_time, permanent)
+
+/turf/open/proc/MakeWet(amt = 0.0, new_temp = T20C, forced = TRUE)
+	. = GetComponent(/datum/component/wetness)
+	if(forced || !.)
+		AddComponent(/datum/component/wetness, amt, new_temp)
 
 /turf/open/proc/MakeDry(wet_setting = TURF_WET_WATER, immediate = FALSE, amount = INFINITY)
 	SEND_SIGNAL(src, COMSIG_TURF_MAKE_DRY, wet_setting, immediate, amount)
