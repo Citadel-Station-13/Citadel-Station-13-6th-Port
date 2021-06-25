@@ -1364,7 +1364,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 
 /datum/species/proc/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(chem.type == exotic_blood && !istype(exotic_blood, /datum/reagent/blood))
-		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		H.AddIntegrationBlood(round(chem.volume, 0.1))
 		H.reagents.del_reagent(chem.type)
 		return TRUE
 	return FALSE

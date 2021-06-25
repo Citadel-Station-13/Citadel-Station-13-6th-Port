@@ -47,7 +47,7 @@ Bonus
 			M.adjustOxyLoss(-7, 0)
 			M.losebreath = max(0, M.losebreath - 4)
 			if(regenerate_blood && M.blood_volume < (BLOOD_VOLUME_NORMAL * M.blood_ratio))
-				M.blood_volume += 1
+				M.AddIntegrationBlood(1)
 		else
 			if(prob(base_message_chance))
 				to_chat(M, "<span class='notice'>[pick("Your lungs feel great.", "You realize you haven't been breathing.", "You don't feel the need to breathe.")]</span>")

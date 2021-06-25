@@ -147,7 +147,7 @@
 
 		carbon_target.blood_volume -= 20
 		if(carbon_user.blood_volume < BLOOD_VOLUME_MAXIMUM) //we dont want to explode after all
-			carbon_user.blood_volume += 20
+			carbon_user.AddIntegrationBlood(20)
 		return
 
 /obj/effect/proc_holder/spell/pointed/blood_siphon/can_target(atom/target, mob/user, silent)

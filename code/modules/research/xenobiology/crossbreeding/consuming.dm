@@ -322,7 +322,7 @@ Consuming extracts:
 	playsound(get_turf(M), 'sound/effects/splat.ogg', 10, 1)
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
-		C.blood_volume += 25 //Half a vampire drain.
+		C.AddIntegrationBlood(25) //Half a vampire drain.
 
 /obj/item/slimecross/consuming/green
 	colour = "green"

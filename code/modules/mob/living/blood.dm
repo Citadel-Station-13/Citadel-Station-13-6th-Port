@@ -39,29 +39,33 @@
 		return
 
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
-
-		//Blood regeneration if there is some space
-		if(blood_volume < BLOOD_VOLUME_NORMAL && !HAS_TRAIT(src, TRAIT_NOHUNGER))
-			var/nutrition_ratio = 0
-			switch(nutrition)
-				if(0 to NUTRITION_LEVEL_STARVING)
-					nutrition_ratio = 0.2
-				if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-					nutrition_ratio = 0.4
-				if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-					nutrition_ratio = 0.6
-				if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-					nutrition_ratio = 0.8
-				else
-					nutrition_ratio = 1
-			if(satiety > 80)
-				nutrition_ratio *= 1.25
-			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
-			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5 * nutrition_ratio)
+		if(integrating_blood > 0)
+			integrating_blood = max(integrating_blood - 1, 0)
+			//Blood regeneration if there is some space
+			if(blood_volume < BLOOD_VOLUME_NORMAL)
+				var/nutrition_ratio = 0
+				blood_volume ++
+				if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
+					switch(nutrition)
+						if(0 to NUTRITION_LEVEL_STARVING)
+							nutrition_ratio = 0.2
+						if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
+							nutrition_ratio = 0.4
+						if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
+							nutrition_ratio = 0.6
+						if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
+							nutrition_ratio = 0.8
+						else
+							nutrition_ratio = 1
+					if(satiety > 80)
+						nutrition_ratio *= 1.25
+					adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
+					blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5 * nutrition_ratio)
 
 		//Effects of bloodloss
 		var/word = pick("dizzy","woozy","faint")
-		switch(blood_volume)
+		var/blood_effect_volume = blood_volume + integrating_blood
+		switch(blood_effect_volume)
 			if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 				if(prob(10))
 					to_chat(src, "<span class='warning'>You feel terribly bloated.</span>")
@@ -94,14 +98,22 @@
 			bleed(temp_bleed)
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/proc/bleed(amt)
-	if(blood_volume)
+/mob/living/carbon/proc/bleed(amt, force)
+	var/bled = FALSE //Have we bled amnt?
+	if(blood_volume > amt || force && blood_volume)
 		blood_volume = max(blood_volume - amt, 0)
-		if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
-			if(amt >= 10)
-				add_splatter_floor(src.loc)
-			else
-				add_splatter_floor(src.loc, 1)
+		bled = TRUE
+	if(integrating_blood > amt || force && integrating_blood)
+		integrating_blood = max(integrating_blood - amt, 0)
+		bled = TRUE
+	if(!bled && !force) //If we are already cycling back through, don't do this again
+		bleed(amt, TRUE) //we cycle back through to try to bleed SOMETHING, not neccesarily the required amount
+		return
+	if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+		if(amt >= 10)
+			add_splatter_floor(src.loc)
+		else
+			add_splatter_floor(src.loc, TRUE)
 
 /mob/living/carbon/human/bleed(amt)
 	amt *= physiology.bleed_mod
@@ -114,6 +126,7 @@
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
+	integrating_blood = 0
 
 /mob/living/carbon/restore_blood()
 	blood_volume = (BLOOD_VOLUME_NORMAL * blood_ratio)
@@ -368,10 +381,17 @@
 		return
 	blood_ratio = 1
 
-/mob/living/proc/AdjustBloodVol(var/value)
+/mob/living/proc/AdjustBloodVol(value)
 	if(blood_ratio == value)
 		return
 	blood_ratio = value
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		H.handle_blood()
+
+/mob/living/proc/AddIntegrationBlood(value, force)
+	var/species_maxblood = BLOOD_VOLUME_NORMAL
+	if(isslimeperson(src) || isvampire(src))
+		species_maxblood = BLOOD_VOLUME_MAXIMUM
+	if(blood_volume + integrating_blood < species_maxblood || force)
+		integrating_blood += value

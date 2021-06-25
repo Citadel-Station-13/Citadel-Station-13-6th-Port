@@ -625,7 +625,7 @@
 	. = ..()
 	if (breath)
 		var/plasma_pp = breath.get_breath_partial_pressure(breath.get_moles(/datum/gas/plasma))
-		owner.blood_volume += (0.2 * plasma_pp) // 10/s when breathing literally nothing but plasma, which will suffocate you.
+		owner.AddIntegrationBlood(0.2 * plasma_pp) // 10/s when breathing literally nothing but plasma, which will suffocate you.
 
 /obj/item/organ/lungs/yamerol
 	name = "Yamerol lungs"

@@ -825,6 +825,7 @@
 			dna.remove_mutation(HM.name)
 	if(blood_volume < (BLOOD_VOLUME_NORMAL*blood_ratio))
 		blood_volume = (BLOOD_VOLUME_NORMAL*blood_ratio)
+	integrating_blood = 0
 	..()
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)

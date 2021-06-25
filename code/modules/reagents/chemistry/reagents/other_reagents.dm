@@ -48,7 +48,7 @@
 		var/mob/living/carbon/C = L
 		var/blood_id = C.get_blood_id()
 		if((HAS_TRAIT(C, TRAIT_NOMARROW) || blood_id == /datum/reagent/blood || blood_id == /datum/reagent/blood/jellyblood) && (method == INJECT || (method == INGEST && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
-			C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM * C.blood_ratio)
+			C.AddIntegrationBlood(round(reac_volume, 0.1))
 			// we don't care about bloodtype here, we're just refilling the mob
 
 	if(reac_volume >= 10 && istype(L) && method != INJECT)
@@ -253,7 +253,7 @@
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	if(M.blood_volume)
-		M.blood_volume += 0.1 // water is good for you!
+		M.AddIntegrationBlood(0.1) // water is good for you!
 
 /*
  *	Water reaction to turf
@@ -368,7 +368,7 @@
 
 /datum/reagent/water/holywater/on_mob_life(mob/living/carbon/M)
 	if(M.blood_volume)
-		M.blood_volume += 0.1 // water is good for you!
+		M.AddIntegrationBlood(0.1) // water is good for you!
 	if(!data)
 		data = list("misc" = 1)
 	data["misc"]++
@@ -454,7 +454,7 @@
 		M.adjustBruteLoss(-2, FALSE)
 		M.adjustFireLoss(-2, FALSE)
 		if(ishuman(M) && M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
-			M.blood_volume += 3
+			M.AddIntegrationBlood(3)
 	else  // Will deal about 90 damage when 50 units are thrown
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
 		M.adjustToxLoss(2, FALSE)
@@ -1144,7 +1144,7 @@
 	if((HAS_TRAIT(C, TRAIT_NOMARROW)))
 		return
 	if(C.blood_volume < (BLOOD_VOLUME_NORMAL*C.blood_ratio))
-		C.blood_volume += 0.25
+		C.AddIntegrationBlood(0.25)
 	..()
 
 /datum/reagent/iron/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
@@ -2550,7 +2550,7 @@
 		M.adjustBruteLoss(-3, FALSE)
 		M.adjustFireLoss(-3, FALSE)
 		if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume += 3
+			M.AddIntegrationBlood(3)
 	else
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
 		M.adjustToxLoss(2, FALSE)
