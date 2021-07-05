@@ -8,6 +8,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.2
 	value = REAGENT_VALUE_COMMON //Encouraging people to mix toxins for reasons beyond harming each other or mixing reagents such as pen acid.
+	boiling_point = T0C + 100
 	var/toxpwr = 1.5
 
 // Are you a bad enough dude to poison your own plants?

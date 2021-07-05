@@ -14,6 +14,7 @@
 	taste_description = "alcohol"
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	pH = 7.33
+	boiling_point = 351.38
 	value = REAGENT_VALUE_VERY_COMMON //don't bother tweaking all drinks values, way too many can easily be done roundstart or with an upgraded dispenser.
 
 /*

@@ -264,6 +264,8 @@
 #define GAS_MIASMA				"miasma"
 #define GAS_METHANE				"methane"
 #define GAS_METHYL_BROMIDE		"methyl_bromide"
+#define GAS_AMMONIA				"ammonia"
+#define GAS_FLUORINE			"fluorine"
 
 #define GAS_FLAG_DANGEROUS		(1<<0)
 #define GAS_FLAG_BREATH_PROC	(1<<1)

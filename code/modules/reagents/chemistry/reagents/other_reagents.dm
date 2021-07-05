@@ -1006,6 +1006,7 @@
 	color = "#808080" // rgb: 128, 128, 128
 	taste_description = "chlorine"
 	pH = 7.4
+	boiling_point = 239.11
 
 // You're an idiot for thinking that one of the most corrosive and deadly gasses would be beneficial
 /datum/reagent/chlorine/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user)
@@ -1272,7 +1273,14 @@
 	glass_name = "glass of welder fuel"
 	glass_desc = "Unless you're an industrial tool, this is probably not safe for consumption."
 	pH = 4
+	boiling_point = 189
 
+/datum/reagent/fuel/define_gas()
+	var/datum/gas/G = ..()
+	G.fire_energy_released = 200000
+	G.fire_products = list(GAS_CO2 = 1)
+	G.fire_temperature = T20C+30
+	return G
 
 /datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
 	if(method == TOUCH || method == VAPOR)
@@ -1290,6 +1298,7 @@
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 	color = "#A5F0EE" // rgb: 165, 240, 238
 	taste_description = "sourness"
+	boiling_point = T0C+50
 	pH = 5.5
 
 /datum/reagent/space_cleaner/reaction_obj(obj/O, reac_volume)
@@ -1302,6 +1311,7 @@
 			O.clean_blood()
 
 /datum/reagent/space_cleaner/reaction_turf(turf/T, reac_volume)
+	..()
 	if(reac_volume >= 1)
 		T.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 		SEND_SIGNAL(T, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
@@ -2454,6 +2464,7 @@
 	var/decal_path = /obj/effect/decal/cleanable/semen
 
 /datum/reagent/consumable/semen/reaction_turf(turf/T, reac_volume)
+	..()
 	if(!istype(T))
 		return
 	if(reac_volume < 10)

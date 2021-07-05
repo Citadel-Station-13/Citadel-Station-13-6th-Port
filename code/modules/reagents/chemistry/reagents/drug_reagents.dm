@@ -2,6 +2,7 @@
 	name = "Drug"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	taste_description = "bitterness"
+	boiling_point = T0C + 100
 	var/trippy = TRUE //Does this drug make you trip?
 
 /datum/reagent/drug/on_mob_end_metabolize(mob/living/M)

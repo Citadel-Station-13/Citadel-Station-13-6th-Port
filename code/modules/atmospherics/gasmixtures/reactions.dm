@@ -56,16 +56,61 @@
 	min_requirements = list(GAS_H2O = MOLES_GAS_VISIBLE)
 
 /datum/gas_reaction/water_vapor/react(datum/gas_mixture/air, datum/holder)
-	var/turf/open/location = isturf(holder) ? holder : null
-	. = NO_REACTION
+	var/turf/open/location = holder
+	if(!istype(location))
+		return NO_REACTION
 	if (air.return_temperature() <= WATER_VAPOR_FREEZE)
 		if(location && location.freon_gas_act())
-			. = REACTING
+			return REACTING
 	else if(location && location.water_vapor_gas_act())
 		air.adjust_moles(GAS_H2O,-MOLES_GAS_VISIBLE)
-		. = REACTING
+		return REACTING
 
 // no test cause it's entirely based on location
+
+/datum/gas_reaction/reagent_stuff
+	priority = 0
+	name = "Condensation"
+	id = "condense"
+
+/datum/gas_reaction/condensation/init_reqs()
+	var/highest_condensation_temp = -INFINITY
+	var/list/reagents = GLOB.gas_data.turf_reagents
+	for(var/gas in reagents)
+		var/datum/reagent/R = reagents[gas]
+		highest_condensation_temp = max(highest_condensation_temp, initial(R.boiling_point))
+	min_requirements = list(
+		"MAX_TEMP" = highest_condensation_temp,
+		"ANY_REAGENT" = 1
+	)
+
+/datum/gas_reaction/condensation/react(datum/gas_mixture/air, datum/holder)
+	var/turf/open/location = holder
+	if(!istype(location))
+		return NO_REACTION
+	var/list/gas_reagents = GLOB.gas_data.turf_reagents
+	var/temperature = air.return_temperature()
+	. = NO_REACTION
+	var/static/datum/reagents/reagents_holder = new
+	reagents_holder.clear_reagents()
+	reagents_holder.chem_temp = temperature
+	for(var/G in air.get_gases())
+		if(G in gas_reagents)
+			var/datum/reagent/R = gas_reagents[G]
+			if(temperature < initial(R.boiling_point))
+				var/amt = air.get_moles(G)
+				air.adjust_moles(G, -min(initial(R.condensation_amount), amt))
+				reagents_holder.add_reagent(R, amt)
+				. = REACTING
+	if(. == REACTING)
+		for(var/atom/movable/AM in location)
+			if(location.intact && AM.level == 1) //hidden under the floor
+				continue
+			reagents_holder.reaction(AM, TOUCH)
+
+		reagents_holder.reaction(location, TOUCH)
+
+
 
 //tritium combustion: combustion of oxygen and tritium (treated as hydrocarbons). creates hotspots. exothermic
 /datum/gas_reaction/tritfire

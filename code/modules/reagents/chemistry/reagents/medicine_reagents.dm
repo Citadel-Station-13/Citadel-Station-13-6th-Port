@@ -8,6 +8,7 @@
 /datum/reagent/medicine
 	name = "Medicine"
 	taste_description = "bitterness"
+	boiling_point = T0C + 100
 	value = REAGENT_VALUE_VERY_COMMON //Low prices, spess medical companies are cheapstakes and products are taxed honk...
 
 /datum/reagent/medicine/on_mob_life(mob/living/carbon/M)
