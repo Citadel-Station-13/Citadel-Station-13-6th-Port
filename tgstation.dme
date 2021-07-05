@@ -2723,6 +2723,7 @@
 #include "code\modules\mob\living\silicon\robot\robot_sprint.dm"
 #include "code\modules\mob\living\silicon\robot\say.dm"
 #include "code\modules\mob\living\silicon\robot\update_icons.dm"
+#include "code\modules\mob\living\simple_animal\amogus.dm"
 #include "code\modules\mob\living\simple_animal\animal_defense.dm"
 #include "code\modules\mob\living\simple_animal\astral.dm"
 #include "code\modules\mob\living\simple_animal\constructs.dm"

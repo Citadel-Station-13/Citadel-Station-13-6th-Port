@@ -1,0 +1,12 @@
+{
+    "map_name": "The Skeld",
+    "map_path": "map_files/Skeld",
+    "map_file": "Skeld.dmm",
+    "shuttles": {
+	    "emergency": "emergency_meta",
+	    "ferry": "ferry_fancy",
+	    "cargo": "cargo_box",
+	    "whiteship": "whiteship_delta",
+	    "mining": "mining_delta"
+    }
+}
