@@ -14,15 +14,17 @@
 	icon_grow = "peas-grow"
 	icon_dead = "peas-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/peas/laugh) // TODO: Add /obj/item/seeds/peas/shoot at a later date, for the peashooter mutation line
+	mutatelist = list(/obj/item/seeds/peas/laugh, /obj/item/seeds/peas/shoot) // TODO: Add /obj/item/seeds/peas/shoot at a later date, for the peashooter mutation line
 	reagents_add = list (/datum/reagent/consumable/nutriment/vitamin = 0.1, /datum/reagent/consumable/nutriment = 0.05, /datum/reagent/water = 0.05)
-	
+
 
 /obj/item/reagent_containers/food/snacks/grown/peas
 	seed = /obj/item/seeds/peas
 	name = "peapod"
 	desc = "Finally... peas."
 	icon_state = "peas"
+	slice_path = /obj/item/ammo_box/magazine/peaclip
+	slices_num = 1
 	filling_color = "#739122"
 	bitesize_mod = 1
 	foodtype = VEGETABLES
@@ -103,3 +105,34 @@
 	wine_flavor = "mind-numbing peace and warmth"
 
 
+//Peashooter - "Noisy Cricket!"
+/obj/item/seeds/peas/shoot
+	name = "pack of peashooters"
+	desc = "The result of a bored botanist looking at gatfruit and peas, before exclaiming 'I can make this work!'"
+	icon_state = "seed-pshoot"
+	species = "peashooter"
+	plantname = "Peashooter Bush"
+	product = /obj/item/reagent_containers/food/snacks/grown/shell/peashooter
+	maturation = 35
+	yield = 1
+	production = 10
+	growthstages = 3
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+	icon_grow = "pshoot-grow"
+	icon_dead = "pshoot-dead"
+	genes = list (/datum/plant_gene/trait/repeated_harvest)
+	reagents_add = list (/datum/reagent/phosphorus = 0.05)
+	rarity = 30 // It's a tree that lets you shoot peas at people, takes a while to manifest, too.
+
+
+/obj/item/reagent_containers/food/snacks/grown/shell/peashooter
+	seed = /obj/item/seeds/peas/shoot
+	name = "Peashooter"
+	desc = "How did we get here? And is there something better down the line?"
+	icon_state = "pshoot"
+	trash = /obj/item/gun/ballistic/automatic/pistol/peashooter
+	bitesize_mod = 2
+	foodtype = VEGETABLES
+	tastes = list("burning" = 1, "questionable decisions" = 1)
+	wine_power = 90
+	wine_flavor = "peas set on fire."

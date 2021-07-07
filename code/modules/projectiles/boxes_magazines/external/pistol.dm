@@ -66,3 +66,12 @@
 	caliber = ".50"
 	max_ammo = 7
 	multiple_sprites = 1
+
+/obj/item/ammo_box/magazine/peaclip
+	name = "ballistic pea pod clip"
+	icon_state = "peaclip"
+	desc = "So... you chopped the top off of a pea, and peeled it in a specific way? What are you getting at here?"
+	custom_materials = list(/datum/material/wood = 5000)
+	ammo_type = /obj/item/ammo_casing/pea
+	caliber = "PEA"
+	max_ammo = 15

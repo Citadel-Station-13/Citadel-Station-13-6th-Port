@@ -154,3 +154,18 @@
 	name = "Syndicate Anti Tank Pistol"
 	desc = "A massively impractical and silly monstrosity of a pistol that fires .50 calliber rounds. The recoil is likely to dislocate a variety of joints without proper bracing."
 	pin = /obj/item/firing_pin/implant/pindicate
+
+///Peashooter///
+
+/obj/item/gun/ballistic/automatic/pistol/peashooter
+	name = "Peashooter"
+	desc = "Born from a desire to pelt people with peas, this gun came from a peashooter bush. It only accepts peapods."
+	icon = 'icons/obj/guns/projectile.dmi'
+	icon_state = "peashooter"
+	item_state = "pistol"
+	mag_type = /obj/item/ammo_box/magazine/peaclip
+	burst_size = 3
+	fire_delay = 3
+	actions_types = list(/datum/action/item_action/toggle_firemode)
+	fire_sound = 'sound/effects/zzzt.ogg'
+	casing_ejector = FALSE

@@ -50,3 +50,12 @@
 			L.Sleeping(300)
 		else
 			L.adjustStaminaLoss(25)
+
+//Ballistic Pea (Peashooter)//
+/obj/item/projectile/bullet/pea
+	name = "ballistic pea"
+	icon_state = "energy"
+	nodamage = TRUE
+	stamina = 15
+	armour_penetration = -50
+	hitsound = 'sound/misc/splort.ogg'

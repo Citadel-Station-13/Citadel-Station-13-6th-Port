@@ -51,3 +51,12 @@
 	desc = "A .50AE bullet casing."
 	caliber = ".50"
 	projectile_type = /obj/item/projectile/bullet/a50AE
+
+// Ballistic Pea (Peashooter)
+/obj/item/ammo_casing/pea
+	name = "ballistic pea"
+	desc = "You WILL eat your peas! By choice or by force."
+	icon_state = "s-pea"
+	custom_materials = list(/datum/material/wood = 500)
+	caliber = "PEA"
+	projectile_type = /obj/item/projectile/bullet/pea
