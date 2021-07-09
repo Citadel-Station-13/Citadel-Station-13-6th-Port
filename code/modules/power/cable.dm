@@ -197,7 +197,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 // shock the user with probability prb
 /obj/structure/cable/proc/shock(mob/user, prb, siemens_coeff = 1)
-	if(!prob(prb))
+	if(!user.prob_bad(prb))
 		return 0
 	if (electrocute_mob(user, powernet, src, siemens_coeff))
 		do_sparks(5, TRUE, src)
@@ -663,7 +663,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	use(1)
 
 	if(C.shock(user, 50))
-		if(prob(50)) //fail
+		if(user.prob_bad(50)) //fail
 			new /obj/item/stack/cable_coil(get_turf(C), 1, C.color)
 			C.deconstruct()
 
@@ -733,7 +733,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			use(1)
 
 			if (NC.shock(user, 50))
-				if (prob(50)) //fail
+				if (user.prob_bad(50)) //fail
 					NC.deconstruct()
 
 			return
@@ -785,7 +785,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		use(1)
 
 		if (C.shock(user, 50))
-			if (prob(50)) //fail
+			if (user.prob_bad(50)) //fail
 				C.deconstruct()
 				return
 

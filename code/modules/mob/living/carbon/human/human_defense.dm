@@ -68,7 +68,7 @@
 
 /mob/living/carbon/human/proc/check_martial_melee_block()
 	if(mind)
-		if(mind.martial_art && prob(mind.martial_art.block_chance) && mind.martial_art.can_use(src) && in_throw_mode && !incapacitated(FALSE, TRUE))
+		if(mind.martial_art && prob_good(mind.martial_art.block_chance) && mind.martial_art.can_use(src) && in_throw_mode && !incapacitated(FALSE, TRUE))
 			return TRUE
 	return FALSE
 
@@ -149,7 +149,7 @@
 			visible_message("<span class='danger'>[M] has disarmed [src]!</span>", \
 					"<span class='userdanger'>[M] has disarmed you!</span>", null, COMBAT_MESSAGE_RANGE, null, M,
 					"<span class='danger'>You have disarmed [src]!</span>")
-		else if(!M.client || prob(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
+		else if(!M.client || prob_good(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
 			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 			DefaultCombatKnockdown(100)
 			log_combat(M, src, "tackled")
@@ -357,7 +357,7 @@
 		var/max_limb_loss = round(4/severity) //so you don't lose four limbs at severity 3.
 		for(var/X in bodyparts)
 			var/obj/item/bodypart/BP = X
-			if(prob(50/severity) && !prob(getarmor(BP, "bomb")) && BP.body_zone != BODY_ZONE_HEAD && BP.body_zone != BODY_ZONE_CHEST)
+			if(prob_bad(50/severity) && !prob(getarmor(BP, "bomb")) && BP.body_zone != BODY_ZONE_HEAD && BP.body_zone != BODY_ZONE_CHEST)
 				BP.brute_dam = BP.max_damage
 				BP.dismember()
 				max_limb_loss--
@@ -541,7 +541,7 @@
 		affecting.receive_damage(acidity, 2*acidity)
 
 		if(affecting.name == BODY_ZONE_HEAD)
-			if(prob(min(acidpwr*acid_volume/10, 90))) //Applies disfigurement
+			if(prob_bad(min(acidpwr*acid_volume/10, 90))) //Applies disfigurement
 				affecting.receive_damage(acidity, 2*acidity)
 				emote("scream")
 				facial_hair_style = "Shaved"
@@ -603,9 +603,9 @@
 				var/brutedamage = LB.brute_dam
 				var/burndamage = LB.burn_dam
 				if(hallucination)
-					if(prob(30))
+					if(prob_bad(30))
 						brutedamage += rand(30,40)
-					if(prob(30))
+					if(prob_bad(30))
 						burndamage += rand(30,40)
 
 				if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
@@ -793,9 +793,9 @@
 		var/brutedamage = LB.brute_dam
 		var/burndamage = LB.burn_dam
 		if(hallucination)
-			if(prob(30))
+			if(prob_bad(30))
 				brutedamage += rand(30,40)
-			if(prob(30))
+			if(prob_bad(30))
 				burndamage += rand(30,40)
 
 		if(HAS_TRAIT(src, TRAIT_SELF_AWARE))

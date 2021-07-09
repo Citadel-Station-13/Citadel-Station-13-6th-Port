@@ -288,14 +288,14 @@
 			//that acts like a crowbar to try and salvage its components
 			to_chat(user, "<span class='notice'>You begin prying the metal coverings off...</span>")
 			if(I.use_tool(src, user, 20))
-				if(prob(70))
+				if(user.prob_good(70))
 					if(stored_gun)
 						stored_gun.forceMove(loc)
 						stored_gun = null
 					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
-					if(prob(50))
+					if(user.prob_good(50))
 						new /obj/item/stack/sheet/metal(loc, rand(1,4))
-					if(prob(50))
+					if(user.prob_good(50))
 						new /obj/item/assembly/prox_sensor(loc)
 				else
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")

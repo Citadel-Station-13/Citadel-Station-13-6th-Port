@@ -33,11 +33,11 @@
 	D.visible_message("<span class='danger'>[A] has [atk_verb]ed [D]!</span>", \
 			"<span class='userdanger'>[A] has [atk_verb]ed [D]!</span>", null, COMBAT_MESSAGE_RANGE)
 
-	D.apply_damage(rand(10,13) + extra_damage, STAMINA, affecting, armor_block)
+	D.apply_damage(A.rand_good(10,13,D) + extra_damage, STAMINA, affecting, armor_block)
 	log_combat(A, D, "punched (boxing) ")
 	if(D.getStaminaLoss() > 100 && istype(D.mind?.martial_art, /datum/martial_art/boxing))
-		var/knockout_prob = (D.getStaminaLoss() + rand(-15,15))*0.75
-		if((D.stat != DEAD) && prob(knockout_prob))
+		var/knockout_prob = (D.getStaminaLoss() + A.rand_good(-15,15,D))*0.75
+		if((D.stat != DEAD) && A.prob_good(knockout_prob,D))
 			D.visible_message("<span class='danger'>[A] has knocked [D] out with a haymaker!</span>", \
 								"<span class='userdanger'>[A] has knocked [D] out with a haymaker!</span>")
 			D.apply_effect(200,EFFECT_KNOCKDOWN,armor_block)

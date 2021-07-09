@@ -581,7 +581,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				else
 					prot = TRUE
 
-				if(prot || prob(75))
+				if(prot || user.prob_good(75))
 					user.visible_message("After a few attempts, [user] manages to light [src].", "<span class='notice'>After a few attempts, you manage to light [src].</span>")
 				else
 					var/hitzone = user.held_index_to_dir(user.active_hand_index) == "r" ? BODY_ZONE_PRECISE_R_HAND : BODY_ZONE_PRECISE_L_HAND

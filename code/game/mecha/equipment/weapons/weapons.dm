@@ -179,7 +179,7 @@
 		M.stuttering += 20
 		M.adjustEarDamage(0, 30)
 		M.DefaultCombatKnockdown(60)
-		if(prob(30))
+		if(M.prob_bad(30))
 			M.Stun(200)
 			M.Unconscious(80)
 		else

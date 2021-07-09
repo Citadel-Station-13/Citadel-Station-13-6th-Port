@@ -239,7 +239,7 @@
 /obj/item/flamethrower/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
 	if(attack_type & ATTACK_TYPE_PROJECTILE)
 		var/obj/item/projectile/P = object
-		if(istype(P) && (P.damage_type != STAMINA) && damage && !P.nodamage && prob(15))
+		if(istype(P) && (P.damage_type != STAMINA) && damage && !P.nodamage && (firer ? (firer.prob_good(8) || owner.prob_bad(8)) : owner.prob_bad(15)))
 			owner.visible_message("<span class='danger'>\The [attack_text] hits the fueltank on [owner]'s [name], rupturing it! What a shot!</span>")
 			var/target_turf = get_turf(owner)
 			igniter.ignite_turf(src,target_turf, release_amount = 100)

@@ -37,7 +37,7 @@
 	D.visible_message("<span class='danger'>[A] [atk_verb]s [D]!</span>", \
 					"<span class='userdanger'>[A] [atk_verb]s you!</span>", null, null, A)
 	to_chat(A, "<span class='danger'>You [atk_verb] [D]!</span>")
-	if(prob(10))
+	if(A.prob_good(10, D))
 		crit_damage += (damage*2 + 15)
 		playsound(get_turf(D), 'sound/weapons/bite.ogg', 50, TRUE, -1)
 		D.visible_message("<span class='warning'>[D] staggers as the blow strikes them with inhuman force!</span>", "<span class='userdanger'>You are struck with incredible precision by [A]!</span>")
@@ -245,7 +245,7 @@
 
 /obj/item/staff/bostaff/attack(mob/target, mob/living/user)
 	add_fingerprint(user)
-	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
+	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && user.prob_bad(50))
 		to_chat(user, "<span class ='warning'>You club yourself over the head with [src].</span>")
 		user.DefaultCombatKnockdown(60)
 		if(ishuman(user))
@@ -277,8 +277,8 @@
 		H.visible_message("<span class='warning'>[pick(fluffmessages)]</span>", \
 							   "<span class='userdanger'>[pick(fluffmessages)]</span>")
 		playsound(get_turf(user), 'sound/effects/woodhit.ogg', 75, 1, -1)
-		H.adjustStaminaLoss(rand(13,20))
-		if(prob(10))
+		H.adjustStaminaLoss(H.rand_bad(13,20))
+		if(H.prob_bad(10))
 			H.visible_message("<span class='warning'>[H] collapses!</span>", \
 								   "<span class='userdanger'>Your legs give out!</span>")
 			H.DefaultCombatKnockdown(80)

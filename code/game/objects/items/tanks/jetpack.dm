@@ -105,7 +105,7 @@
 	if((num < 0.005 || air_contents.total_moles() < num))
 		turn_off(user)
 		return
-	if(rand(0,250) == 0)
+	if(user.rand_good(0,250) == 0)
 		to_chat(user, "<span class='notice'>You feel your jetpack's engines cut out.</span>")
 		turn_off(user)
 		return

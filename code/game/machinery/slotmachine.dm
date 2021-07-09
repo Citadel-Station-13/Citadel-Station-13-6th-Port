@@ -83,7 +83,7 @@
 	if(istype(I, /obj/item/coin))
 		var/obj/item/coin/C = I
 		if(paymode == COIN)
-			if(prob(2))
+			if(user.prob_bad(2))
 				if(!user.transferItemToLoc(C, drop_location()))
 					return
 				C.throw_at(user, 3, 10)

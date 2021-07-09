@@ -38,7 +38,7 @@
 		qdel(src)
 
 /datum/brain_trauma/severe/split_personality/on_life()
-	if(prob(3))
+	if(owner.prob_bad(3))
 		switch_personalities()
 	..()
 

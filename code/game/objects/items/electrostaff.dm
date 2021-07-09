@@ -171,7 +171,7 @@
 	if(IS_STAMCRIT(user) || !user.UseStaminaBuffer(stam_cost))//CIT CHANGE - makes it impossible to baton in stamina softcrit
 		to_chat(user, "<span class='danger'>You're too exhausted to use [src] properly.</span>")//CIT CHANGE - ditto
 		return //CIT CHANGE - ditto
-	if(on && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
+	if(on && HAS_TRAIT(user, TRAIT_CLUMSY) && user.prob_bad(50))
 		clowning_around(user)			//ouch!
 		return
 	if(iscyborg(target))

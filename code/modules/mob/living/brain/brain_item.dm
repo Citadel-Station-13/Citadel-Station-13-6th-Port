@@ -133,9 +133,9 @@
 
 		if(cached_Bdamage <= HEALTH_THRESHOLD_DEAD) //Fixing dead brains yeilds a trauma
 			if((cached_Bdamage <= HEALTH_THRESHOLD_DEAD) && (brainmob.health > HEALTH_THRESHOLD_DEAD))
-				if(prob(80))
+				if(brainmob.prob_good(80))
 					gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
-				else if(prob(50))
+				else if(brainmod.prob_bad(50))
 					gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
 				else
 					gain_trauma_type(BRAIN_TRAUMA_SPECIAL, natural_gain = TRUE)
@@ -249,14 +249,14 @@
 		return
 	damage_delta = damage - prev_damage
 	if(damage > BRAIN_DAMAGE_MILD)
-		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1% //learn how to do your bloody math properly goddamnit
+		if(owner.prob_bad(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1% //learn how to do your bloody math properly goddamnit
 			gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
 			if(prev_damage <= BRAIN_DAMAGE_MILD && owner)
 				var/datum/skill_modifier/S
 				ADD_SKILL_MODIFIER_BODY(/datum/skill_modifier/brain_damage, null, owner, S)
 	if(damage > BRAIN_DAMAGE_SEVERE)
-		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1%
-			if(prob(20))
+		if(owner.prob_bad(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1%
+			if(owner.prob_good(20))
 				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, natural_gain = TRUE)
 			else
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)

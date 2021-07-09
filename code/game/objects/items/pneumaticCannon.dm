@@ -163,11 +163,11 @@
 		else
 			visible_message(src, "<span class='warning'>\The [src] lets out a weak hiss and doesn't react!</span>")
 		return
-	if(user && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(75) && clumsyCheck && iscarbon(user))
+	if(user && HAS_TRAIT(user, TRAIT_CLUMSY) && user.prob_bad(75) && clumsyCheck && iscarbon(user))
 		var/mob/living/carbon/C = user
 		C.visible_message("<span class='warning'>[C] loses [C.p_their()] grip on [src], causing it to go off!</span>", "<span class='userdanger'>[src] slips out of your hands and goes off!</span>")
 		C.dropItemToGround(src, TRUE)
-		if(prob(10))
+		if(user.prob_good(10))
 			target = get_turf(user)
 		else
 			var/list/possible_targets = range(3,src)

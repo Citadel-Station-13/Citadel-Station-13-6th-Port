@@ -72,7 +72,7 @@
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target
-		if(prob(80))
+		if(L.prob_good(80))
 			var/atom/throw_target = get_edge_target_turf(L, dir)
 			L.throw_at(throw_target, rand(1,2), 7, src)
 		else

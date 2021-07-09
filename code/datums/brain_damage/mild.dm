@@ -134,7 +134,7 @@
 	var/fall_chance = 1
 	if(owner.m_intent == MOVE_INTENT_RUN)
 		fall_chance += 2
-	if(prob(fall_chance) && !owner.lying && !owner.buckled)
+	if(owner.prob_bad(fall_chance) && !owner.lying && !owner.buckled)
 		to_chat(owner, "<span class='warning'>Your leg gives out!</span>")
 		owner.DefaultCombatKnockdown(35)
 
@@ -142,10 +142,10 @@
 		var/drop_chance = 1
 		var/obj/item/I = owner.get_active_held_item()
 		drop_chance += I.w_class
-		if(prob(drop_chance) && owner.dropItemToGround(I))
+		if(owner.prob_bad(drop_chance) && owner.dropItemToGround(I))
 			to_chat(owner, "<span class='warning'>You drop [I]!</span>")
 
-	else if(prob(3))
+	else if(owner.prob_bad(3))
 		to_chat(owner, "<span class='warning'>You feel a sudden weakness in your muscles!</span>")
 		owner.adjustStaminaLoss(50)
 	..()

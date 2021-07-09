@@ -26,7 +26,7 @@
 		qdel(chopchop)
 		// user.mind?.adjust_experience(/datum/skill/gaming, 100)
 		playsound(loc, 'sound/arcade/win.ogg', 50, TRUE)
-		prizevend(user, rand(3,5))
+		prizevend(user, user.rand_good(3,5))
 	else
 		to_chat(c_user, "<span class='notice'>You (wisely) decide against putting your hand in the machine.</span>")
 

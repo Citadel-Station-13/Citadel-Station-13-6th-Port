@@ -74,7 +74,7 @@
 	medical_record_text = "Patient demonstrates constant euthymia irregular for environment. It's a bit much, to be honest."
 
 /datum/quirk/jolly/on_process()
-	if(prob(0.05))
+	if(quirk_holder.prob_good(0.05))
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "jolly", /datum/mood_event/jolly)
 
 /datum/quirk/light_step
@@ -219,3 +219,20 @@
 /datum/quirk/night_vision/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
 	H.update_sight()
+
+/datum/quirk/lucky
+	name = "Lucky"
+	desc = "Wherever probability shows up, you seem to do well." // i can't write
+	value = 2
+	gain_text = "<span class='notice'>You're feeling pretty confident.</span>"
+	lose_text = "<span class='danger'>You feel your luck fade away.</span>"
+	medical_record_text = "Patient has a history of close calls."
+
+/datum/quirk/lucky/post_add()
+	. = ..()
+	quirk_holder.AddComponent(/datum/component/luck)
+	SEND_SIGNAL(quirk_holder, COMSIG_ADD_LUCK_SOURCE, "lucky trait", 1)
+
+/datum/quirk/lucky/remove()
+	. = ..()
+	SEND_SIGNAL(quirk_holder, COMSIG_CLEAR_LUCK_SOURCE, "lucky trait")

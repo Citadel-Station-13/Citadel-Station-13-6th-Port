@@ -104,7 +104,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 
 	var/turf/T = get_turf(current_victim)
 	A = get_area(T)
-	if(prob(5))//checks roughly every 20 ticks
+	if(current_victim.prob_bad(5))//checks roughly every 20 ticks
 		if(current_victim.stat == DEAD || current_victim.dna.check_mutation(CLUWNEMUT) || is_type_in_typecache(A, invalid_area_typecache) || !is_station_level(current_victim.z))
 			if(!Found_You())
 				Acquire_Victim()
@@ -165,7 +165,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 
 /mob/living/simple_animal/hostile/floor_cluwne/proc/Acquire_Victim(specific)
 	for(var/I in GLOB.player_list)//better than a potential recursive loop
-		var/mob/living/carbon/human/H = pick(GLOB.player_list)//so the check is fair
+		var/mob/living/carbon/human/H = luck_pick(GLOB.player_list)//so the check is fair
 		var/area/A
 
 		if(specific)
@@ -400,7 +400,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 		H.add_splatter_floor(T)
 	if(do_after(src, 50, target = H))
 		H.unequip_everything()//more runtime prevention
-		if(prob(75))
+		if(H.prob_good(75)) // gibs you if you're lucky
 			H.gib(FALSE)
 		else
 			H.cluwneify()

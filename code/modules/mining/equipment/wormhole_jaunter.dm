@@ -69,7 +69,7 @@
 	var/mob/M = loc
 	if(istype(M))
 		if(M.get_item_by_slot(SLOT_BELT) == src)
-			if(prob(severity))
+			if(M.prob_bad(severity))
 				M.visible_message("<span class='warning'>[src] overloads and activates!</span>")
 				SSblackbox.record_feedback("tally", "jaunter", 1, "EMP") // EMP accidental activation
 				activate(M)

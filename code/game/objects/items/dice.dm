@@ -171,6 +171,14 @@
 	if(rigged && result != rigged)
 		if(prob(clamp(1/(sides - 1) * 100, 25, 80)))
 			result = rigged
+	var/luck = user.get_luck()
+	var/tries = abs(luck)
+	while(tries > 0)
+		tries--
+		if(luck > 0)
+			result = max(result, roll(sides))
+		else
+			result = min(result, roll(sides))
 	var/fake_result = roll(sides)//Daredevil isn't as good as he used to be
 	var/comment = ""
 	if(sides == 20 && result == 20)

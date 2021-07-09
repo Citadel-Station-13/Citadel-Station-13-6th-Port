@@ -19,7 +19,7 @@
 	if(!A.has_gravity())
 		return
 
-	if(!prob(probability))
+	if(!AM.prob_bad(probability))
 		return
 
 	if(ishuman(AM))
@@ -45,7 +45,7 @@
 		if((H.movement_type & FLYING) || H.buckled)
 			return
 
-		var/damage = rand(min_damage, max_damage)
+		var/damage = H.rand_bad(min_damage, max_damage)
 		if(HAS_TRAIT(H, TRAIT_LIGHT_STEP))
 			damage *= 0.75
 		H.apply_damage(damage, BRUTE, picked_def_zone, wound_bonus = CANT_WOUND)

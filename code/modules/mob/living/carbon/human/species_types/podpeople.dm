@@ -50,7 +50,7 @@
 /datum/species/pod/on_hit(obj/item/projectile/P, mob/living/carbon/human/H)
 	switch(P.type)
 		if(/obj/item/projectile/energy/floramut)
-			if(prob(15))
+			if(H.prob_bad(15))
 				H.rad_act(rand(30,80))
 				H.DefaultCombatKnockdown(100)
 				H.visible_message("<span class='warning'>[H] writhes in pain as [H.p_their()] vacuoles boil.</span>", "<span class='userdanger'>You writhe in pain as your vacuoles boil!</span>", "<span class='italics'>You hear the crunching of leaves.</span>")

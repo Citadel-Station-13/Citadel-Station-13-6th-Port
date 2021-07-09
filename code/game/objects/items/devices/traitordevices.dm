@@ -42,7 +42,7 @@ effective or pretty fucking useless.
 	log_combat(user, null, "knocked down people in the area", src)
 
 	for(var/mob/living/carbon/human/M in urange(10, user, 1))
-		if(prob(50))
+		if(user.prob_good(50, M))
 
 			M.DefaultCombatKnockdown(rand(200,400))
 			to_chat(M, "<span class='userdanger'>You feel a tremendous, paralyzing wave flood your mind.</span>")

@@ -141,7 +141,7 @@
 			H.throw_alert("ethereal_overcharge", /obj/screen/alert/ethereal_overcharge, 2)
 			apply_damage(0.65, TOX, null, null, H)
 			brutemod = 1.75
-			if(prob(10)) //10% each tick for ethereals to explosively release excess energy if it reaches dangerous levels
+			if(H.prob_bad(10)) //10% each tick for ethereals to explosively release excess energy if it reaches dangerous levels
 				discharge_process(H)
 		else
 			H.clear_alert("ethereal_charge")
@@ -163,7 +163,7 @@
 			stomach.adjust_charge(100 - stomach.crystal_charge)
 		to_chat(H, "<span class='warning'>You violently discharge energy!</span>")
 		H.visible_message("<span class='danger'>[H] violently discharges energy!</span>")
-		if(prob(10)) //chance of developing heart disease to dissuade overcharging oneself
+		if(H.prob_bad(10)) //chance of developing heart disease to dissuade overcharging oneself
 			var/datum/disease/D = new /datum/disease/heart_failure
 			H.ForceContractDisease(D)
 			to_chat(H, "<span class='userdanger'>You're pretty sure you just felt your heart stop for a second there..</span>")

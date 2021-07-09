@@ -68,7 +68,7 @@
 				if(!do_after(user, 20, target = src))
 					struggling = FALSE
 					return
-				if(!prob(escape_chance))
+				if(!user.prob_good(escape_chance))
 					to_chat(user, "<span class='warning'>It doesn't budge!</span>")
 					escape_chance++
 				else

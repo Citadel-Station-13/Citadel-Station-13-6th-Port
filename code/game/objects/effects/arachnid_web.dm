@@ -37,7 +37,7 @@
 		if(isarachnid(mover.pulledby))
 
 			return TRUE
-		if(prob(20))
+		if(mover.prob_bad(20))
 			to_chat(mover, "<span class='danger'>You get stuck in \the [src] for a moment.</span>")
 			return FALSE
 

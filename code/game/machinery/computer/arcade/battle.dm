@@ -135,7 +135,7 @@
 	// 	gamerSkill = usr.mind.get_skill_level(/datum/skill/gaming)
 
 	if (!blocked && !gameover)
-		var/attackamt = rand(5,7) + rand(0, gamerSkill)
+		var/attackamt = usr.rand_good(5,7) + usr.rand_good(0, gamerSkill)
 
 		if(finishing_move) //time to bonk that fucker,cuban pete will sometime survive a finishing move.
 			attackamt *= 100
@@ -226,7 +226,7 @@
 			last_three_move = null //this shouldn't even happen but we empty the list if it somehow goes above 3
 
 	var/enemy_stance
-	var/attack_amount = rand(8,10) //making the attack amount not vary too much so that it's easier to see if the enemy has a shotgun
+	var/attack_amount = user.rand_bad(8,10) //making the attack amount not vary too much so that it's easier to see if the enemy has a shotgun
 
 	if(player_stance == "defend")
 		attack_amount -= 5

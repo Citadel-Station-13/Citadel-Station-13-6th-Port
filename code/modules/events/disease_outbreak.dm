@@ -28,7 +28,6 @@
 
 	if(!virus_type && !advanced_virus)
 		virus_type = pick(/datum/disease/dnaspread, /datum/disease/advance/flu, /datum/disease/advance/cold, /datum/disease/brainrot, /datum/disease/magnitis)
-
 	for(var/mob/living/carbon/human/H in shuffle(GLOB.alive_mob_list))
 		var/turf/T = get_turf(H)
 		if(!T)
@@ -43,11 +42,9 @@
 			continue
 		if(HAS_TRAIT(H, TRAIT_VIRUSIMMUNE)) //Don't pick someone who's virus immune, only for it to not do anything.
 			continue
-		var/foundAlready = FALSE	// don't infect someone that already has a disease
-		for(var/thing in H.diseases)
-			foundAlready = TRUE
-			break
-		if(foundAlready)
+		if(length(H.diseases))
+			continue
+		if(H.prob_if_lucky(20))
 			continue
 
 		var/datum/disease/D

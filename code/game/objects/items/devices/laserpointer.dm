@@ -106,7 +106,7 @@
 				severity = 0
 
 			//chance to actually hit the eyes depends on internal component
-			if(prob(effectchance * diode.rating) && C.flash_act(severity))
+			if(user.prob_good(effectchance * diode.rating) && C.flash_act(severity))
 				outmsg = "<span class='notice'>You blind [C] by shining [src] in [C.p_their()] eyes.</span>"
 			else
 				outmsg = "<span class='warning'>You fail to blind [C] by shining [src] at [C.p_their()] eyes!</span>"
@@ -116,7 +116,7 @@
 		var/mob/living/silicon/S = target
 		log_combat(user, S, "shone in the sensors", src)
 		//chance to actually hit the eyes depends on internal component
-		if(prob(effectchance * diode.rating))
+		if(user.prob_good(effectchance * diode.rating))
 			S.flash_act(affect_silicon = 1)
 			S.DefaultCombatKnockdown(rand(100,200))
 			to_chat(S, "<span class='danger'>Your sensors were overloaded by a laser!</span>")
@@ -127,7 +127,7 @@
 	//cameras
 	else if(istype(target, /obj/machinery/camera))
 		var/obj/machinery/camera/C = target
-		if(prob(effectchance * diode.rating))
+		if(user.prob_good(effectchance * diode.rating))
 			C.emp_act(80)
 			outmsg = "<span class='notice'>You hit the lens of [C] with [src], temporarily disabling the camera!</span>"
 			log_combat(user, C, "EMPed", src)
@@ -141,7 +141,7 @@
 			continue
 		if(!H.lying)
 			H.setDir(get_dir(H,targloc)) // kitty always looks at the light
-			if(prob(effectchance))
+			if(H.prob_bad(effectchance))
 				H.visible_message("<span class='warning'>[H] makes a grab for the light!</span>","<span class='userdanger'>LIGHT!</span>")
 				H.Move(targloc)
 				log_combat(user, H, "moved with a laser pointer",src)

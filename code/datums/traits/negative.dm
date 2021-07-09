@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	if(quirk_holder.reagents.has_reagent(/datum/reagent/toxin/mindbreaker))
 		quirk_holder.hallucination = 0
 		return
-	if(prob(2)) //we'll all be mad soon enough
+	if(quirk_holder.prob_bad(2)) //we'll all be mad soon enough
 		madness()
 
 /datum/quirk/insanity/proc/madness()
@@ -275,15 +275,15 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 		if(H.client)
 			nearby_people++
 	var/mob/living/carbon/human/H = quirk_holder
-	if(prob(2 + nearby_people))
+	if(quirk_holder.prob_bad(2 + nearby_people))
 		H.stuttering = max(3, H.stuttering)
-	else if(prob(min(3, nearby_people)) && !H.silent)
+	else if(quirk_holder.prob_bad(min(3, nearby_people)) && !H.silent)
 		to_chat(H, "<span class='danger'>You retreat into yourself. You <i>really</i> don't feel up to talking.</span>")
 		H.silent = max(10, H.silent)
-	else if(prob(0.5) && dumb_thing)
+	else if(quirk_holder.prob_bad(0.5) && dumb_thing)
 		to_chat(H, "<span class='userdanger'>You think of a dumb thing you said a long time ago and scream internally.</span>")
 		dumb_thing = FALSE //only once per life
-		if(prob(1))
+		if(quirk_holder.prob_bad(1))
 			new/obj/item/reagent_containers/food/snacks/pastatomato(get_turf(H)) //now that's what I call spaghetti code
 
 // small chance to make eye contact with inanimate objects/mindless mobs because of nerves
@@ -295,7 +295,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, quirk_holder, "<span class='smallnotice'>You make eye contact with [A].</span>"), 3)
 
 /datum/quirk/social_anxiety/proc/eye_contact(datum/source, mob/living/other_mob, triggering_examiner)
-	if(prob(75))
+	if(quirk_holder.prob_good(75))
 		return
 	var/msg
 	if(triggering_examiner)
@@ -416,3 +416,20 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
 	H?.cure_trauma_type(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
+
+/datum/quirk/unlucky
+	name = "Unlucky"
+	desc = "Things just never seem to go well for you."
+	value = -1
+	gain_text = "<span class='danger'>You feel really unlucky.</span>"
+	lose_text = "<span class='notice'>You feel like your fortunes have turned for the better.</span>"
+	medical_record_text = "Patient gets into accidents rather often."
+
+/datum/quirk/unlucky/post_add()
+	. = ..()
+	quirk_holder.AddComponent(/datum/component/luck)
+	SEND_SIGNAL(quirk_holder, COMSIG_ADD_LUCK_SOURCE, "unlucky trait", -1)
+
+/datum/quirk/unlucky/remove()
+	. = ..()
+	SEND_SIGNAL(quirk_holder, COMSIG_CLEAR_LUCK_SOURCE, "unlucky trait")

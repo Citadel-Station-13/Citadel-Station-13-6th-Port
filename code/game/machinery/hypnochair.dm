@@ -127,7 +127,7 @@
 	REMOVE_TRAIT(victim, TRAIT_DEAF, "hypnochair")
 	if(!(victim.get_eye_protection() > 0))
 		victim.cure_trauma_type(/datum/brain_trauma/severe/hypnotic_trigger, TRAUMA_RESILIENCE_SURGERY)
-		if(prob(90))
+		if(victim.prob_bad(90))
 			victim.gain_trauma(new /datum/brain_trauma/severe/hypnotic_trigger(temp_trigger), TRAUMA_RESILIENCE_SURGERY)
 		else
 			victim.gain_trauma(new /datum/brain_trauma/severe/hypnotic_stupor(), TRAUMA_RESILIENCE_SURGERY)
@@ -155,13 +155,13 @@
 				victim.confused += 15
 				victim.Dizzy(200)
 				victim.blur_eyes(10)
-				if(prob(25))
+				if(victim.prob_bad(25))
 					victim.apply_status_effect(/datum/status_effect/trance, rand(50,150), FALSE)
 			if(201 to INFINITY)
 				victim.confused += 20
 				victim.Dizzy(300)
 				victim.blur_eyes(15)
-				if(prob(65))
+				if(victim.prob_bad(65))
 					victim.apply_status_effect(/datum/status_effect/trance, rand(50,150), FALSE)
 	victim = null
 

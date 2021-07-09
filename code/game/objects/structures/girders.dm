@@ -298,7 +298,7 @@
 
 /obj/structure/girder/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && (mover.pass_flags & PASSGRILLE))
-		return prob(girderpasschance)
+		return mover.prob_good(girderpasschance)
 	else
 		if(istype(mover, /obj/item/projectile))
 			return prob(girderpasschance)

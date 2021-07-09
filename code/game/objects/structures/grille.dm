@@ -242,7 +242,7 @@
 /obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || broken)		// anchored/broken grilles are never connected
 		return FALSE
-	if(!prob(prb))
+	if(!user.prob_good(prb))
 		return FALSE
 	if(!in_range(src, user))//To prevent TK and mech users from getting shocked
 		return FALSE

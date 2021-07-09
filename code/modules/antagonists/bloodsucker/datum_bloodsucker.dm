@@ -132,16 +132,14 @@
 		return
 	// Reputations [Master]
 	if(!am_fledgling)
-		bloodsucker_reputation = pick("Butcher","Blood Fiend","Crimson","Red","Black","Terror","Nightman","Feared","Ravenous","Fiend","Malevolent","Wicked","Ancient","Plaguebringer","Sinister","Forgotten","Wretched","Baleful", \
+		var/list/bloodsucker_names = list("Butcher","Blood Fiend","Crimson","Red","Black","Terror","Nightman","Feared","Ravenous","Fiend","Malevolent","Wicked","Ancient","Plaguebringer","Sinister","Forgotten","Wretched","Baleful", \
 							"Inqisitor","Harvester","Reviled","Robust","Betrayer","Destructor","Damned","Accursed","Terrible","Vicious","Profane","Vile","Depraved","Foul","Slayer","Manslayer","Sovereign","Slaughterer", \
 							"Forsaken","Mad","Dragon","Savage","Villainous","Nefarious","Inquisitor","Marauder","Horrible","Immortal","Undying","Overlord","Corrupt","Hellspawn","Tyrant","Sanguineous")
 		if(owner.current.gender == MALE)
-			if(prob(10)) // Gender override
-				bloodsucker_reputation = pick("King of the Damned", "Blood King", "Emperor of Blades", "Sinlord", "God-King")
+			bloodsucker_names += list("King of the Damned", "Blood King", "Emperor of Blades", "Sinlord", "God-King")
 		else if(owner.current.gender == FEMALE)
-			if(prob(10)) // Gender override
-				bloodsucker_reputation = pick("Queen of the Damned", "Blood Queen", "Empress of Blades", "Sinlady", "God-Queen")
-
+			bloodsucker_names += list("Queen of the Damned", "Blood Queen", "Empress of Blades", "Sinlady", "God-Queen")
+		bloodsucker_reputation = pick(bloodsucker_names)
 		to_chat(owner, "<span class='announce'>You have earned a reputation! You are now known as <i>[ReturnFullName(TRUE)]</i>!</span>")
 
 	// Reputations [Fledgling]

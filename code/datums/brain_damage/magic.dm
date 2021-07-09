@@ -33,7 +33,7 @@
 
 /datum/brain_trauma/magic/poltergeist/on_life()
 	..()
-	if(prob(4))
+	if(owner.prob_bad(4))
 		var/most_violent = -1 //So it can pick up items with 0 throwforce if there's nothing else
 		var/obj/item/throwing
 		for(var/obj/item/I in view(5, get_turf(owner)))
@@ -94,8 +94,8 @@
 	if(get_dist(owner, stalker) <= 1)
 		playsound(owner, 'sound/magic/demon_attack1.ogg', 50)
 		owner.visible_message("<span class='warning'>[owner] is torn apart by invisible claws!</span>", "<span class='userdanger'>Ghostly claws tear your body apart!</span>")
-		owner.take_bodypart_damage(rand(20, 45), wound_bonus=CANT_WOUND)
-	else if(prob(50))
+		owner.take_bodypart_damage(owner.rand_bad(20, 45), wound_bonus=CANT_WOUND)
+	else if(owner.prob_bad(50))
 		stalker.forceMove(get_step_towards(stalker, owner))
 	if(get_dist(owner, stalker) <= 8)
 		if(!close_stalker)

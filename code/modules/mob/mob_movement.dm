@@ -82,11 +82,11 @@
 
 	if(L.confused)
 		var/newdir = NONE
-		if((L.confused > 50) && prob(min(L.confused * 0.5, 50)))
+		if((L.confused > 50) && L.prob_bad(min(L.confused * 0.5, 50)))
 			newdir = pick(GLOB.alldirs)
-		else if(prob(L.confused))
+		else if(L.prob_bad(L.confused))
 			newdir = angle2dir(dir2angle(direction) + pick(90, -90))
-		else if(prob(L.confused * 2))
+		else if(L.prob_bad(L.confused * 2))
 			newdir = angle2dir(dir2angle(direction) + pick(45, -45))
 		if(newdir)
 			direction = newdir

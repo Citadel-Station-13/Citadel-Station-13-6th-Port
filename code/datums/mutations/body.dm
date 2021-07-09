@@ -10,7 +10,7 @@
 	power_coeff = 1
 
 /datum/mutation/human/epilepsy/on_life()
-	if(prob(1 * GET_MUTATION_SYNCHRONIZER(src)) && owner.stat == CONSCIOUS)
+	if(owner.prob_bad(1 * GET_MUTATION_SYNCHRONIZER(src)) && owner.stat == CONSCIOUS)
 		owner.visible_message("<span class='danger'>[owner] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
 		owner.Unconscious(200 * GET_MUTATION_POWER(src))
 		owner.Jitter(1000 * GET_MUTATION_POWER(src))
@@ -35,7 +35,7 @@
 		return
 	to_chat(owner, text_gain_indication)
 	var/mob/new_mob
-	if(prob(95))
+	if(owner.prob_bad(95))
 		if(prob(50))
 			new_mob = owner.easy_randmut(NEGATIVE + MINOR_NEGATIVE)
 		else
@@ -271,7 +271,7 @@
 	text_lose_indication = "<span class'notice'>The screaming in your mind fades.</span>"
 
 /datum/mutation/human/paranoia/on_life()
-	if(prob(5) && owner.stat == CONSCIOUS)
+	if(owner.prob_bad(5) && owner.stat == CONSCIOUS)
 		owner.emote("scream")
 		owner.jitteriness = min(max(0, owner.jitteriness + 5), 30)
 		if(prob(25))

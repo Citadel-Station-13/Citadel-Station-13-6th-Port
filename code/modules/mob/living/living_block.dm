@@ -83,7 +83,7 @@
 	. = SEND_SIGNAL(src, COMSIG_ITEM_RUN_BLOCK, owner, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, block_return)
 	if(. & BLOCK_SUCCESS)
 		return
-	if(prob(final_block_chance))
+	if(owner.prob_good(final_block_chance))
 		owner.visible_message("<span class='danger'>[owner] blocks [attack_text] with [src]!</span>",
 			"<span class='danger'>You block [attack_text] with [src]!</span>")
 		return . | BLOCK_SUCCESS | BLOCK_PHYSICAL_EXTERNAL

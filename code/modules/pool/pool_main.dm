@@ -131,7 +131,7 @@
 											"<span class='userdanger'>You fall in and swallow some water!</span>")
 						playsound(src, 'sound/effects/splash.ogg', 60, TRUE, 1)
 				else if(!H.head || !(H.head.armor.getRating("melee") > 20))
-					if(prob(75))
+					if(H.prob_good(75))
 						H.visible_message("<span class='danger'>[H] falls in the drained pool!</span>",
 													"<span class='userdanger'>You fall in the drained pool!</span>")
 						H.adjustBruteLoss(7)

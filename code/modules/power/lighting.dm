@@ -471,7 +471,7 @@
 			to_chat(user, "<span class='userdanger'>You stick \the [W] into the light socket!</span>")
 			if(has_power() && (W.flags_1 & CONDUCT_1))
 				do_sparks(3, TRUE, src)
-				if (prob(75))
+				if (user.prob_bad(75))
 					electrocute_mob(user, get_area(src), src, rand(0.7,1.0), TRUE)
 	else
 		return ..()
@@ -510,7 +510,7 @@
 	..()
 	if(status == LIGHT_BROKEN || status == LIGHT_EMPTY)
 		if(on && (I.flags_1 & CONDUCT_1))
-			if(prob(12))
+			if(user.prob_bad(12))
 				electrocute_mob(user, get_area(src), src, 0.3, TRUE)
 
 /obj/machinery/light/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1)

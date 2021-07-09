@@ -302,7 +302,7 @@
 			attack_mod += 2
 			sacker.adjustStaminaLoss(20)
 
-	var/r = rand(-3, 3) - defense_mod + attack_mod + skill_mod
+	var/r = sacker.rand_good(-3, 3) - defense_mod + attack_mod + skill_mod
 	return r
 
 
@@ -354,7 +354,7 @@
 	if(HAS_TRAIT(user, TRAIT_CLUMSY))
 		oopsie_mod += 6 //honk!
 
-	var/oopsie = rand(danger_zone, 100)
+	var/oopsie = user.rand_bad(danger_zone, 100)
 	if(oopsie >= 94 && oopsie_mod < 0) // good job avoiding getting paralyzed! gold star!
 		to_chat(user, "<span class='usernotice'>You're really glad you're wearing protection!</span>")
 	oopsie += oopsie_mod

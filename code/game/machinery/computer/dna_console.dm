@@ -174,7 +174,7 @@
 		if(A.used)
 			to_chat(user,"<span class='notice'>Recycled [I].</span>")
 			if(A.research)
-				if(prob(60))
+				if(user.prob_good(60))
 					var/c_typepath = generate_chromosome()
 					var/obj/item/chromosome/CM = new c_typepath (drop_location())
 					if(LAZYLEN(stored_chromosomes) < max_chromosomes)
@@ -263,7 +263,7 @@
 	if(!ui)
 		ui = new(user, src, "DnaConsole")
 		ui.open()
-		
+
 /obj/machinery/computer/scan_consolenew/ui_assets()
 	. = ..() || list()
 	. += get_asset_datum(/datum/asset/simple/genetics)

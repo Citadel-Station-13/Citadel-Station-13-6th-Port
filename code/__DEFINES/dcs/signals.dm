@@ -477,6 +477,10 @@
 //Gibs
 #define COMSIG_GIBS_STREAK "gibs_streak"						// from base of /obj/effect/decal/cleanable/blood/gibs/streak(): (list/directions, list/diseases)
 
+//Luck
+#define COMSIG_ADD_LUCK_SOURCE "add_luck" //(name, amt) Called when you send a luck event
+#define COMSIG_CLEAR_LUCK_SOURCE "clear_luck"//(name) Called when you clear a mood event
+
 //Mood
 #define COMSIG_ADD_MOOD_EVENT "add_mood" //Called when you send a mood event from anywhere in the code.
 #define COMSIG_CLEAR_MOOD_EVENT "clear_mood" //Called when you clear a mood event from anywhere in the code.

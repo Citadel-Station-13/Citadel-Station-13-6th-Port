@@ -440,7 +440,7 @@
 		A.emote("scream")
 
 		if (falling == 1)
-			if (prob(33) || D.stat)
+			if (A.prob_good(33,D) || D.stat)
 				D.ex_act(EXPLODE_LIGHT)
 			else
 				D.apply_damage(damage + 25, BRUTE)
@@ -475,7 +475,7 @@
 	A.start_pulling(D)
 	D.visible_message("<span class='danger'>[A] gets [D] in a cinch!</span>", \
 								"<span class='userdanger'>[A] gets [D] in a cinch!</span>")
-	D.Stun(rand(60,100))
+	D.Stun(A.rand_good(60,100,D))
 	log_combat(A, D, "cinched")
 	return TRUE
 

@@ -174,12 +174,12 @@
 	if(!artifactrolled)
 		artifactchance = (1+(user.mind.get_skill_level(/datum/skill/level/dwarfy/blacksmithing)/4))/2500
 		artifactrolled = TRUE
-	var/artifact = max(prob(artifactchance), debug)
+	var/artifact = max(user.prob_good(artifactchance), debug)
 	var/finalfailchance = outrightfailchance
 	if(user.mind.skill_holder)
 		var/skillmod = user.mind.get_skill_level(/datum/skill/level/dwarfy/blacksmithing)/10 + 1
 		finalfailchance = max(0, finalfailchance / skillmod) //lv 2 gives 20% less to fail, 3 30%, etc
-	if((currentsteps > 10 || (rng && prob(finalfailchance))) && !artifact)
+	if((currentsteps > 10 || (rng && user.prob_good(finalfailchance))) && !artifact)
 		to_chat(user, "<span class='warning'>You overwork the metal, causing it to turn into useless slag!</span>")
 		var/turf/T = get_turf(user)
 		workpiece_state = FALSE

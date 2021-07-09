@@ -68,3 +68,39 @@
 	var/obj/item/master = comp.parent
 	comp.appliedComponents += master.AddComponent(/datum/component/lifesteal, comp.quality)
 	return "vampiric [newName]"
+
+/datum/fantasy_affix/lucky
+	placement = AFFIX_PREFIX
+	alignment = AFFIX_GOOD
+	weight = 3
+
+#define LUCKY_AFFIX "lucky affix"
+
+/datum/fantasy_affix/lucky/apply(datum/component/fantasy/comp, newName)
+	var/obj/item/master = comp.parent
+	comp.appliedComponents += master.AddComponent(/datum/component/luck)
+	SEND_SIGNAL(master, COMSIG_ADD_LUCK_SOURCE, LUCKY_AFFIX, comp.quality)
+	return "lucky [newName]"
+
+/datum/fantasy_affix/lucky/remove(datum/component/fantasy/comp)
+	SEND_SIGNAL(comp.parent, COMSIG_CLEAR_LUCK_SOURCE, LUCKY_AFFIX)
+
+#undef LUCKY_AFFIX
+
+#define UNLUCKY_AFFIX "unlucky affix"
+
+/datum/fantasy_affix/lucky
+	placement = AFFIX_PREFIX
+	alignment = AFFIX_BAD
+	weight = 3
+
+/datum/fantasy_affix/unlucky/apply(datum/component/fantasy/comp, newName)
+	var/obj/item/master = comp.parent
+	comp.appliedComponents += master.AddComponent(/datum/component/luck)
+	SEND_SIGNAL(master, COMSIG_ADD_LUCK_SOURCE, UNLUCKY_AFFIX, comp.quality)
+	return "unlucky [newName]"
+
+/datum/fantasy_affix/unlucky/remove(datum/component/fantasy/comp)
+	SEND_SIGNAL(comp.parent, COMSIG_CLEAR_LUCK_SOURCE, UNLUCKY_AFFIX)
+
+#undef UNLUCKY_AFFIX

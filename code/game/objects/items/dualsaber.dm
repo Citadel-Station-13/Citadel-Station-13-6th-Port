@@ -178,7 +178,7 @@
 		user.dropItemToGround(src)
 		return
 	..()
-	if(HAS_TRAIT(user, TRAIT_CLUMSY) && (wielded) && prob(40))
+	if(HAS_TRAIT(user, TRAIT_CLUMSY) && (wielded) && user.prob_bad(40))
 		impale(user)
 		return
 	if(spinnable && (wielded) && prob(50))

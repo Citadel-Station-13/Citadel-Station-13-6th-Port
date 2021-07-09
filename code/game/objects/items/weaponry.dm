@@ -1312,7 +1312,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	if(wielded)
 		final_block_chance *= 2
 	if(wielded || !(attack_type & ATTACK_TYPE_PROJECTILE))
-		if(prob(final_block_chance))
+		if(owner.prob_good(final_block_chance))
 			if(attack_type & ATTACK_TYPE_PROJECTILE)
 				owner.visible_message("<span class='danger'>[owner] deflects [attack_text] with [src]!</span>")
 				playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 75, 1)

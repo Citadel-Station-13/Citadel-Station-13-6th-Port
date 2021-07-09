@@ -50,9 +50,8 @@
 /datum/emote/living/carbon/human/mawp/run_emote(mob/living/user, params)
 	. = ..()
 	if(.)
-		if(ishuman(user))
-			if(prob(10))
-				user.adjustEarDamage(-5, -5)
+		if(ishuman(user) && user.prob_good(10))
+			user.adjustEarDamage(-5, -5)
 
 /datum/emote/living/carbon/human/mumble
 	key = "mumble"

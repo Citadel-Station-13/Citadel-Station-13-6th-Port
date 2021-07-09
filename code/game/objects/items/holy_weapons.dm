@@ -406,7 +406,7 @@
 	slot_flags = ITEM_SLOT_BELT
 
 /obj/item/nullrod/claymore/multiverse/attack(mob/living/carbon/M, mob/living/carbon/user)
-	force = rand(1, 30)
+	force = user.rand_good(1, 30)
 	..()
 
 /obj/item/nullrod/claymore/saber
@@ -615,7 +615,7 @@
 	. = ..()
 	if(!proximity)
 		return
-	if(prob(30) && ishuman(A))
+	if(ishuman(A) && user.prob_good(30))
 		var/mob/living/carbon/human/H = A
 		user.reagents.trans_to(H, user.reagents.total_volume, 1, 1, 0)
 		to_chat(user, "<span class='notice'>Your pride reflects on [H].</span>")

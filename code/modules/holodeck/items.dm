@@ -84,7 +84,7 @@
 		var/mob/living/carbon/M = hit_atom
 		playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
 		M.apply_damage(10, STAMINA)
-		if(prob(5))
+		if(M.prob_bad(5))
 			M.DefaultCombatKnockdown(60)
 			visible_message("<span class='danger'>[M] is knocked right off [M.p_their()] feet!</span>")
 

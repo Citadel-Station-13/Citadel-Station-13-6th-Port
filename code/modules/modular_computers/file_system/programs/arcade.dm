@@ -51,9 +51,9 @@
 	var/boss_mpamt = 0
 	var/bossheal = 0
 	if(pause_state == TRUE)
-		boss_attackamt = rand(3,6)
-		boss_mpamt = rand (2,4)
-		bossheal = rand (4,6)
+		boss_attackamt = user.rand_bad(3,6)
+		boss_mpamt = user.rand_bad(2,4)
+		bossheal = user.rand_bad(4,6)
 	if(game_active == FALSE)
 		return
 	if (boss_mp <= 5)
@@ -109,7 +109,7 @@
 		if("Attack")
 			var/attackamt = 0 //Spam prevention.
 			if(pause_state == FALSE)
-				attackamt = rand(2,6) + rand(0, gamerSkill)
+				attackamt = user.rand_good(2,6) + user.rand_good(0, gamerSkill)
 			pause_state = TRUE
 			heads_up = "You attack for [attackamt] damage."
 			playsound(computer.loc, 'sound/arcade/hit.ogg', 50, TRUE)
@@ -122,11 +122,11 @@
 			var/healamt = 0 //More Spam Prevention.
 			var/healcost = 0
 			if(pause_state == FALSE)
-				healamt = rand(6,8) + rand(0, gamerSkill)
+				healamt = user.rand_good(6,8) + user.rand_good(0, gamerSkill)
 				var/maxPointCost = 3
 				// if(gamerSkillLevel >= SKILL_LEVEL_JOURNEYMAN)
 				// 	maxPointCost = 2
-				healcost = rand(1, maxPointCost)
+				healcost = user.rand_bad(1, maxPointCost)
 			pause_state = TRUE
 			heads_up = "You heal for [healamt] damage."
 			playsound(computer.loc, 'sound/arcade/heal.ogg', 50, TRUE)
@@ -139,7 +139,7 @@
 		if("Recharge_Power")
 			var/rechargeamt = 0 //As above.
 			if(pause_state == FALSE)
-				rechargeamt = rand(4,7) + rand(0, gamerSkill)
+				rechargeamt = user.rand_good(4,7) + user.rand_good(0, gamerSkill)
 			pause_state = TRUE
 			heads_up = "You regain [rechargeamt] magic power."
 			playsound(computer.loc, 'sound/arcade/mana.ogg', 50, TRUE)

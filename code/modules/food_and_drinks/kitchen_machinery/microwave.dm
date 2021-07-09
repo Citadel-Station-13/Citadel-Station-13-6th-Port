@@ -250,13 +250,13 @@
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return
 
-	if(prob(dirty * 5 / (5 * efficiency))) //a clean unupgraded microwave has no risk of failure
+	if(user.prob_bad(dirty * 5 / (5 * efficiency))) //a clean unupgraded microwave has no risk of failure
 		muck()
 		return
 	for(var/obj/O in ingredients)
 		if(istype(O, /obj/item/reagent_containers/food) || istype(O, /obj/item/grown))
 			continue
-		if(prob(min(dirty * 5, 100)))
+		if(user.prob_bad(min(dirty * 5, 100)))
 			start_can_fail()
 			return
 		break
@@ -330,7 +330,7 @@
 	if(metal)
 		spark()
 		broken = 2
-		if(prob(max(metal / 2, 33)))
+		if(user.prob_bad(max(metal / 2, 33)))
 			explosion(loc, 0, 1, 2)
 	else
 		dropContents(ingredients)
@@ -355,7 +355,7 @@
 	operating = FALSE
 
 	for(var/obj/item/reagent_containers/food/snacks/S in src)
-		if(prob(50))
+		if(user.prob_bad(50))
 			new /obj/item/reagent_containers/food/snacks/badrecipe(src)
 			qdel(S)
 

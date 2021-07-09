@@ -289,7 +289,7 @@
 	if(victim.mobility_flags & ~MOBILITY_STAND)
 		fall_chance_current *= 0.2
 
-	if(prob(fall_chance_current))
+	if(victim.prob_good(fall_chance_current))
 		fallOutCarbon()
 
 ////////////////////////////////////////

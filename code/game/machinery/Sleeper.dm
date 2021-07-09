@@ -326,7 +326,7 @@
 /obj/machinery/sleeper/party/inject_chem(chem, mob/user)
 	if(leddit)
 		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, 4) //You're injecting chemicals into yourself from a recalled, decrepit medical machine. What did you expect?
-	else if (prob(20))
+	else if (occupant.prob_bad(20))
 		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, rand(1,3))
 	if(chem in spray_chems)
 		var/datum/reagents/holder = new()

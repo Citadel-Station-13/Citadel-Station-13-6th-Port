@@ -248,13 +248,13 @@
 			else
 				food -= (alive+lings_aboard)*2
 				fuel -= 5
-				if(turns == 2 && prob(30-gamerSkill))
+				if(turns == 2 && usr.prob_bad(30-gamerSkill))
 					event = ORION_TRAIL_COLLISION
 					event()
 				else if(prob(75-gamerSkill))
 					event = pickweight(events)
 					if(lings_aboard)
-						if(event == ORION_TRAIL_LING || prob(55-gamerSkill))
+						if(event == ORION_TRAIL_LING || usr.prob_bad(55-gamerSkill))
 							event = ORION_TRAIL_LING_ATTACK
 					event()
 				turns += 1
@@ -262,13 +262,13 @@
 				var/mob/living/carbon/M = usr //for some vars
 				switch(event)
 					if(ORION_TRAIL_RAIDERS)
-						if(prob(50-gamerSkill))
-							to_chat(usr, "<span class='userdanger'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
-							M.hallucination += 30
-						else
+						if(usr.prob_bad(50-gamerSkill))
 							to_chat(usr, "<span class='userdanger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
 							M.take_bodypart_damage(30)
 							playsound(loc, 'sound/weapons/genhit2.ogg', 100, TRUE)
+						else
+							to_chat(usr, "<span class='userdanger'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
+							M.hallucination += 30
 					if(ORION_TRAIL_ILLNESS)
 						var/maxSeverity = 3
 						// if(gamerSkillLevel >= SKILL_LEVEL_EXPERT)
@@ -285,7 +285,7 @@
 							sleep(30)
 							M.vomit(10, distance = 5)
 					if(ORION_TRAIL_FLUX)
-						if(prob(75-gamerSkill))
+						if(usr.prob_bad(75-gamerSkill))
 							M.DefaultCombatKnockdown(60)
 							say("A sudden gust of powerful wind slams [M] into the floor!")
 							M.take_bodypart_damage(25)
@@ -293,7 +293,7 @@
 						else
 							to_chat(M, "<span class='userdanger'>A violent gale blows past you, and you barely manage to stay standing!</span>")
 					if(ORION_TRAIL_COLLISION) //by far the most damaging event
-						if(prob(90-gamerSkill))
+						if(usr.prob_bad(90-gamerSkill))
 							playsound(loc, 'sound/effects/bang.ogg', 100, TRUE)
 							var/turf/open/floor/F
 							for(F in orange(1, src))
@@ -369,14 +369,14 @@
 			event = null
 	else if(href_list["keepspeed"]) //keep speed
 		if(event == ORION_TRAIL_FLUX)
-			if(prob(75))
+			if(usr.prob_bad(75))
 				event = "Breakdown"
 				event()
 			else
 				event = null
 	else if(href_list["blackhole"]) //keep speed past a black hole
 		if(turns == 7)
-			if(prob(75-gamerSkill))
+			if(usr.prob_bad(75-gamerSkill))
 				event = ORION_TRAIL_BLACKHOLE
 				event()
 				if(obj_flags & EMAGGED)
@@ -464,19 +464,19 @@
 
 				var/FU = 0
 				var/FO = 0
-				if(prob(success))
-					FU = rand(5 + gamerSkillRands,15 + gamerSkillRands)
-					FO = rand(5 + gamerSkillRands,15 + gamerSkillRands)
+				if(usr.prob_good(success))
+					FU = usr.rand_good(5 + gamerSkillRands,15 + gamerSkillRands)
+					FO = usr.rand_good(5 + gamerSkillRands,15 + gamerSkillRands)
 					last_spaceport_action = "You successfully raided the spaceport! You gained [FU] Fuel and [FO] Food! (+[FU]FU,+[FO]FO)"
 					xp_gained += 10
 				else
-					FU = rand(-5,-15)
-					FO = rand(-5,-15)
+					FU = usr.rand_bad(-5,-15)
+					FO = usr.rand_bad(-5,-15)
 					last_spaceport_action = "You failed to raid the spaceport! You lost [FU*-1] Fuel and [FO*-1] Food in your scramble to escape! ([FU]FU,[FO]FO)"
 
 					//your chance of lose a crewmember is 1/2 your chance of success
 					//this makes higher % failures hurt more, don't get cocky space cowboy!
-					if(prob(success*5))
+					if(usr.prob_bad(success*5))
 						var/lost_crew = remove_crewmember()
 						last_spaceport_action = "You failed to raid the spaceport! You lost [FU*-1] Fuel and [FO*-1] Food, AND [lost_crew] in your scramble to escape! ([FU]FI,[FO]FO,-Crew)"
 						if(obj_flags & EMAGGED)
@@ -535,13 +535,13 @@
 	switch(event)
 		if(ORION_TRAIL_RAIDERS)
 			eventdat += "Raiders have come aboard your ship!"
-			if(prob(50))
-				var/sfood = rand(1,10)
-				var/sfuel = rand(1,10)
+			if(usr.prob_bad(50))
+				var/sfood = usr.rand_bad(1,10)
+				var/sfuel = usr.rand_bad(1,10)
 				food -= sfood
 				fuel -= sfuel
 				eventdat += "<br>They have stolen [sfood] <b>Food</b> and [sfuel] <b>Fuel</b>."
-			else if(prob(10))
+			else if(usr.prob_bad(10))
 				var/deadname = remove_crewmember()
 				eventdat += "<br>[deadname] tried to fight back, but was killed."
 			else
@@ -562,7 +562,7 @@
 			canContinueEvent = 1
 
 		if(ORION_TRAIL_SEARCH)
-			switch(rand(100))
+			switch(usr.rand_bad(0,100))
 				if(0 to 15)
 					var/rescued = add_crewmember()
 					var/oldfood = rand(1,7)
@@ -572,16 +572,16 @@
 					eventdat += "<br>As you look through it you find some supplies and a living person!"
 					eventdat += "<br>[rescued] was rescued from the abandoned ship!"
 					eventdat += "<br>You found [oldfood] <b>Food</b> and [oldfuel] <b>Fuel</b>."
-				if(15 to 35)
-					var/lfuel = rand(4,7)
-					var/deadname = remove_crewmember()
-					fuel -= lfuel
-					eventdat += "<br>[deadname] was lost deep in the wreckage, and your own vessel lost [lfuel] <b>Fuel</b> maneuvering to the the abandoned ship."
-				if(35 to 65)
+				if(15 to 45)
 					var/oldfood = rand(5,11)
 					food += oldfood
 					engine++
 					eventdat += "<br>You found [oldfood] <b>Food</b> and some parts amongst the wreck."
+				if(45 to 65)
+					var/lfuel = rand(4,7)
+					var/deadname = remove_crewmember()
+					fuel -= lfuel
+					eventdat += "<br>[deadname] was lost deep in the wreckage, and your own vessel lost [lfuel] <b>Fuel</b> maneuvering to the the abandoned ship."
 				else
 					eventdat += "<br>As you look through the wreck you cannot find much of use."
 			eventdat += "<P ALIGN=Right><a href='byond://?src=[REF(src)];eventclose=1'>Continue</a></P>"
@@ -616,13 +616,13 @@
 
 		if(ORION_TRAIL_COLLISION)
 			eventdat += "Something hit us! Looks like there's some hull damage."
-			if(prob(25))
+			if(user.prob_bad(25))
 				var/sfood = rand(5,15)
 				var/sfuel = rand(5,15)
 				food -= sfood
 				fuel -= sfuel
 				eventdat += "<br>[sfood] <b>Food</b> and [sfuel] <b>Fuel</b> was vented out into space."
-			if(prob(10))
+			if(user.prob_bad(10))
 				var/deadname = remove_crewmember()
 				eventdat += "<br>[deadname] was killed by rapid depressurization."
 			eventdat += "<br>You can repair the damage with hull plates, or you can spend the next 3 days welding scrap together."
@@ -644,13 +644,13 @@
 				eventdat += "<br>Your crew's chance of reaching Orion is so slim the changelings likely avoided your ship..."
 				eventdat += "<P ALIGN=Right><a href='byond://?src=[REF(src)];eventclose=1'>Continue</a></P>"
 				eventdat += "<P ALIGN=Right><a href='byond://?src=[REF(src)];close=1'>Close</a></P>"
-				if(prob(10)) // "likely", I didn't say it was guaranteed!
+				if(user.prob_bad(10)) // "likely", I didn't say it was guaranteed!
 					lings_aboard = min(++lings_aboard,2)
 			else
 				if(lings_aboard) //less likely to stack lings
-					if(prob(20))
+					if(user.prob_bad(20))
 						lings_aboard = min(++lings_aboard,2)
-				else if(prob(70))
+				else if(user.prob_bad(70))
 					lings_aboard = min(++lings_aboard,2)
 
 				eventdat += "<P ALIGN=Right><a href='byond://?src=[REF(src)];killcrew=1'>Kill a Crewmember</a></P>"
@@ -675,9 +675,9 @@
 					eventdat += "<br>[ling1]'s arm twists and contorts into a grotesque blade!"
 
 				var/chance2attack = alive*20
-				if(prob(chance2attack))
+				if(user.prob_bad(chance2attack))
 					var/chancetokill = 30*lings_aboard-(5*alive) //eg: 30*2-(10) = 50%, 2 lings, 2 crew is 50% chance
-					if(prob(chancetokill))
+					if(user.prob_bad(chancetokill))
 						var/deadguy = remove_crewmember()
 						var/murder_text = pick("The changeling[ling2 ? "s" : ""] bring[ling2 ? "" : "s"] down [deadguy] and disembowel[ling2 ? "" : "s"] them in a spray of gore!", \
 						"[ling2 ? pick(ling1, ling2) : ling1] corners [deadguy] and impales them through the stomach!", \
@@ -727,16 +727,16 @@
 
 
 				//If your crew is pathetic you can get freebies (provided you haven't already gotten one from this port)
-				if(!spaceport_freebie && (fuel < 20 || food < 20))
+				if(!spaceport_freebie && (fuel + food < 40))
 					spaceport_freebie++
 					var/FU = 10
 					var/FO = 10
 					var/freecrew = 0
-					if(prob(30))
+					if(user.prob_good(30))
 						FU = 25
 						FO = 25
 
-					if(prob(10))
+					if(user.prob_good(10))
 						add_crewmember()
 						freecrew++
 

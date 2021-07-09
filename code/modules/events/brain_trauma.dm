@@ -26,6 +26,8 @@
 			continue
 		if(!is_station_level(H.z))
 			continue
+		if(H.prob_if_lucky(10))
+			continue
 		traumatize(H)
 		announce_to_ghosts(H)
 		break

@@ -65,7 +65,7 @@
 		if(master && !master.can_terminal_dismantle())
 			return
 
-		if(prob(50) && electrocute_mob(user, powernet, src, 1, TRUE))
+		if(user.prob_bad(50) && electrocute_mob(user, powernet, src, 1, TRUE))
 			do_sparks(5, TRUE, master)
 			return
 

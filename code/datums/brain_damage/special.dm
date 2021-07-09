@@ -12,7 +12,7 @@
 
 /datum/brain_trauma/special/godwoken/on_life()
 	..()
-	if(prob(4))
+	if(owner.prob_good(4))
 		if(prob(33) && owner.HighestImmobilityAmount())
 			speak("unstun", TRUE)
 		else if(prob(60) && owner.health <= owner.crit_threshold)
@@ -170,7 +170,7 @@
 
 /datum/brain_trauma/special/death_whispers/on_life()
 	..()
-	if(!active && prob(2))
+	if(!active && owner.prob_good(2))
 		whispering()
 
 /datum/brain_trauma/special/death_whispers/on_lose()
@@ -263,11 +263,11 @@
 /datum/brain_trauma/special/beepsky/on_life()
 	if(QDELETED(beepsky) || !beepsky.loc || beepsky.z != owner.z)
 		QDEL_NULL(beepsky)
-		if(prob(30))
+		if(owner.prob_bad(30))
 			create_securitron()
 		else
 			return
-	if(get_dist(owner, beepsky) >= 10 && prob(20))
+	if(get_dist(owner, beepsky) >= 10 && owner.prob_bad(20))
 		QDEL_NULL(beepsky)
 		create_securitron()
 	if(owner.stat != CONSCIOUS)
@@ -277,7 +277,7 @@
 	if(get_dist(owner, beepsky) <= 1)
 		owner.playsound_local(owner, 'sound/weapons/egloves.ogg', 50)
 		owner.visible_message("<span class='warning'>[owner]'s body jerks as if it was shocked.</span>", "<span class='userdanger'>You feel the fist of the LAW.</span>")
-		owner.take_bodypart_damage(0,0,rand(40, 70))
+		owner.take_bodypart_damage(0,0,owner.rand_bad(40, 70))
 		QDEL_NULL(beepsky)
 	if(prob(20) && get_dist(owner, beepsky) <= 8)
 		owner.playsound_local(beepsky, 'sound/voice/beepsky/criminal.ogg', 40)

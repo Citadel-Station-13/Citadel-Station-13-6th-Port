@@ -27,7 +27,8 @@
 			break
 		if(foundAlready)
 			continue
-
+		if(H.prob_if_lucky(20))
+			continue
 		var/datum/disease/D = new /datum/disease/appendicitis()
 		H.ForceContractDisease(D, FALSE, TRUE)
 		break

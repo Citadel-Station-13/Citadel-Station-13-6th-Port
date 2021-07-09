@@ -42,7 +42,7 @@
 /mob/living/simple_animal/bot/secbot/grievous/special_retaliate_after_attack(mob/user)
 	if(mode != BOT_HUNT)
 		return
-	if(prob(block_chance))
+	if(prob_good(block_chance, user))
 		visible_message("[src] deflects [user]'s attack with his energy swords!")
 		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
 		return TRUE
