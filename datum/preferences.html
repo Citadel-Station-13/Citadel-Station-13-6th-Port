@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;preferences - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/preferences.html#var">Var Details</a> - <a href="datum/preferences.html#proc">Proc Details</a></header>
+<main>
+<h1>preferences <aside>/<a href="datum.html">datum</a>/<a href="datum/preferences.html">preferences</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 7"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/preferences.html#var/auto_fit_viewport">auto_fit_viewport</a></th><td>Should we automatically fit the viewport?</td></tr>
+            <tr><th><a href="datum/preferences.html#var/broadcast_login_logout">broadcast_login_logout</a></th><td>If we want to broadcast deadchat connect/disconnect messages</td></tr>
+            <tr><th><a href="datum/preferences.html#var/characters_joined_as">characters_joined_as</a></th><td>Characters they have joined the round under - Lazylist of names</td></tr>
+            <tr><th><a href="datum/preferences.html#var/chat_on_map">chat_on_map</a></th><td>Runechat preference. If true, certain messages will be displayed on the map, not ust on the chat area. Boolean.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/dnr_triggered">dnr_triggered</a></th><td>did they DNR? used to prevent respawns.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/favorite_outfits">favorite_outfits</a></th><td>What outfit typepaths we've favorited in the SelectEquipment menu</td></tr>
+            <tr><th><a href="datum/preferences.html#var/gear_points">gear_points</a></th><td>loadout stuff</td></tr>
+            <tr><th><a href="datum/preferences.html#var/hardcore_survival_score">hardcore_survival_score</a></th><td>This var stores the amount of points the owner will get for making it out alive.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/hearted">hearted</a></th><td>Someone thought we were nice! We get a little heart in OOC until we join the server past the below time (we can keep it until the end of the round otherwise)</td></tr>
+            <tr><th><a href="datum/preferences.html#var/hearted_until">hearted_until</a></th><td>If we have a hearted commendations, we honor it every time the player loads preferences until this time has been passed</td></tr>
+            <tr><th><a href="datum/preferences.html#var/key_bindings">key_bindings</a></th><td>Custom Keybindings</td></tr>
+            <tr><th><a href="datum/preferences.html#var/last_id">last_id</a></th><td>Last CID the person was seen on</td></tr>
+            <tr><th><a href="datum/preferences.html#var/last_ip">last_ip</a></th><td>Last IP the person was seen on</td></tr>
+            <tr><th><a href="datum/preferences.html#var/log_clicks">log_clicks</a></th><td>Do we log their clicks to disk?</td></tr>
+            <tr><th><a href="datum/preferences.html#var/max_chat_length">max_chat_length</a></th><td>Limit preference on the size of the message. Requires chat_on_map to have effect.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/medical_records">medical_records</a></th><td>Medical record note section</td></tr>
+            <tr><th><a href="datum/preferences.html#var/modless_key_bindings">modless_key_bindings</a></th><td>List with a key string associated to a list of keybindings. Unlike key_bindings, this one operates on raw key, allowing for binding a key that triggers regardless of if a modifier is depressed as long as the raw key is sent.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/muted">muted</a></th><td>Flags for admin mutes</td></tr>
+            <tr><th><a href="datum/preferences.html#var/persistent_scars">persistent_scars</a></th><td>If we have persistent scars enabled</td></tr>
+            <tr><th><a href="datum/preferences.html#var/pixel_size">pixel_size</a></th><td>What size should pixels be displayed as? 0 is strech to fit</td></tr>
+            <tr><th><a href="datum/preferences.html#var/playtime_reward_cloak">playtime_reward_cloak</a></th><td>The playtime_reward_cloak variable can be set to TRUE from the prefs menu only once the user has gained over 5K playtime hours. If true, it allows the user to get a cool looking roundstart cloak.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/respawn_did_cryo">respawn_did_cryo</a></th><td>did they cryo on their last ghost?</td></tr>
+            <tr><th><a href="datum/preferences.html#var/respawn_restrictions_active">respawn_restrictions_active</a></th><td>Are we currently subject to respawn restrictions? Usually set by us using the &quot;respawn&quot; verb, but can be lifted by admins.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/respawn_time_of_death">respawn_time_of_death</a></th><td>time of death we consider for respawns</td></tr>
+            <tr><th><a href="datum/preferences.html#var/scaling_method">scaling_method</a></th><td>What scaling method should we use?</td></tr>
+            <tr><th><a href="datum/preferences.html#var/scars_index">scars_index</a></th><td>Which of the 5 persistent scar slots we randomly roll to load for this round, if enabled. Actually rolled in [/datum/preferences/proc/load_character(slot)]</td></tr>
+            <tr><th><a href="datum/preferences.html#var/scars_list">scars_list</a></th><td>We have 5 slots for persistent scars, if enabled we pick a random one to load (empty by default) and scars at the end of the shift if we survived as our original person</td></tr>
+            <tr><th><a href="datum/preferences.html#var/security_records">security_records</a></th><td>Security record note section</td></tr>
+            <tr><th><a href="datum/preferences.html#var/see_chat_non_mob">see_chat_non_mob</a></th><td>Whether non-mob messages will be displayed, such as machine vendor announcements. Requires chat_on_map to have effect. Boolean.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/see_rc_emotes">see_rc_emotes</a></th><td>Whether emotes will be displayed on runechat. Requires chat_on_map to have effect. Boolean.</td></tr>
+            <tr><th><a href="datum/preferences.html#var/slots_joined_as">slots_joined_as</a></th><td>Slots they have joined the round under - Lazylist of numbers</td></tr>
+            <tr><th><a href="datum/preferences.html#var/widescreenpref">widescreenpref</a></th><td>Should we be in the widescreen mode set by the config?</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/preferences.html#proc/force_reset_keybindings">force_reset_keybindings</a></th><td>Resets the client's keybindings. Asks them for which</td></tr>
+            <tr><th><a href="datum/preferences.html#proc/force_reset_keybindings_direct">force_reset_keybindings_direct</a></th><td>Does the actual reset</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/auto_fit_viewport"><aside class="declaration">var </aside>auto_fit_viewport
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L167">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 167"/></a></h3>
+        <p>Should we automatically fit the viewport?</p><h3 id="var/broadcast_login_logout"><aside class="declaration">var </aside>broadcast_login_logout
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L230">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 230"/></a></h3>
+        <p>If we want to broadcast deadchat connect/disconnect messages</p><h3 id="var/characters_joined_as"><aside class="declaration">var </aside>characters_joined_as
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 25"/></a></h3>
+        <p>Characters they have joined the round under - Lazylist of names</p><h3 id="var/chat_on_map"><aside class="declaration">var </aside>chat_on_map
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 67"/></a></h3>
+        <p>Runechat preference. If true, certain messages will be displayed on the map, not ust on the chat area. Boolean.</p><h3 id="var/dnr_triggered"><aside class="declaration">var </aside>dnr_triggered
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 33"/></a></h3>
+        <p>did they DNR? used to prevent respawns.</p><h3 id="var/favorite_outfits"><aside class="declaration">var </aside>favorite_outfits
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L232">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 232"/></a></h3>
+        <p>What outfit typepaths we've favorited in the SelectEquipment menu</p><h3 id="var/gear_points"><aside class="declaration">var </aside>gear_points
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L206">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 206"/></a></h3>
+        <p>loadout stuff</p><h3 id="var/hardcore_survival_score"><aside class="declaration">var </aside>hardcore_survival_score
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L221">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 221"/></a></h3>
+        <p>This var stores the amount of points the owner will get for making it out alive.</p><h3 id="var/hearted"><aside class="declaration">var </aside>hearted
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L224">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 224"/></a></h3>
+        <p>Someone thought we were nice! We get a little heart in OOC until we join the server past the below time (we can keep it until the end of the round otherwise)</p><h3 id="var/hearted_until"><aside class="declaration">var </aside>hearted_until
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L226">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 226"/></a></h3>
+        <p>If we have a hearted commendations, we honor it every time the player loads preferences until this time has been passed</p><h3 id="var/key_bindings"><aside class="declaration">var </aside>key_bindings
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 76"/></a></h3>
+        <p>Custom Keybindings</p><h3 id="var/last_id"><aside class="declaration">var </aside>last_id
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 21"/></a></h3>
+        <p>Last CID the person was seen on</p><h3 id="var/last_ip"><aside class="declaration">var </aside>last_ip
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 19"/></a></h3>
+        <p>Last IP the person was seen on</p><h3 id="var/log_clicks"><aside class="declaration">var </aside>log_clicks
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 23"/></a></h3>
+        <p>Do we log their clicks to disk?</p><h3 id="var/max_chat_length"><aside class="declaration">var </aside>max_chat_length
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L69">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 69"/></a></h3>
+        <p>Limit preference on the size of the message. Requires chat_on_map to have effect.</p><h3 id="var/medical_records"><aside class="declaration">var </aside>medical_records
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L138">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 138"/></a></h3>
+        <p>Medical record note section</p><h3 id="var/modless_key_bindings"><aside class="declaration">var </aside>modless_key_bindings
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 78"/></a></h3>
+        <p>List with a key string associated to a list of keybindings. Unlike key_bindings, this one operates on raw key, allowing for binding a key that triggers regardless of if a modifier is depressed as long as the raw key is sent.</p><h3 id="var/muted"><aside class="declaration">var </aside>muted
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 17"/></a></h3>
+        <p>Flags for admin mutes</p><h3 id="var/persistent_scars"><aside class="declaration">var </aside>persistent_scars
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L228">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 228"/></a></h3>
+        <p>If we have persistent scars enabled</p><h3 id="var/pixel_size"><aside class="declaration">var </aside>pixel_size
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L171">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 171"/></a></h3>
+        <p>What size should pixels be displayed as? 0 is strech to fit</p><h3 id="var/playtime_reward_cloak"><aside class="declaration">var </aside>playtime_reward_cloak
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L176">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 176"/></a></h3>
+        <p>The playtime_reward_cloak variable can be set to TRUE from the prefs menu only once the user has gained over 5K playtime hours. If true, it allows the user to get a cool looking roundstart cloak.</p><h3 id="var/respawn_did_cryo"><aside class="declaration">var </aside>respawn_did_cryo
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 35"/></a></h3>
+        <p>did they cryo on their last ghost?</p><h3 id="var/respawn_restrictions_active"><aside class="declaration">var </aside>respawn_restrictions_active
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 29"/></a></h3>
+        <p>Are we currently subject to respawn restrictions? Usually set by us using the &quot;respawn&quot; verb, but can be lifted by admins.</p><h3 id="var/respawn_time_of_death"><aside class="declaration">var </aside>respawn_time_of_death
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 31"/></a></h3>
+        <p>time of death we consider for respawns</p><h3 id="var/scaling_method"><aside class="declaration">var </aside>scaling_method
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 173"/></a></h3>
+        <p>What scaling method should we use?</p><h3 id="var/scars_index"><aside class="declaration">var </aside>scars_index
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L236">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 236"/></a></h3>
+        <p>Which of the 5 persistent scar slots we randomly roll to load for this round, if enabled. Actually rolled in [/datum/preferences/proc/load_character(slot)]</p><h3 id="var/scars_list"><aside class="declaration">var </aside>scars_list
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L234">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 234"/></a></h3>
+        <p>We have 5 slots for persistent scars, if enabled we pick a random one to load (empty by default) and scars at the end of the shift if we survived as our original person</p><h3 id="var/security_records"><aside class="declaration">var </aside>security_records
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L136">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 136"/></a></h3>
+        <p>Security record note section</p><h3 id="var/see_chat_non_mob"><aside class="declaration">var </aside>see_chat_non_mob
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 71"/></a></h3>
+        <p>Whether non-mob messages will be displayed, such as machine vendor announcements. Requires chat_on_map to have effect. Boolean.</p><h3 id="var/see_rc_emotes"><aside class="declaration">var </aside>see_rc_emotes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L73">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 73"/></a></h3>
+        <p>Whether emotes will be displayed on runechat. Requires chat_on_map to have effect. Boolean.</p><h3 id="var/slots_joined_as"><aside class="declaration">var </aside>slots_joined_as
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 27"/></a></h3>
+        <p>Slots they have joined the round under - Lazylist of numbers</p><h3 id="var/widescreenpref"><aside class="declaration">var </aside>widescreenpref
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 169"/></a></h3>
+        <p>Should we be in the widescreen mode set by the config?</p><h2 id="proc">Proc Details</h2><h3 id="proc/force_reset_keybindings"><aside class="declaration">proc </aside>force_reset_keybindings<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L3163">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 3163"/></a></aside>
+        </h3>
+        <p>Resets the client's keybindings. Asks them for which</p><h3 id="proc/force_reset_keybindings_direct"><aside class="declaration">proc </aside>force_reset_keybindings_direct<aside>(hotkeys) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/preferences.dm#L3169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;preferences.dm 3169"/></a></aside>
+        </h3>
+        <p>Does the actual reset</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

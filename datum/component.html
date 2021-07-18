@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;component - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/component.html#var">Var Details</a> - <a href="datum/component.html#proc">Proc Details</a></header>
+<main>
+<h1>Component <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 12"/></a></h1>
+
+<p>The component datum</p>
+<p>A component should be a single standalone unit
+of functionality, that works by receiving signals from it's parent
+object to provide some single functionality (i.e a slippery component)
+that makes the object it's attached to cause people to slip over.
+Useful when you want shared behaviour independent of type inheritance</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/component.html#var/can_transfer">can_transfer</a></th><td>Only set to true if you are able to properly transfer this component
+At a minimum RegisterWithParent and UnregisterFromParent should be used
+Make sure you also implement PostTransfer for any post transfer handling</td></tr>
+            <tr><th><a href="datum/component.html#var/dupe_mode">dupe_mode</a></th><td>Defines how duplicate existing components are handled when added to a datum
+See <code>COMPONENT_DUPE_*</code> definitions for available options</td></tr>
+            <tr><th><a href="datum/component.html#var/dupe_type">dupe_type</a></th><td>The type to check for duplication
+<code>null</code> means exact match on <code>type</code> (default)
+Any other type means that and all subtypes</td></tr>
+            <tr><th><a href="datum/component.html#var/parent">parent</a></th><td>The datum this components belongs to</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/component.html#proc/CheckDupeComponent">CheckDupeComponent</a></th><td>Called on a component when a component of the same type was added to the same parent with COMPONENT_DUPE_SELECTIVE
+See <code>/datum/component/var/dupe_mode</code>
+<code>C</code>'s type will always be the same of the called component
+return TRUE if you are absorbing the component, otherwise FALSE if you are fine having it exist as a duplicate component</td></tr>
+            <tr><th><a href="datum/component.html#proc/Destroy">Destroy</a></th><td>Properly removes the component from <code>parent</code> and cleans up references
+Setting <code>force</code> makes it not check for and remove the component from the parent
+Setting <code>silent</code> deletes the component without sending a <code>COMSIG_COMPONENT_REMOVING</code> signal</td></tr>
+            <tr><th><a href="datum/component.html#proc/InheritComponent">InheritComponent</a></th><td>Called on a component when a component of the same type was added to the same parent
+See <code>/datum/component/var/dupe_mode</code>
+<code>C</code>'s type will always be the same of the called component</td></tr>
+            <tr><th><a href="datum/component.html#proc/Initialize">Initialize</a></th><td>Called during component creation with the same arguments as in new excluding parent.
+Do not call <code>qdel(src)</code> from this function, <code>return COMPONENT_INCOMPATIBLE</code> instead</td></tr>
+            <tr><th><a href="datum/component.html#proc/New">New</a></th><td>Create a new component.
+Additional arguments are passed to <code>Initialize()</code></td></tr>
+            <tr><th><a href="datum/component.html#proc/PostTransfer">PostTransfer</a></th><td>Callback Just after a component is transferred</td></tr>
+            <tr><th><a href="datum/component.html#proc/PreTransfer">PreTransfer</a></th><td>Callback Just before this component is transferred</td></tr>
+            <tr><th><a href="datum/component.html#proc/RegisterWithParent">RegisterWithParent</a></th><td>Register the component with the parent object</td></tr>
+            <tr><th><a href="datum/component.html#proc/RemoveComponent">RemoveComponent</a></th><td>Removes the component from parent, ends up with a null parent</td></tr>
+            <tr><th><a href="datum/component.html#proc/UnregisterFromParent">UnregisterFromParent</a></th><td>Unregister from our parent object</td></tr>
+            <tr><th><a href="datum/component.html#proc/_GetInverseTypeList">_GetInverseTypeList</a></th><td>Internal proc to create a list of our type and all parent types</td></tr>
+            <tr><th><a href="datum/component.html#proc/_JoinParent">_JoinParent</a></th><td>Internal proc to handle behaviour of components when joining a parent</td></tr>
+            <tr><th><a href="datum/component.html#proc/_RemoveFromParent">_RemoveFromParent</a></th><td>Internal proc to handle behaviour when being removed from a parent</td></tr>
+            <tr><th><a href="datum/component.html#proc/ui_host">ui_host</a></th><td>Return the object that is the host of any UI's that this component has</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/can_transfer"><aside class="declaration">var </aside>can_transfer
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 28"/></a></h3>
+        <p>Only set to true if you are able to properly transfer this component
+At a minimum RegisterWithParent and UnregisterFromParent should be used
+Make sure you also implement PostTransfer for any post transfer handling</p><h3 id="var/dupe_mode"><aside class="declaration">var </aside>dupe_mode
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 15"/></a></h3>
+        <p>Defines how duplicate existing components are handled when added to a datum
+See <code>COMPONENT_DUPE_*</code> definitions for available options</p><h3 id="var/dupe_type"><aside class="declaration">var </aside>dupe_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 20"/></a></h3>
+        <p>The type to check for duplication
+<code>null</code> means exact match on <code>type</code> (default)
+Any other type means that and all subtypes</p><h3 id="var/parent"><aside class="declaration">var </aside>parent
+            <aside>&ndash; /<a href="datum.html">datum</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 23"/></a></h3>
+        <p>The datum this components belongs to</p><h2 id="proc">Proc Details</h2><h3 id="proc/CheckDupeComponent"><aside class="declaration">proc </aside>CheckDupeComponent<aside>(/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/C, ...) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L246">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 246"/></a></aside>
+        </h3>
+        <p>Called on a component when a component of the same type was added to the same parent with COMPONENT_DUPE_SELECTIVE
+See <code>/datum/component/var/dupe_mode</code>
+<code>C</code>'s type will always be the same of the called component
+return TRUE if you are absorbing the component, otherwise FALSE if you are fine having it exist as a duplicate component</p><h3 id="proc/Destroy"><aside class="parent"><a title="/datum" href="datum.html#proc/Destroy">&uarr;</a></aside>Destroy<aside>(force, silent) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 59"/></a></aside>
+        </h3>
+        <p>Properly removes the component from <code>parent</code> and cleans up references
+Setting <code>force</code> makes it not check for and remove the component from the parent
+Setting <code>silent</code> deletes the component without sending a <code>COMSIG_COMPONENT_REMOVING</code> signal</p><h3 id="proc/InheritComponent"><aside class="declaration">proc </aside>InheritComponent<aside>(/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/C, i_am_original) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L236">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 236"/></a></aside>
+        </h3>
+        <p>Called on a component when a component of the same type was added to the same parent
+See <code>/datum/component/var/dupe_mode</code>
+<code>C</code>'s type will always be the same of the called component</p><h3 id="proc/Initialize"><aside class="declaration">proc </aside>Initialize<aside>(...) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 51"/></a></aside>
+        </h3>
+        <p>Called during component creation with the same arguments as in new excluding parent.
+Do not call <code>qdel(src)</code> from this function, <code>return COMPONENT_INCOMPATIBLE</code> instead</p><h3 id="proc/New">New<aside>(/list/raw_args) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 37"/></a></aside>
+        </h3>
+        <p>Create a new component.
+Additional arguments are passed to <code>Initialize()</code></p>
+<p>Arguments:</p>
+<ul>
+<li>datum/P the parent datum this component reacts to signals from</li>
+</ul><h3 id="proc/PostTransfer"><aside class="declaration">proc </aside>PostTransfer<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L266">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 266"/></a></aside>
+        </h3>
+        <p>Callback Just after a component is transferred</p>
+<p>Use this to do any special setup you need to do after being moved to a new object
+Do not call <code>qdel(src)</code> from this function, <code>return COMPONENT_INCOMPATIBLE</code> instead</p><h3 id="proc/PreTransfer"><aside class="declaration">proc </aside>PreTransfer<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L256">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 256"/></a></aside>
+        </h3>
+        <p>Callback Just before this component is transferred</p>
+<p>Use this to do any special cleanup you might need to do before being deregged from an object</p><h3 id="proc/RegisterWithParent"><aside class="declaration">proc </aside>RegisterWithParent<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L132">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 132"/></a></aside>
+        </h3>
+        <p>Register the component with the parent object</p>
+<p>Use this proc to register with your parent object
+Overridable proc that's called when added to a new parent</p><h3 id="proc/RemoveComponent"><aside class="declaration">proc </aside>RemoveComponent<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L448">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 448"/></a></aside>
+        </h3>
+        <p>Removes the component from parent, ends up with a null parent</p><h3 id="proc/UnregisterFromParent"><aside class="declaration">proc </aside>UnregisterFromParent<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L142">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 142"/></a></aside>
+        </h3>
+        <p>Unregister from our parent object</p>
+<p>Use this proc to unregister from your parent object
+Overridable proc that's called when removed from a parent</p><h3 id="proc/_GetInverseTypeList"><aside class="declaration">proc </aside>_GetInverseTypeList<aside>(our_type) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L272">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 272"/></a></aside>
+        </h3>
+        <p>Internal proc to create a list of our type and all parent types</p><h3 id="proc/_JoinParent"><aside class="declaration">proc </aside>_JoinParent<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L70">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 70"/></a></aside>
+        </h3>
+        <p>Internal proc to handle behaviour of components when joining a parent</p><h3 id="proc/_RemoveFromParent"><aside class="declaration">proc </aside>_RemoveFromParent<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L108">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 108"/></a></aside>
+        </h3>
+        <p>Internal proc to handle behaviour when being removed from a parent</p><h3 id="proc/ui_host"><aside class="parent"><a title="/datum" href="datum.html#proc/ui_host">&uarr;</a></aside>ui_host<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/_component.dm#L506">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;_component.dm 506"/></a></aside>
+        </h3>
+        <p>Return the object that is the host of any UI's that this component has</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

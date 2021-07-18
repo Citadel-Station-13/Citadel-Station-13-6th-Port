@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;input - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/controller/subsystem/input.html#var">Var Details</a> - <a href="datum/controller/subsystem/input.html#proc">Proc Details</a></header>
+<main>
+<h1>input <aside>/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/input.html">input</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/all_macrosets">all_macrosets</a></th><td>KEEP THIS UP TO DATE!</td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/hotkey_mode_macros">hotkey_mode_macros</a></th><td>Macro set for hotkeys</td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/input_mode_macros">input_mode_macros</a></th><td>Macro set for classic.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/macroset_classic_hotkey">macroset_classic_hotkey</a></th><td>Classic mode map focused macro set. Manually set because it needs to be clientside and go to macroset_classic_input.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/macroset_classic_input">macroset_classic_input</a></th><td>Classic mode input focused macro set. Manually set because we can't define ANY or ANY+UP for classic.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#var/macroset_hotkey">macroset_hotkey</a></th><td>New hotkey mode macro set. All input goes into map, game keeps incessently setting your focus to map, we can use ANY all we want here; we don't care about the input bar, the user has to force the input bar every time they want to type.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/input.html#proc/setup_macrosets">setup_macrosets</a></th><td>Sets up the key list for classic mode for when badmins screw up vv's.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/all_macrosets"><aside class="declaration">var </aside>all_macrosets
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 10"/></a></h3>
+        <p>KEEP THIS UP TO DATE!</p><h3 id="var/hotkey_mode_macros"><aside class="declaration">var </aside>hotkey_mode_macros
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 23"/></a></h3>
+        <p>Macro set for hotkeys</p><h3 id="var/input_mode_macros"><aside class="declaration">var </aside>input_mode_macros
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 27"/></a></h3>
+        <p>Macro set for classic.</p><h3 id="var/macroset_classic_hotkey"><aside class="declaration">var </aside>macroset_classic_hotkey
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 18"/></a></h3>
+        <p>Classic mode map focused macro set. Manually set because it needs to be clientside and go to macroset_classic_input.</p><h3 id="var/macroset_classic_input"><aside class="declaration">var </aside>macroset_classic_input
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 16"/></a></h3>
+        <p>Classic mode input focused macro set. Manually set because we can't define ANY or ANY+UP for classic.</p><h3 id="var/macroset_hotkey"><aside class="declaration">var </aside>macroset_hotkey
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 20"/></a></h3>
+        <p>New hotkey mode macro set. All input goes into map, game keeps incessently setting your focus to map, we can use ANY all we want here; we don't care about the input bar, the user has to force the input bar every time they want to type.</p><h2 id="proc">Proc Details</h2><h3 id="proc/setup_macrosets"><aside class="declaration">proc </aside>setup_macrosets<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 37"/></a></aside>
+        </h3>
+        <p>Sets up the key list for classic mode for when badmins screw up vv's.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

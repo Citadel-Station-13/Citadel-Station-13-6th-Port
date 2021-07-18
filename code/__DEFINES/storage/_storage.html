@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/storage/_storage.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/storage/_storage.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/STORAGE_LIMIT_MAX_ITEMS">STORAGE_LIMIT_MAX_ITEMS</a></th><td>Check max_items and contents.len when trying to insert</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/STORAGE_LIMIT_COMBINED_W_CLASS">STORAGE_LIMIT_COMBINED_W_CLASS</a></th><td>Check max_combined_w_class.</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/STORAGE_LIMIT_VOLUME">STORAGE_LIMIT_VOLUME</a></th><td>Use the new volume system. Will automatically force rendering to use the new volume/baystation scaling UI so this is kind of incompatible with stuff like stack storage etc etc.</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/STORAGE_LIMIT_MAX_W_CLASS">STORAGE_LIMIT_MAX_W_CLASS</a></th><td>Use max_w_class</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/VOLUMETRIC_STORAGE_BOX_ICON_SIZE">VOLUMETRIC_STORAGE_BOX_ICON_SIZE</a></th><td>Size of volumetric box icon</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/VOLUMETRIC_STORAGE_BOX_BORDER_SIZE">VOLUMETRIC_STORAGE_BOX_BORDER_SIZE</a></th><td>Size of EACH left/right border icon for volumetric boxes</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/MINIMUM_PIXELS_PER_ITEM">MINIMUM_PIXELS_PER_ITEM</a></th><td>Minimum pixels an item must have in volumetric scaled storage UI</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/MAXIMUM_VOLUMETRIC_ITEMS">MAXIMUM_VOLUMETRIC_ITEMS</a></th><td>Maximum number of objects that will be allowed to be displayed using the volumetric display system. Arbitrary number to prevent server lockups.</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/VOLUMETRIC_STORAGE_ITEM_PADDING">VOLUMETRIC_STORAGE_ITEM_PADDING</a></th><td>How much padding to give between items</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/VOLUMETRIC_STORAGE_EDGE_PADDING">VOLUMETRIC_STORAGE_EDGE_PADDING</a></th><td>How much padding to give to edges</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_TINY">WEIGHT_CLASS_TINY</a></th><td>Usually items smaller then a human hand, ex: Playing Cards, Lighter, Scalpel, Coins/Money</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_SMALL">WEIGHT_CLASS_SMALL</a></th><td>Pockets can hold small and tiny items, ex: Flashlight, Multitool, Grenades, GPS Device</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_NORMAL">WEIGHT_CLASS_NORMAL</a></th><td>Standard backpacks can carry tiny, small &amp; normal items, ex: Fire extinguisher, Stunbaton, Gas Mask, Metal Sheets</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_BULKY">WEIGHT_CLASS_BULKY</a></th><td>Items that can be weilded or equipped but not stored in a normal bag, ex: Defibrillator, Backpack, Space Suits</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_HUGE">WEIGHT_CLASS_HUGE</a></th><td>Usually represents objects that require two hands to operate, ex: Shotgun, Two Handed Melee Weapons - Can not fit in Boh</td></tr>
+        <tr><th><a href="code/__DEFINES/storage/_storage.html#define/WEIGHT_CLASS_GIGANTIC">WEIGHT_CLASS_GIGANTIC</a></th><td>Essentially means it cannot be picked up or placed in an inventory, ex: Mech Parts, Safe - Can not fit in Boh</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/MAXIMUM_VOLUMETRIC_ITEMS"><aside class="declaration">#define </aside>MAXIMUM_VOLUMETRIC_ITEMS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 24"/></a>
+    </h3>
+    <p>Maximum number of objects that will be allowed to be displayed using the volumetric display system. Arbitrary number to prevent server lockups.</p><h3 id="define/MINIMUM_PIXELS_PER_ITEM"><aside class="declaration">#define </aside>MINIMUM_PIXELS_PER_ITEM
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 22"/></a>
+    </h3>
+    <p>Minimum pixels an item must have in volumetric scaled storage UI</p><h3 id="define/STORAGE_LIMIT_COMBINED_W_CLASS"><aside class="declaration">#define </aside>STORAGE_LIMIT_COMBINED_W_CLASS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 7"/></a>
+    </h3>
+    <p>Check max_combined_w_class.</p><h3 id="define/STORAGE_LIMIT_MAX_ITEMS"><aside class="declaration">#define </aside>STORAGE_LIMIT_MAX_ITEMS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 5"/></a>
+    </h3>
+    <p>Check max_items and contents.len when trying to insert</p><h3 id="define/STORAGE_LIMIT_MAX_W_CLASS"><aside class="declaration">#define </aside>STORAGE_LIMIT_MAX_W_CLASS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 11"/></a>
+    </h3>
+    <p>Use max_w_class</p><h3 id="define/STORAGE_LIMIT_VOLUME"><aside class="declaration">#define </aside>STORAGE_LIMIT_VOLUME
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 9"/></a>
+    </h3>
+    <p>Use the new volume system. Will automatically force rendering to use the new volume/baystation scaling UI so this is kind of incompatible with stuff like stack storage etc etc.</p><h3 id="define/VOLUMETRIC_STORAGE_BOX_BORDER_SIZE"><aside class="declaration">#define </aside>VOLUMETRIC_STORAGE_BOX_BORDER_SIZE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 20"/></a>
+    </h3>
+    <p>Size of EACH left/right border icon for volumetric boxes</p><h3 id="define/VOLUMETRIC_STORAGE_BOX_ICON_SIZE"><aside class="declaration">#define </aside>VOLUMETRIC_STORAGE_BOX_ICON_SIZE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 18"/></a>
+    </h3>
+    <p>Size of volumetric box icon</p><h3 id="define/VOLUMETRIC_STORAGE_EDGE_PADDING"><aside class="declaration">#define </aside>VOLUMETRIC_STORAGE_EDGE_PADDING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 28"/></a>
+    </h3>
+    <p>How much padding to give to edges</p><h3 id="define/VOLUMETRIC_STORAGE_ITEM_PADDING"><aside class="declaration">#define </aside>VOLUMETRIC_STORAGE_ITEM_PADDING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 26"/></a>
+    </h3>
+    <p>How much padding to give between items</p><h3 id="define/WEIGHT_CLASS_BULKY"><aside class="declaration">#define </aside>WEIGHT_CLASS_BULKY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 38"/></a>
+    </h3>
+    <p>Items that can be weilded or equipped but not stored in a normal bag, ex: Defibrillator, Backpack, Space Suits</p><h3 id="define/WEIGHT_CLASS_GIGANTIC"><aside class="declaration">#define </aside>WEIGHT_CLASS_GIGANTIC
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 42"/></a>
+    </h3>
+    <p>Essentially means it cannot be picked up or placed in an inventory, ex: Mech Parts, Safe - Can not fit in Boh</p><h3 id="define/WEIGHT_CLASS_HUGE"><aside class="declaration">#define </aside>WEIGHT_CLASS_HUGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 40"/></a>
+    </h3>
+    <p>Usually represents objects that require two hands to operate, ex: Shotgun, Two Handed Melee Weapons - Can not fit in Boh</p><h3 id="define/WEIGHT_CLASS_NORMAL"><aside class="declaration">#define </aside>WEIGHT_CLASS_NORMAL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 36"/></a>
+    </h3>
+    <p>Standard backpacks can carry tiny, small &amp; normal items, ex: Fire extinguisher, Stunbaton, Gas Mask, Metal Sheets</p><h3 id="define/WEIGHT_CLASS_SMALL"><aside class="declaration">#define </aside>WEIGHT_CLASS_SMALL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 34"/></a>
+    </h3>
+    <p>Pockets can hold small and tiny items, ex: Flashlight, Multitool, Grenades, GPS Device</p><h3 id="define/WEIGHT_CLASS_TINY"><aside class="declaration">#define </aside>WEIGHT_CLASS_TINY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/storage/_storage.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;storage&#x2F;_storage.dm 32"/></a>
+    </h3>
+    <p>Usually items smaller then a human hand, ex: Playing Cards, Lighter, Scalpel, Coins/Money</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

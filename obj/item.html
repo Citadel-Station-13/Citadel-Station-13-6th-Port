@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item.html#var">Var Details</a> - <a href="obj/item.html#proc">Proc Details</a></header>
+<main>
+<h1>item <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 10"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item.html#var/attack_speed">attack_speed</a></th><td>Amount of time to check for from a mob's last attack, checked before an attack happens. Lower = faster attacks</td></tr>
+            <tr><th><a href="obj/item.html#var/attack_unwieldlyness">attack_unwieldlyness</a></th><td>Amount of time to hard-stagger (no clicking at all) the mob when attacking. Lower = better</td></tr>
+            <tr><th><a href="obj/item.html#var/block_chance">block_chance</a></th><td>The 0% to 100% chance for the default implementation of random block rolls.</td></tr>
+            <tr><th><a href="obj/item.html#var/block_priority">block_priority</a></th><td>Block priority, higher means we check this higher in the &quot;chain&quot;.</td></tr>
+            <tr><th><a href="obj/item.html#var/clickdelay_from_next_action">clickdelay_from_next_action</a></th><td>This item checks clickdelay from a user's delayed next action variable rather than the last time they attacked.</td></tr>
+            <tr><th><a href="obj/item.html#var/clickdelay_ignores_next_action">clickdelay_ignores_next_action</a></th><td>This item ignores next action delays.</td></tr>
+            <tr><th><a href="obj/item.html#var/clickdelay_mod_bypass">clickdelay_mod_bypass</a></th><td>This item bypasses any click delay mods</td></tr>
+            <tr><th><a href="obj/item.html#var/dye_color">dye_color</a></th><td>Used as the dye color source in the washing machine only (at the moment). Can be a hex color or a key corresponding to a registry entry, see washing_machine.dm</td></tr>
+            <tr><th><a href="obj/item.html#var/dying_key">dying_key</a></th><td>What dye registry should be looked at when dying this item; see washing_machine.dm</td></tr>
+            <tr><th><a href="obj/item.html#var/item_state">item_state</a></th><td>icon state name for inhand overlays</td></tr>
+            <tr><th><a href="obj/item.html#var/lefthand_file">lefthand_file</a></th><td>Icon file for left hand inhand overlays</td></tr>
+            <tr><th><a href="obj/item.html#var/mob_overlay_icon">mob_overlay_icon</a></th><td>Icon file for mob worn overlays.
+no var for state because it should <em>always</em> be the same as icon_state</td></tr>
+            <tr><th><a href="obj/item.html#var/righthand_file">righthand_file</a></th><td>Icon file for right inhand overlays</td></tr>
+            <tr><th><a href="obj/item.html#var/sharpness">sharpness</a></th><td>All items with sharpness of SHARP_EDGED or higher will automatically get the butchering component.</td></tr>
+            <tr><th><a href="obj/item.html#var/stagger_force">stagger_force</a></th><td>How long, in deciseconds, this staggers for, if null it will autocalculate from w_class and force. Unlike total mass this supports 0 and negatives.</td></tr>
+            <tr><th><a href="obj/item.html#var/total_mass">total_mass</a></th><td>The amount of stamina it takes to swing an item in a normal melee attack do not lie to me and say it's for realism because it ain't. If null it will autocalculate from w_class.</td></tr>
+            <tr><th><a href="obj/item.html#var/undyeable">undyeable</a></th><td>Whether the item is unaffected by standard dying.</td></tr>
+            <tr><th><a href="obj/item.html#var/used_skills">used_skills</a></th><td>Skills vars</td></tr>
+            <tr><th><a href="obj/item.html#var/w_class">w_class</a></th><td>Weight class for how much storage capacity it uses and how big it physically is meaning storages can't hold it if their maximum weight class isn't as high as it.</td></tr>
+            <tr><th><a href="obj/item.html#var/w_volume">w_volume</a></th><td>Volume override for the item, otherwise automatically calculated from w_class.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item.html#proc/ApplyAttackCooldown">ApplyAttackCooldown</a></th><td>Called after a successful attack to set a mob's clickdelay.</td></tr>
+            <tr><th><a href="obj/item.html#proc/CheckAttackCooldown">CheckAttackCooldown</a></th><td>Checks if a user's clickdelay is met for a standard attack, this is called before an attack happens.</td></tr>
+            <tr><th><a href="obj/item.html#proc/GetEstimatedAttackSpeed">GetEstimatedAttackSpeed</a></th><td>Get estimated time that a user has to not attack for to use us</td></tr>
+            <tr><th><a href="obj/item.html#proc/UseStaminaBufferStandard">UseStaminaBufferStandard</a></th><td>Uses the amount of stamina required for a standard hit</td></tr>
+            <tr><th><a href="obj/item.html#proc/active_block_calculate_final_damage">active_block_calculate_final_damage</a></th><td>Calculates FINAL ATTACK DAMAGE after mitigation</td></tr>
+            <tr><th><a href="obj/item.html#proc/active_block_do_stamina_damage">active_block_do_stamina_damage</a></th><td>Apply the stamina damage to our user, notice how damage argument is stamina_amount.</td></tr>
+            <tr><th><a href="obj/item.html#proc/active_block_stamina_cost">active_block_stamina_cost</a></th><td>Amount of stamina from damage blocked. Note that the damage argument is damage_blocked.</td></tr>
+            <tr><th><a href="obj/item.html#proc/active_parry_reflex_counter">active_parry_reflex_counter</a></th><td>Called when an attack is parried and block_parra_data indicates to use a proc to handle counterattack.</td></tr>
+            <tr><th><a href="obj/item.html#proc/afterattack">afterattack</a></th><td>Called after attacking something if the melee attack chain isn't interrupted before.
+Also called when clicking on something with an item without being in melee range</td></tr>
+            <tr><th><a href="obj/item.html#proc/attack">attack</a></th><td>Called when someone uses us to attack a mob in melee combat.</td></tr>
+            <tr><th><a href="obj/item.html#proc/blockable_directions">blockable_directions</a></th><td>Gets the block direction bitflags of what we can block.</td></tr>
+            <tr><th><a href="obj/item.html#proc/can_active_block">can_active_block</a></th><td>Returns if we can actively block.</td></tr>
+            <tr><th><a href="obj/item.html#proc/can_active_parry">can_active_parry</a></th><td>Determines if we can actively parry.</td></tr>
+            <tr><th><a href="obj/item.html#proc/can_block_direction">can_block_direction</a></th><td>Checks if we can block from a specific direction from our direction.</td></tr>
+            <tr><th><a href="obj/item.html#proc/can_block_directions_multiple">can_block_directions_multiple</a></th><td>can_block_direction but for &quot;compound&quot; directions to check all of them and return the number of directions that were blocked.</td></tr>
+            <tr><th><a href="obj/item.html#proc/check_block">check_block</a></th><td>Returns block information using list/block_return. Used for check_block() on mobs.</td></tr>
+            <tr><th><a href="obj/item.html#proc/cyborg_unequip">cyborg_unequip</a></th><td>Parent proc - triggers when an item/module is unequipped from a cyborg.</td></tr>
+            <tr><th><a href="obj/item.html#proc/digest_act">digest_act</a></th><td>////// Auto-Emotes /////
+Prey Loop Refresh/hack 
+////// Exit Early //////
+/// Absorbed Handling //
+///// Sound vars ///////
+////// Make any noise /////</td></tr>
+            <tr><th><a href="obj/item.html#proc/disableEmbedding">disableEmbedding</a></th><td>For when you want to disable an item's embedding capabilities (like transforming weapons and such), this proc will detach any active embed elements from it.</td></tr>
+            <tr><th><a href="obj/item.html#proc/do_stagger_action">do_stagger_action</a></th><td>totally not an untested, arbitrary equation.</td></tr>
+            <tr><th><a href="obj/item.html#proc/dropped">dropped</a></th><td>Called when a mob drops an item.</td></tr>
+            <tr><th><a href="obj/item.html#proc/equipped">equipped</a></th><td>Called after an item is placed in an equipment slot.</td></tr>
+            <tr><th><a href="obj/item.html#proc/failedEmbed">failedEmbed</a></th><td>In case we want to do something special (like self delete) upon failing to embed in something, return true</td></tr>
+            <tr><th><a href="obj/item.html#proc/get_block_parry_data">get_block_parry_data</a></th><td>Gets this item's datum/block_parry_data</td></tr>
+            <tr><th><a href="obj/item.html#proc/get_w_volume">get_w_volume</a></th><td>Get an item's volume that it uses when being stored.</td></tr>
+            <tr><th><a href="obj/item.html#proc/getweight">getweight</a></th><td>How much stamina this takes to swing this is not for realism purposes hecc off.</td></tr>
+            <tr><th><a href="obj/item.html#proc/isEmbedHarmless">isEmbedHarmless</a></th><td>Does the current embedding var meet the criteria for being harmless? Namely, does it explicitly define the pain multiplier and jostle pain mult to be 0? If so, return true.</td></tr>
+            <tr><th><a href="obj/item.html#proc/melee_attack_chain">melee_attack_chain</a></th><td>This is the proc that handles the order of an item_attack.
+The order of procs called is:
+tool_act on the target. If it returns TRUE, the chain will be stopped.
+pre_attack() on src. If this returns TRUE, the chain will be stopped.
+attackby on the target. If it returns TRUE, the chain will be stopped.
+and lastly
+afterattack. The return value does not matter.</td></tr>
+            <tr><th><a href="obj/item.html#proc/melee_stagger_duration">melee_stagger_duration</a></th><td>How long this staggers for. 0 and negatives supported.</td></tr>
+            <tr><th><a href="obj/item.html#proc/on_active_parry">on_active_parry</a></th><td>Called when an attack is parried using this, whether or not the parry was successful.</td></tr>
+            <tr><th><a href="obj/item.html#proc/ranged_attack_chain">ranged_attack_chain</a></th><td>Like melee_attack_chain but for ranged.</td></tr>
+            <tr><th><a href="obj/item.html#proc/run_block">run_block</a></th><td>Runs block and returns flag for do_run_block to process.</td></tr>
+            <tr><th><a href="obj/item.html#proc/set_slowdown">set_slowdown</a></th><td>Sets our slowdown and updates equipment slowdown of any mob we're equipped on.</td></tr>
+            <tr><th><a href="obj/item.html#proc/tryEmbed">tryEmbed</a></th><td>tryEmbed() is for when you want to try embedding something without dealing with the damage + hit messages of calling hitby() on the item while targetting the target.</td></tr>
+            <tr><th><a href="obj/item.html#proc/updateEmbedding">updateEmbedding</a></th><td>For when you want to add/update the embedding on an item. Uses the vars in [/obj/item/embedding], and defaults to config values for values that aren't set. Will automatically detach previous embed elements on this item.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/attack_speed"><aside class="declaration">var </aside>attack_speed
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L174">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 174"/></a></h3>
+        <p>Amount of time to check for from a mob's last attack, checked before an attack happens. Lower = faster attacks</p><h3 id="var/attack_unwieldlyness"><aside class="declaration">var </aside>attack_unwieldlyness
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L176">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 176"/></a></h3>
+        <p>Amount of time to hard-stagger (no clicking at all) the mob when attacking. Lower = better</p><h3 id="var/block_chance"><aside class="declaration">var </aside>block_chance
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L77">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 77"/></a></h3>
+        <p>The 0% to 100% chance for the default implementation of random block rolls.</p><h3 id="var/block_priority"><aside class="declaration">var </aside>block_priority
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L79">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 79"/></a></h3>
+        <p>Block priority, higher means we check this higher in the &quot;chain&quot;.</p><h3 id="var/clickdelay_from_next_action"><aside class="declaration">var </aside>clickdelay_from_next_action
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L180">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 180"/></a></h3>
+        <p>This item checks clickdelay from a user's delayed next action variable rather than the last time they attacked.</p><h3 id="var/clickdelay_ignores_next_action"><aside class="declaration">var </aside>clickdelay_ignores_next_action
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L182">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 182"/></a></h3>
+        <p>This item ignores next action delays.</p><h3 id="var/clickdelay_mod_bypass"><aside class="declaration">var </aside>clickdelay_mod_bypass
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L178">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 178"/></a></h3>
+        <p>This item bypasses any click delay mods</p><h3 id="var/dye_color"><aside class="declaration">var </aside>dye_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 139"/></a></h3>
+        <p>Used as the dye color source in the washing machine only (at the moment). Can be a hex color or a key corresponding to a registry entry, see washing_machine.dm</p><h3 id="var/dying_key"><aside class="declaration">var </aside>dying_key
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L143">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 143"/></a></h3>
+        <p>What dye registry should be looked at when dying this item; see washing_machine.dm</p><h3 id="var/item_state"><aside class="declaration">var </aside>item_state
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 20"/></a></h3>
+        <p>icon state name for inhand overlays</p><h3 id="var/lefthand_file"><aside class="declaration">var </aside>lefthand_file
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 22"/></a></h3>
+        <p>Icon file for left hand inhand overlays</p><h3 id="var/mob_overlay_icon"><aside class="declaration">var </aside>mob_overlay_icon
+            <aside>&ndash; /icon</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 28"/></a></h3>
+        <p>Icon file for mob worn overlays.
+no var for state because it should <em>always</em> be the same as icon_state</p><h3 id="var/righthand_file"><aside class="declaration">var </aside>righthand_file
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 24"/></a></h3>
+        <p>Icon file for right inhand overlays</p><h3 id="var/sharpness"><aside class="declaration">var </aside>sharpness
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L111">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 111"/></a></h3>
+        <p>All items with sharpness of SHARP_EDGED or higher will automatically get the butchering component.</p><h3 id="var/stagger_force"><aside class="declaration">var </aside>stagger_force
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L63">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 63"/></a></h3>
+        <p>How long, in deciseconds, this staggers for, if null it will autocalculate from w_class and force. Unlike total mass this supports 0 and negatives.</p><h3 id="var/total_mass"><aside class="declaration">var </aside>total_mass
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 61"/></a></h3>
+        <p>The amount of stamina it takes to swing an item in a normal melee attack do not lie to me and say it's for realism because it ain't. If null it will autocalculate from w_class.</p><h3 id="var/undyeable"><aside class="declaration">var </aside>undyeable
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L141">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 141"/></a></h3>
+        <p>Whether the item is unaffected by standard dying.</p><h3 id="var/used_skills"><aside class="declaration">var </aside>used_skills
+            <aside>&ndash; /list/datum/skill</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L158">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 158"/></a></h3>
+        <p>Skills vars</p><h3 id="var/w_class"><aside class="declaration">var </aside>w_class
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 56"/></a></h3>
+        <p>Weight class for how much storage capacity it uses and how big it physically is meaning storages can't hold it if their maximum weight class isn't as high as it.</p><h3 id="var/w_volume"><aside class="declaration">var </aside>w_volume
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 58"/></a></h3>
+        <p>Volume override for the item, otherwise automatically calculated from w_class.</p><h2 id="proc">Proc Details</h2><h3 id="proc/ApplyAttackCooldown"><aside class="declaration">proc </aside>ApplyAttackCooldown<aside>(/<a href="mob.html">mob</a>/user, /<a href="atom.html">atom</a>/target, attackchain_flags) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L193">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 193"/></a></aside>
+        </h3>
+        <p>Called after a successful attack to set a mob's clickdelay.</p><h3 id="proc/CheckAttackCooldown"><aside class="declaration">proc </aside>CheckAttackCooldown<aside>(/<a href="mob.html">mob</a>/user, /<a href="atom.html">atom</a>/target) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L187">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 187"/></a></aside>
+        </h3>
+        <p>Checks if a user's clickdelay is met for a standard attack, this is called before an attack happens.</p><h3 id="proc/GetEstimatedAttackSpeed"><aside class="declaration">proc </aside>GetEstimatedAttackSpeed<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L199">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 199"/></a></aside>
+        </h3>
+        <p>Get estimated time that a user has to not attack for to use us</p><h3 id="proc/UseStaminaBufferStandard"><aside class="declaration">proc </aside>UseStaminaBufferStandard<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, multiplier, trait, warn) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L250">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 250"/></a></aside>
+        </h3>
+        <p>Uses the amount of stamina required for a standard hit</p><h3 id="proc/active_block_calculate_final_damage"><aside class="declaration">proc </aside>active_block_calculate_final_damage<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, final_block_chance, /list/block_return, passive) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L143">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 143"/></a></aside>
+        </h3>
+        <p>Calculates FINAL ATTACK DAMAGE after mitigation</p><h3 id="proc/active_block_do_stamina_damage"><aside class="declaration">proc </aside>active_block_do_stamina_damage<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, stamina_amount, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, final_block_chance, /list/block_return) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L181">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 181"/></a></aside>
+        </h3>
+        <p>Apply the stamina damage to our user, notice how damage argument is stamina_amount.</p><h3 id="proc/active_block_stamina_cost"><aside class="declaration">proc </aside>active_block_stamina_cost<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage_blocked, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, final_block_chance, /list/block_return, passive) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L168">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 168"/></a></aside>
+        </h3>
+        <p>Amount of stamina from damage blocked. Note that the damage argument is damage_blocked.</p><h3 id="proc/active_parry_reflex_counter"><aside class="declaration">proc </aside>active_parry_reflex_counter<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list, parry_efficiency, /list/effect_text) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L213">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 213"/></a></aside>
+        </h3>
+        <p>Called when an attack is parried and block_parra_data indicates to use a proc to handle counterattack.</p><h3 id="proc/afterattack"><aside class="declaration">proc </aside>afterattack<aside>(/<a href="atom.html">atom</a>/target, /<a href="mob.html">mob</a>/user, proximity_flag, click_parameters) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L208">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 208"/></a></aside>
+        </h3>
+        <p>Called after attacking something if the melee attack chain isn't interrupted before.
+Also called when clicking on something with an item without being in melee range</p>
+<p>WARNING: This does not automatically check clickdelay if not in a melee attack! Be sure to account for this!</p>
+<p>@params</p>
+<ul>
+<li>target - The thing we clicked</li>
+<li>user - mob of person clicking</li>
+<li>proximity_flag - are we in melee range/doing it in a melee attack</li>
+<li>click_parameters - mouse control parameters, check BYOND ref.</li>
+</ul><h3 id="proc/attack"><aside class="declaration">proc </aside>attack<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/M, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, attackchain_flags, damage_multiplier) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L79">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 79"/></a></aside>
+        </h3>
+        <p>Called when someone uses us to attack a mob in melee combat.</p>
+<p>This proc respects CheckAttackCooldown() default clickdelay handling.</p>
+<p>@params</p>
+<ul>
+<li>mob/living/M - target</li>
+<li>mob/living/user - attacker</li>
+<li>attackchain_Flags - see <a href="code/__DEFINES/_flags/return_values.html" title="code/__DEFINES/_flags/return_values.dm">code/__DEFINES/_flags/return_values.dm</a></li>
+<li>damage_multiplier - what to multiply the damage by</li>
+</ul><h3 id="proc/blockable_directions"><aside class="declaration">proc </aside>blockable_directions<aside>(passive) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L269">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 269"/></a></aside>
+        </h3>
+        <p>Gets the block direction bitflags of what we can block.</p><h3 id="proc/can_active_block"><aside class="declaration">proc </aside>can_active_block<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L137">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 137"/></a></aside>
+        </h3>
+        <p>Returns if we can actively block.</p><h3 id="proc/can_active_parry"><aside class="declaration">proc </aside>can_active_parry<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 5"/></a></aside>
+        </h3>
+        <p>Determines if we can actively parry.</p><h3 id="proc/can_block_direction"><aside class="declaration">proc </aside>can_block_direction<aside>(our_dir, their_dir, passive) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L280">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 280"/></a></aside>
+        </h3>
+        <p>Checks if we can block from a specific direction from our direction.</p>
+<p>@params</p>
+<ul>
+<li>our_dir - our direction.</li>
+<li>their_dir - their direction. Must be a single direction, or NONE for an attack from the same tile. This is incoming direction.</li>
+</ul><h3 id="proc/can_block_directions_multiple"><aside class="declaration">proc </aside>can_block_directions_multiple<aside>(our_dir, /list/their_dirs) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L296">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 296"/></a></aside>
+        </h3>
+        <p>can_block_direction but for &quot;compound&quot; directions to check all of them and return the number of directions that were blocked.</p>
+<p>@params</p>
+<ul>
+<li>our_dir - our direction.</li>
+<li>their_dirs - list of their directions as we cannot use bitfields here.</li>
+</ul><h3 id="proc/check_block"><aside class="declaration">proc </aside>check_block<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, final_block_chance, /list/block_return) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L93">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 93"/></a></aside>
+        </h3>
+        <p>Returns block information using list/block_return. Used for check_block() on mobs.</p><h3 id="proc/cyborg_unequip"><aside class="declaration">proc </aside>cyborg_unequip<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/silicon/robot/inventory.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;inventory.dm 22"/></a></aside>
+        </h3>
+        <p>Parent proc - triggers when an item/module is unequipped from a cyborg.</p><h3 id="proc/digest_act"><aside class="declaration">proc </aside>digest_act<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/item_storage) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/digest_act.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;digest_act.dm 6"/></a></aside>
+        </h3>
+        <p>////// Auto-Emotes /////
+Prey Loop Refresh/hack 
+////// Exit Early //////
+/// Absorbed Handling //
+///// Sound vars ///////
+////// Make any noise /////</p><h3 id="proc/disableEmbedding"><aside class="declaration">proc </aside>disableEmbedding<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1112"/></a></aside>
+        </h3>
+        <p>For when you want to disable an item's embedding capabilities (like transforming weapons and such), this proc will detach any active embed elements from it.</p><h3 id="proc/do_stagger_action"><aside class="declaration">proc </aside>do_stagger_action<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/target, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, force_override) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L262">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 262"/></a></aside>
+        </h3>
+        <p>totally not an untested, arbitrary equation.</p><h3 id="proc/dropped"><aside class="declaration">proc </aside>dropped<aside>(/<a href="mob.html">mob</a>/user, silent) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L437">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 437"/></a></aside>
+        </h3>
+        <p>Called when a mob drops an item.</p><h3 id="proc/equipped"><aside class="declaration">proc </aside>equipped<aside>(/<a href="mob.html">mob</a>/user, slot, initial) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L511">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 511"/></a></aside>
+        </h3>
+        <p>Called after an item is placed in an equipment slot.</p>
+<p>Note that hands count as slots.</p>
+<p>Arguments:</p>
+<ul>
+<li>user is mob that equipped it</li>
+<li>slot uses the slot_X defines found in setup.dm for items that can be placed in multiple slots</li>
+<li>Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it</li>
+</ul><h3 id="proc/failedEmbed"><aside class="declaration">proc </aside>failedEmbed<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1027">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1027"/></a></aside>
+        </h3>
+        <p>In case we want to do something special (like self delete) upon failing to embed in something, return true</p><h3 id="proc/get_block_parry_data"><aside class="declaration">proc </aside>get_block_parry_data<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L190">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 190"/></a></aside>
+        </h3>
+        <p>Gets this item's datum/block_parry_data</p><h3 id="proc/get_w_volume"><aside class="declaration">proc </aside>get_w_volume<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L992">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 992"/></a></aside>
+        </h3>
+        <p>Get an item's volume that it uses when being stored.</p><h3 id="proc/getweight"><aside class="declaration">proc </aside>getweight<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, multiplier, trait) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L240">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 240"/></a></aside>
+        </h3>
+        <p>How much stamina this takes to swing this is not for realism purposes hecc off.</p><h3 id="proc/isEmbedHarmless"><aside class="declaration">proc </aside>isEmbedHarmless<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1022">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1022"/></a></aside>
+        </h3>
+        <p>Does the current embedding var meet the criteria for being harmless? Namely, does it explicitly define the pain multiplier and jostle pain mult to be 0? If so, return true.</p><h3 id="proc/melee_attack_chain"><aside class="declaration">proc </aside>melee_attack_chain<aside>(/<a href="mob.html">mob</a>/user, /<a href="atom.html">atom</a>/target, params, attackchain_flags, damage_multiplier) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 10"/></a></aside>
+        </h3>
+        <p>This is the proc that handles the order of an item_attack.
+The order of procs called is:
+tool_act on the target. If it returns TRUE, the chain will be stopped.
+pre_attack() on src. If this returns TRUE, the chain will be stopped.
+attackby on the target. If it returns TRUE, the chain will be stopped.
+and lastly
+afterattack. The return value does not matter.</p><h3 id="proc/melee_stagger_duration"><aside class="declaration">proc </aside>melee_stagger_duration<aside>(force_override) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L256">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 256"/></a></aside>
+        </h3>
+        <p>How long this staggers for. 0 and negatives supported.</p><h3 id="proc/on_active_parry"><aside class="declaration">proc </aside>on_active_parry<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/block_return, parry_efficiency, parry_time, autoparry) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L198">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 198"/></a></aside>
+        </h3>
+        <p>Called when an attack is parried using this, whether or not the parry was successful.</p><h3 id="proc/ranged_attack_chain"><aside class="declaration">proc </aside>ranged_attack_chain<aside>(/<a href="mob.html">mob</a>/user, /<a href="atom.html">atom</a>/target, params) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/item_attack.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;item_attack.dm 28"/></a></aside>
+        </h3>
+        <p>Like melee_attack_chain but for ranged.</p><h3 id="proc/run_block"><aside class="declaration">proc </aside>run_block<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, final_block_chance, /list/block_return) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 82"/></a></aside>
+        </h3>
+        <p>Runs block and returns flag for do_run_block to process.</p><h3 id="proc/set_slowdown"><aside class="declaration">proc </aside>set_slowdown<aside>(new_slowdown) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1007">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1007"/></a></aside>
+        </h3>
+        <p>Sets our slowdown and updates equipment slowdown of any mob we're equipped on.</p><h3 id="proc/tryEmbed"><aside class="declaration">proc </aside>tryEmbed<aside>(/<a href="atom.html">atom</a>/target, forced, silent) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1068">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1068"/></a></aside>
+        </h3>
+        <p>tryEmbed() is for when you want to try embedding something without dealing with the damage + hit messages of calling hitby() on the item while targetting the target.</p>
+<p>Really, this is used mostly with projectiles with shrapnel payloads, from <a href="datum/element/embed.html#proc/checkEmbedProjectile" title="/datum/element/embed">/datum/element/embed/proc/checkEmbedProjectile</a>, and called on said shrapnel. Mostly acts as an intermediate between different embed elements.</p>
+<p>Arguments:</p>
+<ul>
+<li>
+<p>target- Either a body part, a carbon, or a closed turf. What are we hitting?</p>
+</li>
+<li>
+<p>forced- Do we want this to go through 100%?</p>
+</li>
+</ul><h3 id="proc/updateEmbedding"><aside class="declaration">proc </aside>updateEmbedding<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items.dm#L1132">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items.dm 1132"/></a></aside>
+        </h3>
+        <p>For when you want to add/update the embedding on an item. Uses the vars in [/obj/item/embedding], and defaults to config values for values that aren't set. Will automatically detach previous embed elements on this item.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

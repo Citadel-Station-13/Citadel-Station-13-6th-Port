@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="mob/living/carbon/human.html#var">Var Details</a> - <a href="mob/living/carbon/human.html#proc">Proc Details</a></header>
+<main>
+<h1>human <aside>/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/arousal/arousal.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;arousal&#x2F;arousal.dm 5"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#var/afk_thefts">afk_thefts</a></th><td>When an braindead player has their equipment fiddled with, we log that info here for when they come back so they know who took their ID while they were DC'd for 30 seconds</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#var/combat_flags">combat_flags</a></th><td>Enable stamina combat</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/canUseHUD">canUseHUD</a></th><td>HUDs</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/clothingonpart">clothingonpart</a></th><td>Get all the clothing on a specific body part</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/copy_clothing_prefs">copy_clothing_prefs</a></th><td>copies over clothing preferences like underwear to another human</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/electrocute_act">electrocute_act</a></th><td>Calculates the siemens coeff based on clothing and species, can also restart hearts.</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/format_scars">format_scars</a></th><td>For use formatting all of the scars this human has for saving for persistent scarring</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/get_equipped_items">get_equipped_items</a></th><td>Used to return a list of equipped items on a human mob; does not include held items (use get_all_gear)</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/handle_fire">handle_fire</a></th><td>FIRE CODE</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/load_scar">load_scar</a></th><td>Takes a single scar from the persistent scar loader and recreates it from the saved data</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/sec_hud_set_ID">sec_hud_set_ID</a></th><td>Security HUDs! Basic mode shows only the job.</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/something_horrible">something_horrible</a></th><td>DNA HELPER-PROCS</td></tr>
+            <tr><th><a href="mob/living/carbon/human.html#proc/spec_trait_examine_font">spec_trait_examine_font</a></th><td></td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/afk_thefts"><aside class="declaration">var </aside>afk_thefts
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_defines.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_defines.dm 55"/></a></h3>
+        <p>When an braindead player has their equipment fiddled with, we log that info here for when they come back so they know who took their ID while they were DC'd for 30 seconds</p><h3 id="var/combat_flags"><aside class="parent"><a title="/mob/living" href="mob/living.html#var/combat_flags">&uarr;</a></aside>combat_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_defines.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_defines.dm 10"/></a></h3>
+        <p>Enable stamina combat</p><h2 id="proc">Proc Details</h2><h3 id="proc/canUseHUD"><aside class="declaration">proc </aside>canUseHUD<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human.dm#L522">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human.dm 522"/></a></aside>
+        </h3>
+        <p>HUDs</p><h3 id="proc/clothingonpart"><aside class="declaration">proc </aside>clothingonpart<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/bodypart.html">bodypart</a>/def_zone) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_defense.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_defense.dm 39"/></a></aside>
+        </h3>
+        <p>Get all the clothing on a specific body part</p><h3 id="proc/copy_clothing_prefs"><aside class="declaration">proc </aside>copy_clothing_prefs<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/destination) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_helpers.dm#L181">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_helpers.dm 181"/></a></aside>
+        </h3>
+        <p>copies over clothing preferences like underwear to another human</p><h3 id="proc/electrocute_act"><aside class="parent"><a title="/mob/living/carbon" href="mob/living/carbon.html#proc/electrocute_act">&uarr;</a></aside>electrocute_act<aside>(shock_damage, source, siemens_coeff, flags) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_defense.dm#L378">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_defense.dm 378"/></a></aside>
+        </h3>
+        <p>Calculates the siemens coeff based on clothing and species, can also restart hearts.</p><h3 id="proc/format_scars"><aside class="declaration">proc </aside>format_scars<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_helpers.dm#L152">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_helpers.dm 152"/></a></aside>
+        </h3>
+        <p>For use formatting all of the scars this human has for saving for persistent scarring</p><h3 id="proc/get_equipped_items"><aside class="parent"><a title="/mob/living" href="mob/living.html#proc/get_equipped_items">&uarr;</a></aside>get_equipped_items<aside>(include_pockets) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/inventory.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;inventory.dm 11"/></a></aside>
+        </h3>
+        <p>Used to return a list of equipped items on a human mob; does not include held items (use get_all_gear)</p>
+<p>Argument(s):</p>
+<ul>
+<li>Optional - include_pockets (TRUE/FALSE), whether or not to include the pockets and suit storage in the returned list</li>
+</ul><h3 id="proc/handle_fire">handle_fire<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/life.dm#L112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;life.dm 112"/></a></aside>
+        </h3>
+        <p>FIRE CODE</p><h3 id="proc/load_scar"><aside class="declaration">proc </aside>load_scar<aside>(scar_line) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human_helpers.dm#L166">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human_helpers.dm 166"/></a></aside>
+        </h3>
+        <p>Takes a single scar from the persistent scar loader and recreates it from the saved data</p><h3 id="proc/sec_hud_set_ID"><aside class="declaration">proc </aside>sec_hud_set_ID<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/data_huds.dm#L242">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;data_huds.dm 242"/></a></aside>
+        </h3>
+        <p>Security HUDs! Basic mode shows only the job.</p><h3 id="proc/something_horrible"><aside class="declaration">proc </aside>something_horrible<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/dna.dm#L659">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;dna.dm 659"/></a></aside>
+        </h3>
+        <p>DNA HELPER-PROCS</p><h3 id="proc/spec_trait_examine_font"><aside class="declaration">proc </aside>spec_trait_examine_font<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/human.dm#L1098">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;human.dm 1098"/></a></aside>
+        </h3>
+        <h1 id=""><code>spec_trait_examine_font()</code></h1>
+<p>This gets a humanoid's special examine font, which is used to color their species name during examine / health analyzing.
+The first of these that applies is returned.
+Returns:</p>
+<ul>
+<li>Metallic font if robotic</li>
+<li>Cyan if a toxinlover</li>
+<li>Purple if plasmaperson</li>
+<li>Rock / Brownish if a golem</li>
+<li>Green if none of the others apply (aka, generic organic)</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

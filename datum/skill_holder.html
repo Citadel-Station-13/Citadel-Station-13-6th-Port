@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;skill_holder - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/skill_holder.html#var">Var Details</a></header>
+<main>
+<h1>skill_holder <aside>/<a href="datum.html">datum</a>/<a href="datum/skill_holder.html">skill_holder</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 5"/></a></h1>
+
+<p>Skill holder datums
+All procs are tied to the mind, since they are always expected to have a skill holder anyway.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/all_current_skill_modifiers">all_current_skill_modifiers</a></th><td>List of all current skill modifiers, so we don't add the same ones twice.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/need_static_data_update">need_static_data_update</a></th><td>For UI updates.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/original_values">original_values</a></th><td>List of original values stored at the time a modifier with the MODIFIER_SKILL_ORIGIN_DIFF enabled was added.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/owner">owner</a></th><td>The mind datum this skill is associated with, only used for the check_skills UI</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/see_skill_mods">see_skill_mods</a></th><td>Whether modifiers and final skill values or only base values are displayed.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/selected_category">selected_category</a></th><td>The current selected skill category.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/skill_affinities">skill_affinities</a></th><td>Same as [skills] but affinities, which are multiplied to increase amount when gaining skills.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/skill_levels">skill_levels</a></th><td>Let's say we want to get a specific skill &quot;level&quot; without looping through a proc everytime.
+Only supported by skills with tiers or levels.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/skill_value_mods">skill_value_mods</a></th><td>current skill modifiers lists, per value, affinity, level.</td></tr>
+            <tr><th><a href="datum/skill_holder.html#var/skills">skills</a></th><td>Our list of skills and values. Lazylist. Associative. Keys are datum typepaths to the skill.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/all_current_skill_modifiers"><aside class="declaration">var </aside>all_current_skill_modifiers
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 18"/></a></h3>
+        <p>List of all current skill modifiers, so we don't add the same ones twice.</p><h3 id="var/need_static_data_update"><aside class="declaration">var </aside>need_static_data_update
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 26"/></a></h3>
+        <p>For UI updates.</p><h3 id="var/original_values"><aside class="declaration">var </aside>original_values
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 20"/></a></h3>
+        <p>List of original values stored at the time a modifier with the MODIFIER_SKILL_ORIGIN_DIFF enabled was added.</p><h3 id="var/owner"><aside class="declaration">var </aside>owner
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/mind.html">mind</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 24"/></a></h3>
+        <p>The mind datum this skill is associated with, only used for the check_skills UI</p><h3 id="var/see_skill_mods"><aside class="declaration">var </aside>see_skill_mods
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 28"/></a></h3>
+        <p>Whether modifiers and final skill values or only base values are displayed.</p><h3 id="var/selected_category"><aside class="declaration">var </aside>selected_category
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 32"/></a></h3>
+        <p>The current selected skill category.</p><h3 id="var/skill_affinities"><aside class="declaration">var </aside>skill_affinities
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 9"/></a></h3>
+        <p>Same as [skills] but affinities, which are multiplied to increase amount when gaining skills.</p><h3 id="var/skill_levels"><aside class="declaration">var </aside>skill_levels
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 12"/></a></h3>
+        <p>Let's say we want to get a specific skill &quot;level&quot; without looping through a proc everytime.
+Only supported by skills with tiers or levels.</p><h3 id="var/skill_value_mods"><aside class="declaration">var </aside>skill_value_mods
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 14"/></a></h3>
+        <p>current skill modifiers lists, per value, affinity, level.</p><h3 id="var/skills"><aside class="declaration">var </aside>skills
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_holder.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_holder.dm 7"/></a></h3>
+        <p>Our list of skills and values. Lazylist. Associative. Keys are datum typepaths to the skill.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

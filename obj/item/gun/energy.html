@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;gun&#x2F;energy - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/gun/energy.html#var">Var Details</a> - <a href="obj/item/gun/energy.html#proc">Proc Details</a></header>
+<main>
+<h1>energy <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/gun.html">gun</a>/<a href="obj/item/gun/energy.html">energy</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 14"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/gun/energy.html#var/ammo_type">ammo_type</a></th><td>= TRUE/FALSE decides if the user can switch to it of their own accord</td></tr>
+            <tr><th><a href="obj/item/gun/energy.html#var/current_firemode_index">current_firemode_index</a></th><td>The index of the ammo_types/firemodes which we're using right now</td></tr>
+            <tr><th><a href="obj/item/gun/energy.html#var/right_click_overridden">right_click_overridden</a></th><td>SET THIS TO TRUE IF YOU OVERRIDE altafterattack() or ANY right click action! If this is FALSE, the gun will show in examine its default right click behavior, which is to switch modes.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/gun/energy.html#proc/get_charge_ratio">get_charge_ratio</a></th><td>Used by update_icon_state() and update_overlays()</td></tr>
+            <tr><th><a href="obj/item/gun/energy.html#proc/select_fire">select_fire</a></th><td>This is the proc used in general for when a user switches firemodes. Just goes to next firemode by default.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/ammo_type"><aside class="declaration">var </aside>ammo_type
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 24"/></a></h3>
+        <p>= TRUE/FALSE decides if the user can switch to it of their own accord</p><h3 id="var/current_firemode_index"><aside class="declaration">var </aside>current_firemode_index
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 26"/></a></h3>
+        <p>The index of the ammo_types/firemodes which we're using right now</p><h3 id="var/right_click_overridden"><aside class="declaration">var </aside>right_click_overridden
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 39"/></a></h3>
+        <p>SET THIS TO TRUE IF YOU OVERRIDE altafterattack() or ANY right click action! If this is FALSE, the gun will show in examine its default right click behavior, which is to switch modes.</p><h2 id="proc">Proc Details</h2><h3 id="proc/get_charge_ratio"><aside class="declaration">proc </aside>get_charge_ratio<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L276">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 276"/></a></aside>
+        </h3>
+        <p>Used by update_icon_state() and update_overlays()</p><h3 id="proc/select_fire"><aside class="declaration">proc </aside>select_fire<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/guns/energy.dm#L200">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;energy.dm 200"/></a></aside>
+        </h3>
+        <p>This is the proc used in general for when a user switches firemodes. Just goes to next firemode by default.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;machinery&#x2F;pool&#x2F;controller - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/machinery/pool/controller.html#var">Var Details</a></header>
+<main>
+<h1>controller <aside>/<a href="obj.html">obj</a>/<a href="obj/machinery/pool/controller.html">machinery/pool/controller</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 11"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/bloody">bloody</a></th><td>Is the pool bloody?</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/drainable">drainable</a></th><td>Whether or not the pool can be drained</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/draining">draining</a></th><td>Just to prevent spam</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/interact_delay">interact_delay</a></th><td>Next world.time you can interact with settings</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/last_reagent_process">last_reagent_process</a></th><td>Last time we process_reagents()'d</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/linked_drain">linked_drain</a></th><td>Pool drain</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/linked_filter">linked_filter</a></th><td>Pool filter</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/linked_mist">linked_mist</a></th><td>Linked mist effects</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/linked_turfs">linked_turfs</a></th><td>Pool turfs</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/max_beaker_transfer">max_beaker_transfer</a></th><td>Maximum amount we will take from a beaker</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/min_reagent_amount">min_reagent_amount</a></th><td>Minimum amount of a reagent for it to work on us</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/mist_state">mist_state</a></th><td>Is pool mist currently on?</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/mobs_in_pool">mobs_in_pool</a></th><td>All mobs in pool</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/noreact_reagents">noreact_reagents</a></th><td>ADMINBUS ONLY - WHETHER OR NOT WE HAVE NOREACT ;)</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/old_rcolor">old_rcolor</a></th><td>Old reagent color, used to determine if update_color needs to reset colors.</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/reagent_tick_interval">reagent_tick_interval</a></th><td>how fast in deciseconds between reagent processes</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/respect_reagent_blacklist">respect_reagent_blacklist</a></th><td>Reagent blacklisting</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/scan_range">scan_range</a></th><td>How far it scans for pool objects</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/shocked">shocked</a></th><td>Airlock style shocks</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/temperature">temperature</a></th><td>See __DEFINES/pool.dm, temperature defines</td></tr>
+            <tr><th><a href="obj/machinery/pool/controller.html#var/temperature_unlocked">temperature_unlocked</a></th><td>Can we use unsafe temperatures</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/bloody"><aside class="declaration">var </aside>bloody
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 29"/></a></h3>
+        <p>Is the pool bloody?</p><h3 id="var/drainable"><aside class="declaration">var </aside>drainable
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 45"/></a></h3>
+        <p>Whether or not the pool can be drained</p><h3 id="var/draining"><aside class="declaration">var </aside>draining
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 59"/></a></h3>
+        <p>Just to prevent spam</p><h3 id="var/interact_delay"><aside class="declaration">var </aside>interact_delay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 53"/></a></h3>
+        <p>Next world.time you can interact with settings</p><h3 id="var/last_reagent_process"><aside class="declaration">var </aside>last_reagent_process
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 31"/></a></h3>
+        <p>Last time we process_reagents()'d</p><h3 id="var/linked_drain"><aside class="declaration">var </aside>linked_drain
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/machinery/pool/drain.html">machinery/pool/drain</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 49"/></a></h3>
+        <p>Pool drain</p><h3 id="var/linked_filter"><aside class="declaration">var </aside>linked_filter
+            <aside>&ndash; /<a href="obj.html">obj</a>/machinery/pool/filter</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 51"/></a></h3>
+        <p>Pool filter</p><h3 id="var/linked_mist"><aside class="declaration">var </aside>linked_mist
+            <aside>&ndash; /list/obj/effect/mist</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 23"/></a></h3>
+        <p>Linked mist effects</p><h3 id="var/linked_turfs"><aside class="declaration">var </aside>linked_turfs
+            <aside>&ndash; /list/turf/open/pool</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 25"/></a></h3>
+        <p>Pool turfs</p><h3 id="var/max_beaker_transfer"><aside class="declaration">var </aside>max_beaker_transfer
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 33"/></a></h3>
+        <p>Maximum amount we will take from a beaker</p><h3 id="var/min_reagent_amount"><aside class="declaration">var </aside>min_reagent_amount
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 35"/></a></h3>
+        <p>Minimum amount of a reagent for it to work on us</p><h3 id="var/mist_state"><aside class="declaration">var </aside>mist_state
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 21"/></a></h3>
+        <p>Is pool mist currently on?</p><h3 id="var/mobs_in_pool"><aside class="declaration">var </aside>mobs_in_pool
+            <aside>&ndash; /list/mob/living</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 27"/></a></h3>
+        <p>All mobs in pool</p><h3 id="var/noreact_reagents"><aside class="declaration">var </aside>noreact_reagents
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 37"/></a></h3>
+        <p>ADMINBUS ONLY - WHETHER OR NOT WE HAVE NOREACT ;)</p><h3 id="var/old_rcolor"><aside class="declaration">var </aside>old_rcolor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L57">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 57"/></a></h3>
+        <p>Old reagent color, used to determine if update_color needs to reset colors.</p><h3 id="var/reagent_tick_interval"><aside class="declaration">var </aside>reagent_tick_interval
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 39"/></a></h3>
+        <p>how fast in deciseconds between reagent processes</p><h3 id="var/respect_reagent_blacklist"><aside class="declaration">var </aside>respect_reagent_blacklist
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 61"/></a></h3>
+        <p>Reagent blacklisting</p><h3 id="var/scan_range"><aside class="declaration">var </aside>scan_range
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 19"/></a></h3>
+        <p>How far it scans for pool objects</p><h3 id="var/shocked"><aside class="declaration">var </aside>shocked
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 55"/></a></h3>
+        <p>Airlock style shocks</p><h3 id="var/temperature"><aside class="declaration">var </aside>temperature
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 43"/></a></h3>
+        <p>See __DEFINES/pool.dm, temperature defines</p><h3 id="var/temperature_unlocked"><aside class="declaration">var </aside>temperature_unlocked
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/pool/pool_controller.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;pool&#x2F;pool_controller.dm 41"/></a></h3>
+        <p>Can we use unsafe temperatures</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;explosion.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/explosion.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/explosion.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_DEAD">EXPLOSION_POWER_DEAD</a></th><td>Default explosion power to consider an explosion over</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_DEFAULT_FALLOFF_MULTIPLY">EXPLOSION_DEFAULT_FALLOFF_MULTIPLY</a></th><td>Default explosion falloff</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_DEFAULT_FALLOFF_SUBTRACT">EXPLOSION_DEFAULT_FALLOFF_SUBTRACT</a></th><td>Default explosion constant falloff</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_NO_RESIST_THRESHOLD">EXPLOSION_POWER_NO_RESIST_THRESHOLD</a></th><td>Block amount at which point having 0 block resistance will result in a full block</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_QUANTIZATION_ACCURACY">EXPLOSION_POWER_QUANTIZATION_ACCURACY</a></th><td>Explosion power quantization</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_FLAG_DENSITY_DEPENDENT">EXPLOSION_FLAG_DENSITY_DEPENDENT</a></th><td>No blocking if we're not dense</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_FLAG_HARD_OBSTACLE">EXPLOSION_FLAG_HARD_OBSTACLE</a></th><td>If we survive the explosion, we block ALL the power and ignore the results of wave_ex_act().</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_MAXCAP">EXPLOSION_POWER_MAXCAP</a></th><td>Maxcap</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_ERASE_SHREDS">EXPLOSION_POWER_ERASE_SHREDS</a></th><td>erases shreds from explosions/item damage</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_NORMAL_MOB_GIB">EXPLOSION_POWER_NORMAL_MOB_GIB</a></th><td>Gibs most mobs</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_STANDARD_SCALE_OBJECT_DAMAGE">EXPLOSION_POWER_STANDARD_SCALE_OBJECT_DAMAGE</a></th><td>Explosion power to object damage (without taking into consideration armor)</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_STANDARD_SCALE_HARD_OBSTACLE_DAMAGE">EXPLOSION_POWER_STANDARD_SCALE_HARD_OBSTACLE_DAMAGE</a></th><td>Explosion power to object damage for hard obstacles</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_STANDARD_SCALE_WINDOW_DAMAGE">EXPLOSION_POWER_STANDARD_SCALE_WINDOW_DAMAGE</a></th><td>Explosion power to object damage for windows</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_POWER_STANDARD_SCALE_MOB_DAMAGE">EXPLOSION_POWER_STANDARD_SCALE_MOB_DAMAGE</a></th><td>Default brute damage to do to living things</td></tr>
+        <tr><th><a href="code/__DEFINES/explosion.html#define/EXPLOSION_DAMAGE_OPEN_DOOR_FACTOR">EXPLOSION_DAMAGE_OPEN_DOOR_FACTOR</a></th><td>Factor to multiply damage to a door by if it's open (and therefore not blocking the explosion)</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/EXPLOSION_DAMAGE_OPEN_DOOR_FACTOR"><aside class="declaration">#define </aside>EXPLOSION_DAMAGE_OPEN_DOOR_FACTOR
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 64"/></a>
+    </h3>
+    <p>Factor to multiply damage to a door by if it's open (and therefore not blocking the explosion)</p><h3 id="define/EXPLOSION_DEFAULT_FALLOFF_MULTIPLY"><aside class="declaration">#define </aside>EXPLOSION_DEFAULT_FALLOFF_MULTIPLY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 12"/></a>
+    </h3>
+    <p>Default explosion falloff</p><h3 id="define/EXPLOSION_DEFAULT_FALLOFF_SUBTRACT"><aside class="declaration">#define </aside>EXPLOSION_DEFAULT_FALLOFF_SUBTRACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 14"/></a>
+    </h3>
+    <p>Default explosion constant falloff</p><h3 id="define/EXPLOSION_FLAG_DENSITY_DEPENDENT"><aside class="declaration">#define </aside>EXPLOSION_FLAG_DENSITY_DEPENDENT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 23"/></a>
+    </h3>
+    <p>No blocking if we're not dense</p><h3 id="define/EXPLOSION_FLAG_HARD_OBSTACLE"><aside class="declaration">#define </aside>EXPLOSION_FLAG_HARD_OBSTACLE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 25"/></a>
+    </h3>
+    <p>If we survive the explosion, we block ALL the power and ignore the results of wave_ex_act().</p><h3 id="define/EXPLOSION_POWER_DEAD"><aside class="declaration">#define </aside>EXPLOSION_POWER_DEAD
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 10"/></a>
+    </h3>
+    <p>Default explosion power to consider an explosion over</p><h3 id="define/EXPLOSION_POWER_ERASE_SHREDS"><aside class="declaration">#define </aside>EXPLOSION_POWER_ERASE_SHREDS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 31"/></a>
+    </h3>
+    <p>erases shreds from explosions/item damage</p><h3 id="define/EXPLOSION_POWER_MAXCAP"><aside class="declaration">#define </aside>EXPLOSION_POWER_MAXCAP
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 29"/></a>
+    </h3>
+    <p>Maxcap</p><h3 id="define/EXPLOSION_POWER_NORMAL_MOB_GIB"><aside class="declaration">#define </aside>EXPLOSION_POWER_NORMAL_MOB_GIB
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 33"/></a>
+    </h3>
+    <p>Gibs most mobs</p><h3 id="define/EXPLOSION_POWER_NO_RESIST_THRESHOLD"><aside class="declaration">#define </aside>EXPLOSION_POWER_NO_RESIST_THRESHOLD
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 16"/></a>
+    </h3>
+    <p>Block amount at which point having 0 block resistance will result in a full block</p><h3 id="define/EXPLOSION_POWER_QUANTIZATION_ACCURACY"><aside class="declaration">#define </aside>EXPLOSION_POWER_QUANTIZATION_ACCURACY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 19"/></a>
+    </h3>
+    <p>Explosion power quantization</p><h3 id="define/EXPLOSION_POWER_STANDARD_SCALE_HARD_OBSTACLE_DAMAGE"><aside class="declaration">#define </aside>EXPLOSION_POWER_STANDARD_SCALE_HARD_OBSTACLE_DAMAGE
+            <aside>(power, multiplier)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 56"/></a>
+    </h3>
+    <p>Explosion power to object damage for hard obstacles</p><h3 id="define/EXPLOSION_POWER_STANDARD_SCALE_MOB_DAMAGE"><aside class="declaration">#define </aside>EXPLOSION_POWER_STANDARD_SCALE_MOB_DAMAGE
+            <aside>(power, multiplier)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 60"/></a>
+    </h3>
+    <p>Default brute damage to do to living things</p><h3 id="define/EXPLOSION_POWER_STANDARD_SCALE_OBJECT_DAMAGE"><aside class="declaration">#define </aside>EXPLOSION_POWER_STANDARD_SCALE_OBJECT_DAMAGE
+            <aside>(power, multiplier)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 54"/></a>
+    </h3>
+    <p>Explosion power to object damage (without taking into consideration armor)</p><h3 id="define/EXPLOSION_POWER_STANDARD_SCALE_WINDOW_DAMAGE"><aside class="declaration">#define </aside>EXPLOSION_POWER_STANDARD_SCALE_WINDOW_DAMAGE
+            <aside>(power, multiplier)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/explosion.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;explosion.dm 58"/></a>
+    </h3>
+    <p>Explosion power to object damage for windows</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

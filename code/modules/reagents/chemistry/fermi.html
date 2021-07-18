@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;modules&#x2F;reagents&#x2F;chemistry&#x2F;fermi&#x2F;readme.md - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>code/modules/reagents/chemistry/fermi/readme.md 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/reagents/chemistry/fermi/readme.md">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;reagents&#x2F;chemistry&#x2F;fermi&#x2F;readme.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><p>How to code fermichem reactions:
+First off, probably read though the readme for standard reagent mechanisms, this builds on top of that.</p>
+<p>#bitflags
+for <code>datum/reagent/</code> you have the following options with <code>var/chemical_flags</code>:</p>
+<pre><code>REAGENT_DEAD_PROCESS		calls on_mob_dead() if present in a dead body
+REAGENT_DONOTSPLIT		    Do not split the chem at all during processing
+REAGENT_ONLYINVERSE		    Only invert chem, no splitting
+REAGENT_ONMOBMERGE		    Call on_mob_life proc when reagents are merging.
+REAGENT_INVISIBLE		    Doesn't appear on handheld health analyzers.
+REAGENT_FORCEONNEW		    Forces a on_new() call without a data overhead
+REAGENT_SNEAKYNAME          When inverted, the inverted chem uses the name of the original chem
+REAGENT_SPLITRETAINVOL      Retains initial volume of chem when splitting
+</code></pre>
+<p>for <code>datum/chemical_reaction/</code> under <code>var/clear_conversion</code></p>
+<pre><code>REACTION_CLEAR_IMPURE       Convert into impure/pure on reaction completion
+REACTION_CLEAR_INVERSE      Convert into inverse on reaction completion when purity is low enough
+</code></pre></td></tr></table></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

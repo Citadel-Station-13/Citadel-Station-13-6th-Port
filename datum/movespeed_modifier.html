@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;movespeed_modifier - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/movespeed_modifier.html#var">Var Details</a> - <a href="datum/movespeed_modifier.html#proc">Proc Details</a></header>
+<main>
+<h1>movespeed_modifier <aside>/<a href="datum.html">datum</a>/<a href="datum/movespeed_modifier.html">movespeed_modifier</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 28"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/absolute_max_tiles_per_second">absolute_max_tiles_per_second</a></th><td>Absolute max tiles we can boost to</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/blacklisted_movetypes">blacklisted_movetypes</a></th><td>Movetypes this never applies to</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/complex_calculation">complex_calculation</a></th><td>Next two variables depend on this: Should we do advanced calculations?</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/conflicts_with">conflicts_with</a></th><td>Other modification datums this conflicts with.</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/id">id</a></th><td>Unique ID. You can never have different modifications with the same ID. By default, this SHOULD NOT be set. Only set it for cases where you're dynamically making modifiers/need to have two types overwrite each other. If unset, uses path (converted to text) as ID.</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/max_tiles_per_second_boost">max_tiles_per_second_boost</a></th><td>Max tiles per second we can boost</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/movetypes">movetypes</a></th><td>Movetypes this applies to</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/multiplicative_slowdown">multiplicative_slowdown</a></th><td>Multiplicative slowdown</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/priority">priority</a></th><td>Higher ones override lower priorities. This is NOT used for ID, ID must be unique, if it isn't unique the newer one overwrites automatically if overriding.</td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#var/variable">variable</a></th><td>Whether or not this is a variable modifier. Variable modifiers can NOT be ever auto-cached. ONLY CHECKED VIA INITIAL(), EFFECTIVELY READ ONLY (and for very good reason)</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/movespeed_modifier.html#proc/apply_multiplicative">apply_multiplicative</a></th><td>Returns new multiplicative movespeed after modification.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/absolute_max_tiles_per_second"><aside class="declaration">var </aside>absolute_max_tiles_per_second
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 44"/></a></h3>
+        <p>Absolute max tiles we can boost to</p><h3 id="var/blacklisted_movetypes"><aside class="declaration">var </aside>blacklisted_movetypes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 52"/></a></h3>
+        <p>Movetypes this never applies to</p><h3 id="var/complex_calculation"><aside class="declaration">var </aside>complex_calculation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 42"/></a></h3>
+        <p>Next two variables depend on this: Should we do advanced calculations?</p><h3 id="var/conflicts_with"><aside class="declaration">var </aside>conflicts_with
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L57">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 57"/></a></h3>
+        <p>Other modification datums this conflicts with.</p><h3 id="var/id"><aside class="declaration">var </aside>id
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 33"/></a></h3>
+        <p>Unique ID. You can never have different modifications with the same ID. By default, this SHOULD NOT be set. Only set it for cases where you're dynamically making modifiers/need to have two types overwrite each other. If unset, uses path (converted to text) as ID.</p><h3 id="var/max_tiles_per_second_boost"><aside class="declaration">var </aside>max_tiles_per_second_boost
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 46"/></a></h3>
+        <p>Max tiles per second we can boost</p><h3 id="var/movetypes"><aside class="declaration">var </aside>movetypes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 49"/></a></h3>
+        <p>Movetypes this applies to</p><h3 id="var/multiplicative_slowdown"><aside class="declaration">var </aside>multiplicative_slowdown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 40"/></a></h3>
+        <p>Multiplicative slowdown</p><h3 id="var/priority"><aside class="declaration">var </aside>priority
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 36"/></a></h3>
+        <p>Higher ones override lower priorities. This is NOT used for ID, ID must be unique, if it isn't unique the newer one overwrites automatically if overriding.</p><h3 id="var/variable"><aside class="declaration">var </aside>variable
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 30"/></a></h3>
+        <p>Whether or not this is a variable modifier. Variable modifiers can NOT be ever auto-cached. ONLY CHECKED VIA INITIAL(), EFFECTIVELY READ ONLY (and for very good reason)</p><h2 id="proc">Proc Details</h2><h3 id="proc/apply_multiplicative"><aside class="declaration">proc </aside>apply_multiplicative<aside>(existing, /<a href="mob.html">mob</a>/target) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L65">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 65"/></a></aside>
+        </h3>
+        <p>Returns new multiplicative movespeed after modification.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

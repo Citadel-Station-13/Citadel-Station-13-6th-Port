@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;maths.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/maths.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/maths.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/maths.html#define/DT_PROB_RATE">DT_PROB_RATE</a></th><td>Converts a probability/second chance to probability/delta_time chance
+For example, if you want an event to happen with a 10% per second chance, but your proc only runs every 5 seconds, do <code>if(prob(100*DT_PROB_RATE(0.1, 5)))</code></td></tr>
+        <tr><th><a href="code/__DEFINES/maths.html#define/DT_PROB">DT_PROB</a></th><td>Like DT_PROB_RATE but easier to use, simply put <code>if(DT_PROB(10, 5))</code></td></tr>
+        <tr><th><a href="code/__DEFINES/maths.html#define/MANHATTAN_DISTANCE">MANHATTAN_DISTANCE</a></th><td>Taxicab distance--gets you the <strong>actual</strong> time it takes to get from one turf to another due to how we calculate diagonal movement</td></tr>
+        <tr><th><a href="code/__DEFINES/maths.html#define/LOGISTIC_FUNCTION">LOGISTIC_FUNCTION</a></th><td>A function that exponentially approaches a maximum value of L
+k is the rate at which is approaches L, x_0 is the point where the function = 0</td></tr>
+        <tr><th><a href="code/__DEFINES/maths.html#define/FORCE_BOOLEAN">FORCE_BOOLEAN</a></th><td>Make sure something is a boolean TRUE/FALSE 1/0 value, since things like bitfield &amp; bitflag doesn't always give 1s and 0s.</td></tr>
+        <tr><th><a href="code/__DEFINES/maths.html#define/TILES_TO_PIXELS">TILES_TO_PIXELS</a></th><td>Gives the number of pixels in an orthogonal line of tiles.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/DT_PROB"><aside class="declaration">#define </aside>DT_PROB
+            <aside>(prob_per_second_percent, delta_time)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L215">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 215"/></a>
+    </h3>
+    <p>Like DT_PROB_RATE but easier to use, simply put <code>if(DT_PROB(10, 5))</code></p><h3 id="define/DT_PROB_RATE"><aside class="declaration">#define </aside>DT_PROB_RATE
+            <aside>(prob_per_second, delta_time)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L212">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 212"/></a>
+    </h3>
+    <p>Converts a probability/second chance to probability/delta_time chance
+For example, if you want an event to happen with a 10% per second chance, but your proc only runs every 5 seconds, do <code>if(prob(100*DT_PROB_RATE(0.1, 5)))</code></p><h3 id="define/FORCE_BOOLEAN"><aside class="declaration">#define </aside>FORCE_BOOLEAN
+            <aside>(x)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L226">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 226"/></a>
+    </h3>
+    <p>Make sure something is a boolean TRUE/FALSE 1/0 value, since things like bitfield &amp; bitflag doesn't always give 1s and 0s.</p><h3 id="define/LOGISTIC_FUNCTION"><aside class="declaration">#define </aside>LOGISTIC_FUNCTION
+            <aside>(L, k, x, x_0)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L223">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 223"/></a>
+    </h3>
+    <p>A function that exponentially approaches a maximum value of L
+k is the rate at which is approaches L, x_0 is the point where the function = 0</p><h3 id="define/MANHATTAN_DISTANCE"><aside class="declaration">#define </aside>MANHATTAN_DISTANCE
+            <aside>(a, b)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L218">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 218"/></a>
+    </h3>
+    <p>Taxicab distance--gets you the <strong>actual</strong> time it takes to get from one turf to another due to how we calculate diagonal movement</p><h3 id="define/TILES_TO_PIXELS"><aside class="declaration">#define </aside>TILES_TO_PIXELS
+            <aside>(tiles)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/maths.dm#L229">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;maths.dm 229"/></a>
+    </h3>
+    <p>Gives the number of pixels in an orthogonal line of tiles.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

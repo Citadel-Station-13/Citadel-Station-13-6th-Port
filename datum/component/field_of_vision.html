@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;component&#x2F;field_of_vision - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/component/field_of_vision.html#var">Var Details</a> - <a href="datum/component/field_of_vision.html#proc">Proc Details</a></header>
+<main>
+<h1>field_of_vision <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/field_of_vision.html">field_of_vision</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 36"/></a></h1>
+
+<p>Field of Vision component. Does totally what you probably think it does,
+ergo preventing players from seeing what's behind them.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/adj_mask">adj_mask</a></th><td>A circle image used to somewhat uncover the adjacent portion of the shadow cone, making mobs and objects behind us somewhat visible.
+The owner mask is still required for those mob going over the default 32x32 px size btw.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/angle">angle</a></th><td>How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/current_fov_size">current_fov_size</a></th><td>The current screen size this field of vision is meant to fit for.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/fov">fov</a></th><td>That special invisible, almost neigh indestructible movable
+that holds both shadow cone mask and image and follows the player around.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/nested_locs">nested_locs</a></th><td>A list of nested locations the mob is in, to ensure the above image works correctly.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/owner_mask">owner_mask</a></th><td>An image whose render_source is kept up to date to prevent the mob (or the topmost movable holding it) from being hidden by the mask.
+Will make it use vis_contents instead once a few byonds bugs with images and vis contents are fixed.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/rot_scale">rot_scale</a></th><td>Used to scale the shadow cone when rotating it to fit over the edges of the screen.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/shadow_angle">shadow_angle</a></th><td>The inner angle of this cone, right hardset to 90, 180, or 270 degrees, until someone figures out a way to make it dynamic.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/shadow_mask">shadow_mask</a></th><td>The mask portion of the cone, placed on a * render target plane so while not visible it still applies the filter.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/visual_shadow">visual_shadow</a></th><td>The visual portion of the cone, placed on the highest layer of the wall plane</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#var/width_n_height_offsets">width_n_height_offsets</a></th><td>A static list of offsets based on icon width and height, because render sources are centered unlike most other visuals,
+and that gives us some problems when the icon is larger or smaller than world.icon_size</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/generate_fov_holder">generate_fov_holder</a></th><td>Generates the holder and images (if not generated yet) and adds them to client.images.
+Run when the component is registered to a player mob, or upon login.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/hide_fov">hide_fov</a></th><td>Hides the shadow, other visibility comsig procs will take it into account. Called when the mob dies.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/manual_centered_render_source">manual_centered_render_source</a></th><td>A hacky comsig proc for things that somehow decide to change icon on the go. may make a change_icon_file() proc later but...</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/on_change_view">on_change_view</a></th><td>Called when the client view size is changed.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/on_loc_moved">on_loc_moved</a></th><td>Pretty much like the above, but meant for other movables the mob is stored in (bodybags, boxes, mechs etc).</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/on_mob_moved">on_mob_moved</a></th><td>Called when the owner mob moves around. Used to keep shadow located right behind us,
+As well as modify the owner mask to match the topmost item.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/on_reset_perspective">on_reset_perspective</a></th><td>Hides the shadow when looking through other items, shows it otherwise.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/resize_fov">resize_fov</a></th><td>Resizes the shadow to match the current screen size.
+Run when the client view size is changed, or if the player has a viewsize different than &quot;15x15&quot; on login/comp registration.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/rotate_shadow_cone">rotate_shadow_cone</a></th><td>Rotates the shadow cone to a certain degree. Backend shenanigans.</td></tr>
+            <tr><th><a href="datum/component/field_of_vision.html#proc/show_fov">show_fov</a></th><td>Shows the shadow. Called when the mob is revived.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/adj_mask"><aside class="declaration">var </aside>adj_mask
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L65">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 65"/></a></h3>
+        <p>A circle image used to somewhat uncover the adjacent portion of the shadow cone, making mobs and objects behind us somewhat visible.
+The owner mask is still required for those mob going over the default 32x32 px size btw.</p><h3 id="var/angle"><aside class="declaration">var </aside>angle
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L47">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 47"/></a></h3>
+        <p>How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.</p><h3 id="var/current_fov_size"><aside class="declaration">var </aside>current_fov_size
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 45"/></a></h3>
+        <p>The current screen size this field of vision is meant to fit for.</p><h3 id="var/fov"><aside class="declaration">var </aside>fov
+            <aside>&ndash; /<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/fov_holder.html">fov_holder</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 43"/></a></h3>
+        <p>That special invisible, almost neigh indestructible movable
+that holds both shadow cone mask and image and follows the player around.</p><h3 id="var/nested_locs"><aside class="declaration">var </aside>nested_locs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 67"/></a></h3>
+        <p>A list of nested locations the mob is in, to ensure the above image works correctly.</p><h3 id="var/owner_mask"><aside class="declaration">var </aside>owner_mask
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 60"/></a></h3>
+        <p>An image whose render_source is kept up to date to prevent the mob (or the topmost movable holding it) from being hidden by the mask.
+Will make it use vis_contents instead once a few byonds bugs with images and vis contents are fixed.</p><h3 id="var/rot_scale"><aside class="declaration">var </aside>rot_scale
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 49"/></a></h3>
+        <p>Used to scale the shadow cone when rotating it to fit over the edges of the screen.</p><h3 id="var/shadow_angle"><aside class="declaration">var </aside>shadow_angle
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 51"/></a></h3>
+        <p>The inner angle of this cone, right hardset to 90, 180, or 270 degrees, until someone figures out a way to make it dynamic.</p><h3 id="var/shadow_mask"><aside class="declaration">var </aside>shadow_mask
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 53"/></a></h3>
+        <p>The mask portion of the cone, placed on a * render target plane so while not visible it still applies the filter.</p><h3 id="var/visual_shadow"><aside class="declaration">var </aside>visual_shadow
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 55"/></a></h3>
+        <p>The visual portion of the cone, placed on the highest layer of the wall plane</p><h3 id="var/width_n_height_offsets"><aside class="declaration">var </aside>width_n_height_offsets
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 72"/></a></h3>
+        <p>A static list of offsets based on icon width and height, because render sources are centered unlike most other visuals,
+and that gives us some problems when the icon is larger or smaller than world.icon_size</p><h2 id="proc">Proc Details</h2><h3 id="proc/generate_fov_holder"><aside class="declaration">proc </aside>generate_fov_holder<aside>(/<a href="mob.html">mob</a>/M, _angle) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L119">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 119"/></a></aside>
+        </h3>
+        <p>Generates the holder and images (if not generated yet) and adds them to client.images.
+Run when the component is registered to a player mob, or upon login.</p><h3 id="proc/hide_fov"><aside class="declaration">proc </aside>hide_fov<aside>(/<a href="mob.html">mob</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L190">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 190"/></a></aside>
+        </h3>
+        <p>Hides the shadow, other visibility comsig procs will take it into account. Called when the mob dies.</p><h3 id="proc/manual_centered_render_source"><aside class="declaration">proc </aside>manual_centered_render_source<aside>(/<a href="mob.html">mob</a>/source, old_icon) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L244">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 244"/></a></aside>
+        </h3>
+        <p>A hacky comsig proc for things that somehow decide to change icon on the go. may make a change_icon_file() proc later but...</p><h3 id="proc/on_change_view"><aside class="declaration">proc </aside>on_change_view<aside>(/<a href="mob.html">mob</a>/source, client, /list/old_view, /list/view) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L205">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 205"/></a></aside>
+        </h3>
+        <p>Called when the client view size is changed.</p><h3 id="proc/on_loc_moved"><aside class="declaration">proc </aside>on_loc_moved<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/source, /<a href="atom.html">atom</a>/oldloc, dir, forced) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L229">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 229"/></a></aside>
+        </h3>
+        <p>Pretty much like the above, but meant for other movables the mob is stored in (bodybags, boxes, mechs etc).</p><h3 id="proc/on_mob_moved"><aside class="declaration">proc </aside>on_mob_moved<aside>(/<a href="mob.html">mob</a>/source, /<a href="atom.html">atom</a>/oldloc, dir, forced) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L212">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 212"/></a></aside>
+        </h3>
+        <p>Called when the owner mob moves around. Used to keep shadow located right behind us,
+As well as modify the owner mask to match the topmost item.</p><h3 id="proc/on_reset_perspective"><aside class="declaration">proc </aside>on_reset_perspective<aside>(/<a href="mob.html">mob</a>/source, /<a href="atom.html">atom</a>/target) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L198">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 198"/></a></aside>
+        </h3>
+        <p>Hides the shadow when looking through other items, shows it otherwise.</p><h3 id="proc/resize_fov"><aside class="declaration">proc </aside>resize_fov<aside>(/list/old_view, /list/view) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 169"/></a></aside>
+        </h3>
+        <p>Resizes the shadow to match the current screen size.
+Run when the client view size is changed, or if the player has a viewsize different than &quot;15x15&quot; on login/comp registration.</p><h3 id="proc/rotate_shadow_cone"><aside class="declaration">proc </aside>rotate_shadow_cone<aside>(new_angle) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 155"/></a></aside>
+        </h3>
+        <p>Rotates the shadow cone to a certain degree. Backend shenanigans.</p><h3 id="proc/show_fov"><aside class="declaration">proc </aside>show_fov<aside>(/<a href="mob.html">mob</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/field_of_vision.dm#L194">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;field_of_vision.dm 194"/></a></aside>
+        </h3>
+        <p>Shows the shadow. Called when the mob is revived.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

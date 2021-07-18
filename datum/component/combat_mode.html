@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;component&#x2F;combat_mode - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/component/combat_mode.html#proc">Proc Details</a></header>
+<main>
+<h1>combat_mode <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/combat_mode.html">combat_mode</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 6"/></a></h1>
+
+<p>Combat mode component. It makes the user face whichever atom the mouse pointer is hovering,
+amongst other things designed outside of this file, namely PvP and PvE stuff, hence the name.
+Can be toggled on and off by clicking the screen hud object or by pressing the assigned hotkey (default 'C')</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/check_flags">check_flags</a></th><td>Returns a field of flags that are contained in both the second arg and our bitfield variable.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/disable_combat_mode">disable_combat_mode</a></th><td>Disables combat mode. Please use 'safe_disable_combat_mode' instead, if you wish to also disable the toggle flag.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/enable_combat_mode">enable_combat_mode</a></th><td>Enables combat mode. Please use 'safe_enable_combat_mode' instead, if you wish to also enable the toggle flag.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/onMouseMove">onMouseMove</a></th><td>Changes the user direction to (try) match the pointer.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/on_death">on_death</a></th><td>Disables combat mode upon death.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/on_logout">on_logout</a></th><td>Disables combat mode upon logout</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/on_mob_hud_created">on_mob_hud_created</a></th><td>Creates the hud screen object.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/on_move">on_move</a></th><td>Changes the user direction to (try) keep match the pointer.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/safe_disable_combat_mode">safe_disable_combat_mode</a></th><td>Disables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/safe_enable_combat_mode">safe_enable_combat_mode</a></th><td>Enables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/update_combat_lock">update_combat_lock</a></th><td>Combat mode can be locked out, forcibly disabled by a status trait.</td></tr>
+            <tr><th><a href="datum/component/combat_mode.html#proc/user_toggle_intentional_combat_mode">user_toggle_intentional_combat_mode</a></th><td>Toggles whether the user is intentionally in combat mode. THIS should be the proc you generally use! Has built in visual/to other player feedback, as well as an audible cue to ourselves.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/check_flags"><aside class="declaration">proc </aside>check_flags<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source, flags) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 169"/></a></aside>
+        </h3>
+        <p>Returns a field of flags that are contained in both the second arg and our bitfield variable.</p><h3 id="proc/disable_combat_mode"><aside class="declaration">proc </aside>disable_combat_mode<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source, silent, forced, visible, locked, playsound) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L98">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 98"/></a></aside>
+        </h3>
+        <p>Disables combat mode. Please use 'safe_disable_combat_mode' instead, if you wish to also disable the toggle flag.</p><h3 id="proc/enable_combat_mode"><aside class="declaration">proc </aside>enable_combat_mode<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source, silent, forced, visible, locked, playsound) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L65">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 65"/></a></aside>
+        </h3>
+        <p>Enables combat mode. Please use 'safe_enable_combat_mode' instead, if you wish to also enable the toggle flag.</p><h3 id="proc/onMouseMove"><aside class="declaration">proc </aside>onMouseMove<aside>(/<a href="mob.html">mob</a>/source, object, location, control, params) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L131">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 131"/></a></aside>
+        </h3>
+        <p>Changes the user direction to (try) match the pointer.</p><h3 id="proc/on_death"><aside class="declaration">proc </aside>on_death<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 173"/></a></aside>
+        </h3>
+        <p>Disables combat mode upon death.</p><h3 id="proc/on_logout"><aside class="declaration">proc </aside>on_logout<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 177"/></a></aside>
+        </h3>
+        <p>Disables combat mode upon logout</p><h3 id="proc/on_mob_hud_created"><aside class="declaration">proc </aside>on_mob_hud_created<aside>(/<a href="mob.html">mob</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 42"/></a></aside>
+        </h3>
+        <p>Creates the hud screen object.</p><h3 id="proc/on_move"><aside class="declaration">proc </aside>on_move<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/source, dir, /<a href="atom.html">atom</a>/oldloc, forced) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L125">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 125"/></a></aside>
+        </h3>
+        <p>Changes the user direction to (try) keep match the pointer.</p><h3 id="proc/safe_disable_combat_mode"><aside class="declaration">proc </aside>safe_disable_combat_mode<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source, silent, visible) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L159">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 159"/></a></aside>
+        </h3>
+        <p>Disables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.</p><h3 id="proc/safe_enable_combat_mode"><aside class="declaration">proc </aside>safe_enable_combat_mode<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source, silent, visible) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 145"/></a></aside>
+        </h3>
+        <p>Enables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.</p><h3 id="proc/update_combat_lock"><aside class="declaration">proc </aside>update_combat_lock<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 51"/></a></aside>
+        </h3>
+        <p>Combat mode can be locked out, forcibly disabled by a status trait.</p><h3 id="proc/user_toggle_intentional_combat_mode"><aside class="declaration">proc </aside>user_toggle_intentional_combat_mode<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/combat_mode.dm#L138">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;combat_mode.dm 138"/></a></aside>
+        </h3>
+        <p>Toggles whether the user is intentionally in combat mode. THIS should be the proc you generally use! Has built in visual/to other player feedback, as well as an audible cue to ourselves.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

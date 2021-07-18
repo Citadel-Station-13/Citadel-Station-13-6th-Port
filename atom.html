@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;atom - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="atom.html#var">Var Details</a> - <a href="atom.html#proc">Proc Details</a></header>
+<main>
+<h1>atom <aside>/<a href="atom.html">atom</a></aside><aside> inherits /<a href="datum.html">datum</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/alternate_appearance.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;alternate_appearance.dm 4"/></a></h1>
+
+<p>The base type for nearly all physical objects in SS13</p>
+<p>Lots and lots of functionality lives here, although in general we are striving to move
+as much as possible to the components/elements system</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="atom.html#var/add_overlays">add_overlays</a></th><td>a very temporary list of overlays to add</td></tr>
+            <tr><th><a href="atom.html#var/article">article</a></th><td>If non-null, overrides a/an/some in all cases</td></tr>
+            <tr><th><a href="atom.html#var/atom_colours">atom_colours</a></th><td>used to store the different colors on an atom</td></tr>
+            <tr><th><a href="atom.html#var/attack_hand_is_action">attack_hand_is_action</a></th><td>Should we set last action for attack hand? This implies that attack_hands to this atom should flush to clickdelay buffers instead of discarding.</td></tr>
+            <tr><th><a href="atom.html#var/attack_hand_speed">attack_hand_speed</a></th><td>Amount of time to check for from a mob's last attack to allow an attack_hand().</td></tr>
+            <tr><th><a href="atom.html#var/attack_hand_unwieldlyness">attack_hand_unwieldlyness</a></th><td>Amount of time to hard stagger (no clicking at all) the mob post attack_hand(). Lower = better</td></tr>
+            <tr><th><a href="atom.html#var/chat_color">chat_color</a></th><td>Last color calculated for the the chatmessage overlays</td></tr>
+            <tr><th><a href="atom.html#var/chat_color_darkened">chat_color_darkened</a></th><td>A luminescence-shifted value of the last color calculated for chatmessage overlays</td></tr>
+            <tr><th><a href="atom.html#var/chat_color_name">chat_color_name</a></th><td>Last name used to calculate a color for the chatmessage overlays</td></tr>
+            <tr><th><a href="atom.html#var/custom_materials">custom_materials</a></th><td>The custom materials this atom is made of, used by a lot of things like furniture, walls, and floors (if I finish the functionality, that is.)
+The list referenced by this var can be shared by multiple objects and should not be directly modified. Instead, use <a href="atom.html#proc/set_custom_materials" title="/atom">set_custom_materials</a>.</td></tr>
+            <tr><th><a href="atom.html#var/custom_premium_price">custom_premium_price</a></th><td>Price of an item in a vending machine, overriding the premium vending machine price. Define in terms of paycheck defines as opposed to raw numbers.</td></tr>
+            <tr><th><a href="atom.html#var/custom_price">custom_price</a></th><td>Price of an item in a vending machine, overriding the base vending machine price. Define in terms of paycheck defines as opposed to raw numbers.</td></tr>
+            <tr><th><a href="atom.html#var/explosion_block">explosion_block</a></th><td>Value used to increment ex_act() if reactionary_explosions is on</td></tr>
+            <tr><th><a href="atom.html#var/explosion_flags">explosion_flags</a></th><td>Flags for explosions</td></tr>
+            <tr><th><a href="atom.html#var/fingerprintslast">fingerprintslast</a></th><td>Last fingerprints to touch this atom</td></tr>
+            <tr><th><a href="atom.html#var/flags_1">flags_1</a></th><td>First atom flags var</td></tr>
+            <tr><th><a href="atom.html#var/hud_list">hud_list</a></th><td>This atom's HUD (med/sec, etc) images. Associative list.</td></tr>
+            <tr><th><a href="atom.html#var/hud_possible">hud_possible</a></th><td>HUD images that this atom can provide.</td></tr>
+            <tr><th><a href="atom.html#var/interaction_flags_atom">interaction_flags_atom</a></th><td>Intearaction flags</td></tr>
+            <tr><th><a href="atom.html#var/managed_overlays">managed_overlays</a></th><td>overlays managed by <a href="atom.html#proc/update_overlays" title="/atom">update_overlays</a> to prevent removing overlays that weren't added by the same proc</td></tr>
+            <tr><th><a href="atom.html#var/managed_vis_overlays">managed_vis_overlays</a></th><td>vis overlays managed by SSvis_overlays to automaticaly turn them like other overlays</td></tr>
+            <tr><th><a href="atom.html#var/material_flags">material_flags</a></th><td>Bitfield for how the atom handles materials.</td></tr>
+            <tr><th><a href="atom.html#var/material_modifier">material_modifier</a></th><td>Modifier that raises/lowers the effect of the amount of a material, prevents small and easy to get items from being death machines.</td></tr>
+            <tr><th><a href="atom.html#var/orbit_target">orbit_target</a></th><td>Reference to atom being orbited</td></tr>
+            <tr><th><a href="atom.html#var/proximity_monitor">proximity_monitor</a></th><td>Proximity monitor associated with this atom</td></tr>
+            <tr><th><a href="atom.html#var/rad_insulation">rad_insulation</a></th><td>Radiation insulation types</td></tr>
+            <tr><th><a href="atom.html#var/reagents">reagents</a></th><td>Reagents holder</td></tr>
+            <tr><th><a href="atom.html#var/remove_overlays">remove_overlays</a></th><td>a very temporary list of overlays to remove</td></tr>
+            <tr><th><a href="atom.html#var/ricochet_chance_mod">ricochet_chance_mod</a></th><td>When a projectile tries to ricochet off this atom, the projectile ricochet chance is multiplied by this</td></tr>
+            <tr><th><a href="atom.html#var/ricochet_damage_mod">ricochet_damage_mod</a></th><td>When a projectile ricochets off this atom, it deals the normal damage * this modifier to this atom</td></tr>
+            <tr><th><a href="atom.html#var/targeted_by">targeted_by</a></th><td>Mobs that are currently do_after'ing this atom, to be cleared from on Destroy()</td></tr>
+            <tr><th><a href="atom.html#var/wave_explosion_block">wave_explosion_block</a></th><td>Amount to decrease wave explosions by</td></tr>
+            <tr><th><a href="atom.html#var/wave_explosion_multiply">wave_explosion_multiply</a></th><td>Amount to multiply wave explosions by</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="atom.html#proc/AltClickNoInteract">AltClickNoInteract</a></th><td>Use this instead of [/mob/proc/AltClickOn] where you only want turf content listing without additional atom alt-click interaction</td></tr>
+            <tr><th><a href="atom.html#proc/ComponentInitialize">ComponentInitialize</a></th><td>Put your <a href="code/__DEFINES/dcs/helpers.html#define/AddComponent" title="AddComponent">AddComponent</a> calls here</td></tr>
+            <tr><th><a href="atom.html#proc/Destroy">Destroy</a></th><td>Top level of the destroy chain for most atoms</td></tr>
+            <tr><th><a href="atom.html#proc/Initialize">Initialize</a></th><td>The primary method that objects are setup in SS13 with</td></tr>
+            <tr><th><a href="atom.html#proc/LateInitialize">LateInitialize</a></th><td>Sends a signal that the new atom <code>src</code>, has been created at <code>loc</code>
+Late Intialization, for code that should run after all atoms have run Intialization</td></tr>
+            <tr><th><a href="atom.html#proc/New">New</a></th><td>Called when an atom is created in byond (built in engine proc)</td></tr>
+            <tr><th><a href="atom.html#proc/_contents">_contents</a></th><td>Wrapper to return a copy of contents, as SDQL2 can't tell an internal list from a normal list.</td></tr>
+            <tr><th><a href="atom.html#proc/audible_message">audible_message</a></th><td>Show a message to all mobs in earshot of this atom</td></tr>
+            <tr><th><a href="atom.html#proc/check_projectile_ricochet">check_projectile_ricochet</a></th><td>Checks if a projectile should ricochet off of us. Projectiles get final say.
+[__DEFINES/projectiles.dm] for return values.</td></tr>
+            <tr><th><a href="atom.html#proc/connect_to_shuttle">connect_to_shuttle</a></th><td>Called after a shuttle is loaded <strong>from map template initially</strong>.</td></tr>
+            <tr><th><a href="atom.html#proc/examine_more">examine_more</a></th><td>Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_TIME (default 1.5 seconds)</td></tr>
+            <tr><th><a href="atom.html#proc/get_examine_string">get_examine_string</a></th><td>Generate the full examine string of this atom (including icon for goonchat)</td></tr>
+            <tr><th><a href="atom.html#proc/has_gravity">has_gravity</a></th><td>Returns true if this atom has gravity for the passed in turf</td></tr>
+            <tr><th><a href="atom.html#proc/mat_update_desc">mat_update_desc</a></th><td>This proc is called when a material updates an object's description</td></tr>
+            <tr><th><a href="atom.html#proc/onAwayMission">onAwayMission</a></th><td>Is the atom in an away mission</td></tr>
+            <tr><th><a href="atom.html#proc/onCentCom">onCentCom</a></th><td>Is this atom currently located on centcom</td></tr>
+            <tr><th><a href="atom.html#proc/onSyndieBase">onSyndieBase</a></th><td>Is the atom in any of the centcom syndicate areas</td></tr>
+            <tr><th><a href="atom.html#proc/rust_heretic_act">rust_heretic_act</a></th><td>Causes effects when the atom gets hit by a rust effect from heretics</td></tr>
+            <tr><th><a href="atom.html#proc/setClosed">setClosed</a></th><td>Used to set something as 'closed' if it's being used as a supplypod</td></tr>
+            <tr><th><a href="atom.html#proc/setOpened">setOpened</a></th><td>Used to set something as 'open' if it's being used as a supplypod</td></tr>
+            <tr><th><a href="atom.html#proc/set_custom_materials">set_custom_materials</a></th><td>Sets the custom materials for an item.</td></tr>
+            <tr><th><a href="atom.html#proc/shuttleRotate">shuttleRotate</a></th><td>Base proc</td></tr>
+            <tr><th><a href="atom.html#proc/update_icon">update_icon</a></th><td>Updates the icon of the atom</td></tr>
+            <tr><th><a href="atom.html#proc/update_icon_state">update_icon_state</a></th><td>Updates the icon state of the atom</td></tr>
+            <tr><th><a href="atom.html#proc/update_overlays">update_overlays</a></th><td>Updates the overlays of the atom</td></tr>
+            <tr><th><a href="atom.html#proc/visible_message">visible_message</a></th><td>Generate a visible message from this atom</td></tr>
+            <tr><th><a href="atom.html#proc/wave_ex_act">wave_ex_act</a></th><td>Called when a wave explosion hits this atom.</td></tr>
+            <tr><th><a href="atom.html#proc/wave_explode">wave_explode</a></th><td>Called when a wave explosion hits this atom. Do not override this.</td></tr>
+            <tr><th><a href="atom.html#proc/zap_act">zap_act</a></th><td>Respond to a electric bolt action on our item</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/add_overlays"><aside class="declaration">var </aside>add_overlays
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L57">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 57"/></a></h3>
+        <p>a very temporary list of overlays to add</p><h3 id="var/article"><aside class="declaration">var </aside>article
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 14"/></a></h3>
+        <p>If non-null, overrides a/an/some in all cases</p><h3 id="var/atom_colours"><aside class="declaration">var </aside>atom_colours
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 52"/></a></h3>
+        <p>used to store the different colors on an atom</p>
+<p>its inherent color, the colored paint applied on it, special color effect etc...</p><h3 id="var/attack_hand_is_action"><aside class="declaration">var </aside>attack_hand_is_action
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 169"/></a></h3>
+        <p>Should we set last action for attack hand? This implies that attack_hands to this atom should flush to clickdelay buffers instead of discarding.</p><h3 id="var/attack_hand_speed"><aside class="declaration">var </aside>attack_hand_speed
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L165">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 165"/></a></h3>
+        <p>Amount of time to check for from a mob's last attack to allow an attack_hand().</p><h3 id="var/attack_hand_unwieldlyness"><aside class="declaration">var </aside>attack_hand_unwieldlyness
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/clickdelay.dm#L167">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;clickdelay.dm 167"/></a></h3>
+        <p>Amount of time to hard stagger (no clicking at all) the mob post attack_hand(). Lower = better</p><h3 id="var/chat_color"><aside class="declaration">var </aside>chat_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L102">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 102"/></a></h3>
+        <p>Last color calculated for the the chatmessage overlays</p><h3 id="var/chat_color_darkened"><aside class="declaration">var </aside>chat_color_darkened
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L104">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 104"/></a></h3>
+        <p>A luminescence-shifted value of the last color calculated for chatmessage overlays</p><h3 id="var/chat_color_name"><aside class="declaration">var </aside>chat_color_name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L100">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 100"/></a></h3>
+        <p>Last name used to calculate a color for the chatmessage overlays</p><h3 id="var/custom_materials"><aside class="declaration">var </aside>custom_materials
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L85">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 85"/></a></h3>
+        <p>The custom materials this atom is made of, used by a lot of things like furniture, walls, and floors (if I finish the functionality, that is.)
+The list referenced by this var can be shared by multiple objects and should not be directly modified. Instead, use <a href="atom.html#proc/set_custom_materials" title="/atom">set_custom_materials</a>.</p><h3 id="var/custom_premium_price"><aside class="declaration">var </aside>custom_premium_price
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L74">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 74"/></a></h3>
+        <p>Price of an item in a vending machine, overriding the premium vending machine price. Define in terms of paycheck defines as opposed to raw numbers.</p><h3 id="var/custom_price"><aside class="declaration">var </aside>custom_price
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 72"/></a></h3>
+        <p>Price of an item in a vending machine, overriding the base vending machine price. Define in terms of paycheck defines as opposed to raw numbers.</p><h3 id="var/explosion_block"><aside class="declaration">var </aside>explosion_block
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 37"/></a></h3>
+        <p>Value used to increment ex_act() if reactionary_explosions is on</p><h3 id="var/explosion_flags"><aside class="declaration">var </aside>explosion_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 40"/></a></h3>
+        <p>Flags for explosions</p><h3 id="var/fingerprintslast"><aside class="declaration">var </aside>fingerprintslast
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 67"/></a></h3>
+        <p>Last fingerprints to touch this atom</p><h3 id="var/flags_1"><aside class="declaration">var </aside>flags_1
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 17"/></a></h3>
+        <p>First atom flags var</p><h3 id="var/hud_list"><aside class="declaration">var </aside>hud_list
+            <aside>&ndash; /list/image</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 32"/></a></h3>
+        <p>This atom's HUD (med/sec, etc) images. Associative list.</p><h3 id="var/hud_possible"><aside class="declaration">var </aside>hud_possible
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 34"/></a></h3>
+        <p>HUD images that this atom can provide.</p><h3 id="var/interaction_flags_atom"><aside class="declaration">var </aside>interaction_flags_atom
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 19"/></a></h3>
+        <p>Intearaction flags</p><h3 id="var/managed_overlays"><aside class="declaration">var </aside>managed_overlays
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 62"/></a></h3>
+        <p>overlays managed by <a href="atom.html#proc/update_overlays" title="/atom">update_overlays</a> to prevent removing overlays that weren't added by the same proc</p><h3 id="var/managed_vis_overlays"><aside class="declaration">var </aside>managed_vis_overlays
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 60"/></a></h3>
+        <p>vis overlays managed by SSvis_overlays to automaticaly turn them like other overlays</p><h3 id="var/material_flags"><aside class="declaration">var </aside>material_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L87">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 87"/></a></h3>
+        <p>Bitfield for how the atom handles materials.</p><h3 id="var/material_modifier"><aside class="declaration">var </aside>material_modifier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L89">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 89"/></a></h3>
+        <p>Modifier that raises/lowers the effect of the amount of a material, prevents small and easy to get items from being death machines.</p><h3 id="var/orbit_target"><aside class="declaration">var </aside>orbit_target
+            <aside>&ndash; /<a href="atom.html">atom</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 112"/></a></h3>
+        <p>Reference to atom being orbited</p><h3 id="var/proximity_monitor"><aside class="declaration">var </aside>proximity_monitor
+            <aside>&ndash; /<a href="datum.html">datum</a>/proximity_monitor</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L65">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 65"/></a></h3>
+        <p>Proximity monitor associated with this atom</p><h3 id="var/rad_insulation"><aside class="declaration">var </aside>rad_insulation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 81"/></a></h3>
+        <p>Radiation insulation types</p><h3 id="var/reagents"><aside class="declaration">var </aside>reagents
+            <aside>&ndash; /<a href="datum.html">datum</a>/reagents</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 29"/></a></h3>
+        <p>Reagents holder</p><h3 id="var/remove_overlays"><aside class="declaration">var </aside>remove_overlays
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 55"/></a></h3>
+        <p>a very temporary list of overlays to remove</p><h3 id="var/ricochet_chance_mod"><aside class="declaration">var </aside>ricochet_chance_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 24"/></a></h3>
+        <p>When a projectile tries to ricochet off this atom, the projectile ricochet chance is multiplied by this</p><h3 id="var/ricochet_damage_mod"><aside class="declaration">var </aside>ricochet_damage_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 26"/></a></h3>
+        <p>When a projectile ricochets off this atom, it deals the normal damage * this modifier to this atom</p><h3 id="var/targeted_by"><aside class="declaration">var </aside>targeted_by
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L107">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 107"/></a></h3>
+        <p>Mobs that are currently do_after'ing this atom, to be cleared from on Destroy()</p><h3 id="var/wave_explosion_block"><aside class="declaration">var </aside>wave_explosion_block
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 42"/></a></h3>
+        <p>Amount to decrease wave explosions by</p><h3 id="var/wave_explosion_multiply"><aside class="declaration">var </aside>wave_explosion_multiply
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 44"/></a></h3>
+        <p>Amount to multiply wave explosions by</p><h2 id="proc">Proc Details</h2><h3 id="proc/AltClickNoInteract"><aside class="declaration">proc </aside>AltClickNoInteract<aside>(/<a href="mob.html">mob</a>/user, /<a href="atom.html">atom</a>/A) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/click.dm#L349">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;click.dm 349"/></a></aside>
+        </h3>
+        <p>Use this instead of [/mob/proc/AltClickOn] where you only want turf content listing without additional atom alt-click interaction</p><h3 id="proc/ComponentInitialize"><aside class="declaration">proc </aside>ComponentInitialize<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L217">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 217"/></a></aside>
+        </h3>
+        <p>Put your <a href="code/__DEFINES/dcs/helpers.html#define/AddComponent" title="AddComponent">AddComponent</a> calls here</p><h3 id="proc/Destroy"><aside class="parent"><a title="/datum" href="datum.html#proc/Destroy">&uarr;</a></aside>Destroy<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L230">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 230"/></a></aside>
+        </h3>
+        <p>Top level of the destroy chain for most atoms</p>
+<p>Cleans up the following:</p>
+<ul>
+<li>Removes alternate apperances from huds that see them</li>
+<li>qdels the reagent holder from atoms if it exists</li>
+<li>clears the orbiters list</li>
+<li>clears overlays and priority overlays</li>
+<li>clears the light object</li>
+</ul><h3 id="proc/Initialize"><aside class="declaration">proc </aside>Initialize<aside>(mapload, ...) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L171">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 171"/></a></aside>
+        </h3>
+        <p>The primary method that objects are setup in SS13 with</p>
+<p>we don't use New as we have better control over when this is called and we can choose
+to delay calls or hook other logic in and so forth</p>
+<p>During roundstart map parsing, atoms are queued for intialization in the base atom/New(),
+After the map has loaded, then Initalize is called on all atoms one by one. NB: this
+is also true for loading map templates as well, so they don't Initalize until all objects
+in the map file are parsed and present in the world</p>
+<p>If you're creating an object at any point after SSInit has run then this proc will be
+immediately be called from New.</p>
+<p>mapload: This parameter is true if the atom being loaded is either being intialized during
+the Atom subsystem intialization, or if the atom is being loaded from the map template.
+If the item is being created at runtime any time after the Atom subsystem is intialized then
+it's false.</p>
+<p>You must always call the parent of this proc, otherwise failures will occur as the item
+will not be seen as initalized (this can lead to all sorts of strange behaviour, like
+the item being completely unclickable)</p>
+<p>You must not sleep in this proc, or any subprocs</p>
+<p>Any parameters from new are passed through (excluding loc), naturally if you're loading from a map
+there are no other arguments</p>
+<p>Must return an <a href="code/__DEFINES/subsystems.html#define/INITIALIZE_HINT_NORMAL" title="INITIALIZE_HINT_NORMAL">initialization hint</a> or a runtime will occur.</p>
+<p>Note: the following functions don't call the base for optimization and must copypasta handling:</p>
+<ul>
+<li><a href="turf.html#proc/Initialize" title="/turf">/turf/proc/Initialize</a></li>
+<li><a href="turf/open/space.html#proc/Initialize" title="/turf/open/space">/turf/open/space/proc/Initialize</a></li>
+</ul><h3 id="proc/LateInitialize"><aside class="declaration">proc </aside>LateInitialize<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L213">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 213"/></a></aside>
+        </h3>
+        <p>Sends a signal that the new atom <code>src</code>, has been created at <code>loc</code>
+Late Intialization, for code that should run after all atoms have run Intialization</p>
+<p>To have your LateIntialize proc be called, your atoms <a href="atom.html#proc/Initialize" title="/atom">Initalization</a>
+proc must return the hint
+<a href="code/__DEFINES/subsystems.html#define/INITIALIZE_HINT_LATELOAD" title="INITIALIZE_HINT_LATELOAD">INITIALIZE_HINT_LATELOAD</a> otherwise you will never be called.</p>
+<p>useful for doing things like finding other machines on GLOB.machines because you can guarantee
+that all atoms will actually exist in the &quot;WORLD&quot; at this time and that all their Intialization
+code has been run</p><h3 id="proc/New">New<aside>(loc, ...) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L122">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 122"/></a></aside>
+        </h3>
+        <p>Called when an atom is created in byond (built in engine proc)</p>
+<p>Not a lot happens here in SS13 code, as we offload most of the work to the
+<a href="atom.html#proc/Initialize" title="/atom">Intialization</a> proc, mostly we run the preloader
+if the preloader is being used and then call <a href="datum/controller/subsystem/atoms.html#proc/InitAtom" title="/datum/controller/subsystem/atoms">InitAtom</a> of which the ultimate
+result is that the Intialize proc is called.</p>
+<p>We also generate a tag here if the DF_USE_TAG flag is set on the atom</p><h3 id="proc/_contents"><aside class="declaration">proc </aside>_contents<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/SDQL2/SDQL_2_wrappers.dm#L245">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;SDQL2&#x2F;SDQL_2_wrappers.dm 245"/></a></aside>
+        </h3>
+        <p>Wrapper to return a copy of contents, as SDQL2 can't tell an internal list from a normal list.</p><h3 id="proc/audible_message"><aside class="declaration">proc </aside>audible_message<aside>(message, deaf_message, hearing_distance, self_message, ignored_mobs) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob.dm#L196">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob.dm 196"/></a></aside>
+        </h3>
+        <p>Show a message to all mobs in earshot of this atom</p>
+<p>Use for objects performing audible actions</p>
+<p>vars:</p>
+<ul>
+<li>message is the message output to anyone who can hear.</li>
+<li>deaf_message (optional) is what deaf people will see.</li>
+<li>hearing_distance (optional) is the range, how many tiles away the message can be heard.</li>
+<li>ignored_mobs (optional) doesn't show any message to any given mob in the list.</li>
+</ul><h3 id="proc/check_projectile_ricochet"><aside class="declaration">proc </aside>check_projectile_ricochet<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/projectile.html">projectile</a>/P) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L256">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 256"/></a></aside>
+        </h3>
+        <p>Checks if a projectile should ricochet off of us. Projectiles get final say.
+[__DEFINES/projectiles.dm] for return values.</p><h3 id="proc/connect_to_shuttle"><aside class="declaration">proc </aside>connect_to_shuttle<aside>(/<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/<a href="obj/docking_port/mobile.html">mobile</a>/port, /<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/stationary/dock, idnum, override) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1078">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1078"/></a></aside>
+        </h3>
+        <p>Called after a shuttle is loaded <strong>from map template initially</strong>.</p>
+<p>@params</p>
+<ul>
+<li>port - Mobile port/shuttle</li>
+<li>dock - Stationary dock the shuttle's at</li>
+<li>idnum - ID number of the shuttle</li>
+</ul><h3 id="proc/examine_more"><aside class="declaration">proc </aside>examine_more<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L528">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 528"/></a></aside>
+        </h3>
+        <p>Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_TIME (default 1.5 seconds)</p>
+<p>This is where you can put extra information on something that may be superfluous or not important in critical gameplay
+moments, while allowing people to manually double-examine to take a closer look</p>
+<p>Produces a signal <a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PARENT_EXAMINE_MORE" title="COMSIG_PARENT_EXAMINE_MORE">COMSIG_PARENT_EXAMINE_MORE</a></p><h3 id="proc/get_examine_string"><aside class="declaration">proc </aside>get_examine_string<aside>(/<a href="mob.html">mob</a>/user, thats) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L483">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 483"/></a></aside>
+        </h3>
+        <p>Generate the full examine string of this atom (including icon for goonchat)</p><h3 id="proc/has_gravity"><aside class="declaration">proc </aside>has_gravity<aside>(/<a href="turf.html">turf</a>/T) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1307">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1307"/></a></aside>
+        </h3>
+        <p>Returns true if this atom has gravity for the passed in turf</p>
+<p>Sends signals COMSIG_ATOM_HAS_GRAVITY and COMSIG_TURF_HAS_GRAVITY, both can force gravity with
+the forced gravity var</p>
+<p>Gravity situations:</p>
+<ul>
+<li>No gravity if you're not in a turf</li>
+<li>No gravity if this atom is in is a space turf</li>
+<li>Gravity if the area it's in always has gravity</li>
+<li>Gravity if there's a gravity generator on the z level</li>
+<li>Gravity if the Z level has an SSMappingTrait for ZTRAIT_GRAVITY</li>
+<li>otherwise no gravity</li>
+</ul><h3 id="proc/mat_update_desc"><aside class="declaration">proc </aside>mat_update_desc<aside>(/<a href="datum.html">datum</a>/<a href="datum/material.html">material</a>/mat) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/materials/_material.dm#L96">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;materials&#x2F;_material.dm 96"/></a></aside>
+        </h3>
+        <p>This proc is called when a material updates an object's description</p><h3 id="proc/onAwayMission"><aside class="declaration">proc </aside>onAwayMission<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L344">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 344"/></a></aside>
+        </h3>
+        <p>Is the atom in an away mission</p>
+<p>Must be in the away mission z-level to return TRUE</p>
+<p>Also used in gamemode code for win conditions</p><h3 id="proc/onCentCom"><aside class="declaration">proc </aside>onCentCom<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L287">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 287"/></a></aside>
+        </h3>
+        <p>Is this atom currently located on centcom</p>
+<p>Specifically, is it on the z level and within the centcom areas</p>
+<p>You can also be in a shuttleshuttle during endgame transit</p>
+<p>Used in gamemode to identify mobs who have escaped and for some other areas of the code
+who don't want atoms where they shouldn't be</p><h3 id="proc/onSyndieBase"><aside class="declaration">proc </aside>onSyndieBase<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L324">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 324"/></a></aside>
+        </h3>
+        <p>Is the atom in any of the centcom syndicate areas</p>
+<p>Either in the syndie base on centcom, or any of their shuttles</p>
+<p>Also used in gamemode code for win conditions</p><h3 id="proc/rust_heretic_act"><aside class="declaration">proc </aside>rust_heretic_act<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1344">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1344"/></a></aside>
+        </h3>
+        <p>Causes effects when the atom gets hit by a rust effect from heretics</p>
+<p>Override this if you want custom behaviour in whatever gets hit by the rust</p><h3 id="proc/setClosed"><aside class="declaration">proc </aside>setClosed<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1360">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1360"/></a></aside>
+        </h3>
+        <p>Used to set something as 'closed' if it's being used as a supplypod</p>
+<p>Override this if you want an atom to be usable as a supplypod.</p><h3 id="proc/setOpened"><aside class="declaration">proc </aside>setOpened<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1352">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1352"/></a></aside>
+        </h3>
+        <p>Used to set something as 'open' if it's being used as a supplypod</p>
+<p>Override this if you want an atom to be usable as a supplypod.</p><h3 id="proc/set_custom_materials"><aside class="declaration">proc </aside>set_custom_materials<aside>(/list/materials, multiplier) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1276">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1276"/></a></aside>
+        </h3>
+        <p>Sets the custom materials for an item.</p><h3 id="proc/shuttleRotate"><aside class="declaration">proc </aside>shuttleRotate<aside>(rotation, params) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/shuttle/shuttle_rotate.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;shuttle&#x2F;shuttle_rotate.dm 9"/></a></aside>
+        </h3>
+        <p>Base proc</p><h3 id="proc/update_icon"><aside class="declaration">proc </aside>update_icon<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L535">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 535"/></a></aside>
+        </h3>
+        <p>Updates the icon of the atom</p><h3 id="proc/update_icon_state"><aside class="declaration">proc </aside>update_icon_state<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L557">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 557"/></a></aside>
+        </h3>
+        <p>Updates the icon state of the atom</p><h3 id="proc/update_overlays"><aside class="declaration">proc </aside>update_overlays<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L560">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 560"/></a></aside>
+        </h3>
+        <p>Updates the overlays of the atom</p><h3 id="proc/visible_message"><aside class="declaration">proc </aside>visible_message<aside>(message, self_message, blind_message, vision_distance, ignored_mobs, /<a href="mob.html">mob</a>/target, target_message, omni) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob.dm#L132">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob.dm 132"/></a></aside>
+        </h3>
+        <p>Generate a visible message from this atom</p>
+<p>Show a message to all player mobs who sees this atom</p>
+<p>Show a message to the src mob (if the src is a mob)</p>
+<p>Use for atoms performing visible actions</p>
+<p>message is output to anyone who can see, e.g. &quot;The [src] does something!&quot;</p>
+<p>Vars:</p>
+<ul>
+<li>self_message (optional) is what the src mob sees e.g. &quot;You do something!&quot;</li>
+<li>blind_message (optional) is what blind people will hear e.g. &quot;You hear something!&quot;</li>
+<li>vision_distance (optional) define how many tiles away the message can be seen.</li>
+<li>ignored_mobs (optional) doesn't show any message to any given mob in the list.</li>
+<li>target (optional) is the other mob involved with the visible message. For example, the attacker in many combat messages.</li>
+<li>target_message (optional) is what the target mob will see e.g. &quot;[src] does something to you!&quot;</li>
+<li>omni (optional) if TRUE, will show to users no matter what.</li>
+</ul><h3 id="proc/wave_ex_act"><aside class="declaration">proc </aside>wave_ex_act<aside>(power, /<a href="datum.html">datum</a>/<a href="datum/wave_explosion.html">wave_explosion</a>/explosion, dir) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L604">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 604"/></a></aside>
+        </h3>
+        <p>Called when a wave explosion hits this atom.</p>
+<p>Returns explosion power to &quot;allow through&quot;. Standard handling and flag overrides in [wave_explode()].</p><h3 id="proc/wave_explode"><aside class="declaration">proc </aside>wave_explode<aside>(power, /<a href="datum.html">datum</a>/<a href="datum/wave_explosion.html">wave_explosion</a>/explosion, dir) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L585">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 585"/></a></aside>
+        </h3>
+        <p>Called when a wave explosion hits this atom. Do not override this.</p>
+<p>Returns explosion power to &quot;allow through&quot;.</p><h3 id="proc/zap_act"><aside class="declaration">proc </aside>zap_act<aside>(power, zap_flags, shocked_targets) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L805">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 805"/></a></aside>
+        </h3>
+        <p>Respond to a electric bolt action on our item</p>
+<p>Default behaviour is to return, we define here to allow for cleaner code later on</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;structure&#x2F;glowshroom - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/structure/glowshroom.html#var">Var Details</a> - <a href="obj/structure/glowshroom.html#proc">Proc Details</a></header>
+<main>
+<h1>glowshroom <aside>/<a href="obj.html">obj</a>/<a href="obj/structure/glowshroom.html">structure/glowshroom</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 3"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/blacklisted_glowshroom_turfs">blacklisted_glowshroom_turfs</a></th><td>Turfs where the glowshroom cannot spread to</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/delay_decay">delay_decay</a></th><td>Time interval between glowshroom decay checks</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/delay_spread">delay_spread</a></th><td>Time interval between glowshroom &quot;spreads&quot;</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/floor">floor</a></th><td>Boolean to indicate if the shroom is on the floor/wall</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/generation">generation</a></th><td>Mushroom generation number</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/myseed">myseed</a></th><td>Internal seed of the glowshroom, stats are stored here</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#var/spreadIntoAdjacentChance">spreadIntoAdjacentChance</a></th><td>Chance to spread into adjacent tiles (0-100)</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#proc/Decay">Decay</a></th><td>Causes the glowshroom to decay by decreasing its endurance.</td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#proc/Initialize">Initialize</a></th><td></td></tr>
+            <tr><th><a href="obj/structure/glowshroom.html#proc/Spread">Spread</a></th><td>Causes glowshroom spreading across the floor/walls.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/blacklisted_glowshroom_turfs"><aside class="declaration">var </aside>blacklisted_glowshroom_turfs
+            <aside>&ndash; /static/list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 25"/></a></h3>
+        <p>Turfs where the glowshroom cannot spread to</p><h3 id="var/delay_decay"><aside class="declaration">var </aside>delay_decay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 15"/></a></h3>
+        <p>Time interval between glowshroom decay checks</p><h3 id="var/delay_spread"><aside class="declaration">var </aside>delay_spread
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 13"/></a></h3>
+        <p>Time interval between glowshroom &quot;spreads&quot;</p><h3 id="var/floor"><aside class="declaration">var </aside>floor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 17"/></a></h3>
+        <p>Boolean to indicate if the shroom is on the floor/wall</p><h3 id="var/generation"><aside class="declaration">var </aside>generation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 19"/></a></h3>
+        <p>Mushroom generation number</p><h3 id="var/myseed"><aside class="declaration">var </aside>myseed
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/seeds.html">seeds</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 23"/></a></h3>
+        <p>Internal seed of the glowshroom, stats are stored here</p><h3 id="var/spreadIntoAdjacentChance"><aside class="declaration">var </aside>spreadIntoAdjacentChance
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 21"/></a></h3>
+        <p>Chance to spread into adjacent tiles (0-100)</p><h2 id="proc">Proc Details</h2><h3 id="proc/Decay"><aside class="declaration">proc </aside>Decay<aside>(spread, amount) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L195">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 195"/></a></aside>
+        </h3>
+        <p>Causes the glowshroom to decay by decreasing its endurance.</p>
+<p>Arguments:</p>
+<ul>
+<li>spread - Boolean to indicate if the decay is due to spreading or natural decay.</li>
+<li>amount - Amount of endurance to be reduced due to spread decay.</li>
+</ul><h3 id="proc/Initialize"><aside class="parent"><a title="/atom" href="atom.html#proc/Initialize">&uarr;</a></aside>Initialize<aside>(mapload, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/seeds.html">seeds</a>/newseed, mutate_stats, spread) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 62"/></a></aside>
+        </h3>
+        <pre><code>Creates a new glowshroom structure.
+</code></pre>
+<p>Arguments:</p>
+<ul>
+<li>newseed - Seed of the shroom</li>
+<li>mutate_stats - If the plant needs to mutate their stats</li>
+<li>spread - If the plant is a result of spreading, reduce its stats</li>
+</ul><h3 id="proc/Spread"><aside class="declaration">proc </aside>Spread<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/effects/glowshroom.dm#L108">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;effects&#x2F;glowshroom.dm 108"/></a></aside>
+        </h3>
+        <p>Causes glowshroom spreading across the floor/walls.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;persistence - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/controller/subsystem/persistence.html#var">Var Details</a> - <a href="datum/controller/subsystem/persistence.html#proc">Proc Details</a></header>
+<main>
+<h1>persistence <aside>/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/persistence.html">persistence</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/_persistence.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;_persistence.dm 4"/></a></h1>
+
+<p>Persistence for cleanable debris.</p>
+<p>Stores recently played gamemodes, maps, etc.</p>
+<p>Secret satchel persistence - allows storing of items in underfloor satchels that's loaded later.</p>
+<p>Stores trophies in curator display cases</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/persistence.html#var/loaded_debris">loaded_debris</a></th><td>tracks if we already loaded debris. Unlike everything else, this can actually be a major problem if some badmin procs it twice.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/persistence.html#var/station_persistence_save_disabled">station_persistence_save_disabled</a></th><td>Marks if persistence save should be disabled</td></tr>
+            <tr><th><a href="datum/controller/subsystem/persistence.html#var/station_was_destroyed">station_was_destroyed</a></th><td>Marks if the station got horribly destroyed</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/persistence.html#proc/SaveMapDebris">SaveMapDebris</a></th><td>reverse it</td></tr>
+            <tr><th><a href="datum/controller/subsystem/persistence.html#proc/get_map_persistence_path">get_map_persistence_path</a></th><td>Gets the persistence path of the current map.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/loaded_debris"><aside class="declaration">var </aside>loaded_debris
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/cleanable_debris.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;cleanable_debris.dm 6"/></a></h3>
+        <p>tracks if we already loaded debris. Unlike everything else, this can actually be a major problem if some badmin procs it twice.</p><h3 id="var/station_persistence_save_disabled"><aside class="declaration">var </aside>station_persistence_save_disabled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/_persistence.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;_persistence.dm 12"/></a></h3>
+        <p>Marks if persistence save should be disabled</p><h3 id="var/station_was_destroyed"><aside class="declaration">var </aside>station_was_destroyed
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/_persistence.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;_persistence.dm 10"/></a></h3>
+        <p>Marks if the station got horribly destroyed</p><h2 id="proc">Proc Details</h2><h3 id="proc/SaveMapDebris"><aside class="declaration">proc </aside>SaveMapDebris<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/cleanable_debris.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;cleanable_debris.dm 86"/></a></aside>
+        </h3>
+        <p>reverse it</p><h3 id="proc/get_map_persistence_path"><aside class="declaration">proc </aside>get_map_persistence_path<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/persistence/_persistence.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;persistence&#x2F;_persistence.dm 37"/></a></aside>
+        </h3>
+        <p>Gets the persistence path of the current map.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

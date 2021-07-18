@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/_flags/do_after.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/_flags/do_after.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_DISALLOW_MOVING_ABSOLUTE_USER">DO_AFTER_DISALLOW_MOVING_ABSOLUTE_USER</a></th><td>Requires absolute stillness from the user</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_DISALLOW_MOVING_ABSOLUTE_TARGET">DO_AFTER_DISALLOW_MOVING_ABSOLUTE_TARGET</a></th><td>Requires absolute stillness from the target</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_REQUIRES_USER_ON_TURF">DO_AFTER_REQUIRES_USER_ON_TURF</a></th><td>Requires that the user is on a turf.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_DISALLOW_MOVING_RELATIVE">DO_AFTER_DISALLOW_MOVING_RELATIVE</a></th><td>Requires relative stillness to our target via dx and dy coordinate difference but only if both are spacedrifting. Specify DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY to say otherwise.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_DISALLOW_ACTIVE_ITEM_CHANGE">DO_AFTER_DISALLOW_ACTIVE_ITEM_CHANGE</a></th><td>Breaks if active hand item changes. Requires a tool be specified, otherwise defaults to active item</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_REQUIRE_FREE_HAND_OR_TOOL">DO_AFTER_REQUIRE_FREE_HAND_OR_TOOL</a></th><td>Breaks if the user has no free hands. If a tool is specified, allows that as well.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_NO_PROGRESSBAR">DO_AFTER_NO_PROGRESSBAR</a></th><td>Do not display progressbar.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_NO_COEFFICIENT">DO_AFTER_NO_COEFFICIENT</a></th><td>Do not check do_after_coefficient()</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY">DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY</a></th><td>For relative stillness, allow non spacedrift relative movement</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_PROCEED">DO_AFTER_PROCEED</a></th><td>Ignores checks.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_CONTINUE">DO_AFTER_CONTINUE</a></th><td>Uses all other checks</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_STOP">DO_AFTER_STOP</a></th><td>Breaks</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_STARTING">DO_AFTER_STARTING</a></th><td>Stage - initiating a do_after</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_PROGRESSING">DO_AFTER_PROGRESSING</a></th><td>Stage - main loop of a do_after</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/do_after.html#define/DO_AFTER_FINISHING">DO_AFTER_FINISHING</a></th><td>Stage - Last check of a do_after</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY"><aside class="declaration">#define </aside>DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 18"/></a>
+    </h3>
+    <p>For relative stillness, allow non spacedrift relative movement</p><h3 id="define/DO_AFTER_CONTINUE"><aside class="declaration">#define </aside>DO_AFTER_CONTINUE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 23"/></a>
+    </h3>
+    <p>Uses all other checks</p><h3 id="define/DO_AFTER_DISALLOW_ACTIVE_ITEM_CHANGE"><aside class="declaration">#define </aside>DO_AFTER_DISALLOW_ACTIVE_ITEM_CHANGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 10"/></a>
+    </h3>
+    <p>Breaks if active hand item changes. Requires a tool be specified, otherwise defaults to active item</p><h3 id="define/DO_AFTER_DISALLOW_MOVING_ABSOLUTE_TARGET"><aside class="declaration">#define </aside>DO_AFTER_DISALLOW_MOVING_ABSOLUTE_TARGET
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 4"/></a>
+    </h3>
+    <p>Requires absolute stillness from the target</p><h3 id="define/DO_AFTER_DISALLOW_MOVING_ABSOLUTE_USER"><aside class="declaration">#define </aside>DO_AFTER_DISALLOW_MOVING_ABSOLUTE_USER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 2"/></a>
+    </h3>
+    <p>Requires absolute stillness from the user</p><h3 id="define/DO_AFTER_DISALLOW_MOVING_RELATIVE"><aside class="declaration">#define </aside>DO_AFTER_DISALLOW_MOVING_RELATIVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 8"/></a>
+    </h3>
+    <p>Requires relative stillness to our target via dx and dy coordinate difference but only if both are spacedrifting. Specify DO_AFTER_ALLOW_NONSPACEDRIFT_RELATIVITY to say otherwise.</p><h3 id="define/DO_AFTER_FINISHING"><aside class="declaration">#define </aside>DO_AFTER_FINISHING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 32"/></a>
+    </h3>
+    <p>Stage - Last check of a do_after</p><h3 id="define/DO_AFTER_NO_COEFFICIENT"><aside class="declaration">#define </aside>DO_AFTER_NO_COEFFICIENT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 16"/></a>
+    </h3>
+    <p>Do not check do_after_coefficient()</p><h3 id="define/DO_AFTER_NO_PROGRESSBAR"><aside class="declaration">#define </aside>DO_AFTER_NO_PROGRESSBAR
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 14"/></a>
+    </h3>
+    <p>Do not display progressbar.</p><h3 id="define/DO_AFTER_PROCEED"><aside class="declaration">#define </aside>DO_AFTER_PROCEED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 21"/></a>
+    </h3>
+    <p>Ignores checks.</p><h3 id="define/DO_AFTER_PROGRESSING"><aside class="declaration">#define </aside>DO_AFTER_PROGRESSING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 30"/></a>
+    </h3>
+    <p>Stage - main loop of a do_after</p><h3 id="define/DO_AFTER_REQUIRES_USER_ON_TURF"><aside class="declaration">#define </aside>DO_AFTER_REQUIRES_USER_ON_TURF
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 6"/></a>
+    </h3>
+    <p>Requires that the user is on a turf.</p><h3 id="define/DO_AFTER_REQUIRE_FREE_HAND_OR_TOOL"><aside class="declaration">#define </aside>DO_AFTER_REQUIRE_FREE_HAND_OR_TOOL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 12"/></a>
+    </h3>
+    <p>Breaks if the user has no free hands. If a tool is specified, allows that as well.</p><h3 id="define/DO_AFTER_STARTING"><aside class="declaration">#define </aside>DO_AFTER_STARTING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 28"/></a>
+    </h3>
+    <p>Stage - initiating a do_after</p><h3 id="define/DO_AFTER_STOP"><aside class="declaration">#define </aside>DO_AFTER_STOP
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/do_after.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;do_after.dm 25"/></a>
+    </h3>
+    <p>Breaks</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

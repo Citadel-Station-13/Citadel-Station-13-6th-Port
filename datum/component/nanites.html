@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;component&#x2F;nanites - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/component/nanites.html#var">Var Details</a> - <a href="datum/component/nanites.html#proc">Proc Details</a></header>
+<main>
+<h1>nanites <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/nanites.html">nanites</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/can_be_deleted">can_be_deleted</a></th><td>Allow deletion</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_desync_mod">emp_desync_mod</a></th><td>EMP severity div for cloudsync reset chance</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_flat_deletion_lower">emp_flat_deletion_lower</a></th><td>EMP flat deletion lower</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_flat_deletion_upper">emp_flat_deletion_upper</a></th><td>EMP flat deletion upper</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_percent_deletion_lower">emp_percent_deletion_lower</a></th><td>EMP percent deletion lower</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_percent_deletion_upper">emp_percent_deletion_upper</a></th><td>EMP percent deletion upper</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/emp_severity_mod">emp_severity_mod</a></th><td>EMP severity multiplier, capping to 0 to 100</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/minor_shock_deletion_lower">minor_shock_deletion_lower</a></th><td>minor shock deletion lower</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/minor_shock_deletion_upper">minor_shock_deletion_upper</a></th><td>minor shock deletion upper</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/permanent_programs">permanent_programs</a></th><td>Permanent programs - can never be deleted. does not count towards max_programs.</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/qdel_self_on_depletion">qdel_self_on_depletion</a></th><td>Delete ourselves when we're depleted.</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/requires_cloud_sync">requires_cloud_sync</a></th><td>Whether or not we can survive no cloud syncing without errors</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/shock_flat_deletion_lower">shock_flat_deletion_lower</a></th><td>Shock flat deletion lower</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/shock_flat_deletion_upper">shock_flat_deletion_upper</a></th><td>Shock flat deletion upper</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/shock_percent_deletion_lower">shock_percent_deletion_lower</a></th><td>Shock percent deletion lower</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/shock_percent_deletion_upper">shock_percent_deletion_upper</a></th><td>Shock percent deletion upper</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/start_time">start_time</a></th><td>Separate list of protocol programs, to avoid looping through the whole programs list when checking for conflicts</td></tr>
+            <tr><th><a href="datum/component/nanites.html#var/stealth">stealth</a></th><td>Timestamp to when the nanites were first inserted in the host</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/add_permanent_program">add_permanent_program</a></th><td>Adds permanent programs</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/add_program">add_program</a></th><td>Adds a nanite program, replacing existing unique programs of the same type. A source program can be specified to copy its programming onto the new one.</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/adjust_nanites">adjust_nanites</a></th><td>Modifies the current nanite volume, then checks if the nanites are depleted or exceeding the maximum amount</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/check_console_locking">check_console_locking</a></th><td>Checks if we can block out console modification</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/check_host_lockout">check_host_lockout</a></th><td>Checks if we can lock out host internal conscious modification</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/check_viral_prevention">check_viral_prevention</a></th><td>Checks if we can block out viral replica</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/cloud_sync">cloud_sync</a></th><td>Syncs the nanites to their assigned cloud copy, if it is available. If it is not, there is a small chance of a software error instead.</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/delete_nanites">delete_nanites</a></th><td>Used to rid ourselves
+Deletes nanites!</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/nanites_depleted">nanites_depleted</a></th><td>Called when nanites are depleted.
+Deletes ourselves by default.</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/reject_excess_nanites">reject_excess_nanites</a></th><td></td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/set_nanite_bar">set_nanite_bar</a></th><td>Updates the nanite volume bar visible in diagnostic HUDs</td></tr>
+            <tr><th><a href="datum/component/nanites.html#proc/sync">sync</a></th><td>Syncs the nanite component to another, making it so programs are the same with the same programming (except activation status)</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/can_be_deleted"><aside class="declaration">var </aside>can_be_deleted
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 23"/></a></h3>
+        <p>Allow deletion</p><h3 id="var/emp_desync_mod"><aside class="declaration">var </aside>emp_desync_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 41"/></a></h3>
+        <p>EMP severity div for cloudsync reset chance</p><h3 id="var/emp_flat_deletion_lower"><aside class="declaration">var </aside>emp_flat_deletion_lower
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 33"/></a></h3>
+        <p>EMP flat deletion lower</p><h3 id="var/emp_flat_deletion_upper"><aside class="declaration">var </aside>emp_flat_deletion_upper
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 31"/></a></h3>
+        <p>EMP flat deletion upper</p><h3 id="var/emp_percent_deletion_lower"><aside class="declaration">var </aside>emp_percent_deletion_lower
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 37"/></a></h3>
+        <p>EMP percent deletion lower</p><h3 id="var/emp_percent_deletion_upper"><aside class="declaration">var </aside>emp_percent_deletion_upper
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 35"/></a></h3>
+        <p>EMP percent deletion upper</p><h3 id="var/emp_severity_mod"><aside class="declaration">var </aside>emp_severity_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 39"/></a></h3>
+        <p>EMP severity multiplier, capping to 0 to 100</p><h3 id="var/minor_shock_deletion_lower"><aside class="declaration">var </aside>minor_shock_deletion_lower
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 54"/></a></h3>
+        <p>minor shock deletion lower</p><h3 id="var/minor_shock_deletion_upper"><aside class="declaration">var </aside>minor_shock_deletion_upper
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 56"/></a></h3>
+        <p>minor shock deletion upper</p><h3 id="var/permanent_programs"><aside class="declaration">var </aside>permanent_programs
+            <aside>&ndash; /list/datum/nanite_program</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 27"/></a></h3>
+        <p>Permanent programs - can never be deleted. does not count towards max_programs.</p><h3 id="var/qdel_self_on_depletion"><aside class="declaration">var </aside>qdel_self_on_depletion
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 21"/></a></h3>
+        <p>Delete ourselves when we're depleted.</p><h3 id="var/requires_cloud_sync"><aside class="declaration">var </aside>requires_cloud_sync
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 25"/></a></h3>
+        <p>Whether or not we can survive no cloud syncing without errors</p><h3 id="var/shock_flat_deletion_lower"><aside class="declaration">var </aside>shock_flat_deletion_lower
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 46"/></a></h3>
+        <p>Shock flat deletion lower</p><h3 id="var/shock_flat_deletion_upper"><aside class="declaration">var </aside>shock_flat_deletion_upper
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 44"/></a></h3>
+        <p>Shock flat deletion upper</p><h3 id="var/shock_percent_deletion_lower"><aside class="declaration">var </aside>shock_percent_deletion_lower
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 50"/></a></h3>
+        <p>Shock percent deletion lower</p><h3 id="var/shock_percent_deletion_upper"><aside class="declaration">var </aside>shock_percent_deletion_upper
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 48"/></a></h3>
+        <p>Shock percent deletion upper</p><h3 id="var/start_time"><aside class="declaration">var </aside>start_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 16"/></a></h3>
+        <p>Separate list of protocol programs, to avoid looping through the whole programs list when checking for conflicts</p><h3 id="var/stealth"><aside class="declaration">var </aside>stealth
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 17"/></a></h3>
+        <p>Timestamp to when the nanites were first inserted in the host</p><h2 id="proc">Proc Details</h2><h3 id="proc/add_permanent_program"><aside class="declaration">proc </aside>add_permanent_program<aside>(/list/program, immutable) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L183">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 183"/></a></aside>
+        </h3>
+        <p>Adds permanent programs</p>
+<p>WARNING: Has no sanity checks. Make sure you know what you are doing! (make sure programs do not conflict)</p><h3 id="proc/add_program"><aside class="declaration">proc </aside>add_program<aside>(/<a href="datum.html">datum</a>/source, /<a href="datum.html">datum</a>/<a href="datum/nanite_program.html">nanite_program</a>/new_program, /<a href="datum.html">datum</a>/<a href="datum/nanite_program.html">nanite_program</a>/source_program) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L252">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 252"/></a></aside>
+        </h3>
+        <p>Adds a nanite program, replacing existing unique programs of the same type. A source program can be specified to copy its programming onto the new one.</p><h3 id="proc/adjust_nanites"><aside class="declaration">proc </aside>adjust_nanites<aside>(/<a href="datum.html">datum</a>/source, amount) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L275">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 275"/></a></aside>
+        </h3>
+        <p>Modifies the current nanite volume, then checks if the nanites are depleted or exceeding the maximum amount</p><h3 id="proc/check_console_locking"><aside class="declaration">proc </aside>check_console_locking<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L202">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 202"/></a></aside>
+        </h3>
+        <p>Checks if we can block out console modification</p><h3 id="proc/check_host_lockout"><aside class="declaration">proc </aside>check_host_lockout<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L208">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 208"/></a></aside>
+        </h3>
+        <p>Checks if we can lock out host internal conscious modification</p><h3 id="proc/check_viral_prevention"><aside class="declaration">proc </aside>check_viral_prevention<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L214">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 214"/></a></aside>
+        </h3>
+        <p>Checks if we can block out viral replica</p><h3 id="proc/cloud_sync"><aside class="declaration">proc </aside>cloud_sync<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L238">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 238"/></a></aside>
+        </h3>
+        <p>Syncs the nanites to their assigned cloud copy, if it is available. If it is not, there is a small chance of a software error instead.</p><h3 id="proc/delete_nanites"><aside class="declaration">proc </aside>delete_nanites<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L174">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 174"/></a></aside>
+        </h3>
+        <p>Used to rid ourselves
+Deletes nanites!</p><h3 id="proc/nanites_depleted"><aside class="declaration">proc </aside>nanites_depleted<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L166">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 166"/></a></aside>
+        </h3>
+        <p>Called when nanites are depleted.
+Deletes ourselves by default.</p><h3 id="proc/reject_excess_nanites"><aside class="declaration">proc </aside>reject_excess_nanites<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L293">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 293"/></a></aside>
+        </h3>
+        <pre><code>Handles how nanites leave the host's body if they find out that they're currently exceeding the maximum supported amount
+</code></pre>
+<p>IC explanation:
+Normally nanites simply discard excess volume by slowing replication or 'sweating' it out in imperceptible amounts,
+but if there is a large excess volume, likely due to a programming change that leaves them unable to support their current volume,
+the nanites attempt to leave the host as fast as necessary to prevent nanite poisoning. This can range from minor oozing to nanites
+rapidly bursting out from every possible pathway, causing temporary inconvenience to the host.</p><h3 id="proc/set_nanite_bar"><aside class="declaration">proc </aside>set_nanite_bar<aside>(remove) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L335">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 335"/></a></aside>
+        </h3>
+        <p>Updates the nanite volume bar visible in diagnostic HUDs</p><h3 id="proc/sync"><aside class="declaration">proc </aside>sync<aside>(/<a href="datum.html">datum</a>/signal_source, /<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/nanites.html">nanites</a>/source, full_overwrite, copy_activation) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/nanites.dm#L218">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;nanites.dm 218"/></a></aside>
+        </h3>
+        <p>Syncs the nanite component to another, making it so programs are the same with the same programming (except activation status)</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

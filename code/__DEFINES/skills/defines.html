@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/skills/defines.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/skills/defines.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_PROGRESSION_BINARY">SKILL_PROGRESSION_BINARY</a></th><td>true/false</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_PROGRESSION_NUMERICAL">SKILL_PROGRESSION_NUMERICAL</a></th><td>numerical</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_PROGRESSION_ENUM">SKILL_PROGRESSION_ENUM</a></th><td>Enum</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_PROGRESSION_LEVEL">SKILL_PROGRESSION_LEVEL</a></th><td>Levels</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_USE_TOOL">SKILL_USE_TOOL</a></th><td>Items skill_traits and other defines</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/THRESHOLD_UNTRAINED">THRESHOLD_UNTRAINED</a></th><td>competency_threshold  defines</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/STD_XP_LVL_UP">STD_XP_LVL_UP</a></th><td>Level/Experience skills defines.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_VALUE">MODIFIER_SKILL_VALUE</a></th><td>Skill modifier defines and flags.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_MULT">MODIFIER_SKILL_MULT</a></th><td>makes the skill modifier a multiplier, not an addendum.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_VIRTUE">MODIFIER_SKILL_VIRTUE</a></th><td>Sets the skill to the defined value if lower than that. Highly reccomended you don't use it with MODIFIER_SKILL_MULT.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_HANDICAP">MODIFIER_SKILL_HANDICAP</a></th><td>Does the opposite of the above. combining both effectively results in the skill being locked to the specified value.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_BODYBOUND">MODIFIER_SKILL_BODYBOUND</a></th><td>Makes it untransferred by mind.transfer_to()</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_ORIGIN_DIFF">MODIFIER_SKILL_ORIGIN_DIFF</a></th><td>Adds the difference of the current value and the value stored at the time the modifier was added to the result.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_USE_THRESHOLDS">MODIFIER_USE_THRESHOLDS</a></th><td>Will this skill use competency thresholds instead of preset values</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/MODIFIER_SKILL_PRIORITY_LOW">MODIFIER_SKILL_PRIORITY_LOW</a></th><td>Ascending priority defines.</td></tr>
+        <tr><th><a href="code/__DEFINES/skills/defines.html#define/SKILL_UI_CAT_ENG">SKILL_UI_CAT_ENG</a></th><td>Categories of skills, these will be displayed alphabetically.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/MODIFIER_SKILL_BODYBOUND"><aside class="declaration">#define </aside>MODIFIER_SKILL_BODYBOUND
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L90">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 90"/></a>
+    </h3>
+    <p>Makes it untransferred by mind.transfer_to()</p><h3 id="define/MODIFIER_SKILL_HANDICAP"><aside class="declaration">#define </aside>MODIFIER_SKILL_HANDICAP
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 88"/></a>
+    </h3>
+    <p>Does the opposite of the above. combining both effectively results in the skill being locked to the specified value.</p><h3 id="define/MODIFIER_SKILL_MULT"><aside class="declaration">#define </aside>MODIFIER_SKILL_MULT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 84"/></a>
+    </h3>
+    <p>makes the skill modifier a multiplier, not an addendum.</p><h3 id="define/MODIFIER_SKILL_ORIGIN_DIFF"><aside class="declaration">#define </aside>MODIFIER_SKILL_ORIGIN_DIFF
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 92"/></a>
+    </h3>
+    <p>Adds the difference of the current value and the value stored at the time the modifier was added to the result.</p><h3 id="define/MODIFIER_SKILL_PRIORITY_LOW"><aside class="declaration">#define </aside>MODIFIER_SKILL_PRIORITY_LOW
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L101">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 101"/></a>
+    </h3>
+    <p>Ascending priority defines.</p><h3 id="define/MODIFIER_SKILL_VALUE"><aside class="declaration">#define </aside>MODIFIER_SKILL_VALUE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 80"/></a>
+    </h3>
+    <p>Skill modifier defines and flags.</p><h3 id="define/MODIFIER_SKILL_VIRTUE"><aside class="declaration">#define </aside>MODIFIER_SKILL_VIRTUE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 86"/></a>
+    </h3>
+    <p>Sets the skill to the defined value if lower than that. Highly reccomended you don't use it with MODIFIER_SKILL_MULT.</p><h3 id="define/MODIFIER_USE_THRESHOLDS"><aside class="declaration">#define </aside>MODIFIER_USE_THRESHOLDS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 94"/></a>
+    </h3>
+    <p>Will this skill use competency thresholds instead of preset values</p><h3 id="define/SKILL_PROGRESSION_BINARY"><aside class="declaration">#define </aside>SKILL_PROGRESSION_BINARY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 3"/></a>
+    </h3>
+    <p>true/false</p><h3 id="define/SKILL_PROGRESSION_ENUM"><aside class="declaration">#define </aside>SKILL_PROGRESSION_ENUM
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 7"/></a>
+    </h3>
+    <p>Enum</p><h3 id="define/SKILL_PROGRESSION_LEVEL"><aside class="declaration">#define </aside>SKILL_PROGRESSION_LEVEL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 9"/></a>
+    </h3>
+    <p>Levels</p><h3 id="define/SKILL_PROGRESSION_NUMERICAL"><aside class="declaration">#define </aside>SKILL_PROGRESSION_NUMERICAL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 5"/></a>
+    </h3>
+    <p>numerical</p><h3 id="define/SKILL_UI_CAT_ENG"><aside class="declaration">#define </aside>SKILL_UI_CAT_ENG
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L107">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 107"/></a>
+    </h3>
+    <p>Categories of skills, these will be displayed alphabetically.</p><h3 id="define/SKILL_USE_TOOL"><aside class="declaration">#define </aside>SKILL_USE_TOOL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 35"/></a>
+    </h3>
+    <p>Items skill_traits and other defines</p><h3 id="define/STD_XP_LVL_UP"><aside class="declaration">#define </aside>STD_XP_LVL_UP
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 53"/></a>
+    </h3>
+    <p>Level/Experience skills defines.</p><h3 id="define/THRESHOLD_UNTRAINED"><aside class="declaration">#define </aside>THRESHOLD_UNTRAINED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/skills/defines.dm#L47">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;skills&#x2F;defines.dm 47"/></a>
+    </h3>
+    <p>competency_threshold  defines</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

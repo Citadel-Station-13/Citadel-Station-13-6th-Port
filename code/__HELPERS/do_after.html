@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__HELPERS&#x2F;do_after.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__HELPERS/do_after.html#define">Define Details</a></header>
+<main>
+<h1>code/__HELPERS/do_after.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/do_after.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;do_after.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__HELPERS/do_after.html#define/INVOKE_CALLBACK">INVOKE_CALLBACK</a></th><td>Higher overhead &quot;advanced&quot; version of do_after.
+@params</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/INVOKE_CALLBACK"><aside class="declaration">#define </aside>INVOKE_CALLBACK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/do_after.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;do_after.dm 19"/></a>
+    </h3>
+    <p>Higher overhead &quot;advanced&quot; version of do_after.
+@params</p>
+<ul>
+<li>atom/user is the atom doing the action or the &quot;physical&quot; user</li>
+<li>delay is time in deciseconds</li>
+<li>atom/target is the atom the action is being done to, defaults to user</li>
+<li>do_after_flags see __DEFINES/flags/do_after.dm for details.</li>
+<li>datum/callback/extra_checks - Every time this ticks, extra_checks() is invoked with (user, delay, target, time_left, do_after_flags, required_mobility_flags, required_combat_flags, mob_redirect, stage, initially_held_item, tool, passed_in).
+Stage can be DO_AFTER_STARTING, DO_AFTER_PROGRESSING, DO_AFTER_FINISHING
+If it returns DO_AFTER_STOP, this breaks.
+If it returns nothing, all other checks are done.
+If it returns DO_AFTER_PROCEED, all other checks are ignored.
+passed_in is a list[PROGRESS_MULTIPLIER], for modification.</li>
+<li>required_mobility_flags is checked with CHECK_ALL_MOBILITY. Will immediately fail if the user isn't a mob.</li>
+<li>requried_combat_flags is checked with CHECK_MULTIPLE_BITFIELDS. Will immediately fail if the user isn't a mob.</li>
+<li>mob/living/mob_redirect - advanced option: If this is specified, movement and mobility/combat flag checks will use this instead of user. Progressbars will also go to this.</li>
+<li>obj/item/tool - The tool we're using. See do_after flags for details.</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

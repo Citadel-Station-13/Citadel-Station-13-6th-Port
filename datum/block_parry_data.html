@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;block_parry_data - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/block_parry_data.html#var">Var Details</a> - <a href="datum/block_parry_data.html#proc">Proc Details</a></header>
+<main>
+<h1>block_parry_data <aside>/<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 21"/></a></h1>
+
+<p>Carries data like list data that would be a waste of memory if we initialized the list on every /item as we can cache datums easier.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_cooldown_absolute">autoparry_cooldown_absolute</a></th><td>Hard autoparry cooldown</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_mouse_delay_maximum">autoparry_mouse_delay_maximum</a></th><td>ADVANCED - Autoparry requirement for time since last moused over for a specific object</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_sequence_simulation">autoparry_sequence_simulation</a></th><td>Autoparry : Simulate a parry sequence starting at a certain tick, or simply simulate a single attack parry?</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_sequence_start_time">autoparry_sequence_start_time</a></th><td>Decisecond of sequence to start on. -1 to start to 0th tick of active parry window.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_single_efficiency">autoparry_single_efficiency</a></th><td>Single attack autoparry - efficiency</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/autoparry_single_efficiency_override">autoparry_single_efficiency_override</a></th><td>Single attack autoparry - efficiency overrides by attack type, see above</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_active_priority">block_active_priority</a></th><td>The priority we get in <a href="mob.html" title="/mob">mob/do_run_block()</a> while we're being used to parry.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_automatic_directions">block_automatic_directions</a></th><td>Directions that you can autoblock in. Null to default to normal directions.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_automatic_enabled">block_automatic_enabled</a></th><td>Can this item automatically block?</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_automatic_mitigation_multiplier">block_automatic_mitigation_multiplier</a></th><td>Effectiveness multiplier for automated block. Only applies to efficiency, absorption and limits stay the same!</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_automatic_stamina_multiplier">block_automatic_stamina_multiplier</a></th><td>Stamina cost multiplier for automated block</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_absorption">block_damage_absorption</a></th><td>Amount of &quot;free&quot; damage blocking absorbs</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_absorption_override">block_damage_absorption_override</a></th><td>Override absorption, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_absorption]</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_limit">block_damage_limit</a></th><td>Upper bound of damage block, anything above this will go right through.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_limit_override">block_damage_limit_override</a></th><td>Override upper bound of damage block, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_limit]</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_multiplier">block_damage_multiplier</a></th><td>Ratio of damage to allow through above absorption and below limit. Multiplied by damage to determine how much to let through. Lower is better.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_damage_multiplier_override">block_damage_multiplier_override</a></th><td>Override damage overrun efficiency, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_efficiency]</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_end_click_cd_add">block_end_click_cd_add</a></th><td>Clickdelay added to user after block ends</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_lock_attacking">block_lock_attacking</a></th><td>Disallow attacking during block</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_lock_sprinting">block_lock_sprinting</a></th><td>Disallow sprinting during block</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_no_stambuffer_regeneration">block_no_stambuffer_regeneration</a></th><td>Prevent stamina buffer regeneration while block?</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_no_stamina_regeneration">block_no_stamina_regeneration</a></th><td>Prevent stamina regeneration while block?</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_projectile_mitigation">block_projectile_mitigation</a></th><td>The blocked variable of on_hit() on projectiles is impacted by this. Higher is better, 0 to 100, percentage.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_resting_attack_types_anydir">block_resting_attack_types_anydir</a></th><td>Bitfield for attack types that we can block while down. This will work in any direction.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_resting_attack_types_directional">block_resting_attack_types_directional</a></th><td>Bitfield for attack types that we can block while down but only in our normal directions.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_resting_stamina_penalty_multiplier">block_resting_stamina_penalty_multiplier</a></th><td>Multiplier to stamina damage taken for attacks blocked while downed.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_resting_stamina_penalty_multiplier_override">block_resting_stamina_penalty_multiplier_override</a></th><td>Override list for multiplier to stamina damage taken for attacks blocked while down. list(&quot;[ATTACK_TYPE_DEFINE]&quot; = multiplier_number)</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_slowdown">block_slowdown</a></th><td>Our slowdown added while blocking</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_sounds">block_sounds</a></th><td>Sounds for blocking</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_stamina_buffer_ratio">block_stamina_buffer_ratio</a></th><td>Ratio of stamina incurred by chest (so after [block_stamina_limb_ratio] runs) that is buffered.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_stamina_cost_per_second">block_stamina_cost_per_second</a></th><td>Stamina dealt directly via UseStaminaBuffer() per SECOND of block.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_stamina_efficiency">block_stamina_efficiency</a></th><td>Default damage-to-stamina coefficient, higher is better. This is based on amount of damage BLOCKED, not initial damage, to prevent damage from &quot;double dipping&quot;.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_stamina_efficiency_override">block_stamina_efficiency_override</a></th><td>Override damage-to-stamina coefficient, see [block_efficiency], this should be list(&quot;[ATTACK_TYPE_DEFINE]&quot; = coefficient_number)</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_stamina_limb_ratio">block_stamina_limb_ratio</a></th><td>Ratio of stamina incurred by blocking that goes to the arm holding the object instead of the chest. Has no effect if this is not held in hand.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/block_start_delay">block_start_delay</a></th><td>Windup before we have our blocking active.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/can_block_attack_types">can_block_attack_types</a></th><td>Attacks we can block</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/can_block_directions">can_block_directions</a></th><td>//////// BLOCKING ////////////
+NOTE: FOR ATTACK_TYPE_DEFINE, you MUST wrap it in &quot;[DEFINE_HERE]&quot;! The defines are bitflags, and therefore, NUMBERS!
+See defines. Point of reference is someone facing north.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_allow_repeated_counterattacks">parry_allow_repeated_counterattacks</a></th><td>Allow multiple counterattacks per parry sequence. Bad idea.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_attack_types">parry_attack_types</a></th><td>Attack types we can block</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_automatic_enabled">parry_automatic_enabled</a></th><td>Can this data automatically parry? This is off by default because this is something that requires thought to balance.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_cooldown">parry_cooldown</a></th><td>Parrying cooldown, separate of clickdelay. It must be this much deciseconds since their last parry for them to parry with this object.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_data">parry_data</a></th><td>Parry effect data.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_effect_icon_state">parry_effect_icon_state</a></th><td>Visual icon state override for parrying</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_efficiency_considered_successful">parry_efficiency_considered_successful</a></th><td>Efficiency must be at least this to be considered successful</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_efficiency_perfect">parry_efficiency_perfect</a></th><td>Efficiency in percent on perfect parry.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_efficiency_perfect_override">parry_efficiency_perfect_override</a></th><td>Override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = perecntage) for perfect efficiency.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_efficiency_to_counterattack">parry_efficiency_to_counterattack</a></th><td>Efficiency must be at least this to run automatic counterattack</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_failed_clickcd_duration">parry_failed_clickcd_duration</a></th><td>Clickdelay duration post-parry if you fail to parry an attack</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_failed_cooldown_duration">parry_failed_cooldown_duration</a></th><td>Parry cooldown post-parry if failed. This is ADDED to parry_cooldown!!!</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_failed_stagger_duration">parry_failed_stagger_duration</a></th><td>Stagger duration post-parry if you fail to parry an attack</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_flags">parry_flags</a></th><td>Parry flags</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_imperfect_falloff_percent">parry_imperfect_falloff_percent</a></th><td>Parry &quot;efficiency&quot; falloff in percent per decisecond once perfect window is over.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_imperfect_falloff_percent_override">parry_imperfect_falloff_percent_override</a></th><td>[parry_imperfect_falloff_percent] override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = deciseconds)</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_max_attacks">parry_max_attacks</a></th><td>Maximum attacks to parry successfully or unsuccessfully (but not efficiency &lt; 0) during active period, hitting this immediately ends the sequence.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_respect_clickdelay">parry_respect_clickdelay</a></th><td>//////// PARRYING ////////////
+Priority for <a href="mob.html" title="/mob">mob/do_run_block()</a> while we're being used to parry.
+Parry doesn't work if you aren't able to otherwise attack due to clickdelay</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_sounds">parry_sounds</a></th><td>Sounds for parrying</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_stamina_cost">parry_stamina_cost</a></th><td>Parry stamina cost</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_start_sound">parry_start_sound</a></th><td>Parry start sound</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_active">parry_time_active</a></th><td>Main parry window in deciseconds. This is between [parry_time_windup] and [parry_time_spindown]</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_active_visual_override">parry_time_active_visual_override</a></th><td>If set, overrides visual duration of active period</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_perfect">parry_time_perfect</a></th><td>Perfect parry window in deciseconds from the start of the main window. 3 with main 5 = perfect on third decisecond of main window.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_perfect_leeway">parry_time_perfect_leeway</a></th><td>Time on both sides of perfect parry that still counts as part of the perfect window.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_perfect_leeway_override">parry_time_perfect_leeway_override</a></th><td>[parry_time_perfect_leeway] override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = deciseconds)</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_spindown">parry_time_spindown</a></th><td>Parry spindown duration in deciseconds. main stage end to this is the spindown stage, afterwards the parry fully ends.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_spindown_visual_override">parry_time_spindown_visual_override</a></th><td>If set, overrides visual duration of spindown</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_windup">parry_time_windup</a></th><td>Parry windup duration in deciseconds. 0 to this is windup, afterwards is main stage.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/parry_time_windup_visual_override">parry_time_windup_visual_override</a></th><td>If set, overrides visual duration of windup</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/perfect_parry_block_return_flags">perfect_parry_block_return_flags</a></th><td>Flags added to return value</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#var/perfect_parry_block_return_list">perfect_parry_block_return_list</a></th><td>List appended to block return</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/block_parry_data.html#proc/attack_type_list_scan">attack_type_list_scan</a></th><td>Quirky proc to get average of flags in list that are in attack_type because why is attack_type a flag.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#proc/get_parry_efficiency">get_parry_efficiency</a></th><td>Gets the percentage efficiency of our parry.</td></tr>
+            <tr><th><a href="datum/block_parry_data.html#proc/render_html_readout">render_html_readout</a></th><td>Generates a HTML render of this datum for self-documentation
+Maybe make this tgui-next someday haha god this is ugly as sin.
+Does NOT include the popout or title or anything. Just the variables and explanations..</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/autoparry_cooldown_absolute"><aside class="declaration">var </aside>autoparry_cooldown_absolute
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L188">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 188"/></a></h3>
+        <p>Hard autoparry cooldown</p><h3 id="var/autoparry_mouse_delay_maximum"><aside class="declaration">var </aside>autoparry_mouse_delay_maximum
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L202">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 202"/></a></h3>
+        <p>ADVANCED - Autoparry requirement for time since last moused over for a specific object</p><h3 id="var/autoparry_sequence_simulation"><aside class="declaration">var </aside>autoparry_sequence_simulation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L190">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 190"/></a></h3>
+        <p>Autoparry : Simulate a parry sequence starting at a certain tick, or simply simulate a single attack parry?</p><h3 id="var/autoparry_sequence_start_time"><aside class="declaration">var </aside>autoparry_sequence_start_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L198">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 198"/></a></h3>
+        <p>Decisecond of sequence to start on. -1 to start to 0th tick of active parry window.</p><h3 id="var/autoparry_single_efficiency"><aside class="declaration">var </aside>autoparry_single_efficiency
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L193">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 193"/></a></h3>
+        <p>Single attack autoparry - efficiency</p><h3 id="var/autoparry_single_efficiency_override"><aside class="declaration">var </aside>autoparry_single_efficiency_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L195">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 195"/></a></h3>
+        <p>Single attack autoparry - efficiency overrides by attack type, see above</p><h3 id="var/block_active_priority"><aside class="declaration">var </aside>block_active_priority
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 39"/></a></h3>
+        <p>The priority we get in <a href="mob.html" title="/mob">mob/do_run_block()</a> while we're being used to parry.</p><h3 id="var/block_automatic_directions"><aside class="declaration">var </aside>block_automatic_directions
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L101">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 101"/></a></h3>
+        <p>Directions that you can autoblock in. Null to default to normal directions.</p><h3 id="var/block_automatic_enabled"><aside class="declaration">var </aside>block_automatic_enabled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L99">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 99"/></a></h3>
+        <p>Can this item automatically block?</p><h3 id="var/block_automatic_mitigation_multiplier"><aside class="declaration">var </aside>block_automatic_mitigation_multiplier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 103"/></a></h3>
+        <p>Effectiveness multiplier for automated block. Only applies to efficiency, absorption and limits stay the same!</p><h3 id="var/block_automatic_stamina_multiplier"><aside class="declaration">var </aside>block_automatic_stamina_multiplier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L105">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 105"/></a></h3>
+        <p>Stamina cost multiplier for automated block</p><h3 id="var/block_damage_absorption"><aside class="declaration">var </aside>block_damage_absorption
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 44"/></a></h3>
+        <p>Amount of &quot;free&quot; damage blocking absorbs</p><h3 id="var/block_damage_absorption_override"><aside class="declaration">var </aside>block_damage_absorption_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 46"/></a></h3>
+        <p>Override absorption, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_absorption]</p><h3 id="var/block_damage_limit"><aside class="declaration">var </aside>block_damage_limit
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 54"/></a></h3>
+        <p>Upper bound of damage block, anything above this will go right through.</p><h3 id="var/block_damage_limit_override"><aside class="declaration">var </aside>block_damage_limit_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 56"/></a></h3>
+        <p>Override upper bound of damage block, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_limit]</p><h3 id="var/block_damage_multiplier"><aside class="declaration">var </aside>block_damage_multiplier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 49"/></a></h3>
+        <p>Ratio of damage to allow through above absorption and below limit. Multiplied by damage to determine how much to let through. Lower is better.</p><h3 id="var/block_damage_multiplier_override"><aside class="declaration">var </aside>block_damage_multiplier_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 51"/></a></h3>
+        <p>Override damage overrun efficiency, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = absorption), see [block_damage_efficiency]</p><h3 id="var/block_end_click_cd_add"><aside class="declaration">var </aside>block_end_click_cd_add
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 33"/></a></h3>
+        <p>Clickdelay added to user after block ends</p><h3 id="var/block_lock_attacking"><aside class="declaration">var </aside>block_lock_attacking
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 35"/></a></h3>
+        <p>Disallow attacking during block</p><h3 id="var/block_lock_sprinting"><aside class="declaration">var </aside>block_lock_sprinting
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 37"/></a></h3>
+        <p>Disallow sprinting during block</p><h3 id="var/block_no_stambuffer_regeneration"><aside class="declaration">var </aside>block_no_stambuffer_regeneration
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 80"/></a></h3>
+        <p>Prevent stamina buffer regeneration while block?</p><h3 id="var/block_no_stamina_regeneration"><aside class="declaration">var </aside>block_no_stamina_regeneration
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 82"/></a></h3>
+        <p>Prevent stamina regeneration while block?</p><h3 id="var/block_projectile_mitigation"><aside class="declaration">var </aside>block_projectile_mitigation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 59"/></a></h3>
+        <p>The blocked variable of on_hit() on projectiles is impacted by this. Higher is better, 0 to 100, percentage.</p><h3 id="var/block_resting_attack_types_anydir"><aside class="declaration">var </aside>block_resting_attack_types_anydir
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L85">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 85"/></a></h3>
+        <p>Bitfield for attack types that we can block while down. This will work in any direction.</p><h3 id="var/block_resting_attack_types_directional"><aside class="declaration">var </aside>block_resting_attack_types_directional
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L87">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 87"/></a></h3>
+        <p>Bitfield for attack types that we can block while down but only in our normal directions.</p><h3 id="var/block_resting_stamina_penalty_multiplier"><aside class="declaration">var </aside>block_resting_stamina_penalty_multiplier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L89">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 89"/></a></h3>
+        <p>Multiplier to stamina damage taken for attacks blocked while downed.</p><h3 id="var/block_resting_stamina_penalty_multiplier_override"><aside class="declaration">var </aside>block_resting_stamina_penalty_multiplier_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L91">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 91"/></a></h3>
+        <p>Override list for multiplier to stamina damage taken for attacks blocked while down. list(&quot;[ATTACK_TYPE_DEFINE]&quot; = multiplier_number)</p><h3 id="var/block_slowdown"><aside class="declaration">var </aside>block_slowdown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 31"/></a></h3>
+        <p>Our slowdown added while blocking</p><h3 id="var/block_sounds"><aside class="declaration">var </aside>block_sounds
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 94"/></a></h3>
+        <p>Sounds for blocking</p><h3 id="var/block_stamina_buffer_ratio"><aside class="declaration">var </aside>block_stamina_buffer_ratio
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 75"/></a></h3>
+        <p>Ratio of stamina incurred by chest (so after [block_stamina_limb_ratio] runs) that is buffered.</p><h3 id="var/block_stamina_cost_per_second"><aside class="declaration">var </aside>block_stamina_cost_per_second
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 78"/></a></h3>
+        <p>Stamina dealt directly via UseStaminaBuffer() per SECOND of block.</p><h3 id="var/block_stamina_efficiency"><aside class="declaration">var </aside>block_stamina_efficiency
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L69">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 69"/></a></h3>
+        <p>Default damage-to-stamina coefficient, higher is better. This is based on amount of damage BLOCKED, not initial damage, to prevent damage from &quot;double dipping&quot;.</p><h3 id="var/block_stamina_efficiency_override"><aside class="declaration">var </aside>block_stamina_efficiency_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 71"/></a></h3>
+        <p>Override damage-to-stamina coefficient, see [block_efficiency], this should be list(&quot;[ATTACK_TYPE_DEFINE]&quot; = coefficient_number)</p><h3 id="var/block_stamina_limb_ratio"><aside class="declaration">var </aside>block_stamina_limb_ratio
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L73">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 73"/></a></h3>
+        <p>Ratio of stamina incurred by blocking that goes to the arm holding the object instead of the chest. Has no effect if this is not held in hand.</p><h3 id="var/block_start_delay"><aside class="declaration">var </aside>block_start_delay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 41"/></a></h3>
+        <p>Windup before we have our blocking active.</p><h3 id="var/can_block_attack_types"><aside class="declaration">var </aside>can_block_attack_types
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 29"/></a></h3>
+        <p>Attacks we can block</p><h3 id="var/can_block_directions"><aside class="declaration">var </aside>can_block_directions
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 27"/></a></h3>
+        <p>//////// BLOCKING ////////////
+NOTE: FOR ATTACK_TYPE_DEFINE, you MUST wrap it in &quot;[DEFINE_HERE]&quot;! The defines are bitflags, and therefore, NUMBERS!
+See defines. Point of reference is someone facing north.</p><h3 id="var/parry_allow_repeated_counterattacks"><aside class="declaration">var </aside>parry_allow_repeated_counterattacks
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L181">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 181"/></a></h3>
+        <p>Allow multiple counterattacks per parry sequence. Bad idea.</p><h3 id="var/parry_attack_types"><aside class="declaration">var </aside>parry_attack_types
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L115">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 115"/></a></h3>
+        <p>Attack types we can block</p><h3 id="var/parry_automatic_enabled"><aside class="declaration">var </aside>parry_automatic_enabled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L186">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 186"/></a></h3>
+        <p>Can this data automatically parry? This is off by default because this is something that requires thought to balance.</p><h3 id="var/parry_cooldown"><aside class="declaration">var </aside>parry_cooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L159">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 159"/></a></h3>
+        <p>Parrying cooldown, separate of clickdelay. It must be this much deciseconds since their last parry for them to parry with this object.</p><h3 id="var/parry_data"><aside class="declaration">var </aside>parry_data
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L147">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 147"/></a></h3>
+        <p>Parry effect data.</p><h3 id="var/parry_effect_icon_state"><aside class="declaration">var </aside>parry_effect_icon_state
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L157">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 157"/></a></h3>
+        <p>Visual icon state override for parrying</p><h3 id="var/parry_efficiency_considered_successful"><aside class="declaration">var </aside>parry_efficiency_considered_successful
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 151"/></a></h3>
+        <p>Efficiency must be at least this to be considered successful</p><h3 id="var/parry_efficiency_perfect"><aside class="declaration">var </aside>parry_efficiency_perfect
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L143">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 143"/></a></h3>
+        <p>Efficiency in percent on perfect parry.</p><h3 id="var/parry_efficiency_perfect_override"><aside class="declaration">var </aside>parry_efficiency_perfect_override
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 145"/></a></h3>
+        <p>Override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = perecntage) for perfect efficiency.</p><h3 id="var/parry_efficiency_to_counterattack"><aside class="declaration">var </aside>parry_efficiency_to_counterattack
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L153">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 153"/></a></h3>
+        <p>Efficiency must be at least this to run automatic counterattack</p><h3 id="var/parry_failed_clickcd_duration"><aside class="declaration">var </aside>parry_failed_clickcd_duration
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L167">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 167"/></a></h3>
+        <p>Clickdelay duration post-parry if you fail to parry an attack</p><h3 id="var/parry_failed_cooldown_duration"><aside class="declaration">var </aside>parry_failed_cooldown_duration
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 169"/></a></h3>
+        <p>Parry cooldown post-parry if failed. This is ADDED to parry_cooldown!!!</p><h3 id="var/parry_failed_stagger_duration"><aside class="declaration">var </aside>parry_failed_stagger_duration
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L165">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 165"/></a></h3>
+        <p>Stagger duration post-parry if you fail to parry an attack</p><h3 id="var/parry_flags"><aside class="declaration">var </aside>parry_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L117">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 117"/></a></h3>
+        <p>Parry flags</p><h3 id="var/parry_imperfect_falloff_percent"><aside class="declaration">var </aside>parry_imperfect_falloff_percent
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 139"/></a></h3>
+        <p>Parry &quot;efficiency&quot; falloff in percent per decisecond once perfect window is over.</p><h3 id="var/parry_imperfect_falloff_percent_override"><aside class="declaration">var </aside>parry_imperfect_falloff_percent_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L141">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 141"/></a></h3>
+        <p>[parry_imperfect_falloff_percent] override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = deciseconds)</p><h3 id="var/parry_max_attacks"><aside class="declaration">var </aside>parry_max_attacks
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 155"/></a></h3>
+        <p>Maximum attacks to parry successfully or unsuccessfully (but not efficiency &lt; 0) during active period, hitting this immediately ends the sequence.</p><h3 id="var/parry_respect_clickdelay"><aside class="declaration">var </aside>parry_respect_clickdelay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L111">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 111"/></a></h3>
+        <p>//////// PARRYING ////////////
+Priority for <a href="mob.html" title="/mob">mob/do_run_block()</a> while we're being used to parry.
+Parry doesn't work if you aren't able to otherwise attack due to clickdelay</p><h3 id="var/parry_sounds"><aside class="declaration">var </aside>parry_sounds
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L163">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 163"/></a></h3>
+        <p>Sounds for parrying</p><h3 id="var/parry_stamina_cost"><aside class="declaration">var </aside>parry_stamina_cost
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L113">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 113"/></a></h3>
+        <p>Parry stamina cost</p><h3 id="var/parry_start_sound"><aside class="declaration">var </aside>parry_start_sound
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L161">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 161"/></a></h3>
+        <p>Parry start sound</p><h3 id="var/parry_time_active"><aside class="declaration">var </aside>parry_time_active
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L124">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 124"/></a></h3>
+        <p>Main parry window in deciseconds. This is between [parry_time_windup] and [parry_time_spindown]</p><h3 id="var/parry_time_active_visual_override"><aside class="declaration">var </aside>parry_time_active_visual_override
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L129">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 129"/></a></h3>
+        <p>If set, overrides visual duration of active period</p><h3 id="var/parry_time_perfect"><aside class="declaration">var </aside>parry_time_perfect
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L133">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 133"/></a></h3>
+        <p>Perfect parry window in deciseconds from the start of the main window. 3 with main 5 = perfect on third decisecond of main window.</p><h3 id="var/parry_time_perfect_leeway"><aside class="declaration">var </aside>parry_time_perfect_leeway
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L135">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 135"/></a></h3>
+        <p>Time on both sides of perfect parry that still counts as part of the perfect window.</p><h3 id="var/parry_time_perfect_leeway_override"><aside class="declaration">var </aside>parry_time_perfect_leeway_override
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L137">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 137"/></a></h3>
+        <p>[parry_time_perfect_leeway] override for attack types, list(&quot;[ATTACK_TYPE_DEFINE]&quot; = deciseconds)</p><h3 id="var/parry_time_spindown"><aside class="declaration">var </aside>parry_time_spindown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L122">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 122"/></a></h3>
+        <p>Parry spindown duration in deciseconds. main stage end to this is the spindown stage, afterwards the parry fully ends.</p><h3 id="var/parry_time_spindown_visual_override"><aside class="declaration">var </aside>parry_time_spindown_visual_override
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L131">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 131"/></a></h3>
+        <p>If set, overrides visual duration of spindown</p><h3 id="var/parry_time_windup"><aside class="declaration">var </aside>parry_time_windup
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L120">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 120"/></a></h3>
+        <p>Parry windup duration in deciseconds. 0 to this is windup, afterwards is main stage.</p><h3 id="var/parry_time_windup_visual_override"><aside class="declaration">var </aside>parry_time_windup_visual_override
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L127">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 127"/></a></h3>
+        <p>If set, overrides visual duration of windup</p><h3 id="var/perfect_parry_block_return_flags"><aside class="declaration">var </aside>perfect_parry_block_return_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 173"/></a></h3>
+        <p>Flags added to return value</p><h3 id="var/perfect_parry_block_return_list"><aside class="declaration">var </aside>perfect_parry_block_return_list
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 177"/></a></h3>
+        <p>List appended to block return</p><h2 id="proc">Proc Details</h2><h3 id="proc/attack_type_list_scan"><aside class="declaration">proc </aside>attack_type_list_scan<aside>(/list/L, attack_type) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L207">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 207"/></a></aside>
+        </h3>
+        <p>Quirky proc to get average of flags in list that are in attack_type because why is attack_type a flag.</p><h3 id="proc/get_parry_efficiency"><aside class="declaration">proc </aside>get_parry_efficiency<aside>(attack_type, parry_time) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L229">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 229"/></a></aside>
+        </h3>
+        <p>Gets the percentage efficiency of our parry.</p>
+<p>Returns a percentage in normal 0 to 100 scale, but not clamped to just 0 to 100.
+This is a proc to allow for overriding.
+@params</p>
+<ul>
+<li>attack_type - int, bitfield of the attack type(s)</li>
+<li>parry_time - deciseconds since start of the parry.</li>
+</ul><h3 id="proc/render_html_readout"><aside class="declaration">proc </aside>render_html_readout<aside>(block_data, parry_data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L289">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 289"/></a></aside>
+        </h3>
+        <p>Generates a HTML render of this datum for self-documentation
+Maybe make this tgui-next someday haha god this is ugly as sin.
+Does NOT include the popout or title or anything. Just the variables and explanations..</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

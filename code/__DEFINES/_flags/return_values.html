@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/_flags/return_values.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/_flags/return_values.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/STOP_ATTACK_PROC_CHAIN">STOP_ATTACK_PROC_CHAIN</a></th><td>//////// ATTACKCHAIN_FLAGS ////////////
+Stop the attack chain if still in melee_attack_chain()</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/DISCARD_LAST_ACTION">DISCARD_LAST_ACTION</a></th><td>This attack should discard last_action instead of flushing (storing) it). You should probably know what you're doing if you use this considering this is how clickdelay is enforced.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/NO_AUTO_CLICKDELAY_HANDLING">NO_AUTO_CLICKDELAY_HANDLING</a></th><td>There are a number of &quot;safety nets&quot; intended to default-handle clickdelay. Return this flag to bypass ALL of them. Be sure
+you know EXACTLY what you are doing!</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/INTERRUPT_UNARMED_ATTACK">INTERRUPT_UNARMED_ATTACK</a></th><td>Only used with UnarmedAttack(). Interrupts unarmed attack from progressing.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/ATTACK_IGNORE_ACTION">ATTACK_IGNORE_ACTION</a></th><td>Attack should not set next action even if the atom wants it to be an action</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/ATTACK_IGNORE_CLICKDELAY">ATTACK_IGNORE_CLICKDELAY</a></th><td>Attack should not at all check last_action/attack_hand_speed even if the atom wants to</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/ATTACK_IS_PARRY_COUNTERATTACK">ATTACK_IS_PARRY_COUNTERATTACK</a></th><td>This attack is from a parry counterattack</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/return_values.html#define/ITEM_RELOCATED_BY_DROPPED">ITEM_RELOCATED_BY_DROPPED</a></th><td>dropped() relocated this item, return FALSE for doUnEquip.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/ATTACK_IGNORE_ACTION"><aside class="declaration">#define </aside>ATTACK_IGNORE_ACTION
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 14"/></a>
+    </h3>
+    <p>Attack should not set next action even if the atom wants it to be an action</p><h3 id="define/ATTACK_IGNORE_CLICKDELAY"><aside class="declaration">#define </aside>ATTACK_IGNORE_CLICKDELAY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 16"/></a>
+    </h3>
+    <p>Attack should not at all check last_action/attack_hand_speed even if the atom wants to</p><h3 id="define/ATTACK_IS_PARRY_COUNTERATTACK"><aside class="declaration">#define </aside>ATTACK_IS_PARRY_COUNTERATTACK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 18"/></a>
+    </h3>
+    <p>This attack is from a parry counterattack</p><h3 id="define/DISCARD_LAST_ACTION"><aside class="declaration">#define </aside>DISCARD_LAST_ACTION
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 7"/></a>
+    </h3>
+    <p>This attack should discard last_action instead of flushing (storing) it). You should probably know what you're doing if you use this considering this is how clickdelay is enforced.</p><h3 id="define/INTERRUPT_UNARMED_ATTACK"><aside class="declaration">#define </aside>INTERRUPT_UNARMED_ATTACK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 12"/></a>
+    </h3>
+    <p>Only used with UnarmedAttack(). Interrupts unarmed attack from progressing.</p><h3 id="define/ITEM_RELOCATED_BY_DROPPED"><aside class="declaration">#define </aside>ITEM_RELOCATED_BY_DROPPED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 22"/></a>
+    </h3>
+    <p>dropped() relocated this item, return FALSE for doUnEquip.</p><h3 id="define/NO_AUTO_CLICKDELAY_HANDLING"><aside class="declaration">#define </aside>NO_AUTO_CLICKDELAY_HANDLING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 10"/></a>
+    </h3>
+    <p>There are a number of &quot;safety nets&quot; intended to default-handle clickdelay. Return this flag to bypass ALL of them. Be sure
+you know EXACTLY what you are doing!</p><h3 id="define/STOP_ATTACK_PROC_CHAIN"><aside class="declaration">#define </aside>STOP_ATTACK_PROC_CHAIN
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/return_values.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;return_values.dm 5"/></a>
+    </h3>
+    <p>//////// ATTACKCHAIN_FLAGS ////////////
+Stop the attack chain if still in melee_attack_chain()</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

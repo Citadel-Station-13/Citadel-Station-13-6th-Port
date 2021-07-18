@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;mob&#x2F;living - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="mob/living.html#var">Var Details</a> - <a href="mob/living.html#proc">Proc Details</a></header>
+<main>
+<h1>living <aside>/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/soullink.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;soullink.dm 3"/></a></h1>
+
+<p>Mob Living</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="mob/living.html#var/active_block_item">active_block_item</a></th><td>The item the user is actively blocking with if any.</td></tr>
+            <tr><th><a href="mob/living.html#var/active_parry_item">active_parry_item</a></th><td>The itme the user is currently parrying with, if any.</td></tr>
+            <tr><th><a href="mob/living.html#var/block_parry_data">block_parry_data</a></th><td>Our block_parry_data for unarmed blocks/parries. Currently only used for parrying, as unarmed block isn't implemented yet. YOU MUST RUN [get_block_parry_data(this)] INSTEAD OF DIRECTLY ACCESSING!</td></tr>
+            <tr><th><a href="mob/living.html#var/buckle_message_cooldown">buckle_message_cooldown</a></th><td>Next world.time when we can get the &quot;you can't move while buckled to [thing]&quot; message.</td></tr>
+            <tr><th><a href="mob/living.html#var/combat_flags">combat_flags</a></th><td>/ CITADEL STATION COMBAT ////
+See __DEFINES/combat.dm</td></tr>
+            <tr><th><a href="mob/living.html#var/combatmessagecooldown">combatmessagecooldown</a></th><td>Next world.time when we will show a visible message on entering combat mode voluntarily again.</td></tr>
+            <tr><th><a href="mob/living.html#var/default_block_parry_data">default_block_parry_data</a></th><td>Default</td></tr>
+            <tr><th><a href="mob/living.html#var/last_autoparry">last_autoparry</a></th><td>Last autoparry</td></tr>
+            <tr><th><a href="mob/living.html#var/next_preyloop">next_preyloop</a></th><td>Next time vore sounds get played for the prey, do not change manually as it is intended to be set automatically</td></tr>
+            <tr><th><a href="mob/living.html#var/parry_end_time_last">parry_end_time_last</a></th><td>world.time of last parry end</td></tr>
+            <tr><th><a href="mob/living.html#var/parry_start_time">parry_start_time</a></th><td>world.time of parry action start</td></tr>
+            <tr><th><a href="mob/living.html#var/parry_visual_effect">parry_visual_effect</a></th><td>Current parry effect.</td></tr>
+            <tr><th><a href="mob/living.html#var/parrying">parrying</a></th><td>Whether or not the user is in the middle of an active parry. Set to <a href="code/__DEFINES/combat/block_parry.html#define/UNARMED_PARRY" title="UNARMED_PARRY">UNARMED_PARRY</a>, [ITEM_PARRY], [MARTIAL_PARRY] if parrying.</td></tr>
+            <tr><th><a href="mob/living.html#var/pugilist_block_parry_data">pugilist_block_parry_data</a></th><td>If we're a pugilist</td></tr>
+            <tr><th><a href="mob/living.html#var/stamina_buffer">stamina_buffer</a></th><td>Our stamina buffer</td></tr>
+            <tr><th><a href="mob/living.html#var/stamina_buffer_last_use">stamina_buffer_last_use</a></th><td>Last time we used stamina buffer</td></tr>
+            <tr><th><a href="mob/living.html#var/stamina_buffer_regen_last">stamina_buffer_regen_last</a></th><td>Last time stamina buffer regen was done</td></tr>
+            <tr><th><a href="mob/living.html#var/stamina_buffer_regen_mod">stamina_buffer_regen_mod</a></th><td>Stamina buffer regen modifier</td></tr>
+            <tr><th><a href="mob/living.html#var/successful_parries">successful_parries</a></th><td>Successful parries within the current parry cycle. It's a list of efficiency percentages.</td></tr>
+            <tr><th><a href="mob/living.html#var/successful_parry_counterattacks">successful_parry_counterattacks</a></th><td>Current parry counterattacks. Makes sure we can only counterattack someone once per parry.</td></tr>
+            <tr><th><a href="mob/living.html#var/vore_organs">vore_organs</a></th><td>List of vore containers inside a mob</td></tr>
+            <tr><th><a href="mob/living.html#var/vore_selected">vore_selected</a></th><td>Default to no vore capability.</td></tr>
+            <tr><th><a href="mob/living.html#var/vore_smell">vore_smell</a></th><td>What the character smells like</td></tr>
+            <tr><th><a href="mob/living.html#var/vore_taste">vore_taste</a></th><td>What the character tastes like</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="mob/living.html#proc/BiologicalLife">BiologicalLife</a></th><td>Handles biological life processes like chemical metabolism, breathing, etc
+Returns TRUE or FALSE based on if we were interrupted. This is used by overridden variants to check if they should stop.</td></tr>
+            <tr><th><a href="mob/living.html#proc/HealAllImmobilityUpTo">HealAllImmobilityUpTo</a></th><td>Makes sure all 5 of the non-knockout immobilizing status effects are lower or equal to amount.</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsDazed">IsDazed</a></th><td>DAZED</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsFrozen">IsFrozen</a></th><td>FROZEN</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsImmobilized">IsImmobilized</a></th><td>IMMOBILIZED</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsKnockdown">IsKnockdown</a></th><td>KNOCKDOWN</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsParalyzed">IsParalyzed</a></th><td>PARALYZED</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsSleeping">IsSleeping</a></th><td>SLEEPING</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsStaggered">IsStaggered</a></th><td>STAGGERED</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsStun">IsStun</a></th><td>STUN</td></tr>
+            <tr><th><a href="mob/living.html#proc/IsUnconscious">IsUnconscious</a></th><td>UNCONSCIOUS</td></tr>
+            <tr><th><a href="mob/living.html#proc/Life">Life</a></th><td>Called by SSmobs at an interval of 2 seconds.
+Splits off into PhysicalLife() and BiologicalLife(). Override those instead of this.</td></tr>
+            <tr><th><a href="mob/living.html#proc/PhysicalLife">PhysicalLife</a></th><td>Handles physical life processes like being on fire. Don't ask why this is considered &quot;Life&quot;.
+Returns TRUE or FALSE based on if we were interrupted. This is used by overridden variants to check if they should stop.</td></tr>
+            <tr><th><a href="mob/living.html#proc/RechargeStaminaBuffer">RechargeStaminaBuffer</a></th><td>Boosts our stamina buffer by this much.</td></tr>
+            <tr><th><a href="mob/living.html#proc/ShoveOffBalance">ShoveOffBalance</a></th><td>OFF BALANCE/SHOVIES</td></tr>
+            <tr><th><a href="mob/living.html#proc/UpdateStaminaBuffer">UpdateStaminaBuffer</a></th><td>Updates our stamina buffer amount.</td></tr>
+            <tr><th><a href="mob/living.html#proc/UseStaminaBuffer">UseStaminaBuffer</a></th><td>Attempts to use an amount of stamina from our stamina buffer.
+Does not use anything if we don't have enough.</td></tr>
+            <tr><th><a href="mob/living.html#proc/active_block_effect_end">active_block_effect_end</a></th><td>Visual effect cleanup for starting a directional block</td></tr>
+            <tr><th><a href="mob/living.html#proc/active_block_effect_start">active_block_effect_start</a></th><td>Visual effect setup for starting a directional block</td></tr>
+            <tr><th><a href="mob/living.html#proc/active_parry_reflex_counter">active_parry_reflex_counter</a></th><td>Called when an attack is parried and block_parra_data indicates to use a proc to handle counterattack.</td></tr>
+            <tr><th><a href="mob/living.html#proc/add_movespeed_mod_immunities">add_movespeed_mod_immunities</a></th><td>Ignores specific slowdowns. Accepts a list of slowdowns.</td></tr>
+            <tr><th><a href="mob/living.html#proc/add_quirk">add_quirk</a></th><td>DISABILITIES</td></tr>
+            <tr><th><a href="mob/living.html#proc/add_stun_absorption">add_stun_absorption</a></th><td>STUN ABSORPTION</td></tr>
+            <tr><th><a href="mob/living.html#proc/apply_damage">apply_damage</a></th><td>Applies damage to this mob</td></tr>
+            <tr><th><a href="mob/living.html#proc/attempt_auto_parry">attempt_auto_parry</a></th><td>Attempts to automatically parry an attacker.</td></tr>
+            <tr><th><a href="mob/living.html#proc/bleedDragAmount">bleedDragAmount</a></th><td>Returns how much blood we're losing from being dragged a tile, from [mob/living/proc/makeTrail]</td></tr>
+            <tr><th><a href="mob/living.html#proc/can_move_under_living">can_move_under_living</a></th><td>whether or not we can slide under another living mob. defaults to if we're not dense. CanPass should check &quot;overriding circumstances&quot; like buckled mobs/having PASSMOB flag, etc.</td></tr>
+            <tr><th><a href="mob/living.html#proc/check_unarmed_parry_activation_special">check_unarmed_parry_activation_special</a></th><td>Check if we can unarmed parry</td></tr>
+            <tr><th><a href="mob/living.html#proc/cure_blind">cure_blind</a></th><td>TRAIT PROCS</td></tr>
+            <tr><th><a href="mob/living.html#proc/determine_parry_method">determine_parry_method</a></th><td>Massive snowflake proc for getting something to parry with.</td></tr>
+            <tr><th><a href="mob/living.html#proc/do_resist">do_resist</a></th><td>The actual proc for resisting. Return TRUE to give CLICK_CD_RESIST clickdelay.</td></tr>
+            <tr><th><a href="mob/living.html#proc/do_run_block">do_run_block</a></th><td></td></tr>
+            <tr><th><a href="mob/living.html#proc/electrocute_act">electrocute_act</a></th><td>As the name suggests, this should be called to apply electric shocks.</td></tr>
+            <tr><th><a href="mob/living.html#proc/end_parry_sequence">end_parry_sequence</a></th><td>Called via timer when the parry sequence ends.</td></tr>
+            <tr><th><a href="mob/living.html#proc/find_active_block_item">find_active_block_item</a></th><td>Gets the first item we can that can block, but if that fails, default to active held item.COMSIG_ENABLE_COMBAT_MODE</td></tr>
+            <tr><th><a href="mob/living.html#proc/find_backup_parry_item">find_backup_parry_item</a></th><td>Tries to find a backup parry item.
+Does not look at active held item.</td></tr>
+            <tr><th><a href="mob/living.html#proc/get_blocking_items">get_blocking_items</a></th><td>Gets an unsortedlist of objects to run block checks on. List must have associative values for priorities!</td></tr>
+            <tr><th><a href="mob/living.html#proc/get_equipped_items">get_equipped_items</a></th><td>Used to return a list of equipped items on a mob; does not include held items (use get_all_gear)</td></tr>
+            <tr><th><a href="mob/living.html#proc/get_parry_data">get_parry_data</a></th><td>Gets the datum/block_parry_data we're going to use to parry.</td></tr>
+            <tr><th><a href="mob/living.html#proc/get_parry_stage">get_parry_stage</a></th><td>Gets the stage of our parry sequence we're currently in.</td></tr>
+            <tr><th><a href="mob/living.html#proc/get_parry_time">get_parry_time</a></th><td>Gets the current decisecond &quot;frame&quot; of an active parry.</td></tr>
+            <tr><th><a href="mob/living.html#proc/handle_block_parry">handle_block_parry</a></th><td>Called every life tick to handle blocking/parrying effects.</td></tr>
+            <tr><th><a href="mob/living.html#proc/handle_parry_ending_effects">handle_parry_ending_effects</a></th><td>Handles ending effects for parrying.</td></tr>
+            <tr><th><a href="mob/living.html#proc/handle_parry_starting_effects">handle_parry_starting_effects</a></th><td>Handles starting effects for parrying.</td></tr>
+            <tr><th><a href="mob/living.html#proc/hasparasites">hasparasites</a></th><td>parasite tracking/finding procs</td></tr>
+            <tr><th><a href="mob/living.html#proc/hud_set_nanite_indicator">hud_set_nanite_indicator</a></th><td>Diagnostic HUDs!</td></tr>
+            <tr><th><a href="mob/living.html#proc/ignore_slowdown">ignore_slowdown</a></th><td>Ignores all slowdowns that lack the IGNORE_NOSLOW flag.</td></tr>
+            <tr><th><a href="mob/living.html#proc/initiate_parry_sequence">initiate_parry_sequence</a></th><td>Initiates a parrying sequence.</td></tr>
+            <tr><th><a href="mob/living.html#proc/keybind_parry">keybind_parry</a></th><td>Called from keybindings.</td></tr>
+            <tr><th><a href="mob/living.html#proc/keybind_start_active_blocking">keybind_start_active_blocking</a></th><td>Proc called by keybindings to start active blocking.</td></tr>
+            <tr><th><a href="mob/living.html#proc/keybind_stop_active_blocking">keybind_stop_active_blocking</a></th><td>Proc called by keybindings to stop active blocking.</td></tr>
+            <tr><th><a href="mob/living.html#proc/keybind_toggle_active_blocking">keybind_toggle_active_blocking</a></th><td>Proc called by keybindings to toggle active blocking.</td></tr>
+            <tr><th><a href="mob/living.html#proc/remove_movespeed_mod_immunities">remove_movespeed_mod_immunities</a></th><td>Unignores specific slowdowns. Accepts a list of slowdowns.</td></tr>
+            <tr><th><a href="mob/living.html#proc/resist">resist</a></th><td>Resist verb for attempting to get out of whatever is restraining your motion. Gives you resist clickdelay if do_resist() returns true.</td></tr>
+            <tr><th><a href="mob/living.html#proc/run_parry">run_parry</a></th><td>same return values as normal blocking, called with absolute highest priority in the block &quot;chain&quot;.</td></tr>
+            <tr><th><a href="mob/living.html#proc/run_parry_countereffects">run_parry_countereffects</a></th><td>Run counterattack if any</td></tr>
+            <tr><th><a href="mob/living.html#proc/shared_living_ui_distance">shared_living_ui_distance</a></th><td>public</td></tr>
+            <tr><th><a href="mob/living.html#proc/subtle">subtle</a></th><td>VERB CODE</td></tr>
+            <tr><th><a href="mob/living.html#proc/subtler">subtler</a></th><td>VERB CODE 2</td></tr>
+            <tr><th><a href="mob/living.html#proc/subtler_table">subtler_table</a></th><td>VERB CODE 3</td></tr>
+            <tr><th><a href="mob/living.html#proc/transfer_blood_to">transfer_blood_to</a></th><td>BLOOD TRANSFERS</td></tr>
+            <tr><th><a href="mob/living.html#proc/unignore_slowdown">unignore_slowdown</a></th><td>Unignores all slowdowns that lack the IGNORE_NOSLOW flag.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/active_block_item"><aside class="declaration">var </aside>active_block_item
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 41"/></a></h3>
+        <p>The item the user is actively blocking with if any.</p><h3 id="var/active_parry_item"><aside class="declaration">var </aside>active_parry_item
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 46"/></a></h3>
+        <p>The itme the user is currently parrying with, if any.</p><h3 id="var/block_parry_data"><aside class="declaration">var </aside>block_parry_data
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 34"/></a></h3>
+        <p>Our block_parry_data for unarmed blocks/parries. Currently only used for parrying, as unarmed block isn't implemented yet. YOU MUST RUN [get_block_parry_data(this)] INSTEAD OF DIRECTLY ACCESSING!</p><h3 id="var/buckle_message_cooldown"><aside class="declaration">var </aside>buckle_message_cooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 151"/></a></h3>
+        <p>Next world.time when we can get the &quot;you can't move while buckled to [thing]&quot; message.</p><h3 id="var/combat_flags"><aside class="declaration">var </aside>combat_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 155"/></a></h3>
+        <p>/ CITADEL STATION COMBAT ////
+See __DEFINES/combat.dm</p><h3 id="var/combatmessagecooldown"><aside class="declaration">var </aside>combatmessagecooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L157">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 157"/></a></h3>
+        <p>Next world.time when we will show a visible message on entering combat mode voluntarily again.</p><h3 id="var/default_block_parry_data"><aside class="declaration">var </aside>default_block_parry_data
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 36"/></a></h3>
+        <p>Default</p><h3 id="var/last_autoparry"><aside class="declaration">var </aside>last_autoparry
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 54"/></a></h3>
+        <p>Last autoparry</p><h3 id="var/next_preyloop"><aside class="declaration">var </aside>next_preyloop
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/living.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;living.dm 20"/></a></h3>
+        <p>Next time vore sounds get played for the prey, do not change manually as it is intended to be set automatically</p><h3 id="var/parry_end_time_last"><aside class="declaration">var </aside>parry_end_time_last
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 52"/></a></h3>
+        <p>world.time of last parry end</p><h3 id="var/parry_start_time"><aside class="declaration">var </aside>parry_start_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 48"/></a></h3>
+        <p>world.time of parry action start</p><h3 id="var/parry_visual_effect"><aside class="declaration">var </aside>parry_visual_effect
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/effect/abstract/parry.html">effect/abstract/parry</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 50"/></a></h3>
+        <p>Current parry effect.</p><h3 id="var/parrying"><aside class="declaration">var </aside>parrying
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 44"/></a></h3>
+        <p>Whether or not the user is in the middle of an active parry. Set to <a href="code/__DEFINES/combat/block_parry.html#define/UNARMED_PARRY" title="UNARMED_PARRY">UNARMED_PARRY</a>, [ITEM_PARRY], [MARTIAL_PARRY] if parrying.</p><h3 id="var/pugilist_block_parry_data"><aside class="declaration">var </aside>pugilist_block_parry_data
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 38"/></a></h3>
+        <p>If we're a pugilist</p><h3 id="var/stamina_buffer"><aside class="declaration">var </aside>stamina_buffer
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L171">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 171"/></a></h3>
+        <p>Our stamina buffer</p><h3 id="var/stamina_buffer_last_use"><aside class="declaration">var </aside>stamina_buffer_last_use
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 177"/></a></h3>
+        <p>Last time we used stamina buffer</p><h3 id="var/stamina_buffer_regen_last"><aside class="declaration">var </aside>stamina_buffer_regen_last
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L175">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 175"/></a></h3>
+        <p>Last time stamina buffer regen was done</p><h3 id="var/stamina_buffer_regen_mod"><aside class="declaration">var </aside>stamina_buffer_regen_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 173"/></a></h3>
+        <p>Stamina buffer regen modifier</p><h3 id="var/successful_parries"><aside class="declaration">var </aside>successful_parries
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 56"/></a></h3>
+        <p>Successful parries within the current parry cycle. It's a list of efficiency percentages.</p><h3 id="var/successful_parry_counterattacks"><aside class="declaration">var </aside>successful_parry_counterattacks
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defines.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 58"/></a></h3>
+        <p>Current parry counterattacks. Makes sure we can only counterattack someone once per parry.</p><h3 id="var/vore_organs"><aside class="declaration">var </aside>vore_organs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/living.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;living.dm 9"/></a></h3>
+        <p>List of vore containers inside a mob</p><h3 id="var/vore_selected"><aside class="declaration">var </aside>vore_selected
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/belly.html">belly</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/living.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;living.dm 7"/></a></h3>
+        <p>Default to no vore capability.</p><h3 id="var/vore_smell"><aside class="declaration">var </aside>vore_smell
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/living.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;living.dm 13"/></a></h3>
+        <p>What the character smells like</p><h3 id="var/vore_taste"><aside class="declaration">var </aside>vore_taste
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/vore/eating/living.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;vore&#x2F;eating&#x2F;living.dm 11"/></a></h3>
+        <p>What the character tastes like</p><h2 id="proc">Proc Details</h2><h3 id="proc/BiologicalLife"><aside class="declaration">proc </aside>BiologicalLife<aside>(seconds, times_fired) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/life.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;life.dm 45"/></a></aside>
+        </h3>
+        <p>Handles biological life processes like chemical metabolism, breathing, etc
+Returns TRUE or FALSE based on if we were interrupted. This is used by overridden variants to check if they should stop.</p><h3 id="proc/HealAllImmobilityUpTo"><aside class="declaration">proc </aside>HealAllImmobilityUpTo<aside>(amount, updating, ignore_canstun) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L393">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 393"/></a></aside>
+        </h3>
+        <p>Makes sure all 5 of the non-knockout immobilizing status effects are lower or equal to amount.</p><h3 id="proc/IsDazed"><aside class="declaration">proc </aside>IsDazed<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L250">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 250"/></a></aside>
+        </h3>
+        <p>DAZED</p><h3 id="proc/IsFrozen"><aside class="declaration">proc </aside>IsFrozen<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L516">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 516"/></a></aside>
+        </h3>
+        <p>FROZEN</p><h3 id="proc/IsImmobilized"><aside class="declaration">proc </aside>IsImmobilized<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L138">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 138"/></a></aside>
+        </h3>
+        <p>IMMOBILIZED</p><h3 id="proc/IsKnockdown"><aside class="declaration">proc </aside>IsKnockdown<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 82"/></a></aside>
+        </h3>
+        <p>KNOCKDOWN</p><h3 id="proc/IsParalyzed"><aside class="declaration">proc </aside>IsParalyzed<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L194">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 194"/></a></aside>
+        </h3>
+        <p>PARALYZED</p><h3 id="proc/IsSleeping"><aside class="declaration">proc </aside>IsSleeping<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L460">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 460"/></a></aside>
+        </h3>
+        <p>SLEEPING</p><h3 id="proc/IsStaggered"><aside class="declaration">proc </aside>IsStaggered<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L306">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 306"/></a></aside>
+        </h3>
+        <p>STAGGERED</p><h3 id="proc/IsStun"><aside class="declaration">proc </aside>IsStun<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 25"/></a></aside>
+        </h3>
+        <p>STUN</p><h3 id="proc/IsUnconscious"><aside class="declaration">proc </aside>IsUnconscious<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L413">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 413"/></a></aside>
+        </h3>
+        <p>UNCONSCIOUS</p><h3 id="proc/Life"><aside class="declaration">proc </aside>Life<aside>(seconds, times_fired) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/life.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;life.dm 5"/></a></aside>
+        </h3>
+        <p>Called by SSmobs at an interval of 2 seconds.
+Splits off into PhysicalLife() and BiologicalLife(). Override those instead of this.</p><h3 id="proc/PhysicalLife"><aside class="declaration">proc </aside>PhysicalLife<aside>(seconds, times_fired) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/life.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;life.dm 81"/></a></aside>
+        </h3>
+        <p>Handles physical life processes like being on fire. Don't ask why this is considered &quot;Life&quot;.
+Returns TRUE or FALSE based on if we were interrupted. This is used by overridden variants to check if they should stop.</p><h3 id="proc/RechargeStaminaBuffer"><aside class="declaration">proc </aside>RechargeStaminaBuffer<aside>(amount) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/stamina_buffer.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;stamina_buffer.dm 53"/></a></aside>
+        </h3>
+        <p>Boosts our stamina buffer by this much.</p><h3 id="proc/ShoveOffBalance"><aside class="declaration">proc </aside>ShoveOffBalance<aside>(amount) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L506">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 506"/></a></aside>
+        </h3>
+        <p>OFF BALANCE/SHOVIES</p><h3 id="proc/UpdateStaminaBuffer"><aside class="declaration">proc </aside>UpdateStaminaBuffer<aside>(updating_hud) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/stamina_buffer.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;stamina_buffer.dm 27"/></a></aside>
+        </h3>
+        <p>Updates our stamina buffer amount.</p><h3 id="proc/UseStaminaBuffer"><aside class="declaration">proc </aside>UseStaminaBuffer<aside>(amount, warn, considered_action) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/stamina_buffer.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;stamina_buffer.dm 7"/></a></aside>
+        </h3>
+        <p>Attempts to use an amount of stamina from our stamina buffer.
+Does not use anything if we don't have enough.</p>
+<p>Returns TRUE or FALSE based on if we have it.</p><h3 id="proc/active_block_effect_end"><aside class="declaration">proc </aside>active_block_effect_end<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 46"/></a></aside>
+        </h3>
+        <p>Visual effect cleanup for starting a directional block</p><h3 id="proc/active_block_effect_start"><aside class="declaration">proc </aside>active_block_effect_start<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 41"/></a></aside>
+        </h3>
+        <p>Visual effect setup for starting a directional block</p><h3 id="proc/active_parry_reflex_counter"><aside class="declaration">proc </aside>active_parry_reflex_counter<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/owner, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list, parry_efficiency, /list/effect_text) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L218">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 218"/></a></aside>
+        </h3>
+        <p>Called when an attack is parried and block_parra_data indicates to use a proc to handle counterattack.</p><h3 id="proc/add_movespeed_mod_immunities"><aside class="declaration">proc </aside>add_movespeed_mod_immunities<aside>(source, slowdown_type, update) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L648">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 648"/></a></aside>
+        </h3>
+        <p>Ignores specific slowdowns. Accepts a list of slowdowns.</p><h3 id="proc/add_quirk"><aside class="declaration">proc </aside>add_quirk<aside>(quirktype, spawn_effects) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L557">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 557"/></a></aside>
+        </h3>
+        <p>DISABILITIES</p><h3 id="proc/add_stun_absorption"><aside class="declaration">proc </aside>add_stun_absorption<aside>(key, duration, priority, message, self_message, examine_message) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L521">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 521"/></a></aside>
+        </h3>
+        <p>STUN ABSORPTION</p><h3 id="proc/apply_damage"><aside class="declaration">proc </aside>apply_damage<aside>(damage, damagetype, def_zone, blocked, forced, spread_damage, wound_bonus, bare_wound_bonus, sharpness) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/damage_procs.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;damage_procs.dm 17"/></a></aside>
+        </h3>
+        <p>Applies damage to this mob</p>
+<p>Sends [COMSIG_MOB_APPLY_DAMAGE]</p>
+<p>Arguuments:</p>
+<ul>
+<li>damage - amount of damage</li>
+<li>damagetype - one of [BRUTE], [BURN], [TOX], [OXY], [CLONE], [STAMINA]</li>
+<li>def_zone - zone that is being hit if any</li>
+<li>blocked - armor value applied</li>
+<li>forced - bypass hit percentage</li>
+<li>spread_damage - used in overrides</li>
+</ul>
+<p>Returns TRUE if damage applied</p><h3 id="proc/attempt_auto_parry"><aside class="declaration">proc </aside>attempt_auto_parry<aside>(/<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L228">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 228"/></a></aside>
+        </h3>
+        <p>Attempts to automatically parry an attacker.</p><h3 id="proc/bleedDragAmount"><aside class="declaration">proc </aside>bleedDragAmount<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living.dm#L704">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living.dm 704"/></a></aside>
+        </h3>
+        <p>Returns how much blood we're losing from being dragged a tile, from [mob/living/proc/makeTrail]</p><h3 id="proc/can_move_under_living"><aside class="declaration">proc </aside>can_move_under_living<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/other) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_movement.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_movement.dm 54"/></a></aside>
+        </h3>
+        <p>whether or not we can slide under another living mob. defaults to if we're not dense. CanPass should check &quot;overriding circumstances&quot; like buckled mobs/having PASSMOB flag, etc.</p><h3 id="proc/check_unarmed_parry_activation_special"><aside class="declaration">proc </aside>check_unarmed_parry_activation_special<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L133">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 133"/></a></aside>
+        </h3>
+        <p>Check if we can unarmed parry</p><h3 id="proc/cure_blind"><aside class="declaration">proc </aside>cure_blind<aside>(source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L582">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 582"/></a></aside>
+        </h3>
+        <p>TRAIT PROCS</p><h3 id="proc/determine_parry_method"><aside class="declaration">proc </aside>determine_parry_method<aside>(silent, autoparry) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 68"/></a></aside>
+        </h3>
+        <p>Massive snowflake proc for getting something to parry with.</p>
+<p>@return list of [method, data, tool], where method is the parry method define, data is the block_parry_data var that must be run through return_block_parry_data, and tool is the concept/object/martial art/etc used.</p><h3 id="proc/do_resist"><aside class="declaration">proc </aside>do_resist<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living.dm#L766">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living.dm 766"/></a></aside>
+        </h3>
+        <p>The actual proc for resisting. Return TRUE to give CLICK_CD_RESIST clickdelay.</p><h3 id="proc/do_run_block"><aside class="declaration">proc </aside>do_run_block<aside>(real_attack, /<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list, attack_direction) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 19"/></a></aside>
+        </h3>
+        <ul>
+<li>The actual proc for block checks. DO NOT USE THIS DIRECTLY UNLESS YOU HAVE VERY GOOD REASON TO. To reduce copypaste for differences between handling for real attacks and virtual checks.
+<ul>
+<li>Automatically checks all held items for /obj/item/proc/run_block() with the same parameters.</li>
+<li>@params</li>
+<li>real_attack - If this attack is real. This one is quirky; If it's real, run_block is called. If it's not, check_block is called and none of the regular checks happen, and this is effectively only useful</li>
+<li>
+<pre><code>for populating return_list with blocking metadata.
+</code></pre>
+</li>
+<li>object - Whatever /atom is actually hitting us, in essence. For example, projectile if gun, item if melee, structure/whatever if it's a thrown, etc.</li>
+<li>damage - The nominal damage this would do if it was to hit. Obviously doesn't take into effect explosions/magic/similar things.. unless you implement it to raise the value.</li>
+<li>attack_text - The text that this attack should show, in the context of something like &quot;[src] blocks [attack_text]!&quot;</li>
+<li>attack_type - See __DEFINES/combat.dm - Attack types, to distinguish between, for example, someone throwing an item at us vs bashing us with it.</li>
+<li>armour_penetration - 0-100 value of how effectively armor penetrating the attack should be.</li>
+<li>attacker - Set to the mob attacking IF KNOWN. Do not expect this to always be set!</li>
+<li>def_zone - The zone this'll impact.</li>
+<li>return_list - If something wants to grab things from what items/whatever put into list/block_return on obj/item/run_block and the comsig, pass in a list so you can grab anything put in it after block runs.</li>
+<li>attack_direction - Direction of the attack. It is highly recommended to put this in, as the automatic guesswork that's done otherwise is quite inaccurate at times.</li>
+</ul>
+</li>
+</ul><h3 id="proc/electrocute_act"><aside class="declaration">proc </aside>electrocute_act<aside>(shock_damage, source, siemens_coeff, flags) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_defense.dm#L454">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defense.dm 454"/></a></aside>
+        </h3>
+        <p>As the name suggests, this should be called to apply electric shocks.</p><h3 id="proc/end_parry_sequence"><aside class="declaration">proc </aside>end_parry_sequence<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 139"/></a></aside>
+        </h3>
+        <p>Called via timer when the parry sequence ends.</p><h3 id="proc/find_active_block_item"><aside class="declaration">proc </aside>find_active_block_item<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L116">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 116"/></a></aside>
+        </h3>
+        <p>Gets the first item we can that can block, but if that fails, default to active held item.COMSIG_ENABLE_COMBAT_MODE</p><h3 id="proc/find_backup_parry_item"><aside class="declaration">proc </aside>find_backup_parry_item<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L125">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 125"/></a></aside>
+        </h3>
+        <p>Tries to find a backup parry item.
+Does not look at active held item.</p><h3 id="proc/get_blocking_items"><aside class="declaration">proc </aside>get_blocking_items<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 61"/></a></aside>
+        </h3>
+        <p>Gets an unsortedlist of objects to run block checks on. List must have associative values for priorities!</p><h3 id="proc/get_equipped_items"><aside class="declaration">proc </aside>get_equipped_items<aside>(include_pockets) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/inventory.dm#L401">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;inventory.dm 401"/></a></aside>
+        </h3>
+        <p>Used to return a list of equipped items on a mob; does not include held items (use get_all_gear)</p>
+<p>Argument(s):</p>
+<ul>
+<li>Optional - include_pockets (TRUE/FALSE), whether or not to include the pockets and suit storage in the returned list</li>
+</ul><h3 id="proc/get_parry_data"><aside class="declaration">proc </aside>get_parry_data<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L459">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 459"/></a></aside>
+        </h3>
+        <p>Gets the datum/block_parry_data we're going to use to parry.</p><h3 id="proc/get_parry_stage"><aside class="declaration">proc </aside>get_parry_stage<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L316">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 316"/></a></aside>
+        </h3>
+        <p>Gets the stage of our parry sequence we're currently in.</p><h3 id="proc/get_parry_time"><aside class="declaration">proc </aside>get_parry_time<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L339">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 339"/></a></aside>
+        </h3>
+        <p>Gets the current decisecond &quot;frame&quot; of an active parry.</p><h3 id="proc/handle_block_parry"><aside class="declaration">proc </aside>handle_block_parry<aside>(seconds) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_blocking_parrying.dm#L358">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_blocking_parrying.dm 358"/></a></aside>
+        </h3>
+        <p>Called every life tick to handle blocking/parrying effects.</p><h3 id="proc/handle_parry_ending_effects"><aside class="declaration">proc </aside>handle_parry_ending_effects<aside>(/<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a>/data, /list/failed_effect_text) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L182">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 182"/></a></aside>
+        </h3>
+        <p>Handles ending effects for parrying.</p><h3 id="proc/handle_parry_starting_effects"><aside class="declaration">proc </aside>handle_parry_starting_effects<aside>(/<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a>/data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L170">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 170"/></a></aside>
+        </h3>
+        <p>Handles starting effects for parrying.</p><h3 id="proc/hasparasites"><aside class="declaration">proc </aside>hasparasites<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/simple_animal/guardian/guardian.dm#L493">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;simple_animal&#x2F;guardian&#x2F;guardian.dm 493"/></a></aside>
+        </h3>
+        <p>parasite tracking/finding procs</p><h3 id="proc/hud_set_nanite_indicator"><aside class="declaration">proc </aside>hud_set_nanite_indicator<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/data_huds.dm#L300">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;data_huds.dm 300"/></a></aside>
+        </h3>
+        <p>Diagnostic HUDs!</p><h3 id="proc/ignore_slowdown"><aside class="declaration">proc </aside>ignore_slowdown<aside>(source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L643">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 643"/></a></aside>
+        </h3>
+        <p>Ignores all slowdowns that lack the IGNORE_NOSLOW flag.</p><h3 id="proc/initiate_parry_sequence"><aside class="declaration">proc </aside>initiate_parry_sequence<aside>(silent, /list/override_method_data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 17"/></a></aside>
+        </h3>
+        <p>Initiates a parrying sequence.</p><h3 id="proc/keybind_parry"><aside class="declaration">proc </aside>keybind_parry<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 11"/></a></aside>
+        </h3>
+        <p>Called from keybindings.</p><h3 id="proc/keybind_start_active_blocking"><aside class="declaration">proc </aside>keybind_start_active_blocking<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 81"/></a></aside>
+        </h3>
+        <p>Proc called by keybindings to start active blocking.</p><h3 id="proc/keybind_stop_active_blocking"><aside class="declaration">proc </aside>keybind_stop_active_blocking<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L128">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 128"/></a></aside>
+        </h3>
+        <p>Proc called by keybindings to stop active blocking.</p><h3 id="proc/keybind_toggle_active_blocking"><aside class="declaration">proc </aside>keybind_toggle_active_blocking<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_block.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_block.dm 72"/></a></aside>
+        </h3>
+        <p>Proc called by keybindings to toggle active blocking.</p><h3 id="proc/remove_movespeed_mod_immunities"><aside class="declaration">proc </aside>remove_movespeed_mod_immunities<aside>(source, slowdown_type, update) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L662">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 662"/></a></aside>
+        </h3>
+        <p>Unignores specific slowdowns. Accepts a list of slowdowns.</p><h3 id="proc/resist"><aside class="declaration">verb </aside>resist<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living.dm#L754">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living.dm 754"/></a></aside>
+        </h3>
+        <p>Resist verb for attempting to get out of whatever is restraining your motion. Gives you resist clickdelay if do_resist() returns true.</p><h3 id="proc/run_parry"><aside class="declaration">proc </aside>run_parry<aside>(/<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list, allow_auto) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L343">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 343"/></a></aside>
+        </h3>
+        <p>same return values as normal blocking, called with absolute highest priority in the block &quot;chain&quot;.</p><h3 id="proc/run_parry_countereffects"><aside class="declaration">proc </aside>run_parry_countereffects<aside>(/<a href="atom.html">atom</a>/object, damage, attack_text, attack_type, armour_penetration, /<a href="mob.html">mob</a>/attacker, def_zone, /list/return_list, parry_efficiency, /<a href="datum.html">datum</a>/<a href="datum/block_parry_data.html">block_parry_data</a>/data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_active_parry.dm#L416">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_active_parry.dm 416"/></a></aside>
+        </h3>
+        <p>Run counterattack if any</p><h3 id="proc/shared_living_ui_distance"><aside class="declaration">proc </aside>shared_living_ui_distance<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/src_object, viewcheck) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/states.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;states.dm 103"/></a></aside>
+        </h3>
+        <p>public</p>
+<p>Distance versus interaction check.</p>
+<p>required src_object atom/movable The object which owns the UI.</p>
+<p>return UI_state The state of the UI.</p><h3 id="proc/subtle"><aside class="declaration">verb </aside>subtle<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/say_vr.dm#L180">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;say_vr.dm 180"/></a></aside>
+        </h3>
+        <p>VERB CODE</p><h3 id="proc/subtler"><aside class="declaration">verb </aside>subtler<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/say_vr.dm#L189">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;say_vr.dm 189"/></a></aside>
+        </h3>
+        <p>VERB CODE 2</p><h3 id="proc/subtler_table"><aside class="declaration">verb </aside>subtler_table<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/say_vr.dm#L198">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;say_vr.dm 198"/></a></aside>
+        </h3>
+        <p>VERB CODE 3</p><h3 id="proc/transfer_blood_to"><aside class="declaration">proc </aside>transfer_blood_to<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/AM, amount, forced) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/blood.dm#L129">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;blood.dm 129"/></a></aside>
+        </h3>
+        <p>BLOOD TRANSFERS</p><h3 id="proc/unignore_slowdown"><aside class="declaration">proc </aside>unignore_slowdown<aside>(source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/status_procs.dm#L638">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;status_procs.dm 638"/></a></aside>
+        </h3>
+        <p>Unignores all slowdowns that lack the IGNORE_NOSLOW flag.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

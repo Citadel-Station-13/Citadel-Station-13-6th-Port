@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;client - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="client.html#var">Var Details</a> - <a href="client.html#proc">Proc Details</a></header>
+<main>
+<h1>client <aside>/<a href="client.html">client</a></aside><aside> inherits /<a href="datum.html">datum</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 2"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="client.html#var/active_mousedown_item">active_mousedown_item</a></th><td>Autoclick variable referencing the associated item.</td></tr>
+            <tr><th><a href="client.html#var/admin_music_volume">admin_music_volume</a></th><td>Admin music volume, from 0 to 1.</td></tr>
+            <tr><th><a href="client.html#var/autobunker_last_try">autobunker_last_try</a></th><td>last time they tried to do an autobunker auth</td></tr>
+            <tr><th><a href="client.html#var/block_parry_hinted">block_parry_hinted</a></th><td>Should go in persistent round player data sometime. This tracks what items have already warned the user on pickup that they can block/parry.</td></tr>
+            <tr><th><a href="client.html#var/clicklimiter">clicklimiter</a></th><td>Used for limiting the rate of clicks sends by the client to avoid abuse</td></tr>
+            <tr><th><a href="client.html#var/client_keysend_amount">client_keysend_amount</a></th><td>Amount of keydowns in the last keysend checking interval</td></tr>
+            <tr><th><a href="client.html#var/completed_asset_jobs">completed_asset_jobs</a></th><td>List of all completed blocking send jobs awaiting acknowledgement by send_asset</td></tr>
+            <tr><th><a href="client.html#var/credits">credits</a></th><td>lazy list of all credit object bound to this client</td></tr>
+            <tr><th><a href="client.html#var/cryo_warned">cryo_warned</a></th><td>When was the last time we warned them about not cryoing without an ahelp, set to -5 minutes so that rounstart cryo still warns</td></tr>
+            <tr><th><a href="client.html#var/dont_animate_parallax">dont_animate_parallax</a></th><td>world.time of when we can state animate()ing parallax again</td></tr>
+            <tr><th><a href="client.html#var/holder">holder</a></th><td>Contains admin info. Null if client is not an admin.</td></tr>
+            <tr><th><a href="client.html#var/keys_held">keys_held</a></th><td>Keys currently held</td></tr>
+            <tr><th><a href="client.html#var/keysend_tripped">keysend_tripped</a></th><td>When set to true, user will be autokicked if they trip the keysends in a second limit again</td></tr>
+            <tr><th><a href="client.html#var/last_asset_job">last_asset_job</a></th><td>Last asset send job id.</td></tr>
+            <tr><th><a href="client.html#var/last_click">last_click</a></th><td>Last time we Click()ed. No clicking twice in one tick!</td></tr>
+            <tr><th><a href="client.html#var/last_macro_fix">last_macro_fix</a></th><td>Last time they used fix macros</td></tr>
+            <tr><th><a href="client.html#var/last_parallax_shift">last_parallax_shift</a></th><td>world.time of last parallax update</td></tr>
+            <tr><th><a href="client.html#var/mouseLocation">mouseLocation</a></th><td>Used in MouseDrag to preserve the last mouse-entered location.</td></tr>
+            <tr><th><a href="client.html#var/mouseObject">mouseObject</a></th><td>Used in MouseDrag to preserve the last mouse-entered object.</td></tr>
+            <tr><th><a href="client.html#var/mouseParams">mouseParams</a></th><td>Used in MouseDrag to preserve the original mouse click parameters</td></tr>
+            <tr><th><a href="client.html#var/moused_over_objects">moused_over_objects</a></th><td>moused over objects, currently capped at 7. this is awful, and should be replaced with a component to track it using signals for parrying at some point.</td></tr>
+            <tr><th><a href="client.html#var/movement_keys">movement_keys</a></th><td>custom movement keys for this client</td></tr>
+            <tr><th><a href="client.html#var/next_keysend_reset">next_keysend_reset</a></th><td>World tick time where client_keysend_amount will reset</td></tr>
+            <tr><th><a href="client.html#var/next_keysend_trip_reset">next_keysend_trip_reset</a></th><td>World tick time where keysend_tripped will reset back to false</td></tr>
+            <tr><th><a href="client.html#var/next_move_dir_add">next_move_dir_add</a></th><td>These next two vars are to apply movement for keypresses and releases made while move delayed.
+Because discarding that input makes the game less responsive.
+On next move, add this dir to the move that would otherwise be done</td></tr>
+            <tr><th><a href="client.html#var/next_move_dir_sub">next_move_dir_sub</a></th><td>On next move, subtract this dir from the move that would otherwise be done</td></tr>
+            <tr><th><a href="client.html#var/panel_tabs">panel_tabs</a></th><td>list of all tabs</td></tr>
+            <tr><th><a href="client.html#var/parallax_throttle">parallax_throttle</a></th><td>ds between parallax updates</td></tr>
+            <tr><th><a href="client.html#var/recent_examines">recent_examines</a></th><td>A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [atom/proc/examine_more()] instead of [atom/proc/examine()] on them when examining</td></tr>
+            <tr><th><a href="client.html#var/screen_maps">screen_maps</a></th><td>Assoc list with all the active maps - when a screen obj is added to
+a map, it's put in here as well.</td></tr>
+            <tr><th><a href="client.html#var/script">script</a></th><td>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!HEY LISTEN!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</td></tr>
+            <tr><th><a href="client.html#var/seen_messages">seen_messages</a></th><td>Messages currently seen by this client</td></tr>
+            <tr><th><a href="client.html#var/selected_target">selected_target</a></th><td>Autoclick list of two elements, first being the clicked thing, second being the parameters.</td></tr>
+            <tr><th><a href="client.html#var/show_verb_panel">show_verb_panel</a></th><td>hides the byond verb panel as we use our own custom version</td></tr>
+            <tr><th><a href="client.html#var/spell_tabs">spell_tabs</a></th><td>list of tabs containing spells and abilities</td></tr>
+            <tr><th><a href="client.html#var/stat_tab">stat_tab</a></th><td>our current tab</td></tr>
+            <tr><th><a href="client.html#var/statbrowser_ready">statbrowser_ready</a></th><td>whether our browser is ready or not yet</td></tr>
+            <tr><th><a href="client.html#var/tgui_cache_reloaded">tgui_cache_reloaded</a></th><td>global</td></tr>
+            <tr><th><a href="client.html#var/tgui_windows">tgui_windows</a></th><td>global</td></tr>
+            <tr><th><a href="client.html#var/total_count_reset">total_count_reset</a></th><td>Next tick to reset the total message counter</td></tr>
+            <tr><th><a href="client.html#var/total_message_count">total_message_count</a></th><td>How many messages sent in the last 10 seconds</td></tr>
+            <tr><th><a href="client.html#var/verb_tabs">verb_tabs</a></th><td>list of tabs containing verbs</td></tr>
+            <tr><th><a href="client.html#var/view_size">view_size</a></th><td>viewsize datum for holding our view size</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="client.html#proc/ForceAllKeysUp">ForceAllKeysUp</a></th><td>Check if the key is short enough to even be a real key
+Keyup's all keys held down.</td></tr>
+            <tr><th><a href="client.html#proc/NONSENSICAL_VERB_THAT_DOES_NOTHING">NONSENSICAL_VERB_THAT_DOES_NOTHING</a></th><td>*sigh</td></tr>
+            <tr><th><a href="client.html#proc/Process_Grab">Process_Grab</a></th><td>Process_Grab(): checks for grab, attempts to break if so. Return TRUE to prevent movement.</td></tr>
+            <tr><th><a href="client.html#proc/Process_Incorpmove">Process_Incorpmove</a></th><td>Process_Incorpmove
+Called by client/Move()
+Allows mobs to run though walls</td></tr>
+            <tr><th><a href="client.html#proc/admin_cmd_remove_ghost_respawn_timer">admin_cmd_remove_ghost_respawn_timer</a></th><td>Allows a ghost to bypass respawn delay without lifting respawn restrictions</td></tr>
+            <tr><th><a href="client.html#proc/admin_cmd_respawn_return_to_lobby">admin_cmd_respawn_return_to_lobby</a></th><td>Fully returns a player to lobby, allowing them to bypass all respawn restrictions
+Works on ghosts or new players (lobby players)
+If a lobby player is selected, their restrictions are removed.</td></tr>
+            <tr><th><a href="client.html#proc/asset_cache_confirm_arrival">asset_cache_confirm_arrival</a></th><td>Process asset cache client topic calls for <code>&quot;asset_cache_confirm_arrival=[INT]&quot;</code></td></tr>
+            <tr><th><a href="client.html#proc/asset_cache_preload_data">asset_cache_preload_data</a></th><td>Process asset cache client topic calls for <code>&quot;asset_cache_preload_data=[HTML+JSON_STRING]&quot;</code></td></tr>
+            <tr><th><a href="client.html#proc/asset_cache_update_json">asset_cache_update_json</a></th><td>Updates the client side stored json file used to keep track of what assets the client has between restarts/reconnects.</td></tr>
+            <tr><th><a href="client.html#proc/award_heart">award_heart</a></th><td>Redirect proc that makes it easier to get the status of an achievement. Achievement type is the typepath to the award.</td></tr>
+            <tr><th><a href="client.html#proc/browse_queue_flush">browse_queue_flush</a></th><td>Blocks until all currently sending browse and browse_rsc assets have been sent.
+Due to byond limitations, this proc will sleep for 1 client round trip even if the client has no pending asset sends.
+This proc will return an untrue value if it had to return before confirming the send, such as timeout or the client going away.</td></tr>
+            <tr><th><a href="client.html#proc/clear_all_maps">clear_all_maps</a></th><td>Clears all the maps of registered screen objects.</td></tr>
+            <tr><th><a href="client.html#proc/clear_map">clear_map</a></th><td>Clears the map of registered screen objects.</td></tr>
+            <tr><th><a href="client.html#proc/close_popup">close_popup</a></th><td>Closes a popup.</td></tr>
+            <tr><th><a href="client.html#proc/create_popup">create_popup</a></th><td>Creates a popup window with a basic map element in it, without any
+further initialization.</td></tr>
+            <tr><th><a href="client.html#proc/fix_tgui_panel">fix_tgui_panel</a></th><td>tgui panel / chat troubleshooting verb</td></tr>
+            <tr><th><a href="client.html#proc/get_award_status">get_award_status</a></th><td>Redirect proc that makes it easier to get the status of an achievement. Achievement type is the typepath to the award.</td></tr>
+            <tr><th><a href="client.html#proc/give_award">give_award</a></th><td>Redirect proc that makes it easier to call the unlock achievement proc. Achievement type is the typepath to the award, user is the mob getting the award, and value is an optional variable used for leaderboard value increments</td></tr>
+            <tr><th><a href="client.html#proc/handle_popup_close">handle_popup_close</a></th><td>When the popup closes in any way (player or proc call) it calls this.</td></tr>
+            <tr><th><a href="client.html#proc/init_verbs">init_verbs</a></th><td>compiles a full list of verbs and sends it to the browser</td></tr>
+            <tr><th><a href="client.html#proc/register_map_obj">register_map_obj</a></th><td>Registers screen obj with the client, which makes it visible on the
+assigned map, and becomes a part of the assigned map's lifecycle.</td></tr>
+            <tr><th><a href="client.html#proc/send_resources">send_resources</a></th><td>Send resources to the client.
+Sends both game resources and browser assets.</td></tr>
+            <tr><th><a href="client.html#proc/set_tab">set_tab</a></th><td>verbs that send information from the browser UI</td></tr>
+            <tr><th><a href="client.html#proc/setup_popup">setup_popup</a></th><td>Create the popup, and get it ready for generic use by giving
+it a background.</td></tr>
+            <tr><th><a href="client.html#proc/uiclose">uiclose</a></th><td>verb</td></tr>
+            <tr><th><a href="client.html#proc/update_special_keybinds">update_special_keybinds</a></th><td>Updates the keybinds for special keys</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/active_mousedown_item"><aside class="declaration">var </aside>active_mousedown_item
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L117">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 117"/></a></h3>
+        <p>Autoclick variable referencing the associated item.</p><h3 id="var/admin_music_volume"><aside class="declaration">var </aside>admin_music_volume
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui_panel/audio.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui_panel&#x2F;audio.dm 7"/></a></h3>
+        <p>Admin music volume, from 0 to 1.</p><h3 id="var/autobunker_last_try"><aside class="declaration">var </aside>autobunker_last_try
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 26"/></a></h3>
+        <p>last time they tried to do an autobunker auth</p><h3 id="var/block_parry_hinted"><aside class="declaration">var </aside>block_parry_hinted
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L187">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 187"/></a></h3>
+        <p>Should go in persistent round player data sometime. This tracks what items have already warned the user on pickup that they can block/parry.</p><h3 id="var/clicklimiter"><aside class="declaration">var </aside>clicklimiter
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 84"/></a></h3>
+        <p>Used for limiting the rate of clicks sends by the client to avoid abuse</p><h3 id="var/client_keysend_amount"><aside class="declaration">var </aside>client_keysend_amount
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L104">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 104"/></a></h3>
+        <p>Amount of keydowns in the last keysend checking interval</p><h3 id="var/completed_asset_jobs"><aside class="declaration">var </aside>completed_asset_jobs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L178">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 178"/></a></h3>
+        <p>List of all completed blocking send jobs awaiting acknowledgement by send_asset</p><h3 id="var/credits"><aside class="declaration">var </aside>credits
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L87">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 87"/></a></h3>
+        <p>lazy list of all credit object bound to this client</p><h3 id="var/cryo_warned"><aside class="declaration">var </aside>cryo_warned
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 151"/></a></h3>
+        <p>When was the last time we warned them about not cryoing without an ahelp, set to -5 minutes so that rounstart cryo still warns</p><h3 id="var/dont_animate_parallax"><aside class="declaration">var </aside>dont_animate_parallax
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L158">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 158"/></a></h3>
+        <p>world.time of when we can state animate()ing parallax again</p><h3 id="var/holder"><aside class="declaration">var </aside>holder
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/admins.html">admins</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 13"/></a></h3>
+        <p>Contains admin info. Null if client is not an admin.</p><h3 id="var/keys_held"><aside class="declaration">var </aside>keys_held
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L96">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 96"/></a></h3>
+        <p>Keys currently held</p><h3 id="var/keysend_tripped"><aside class="declaration">var </aside>keysend_tripped
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L110">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 110"/></a></h3>
+        <p>When set to true, user will be autokicked if they trip the keysends in a second limit again</p><h3 id="var/last_asset_job"><aside class="declaration">var </aside>last_asset_job
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L180">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 180"/></a></h3>
+        <p>Last asset send job id.</p><h3 id="var/last_click"><aside class="declaration">var </aside>last_click
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 38"/></a></h3>
+        <p>Last time we Click()ed. No clicking twice in one tick!</p><h3 id="var/last_macro_fix"><aside class="declaration">var </aside>last_macro_fix
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 94"/></a></h3>
+        <p>Last time they used fix macros</p><h3 id="var/last_parallax_shift"><aside class="declaration">var </aside>last_parallax_shift
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L160">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 160"/></a></h3>
+        <p>world.time of last parallax update</p><h3 id="var/mouseLocation"><aside class="declaration">var </aside>mouseLocation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L121">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 121"/></a></h3>
+        <p>Used in MouseDrag to preserve the last mouse-entered location.</p><h3 id="var/mouseObject"><aside class="declaration">var </aside>mouseObject
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L123">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 123"/></a></h3>
+        <p>Used in MouseDrag to preserve the last mouse-entered object.</p><h3 id="var/mouseParams"><aside class="declaration">var </aside>mouseParams
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L119">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 119"/></a></h3>
+        <p>Used in MouseDrag to preserve the original mouse click parameters</p><h3 id="var/moused_over_objects"><aside class="declaration">var </aside>moused_over_objects
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L189">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 189"/></a></h3>
+        <p>moused over objects, currently capped at 7. this is awful, and should be replaced with a component to track it using signals for parrying at some point.</p><h3 id="var/movement_keys"><aside class="declaration">var </aside>movement_keys
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 112"/></a></h3>
+        <p>custom movement keys for this client</p><h3 id="var/next_keysend_reset"><aside class="declaration">var </aside>next_keysend_reset
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L106">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 106"/></a></h3>
+        <p>World tick time where client_keysend_amount will reset</p><h3 id="var/next_keysend_trip_reset"><aside class="declaration">var </aside>next_keysend_trip_reset
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L108">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 108"/></a></h3>
+        <p>World tick time where keysend_tripped will reset back to false</p><h3 id="var/next_move_dir_add"><aside class="declaration">var </aside>next_move_dir_add
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L100">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 100"/></a></h3>
+        <p>These next two vars are to apply movement for keypresses and releases made while move delayed.
+Because discarding that input makes the game less responsive.
+On next move, add this dir to the move that would otherwise be done</p><h3 id="var/next_move_dir_sub"><aside class="declaration">var </aside>next_move_dir_sub
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L102">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 102"/></a></h3>
+        <p>On next move, subtract this dir from the move that would otherwise be done</p><h3 id="var/panel_tabs"><aside class="declaration">var </aside>panel_tabs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L142">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 142"/></a></h3>
+        <p>list of all tabs</p><h3 id="var/parallax_throttle"><aside class="declaration">var </aside>parallax_throttle
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L162">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 162"/></a></h3>
+        <p>ds between parallax updates</p><h3 id="var/recent_examines"><aside class="declaration">var </aside>recent_examines
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L149">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 149"/></a></h3>
+        <p>A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [atom/proc/examine_more()] instead of [atom/proc/examine()] on them when examining</p><h3 id="var/screen_maps"><aside class="declaration">var </aside>screen_maps
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 173"/></a></h3>
+        <p>Assoc list with all the active maps - when a screen obj is added to
+a map, it's put in here as well.</p>
+<p>Format: list(<mapname> = list(/obj/screen))</p><h3 id="var/script"><aside class="declaration">var </aside>script
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/interface/stylesheet.dm#L9">
+        <img src="git.png" width="16" height="16" title="interface&#x2F;stylesheet.dm 9"/></a></h3>
+        <p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!HEY LISTEN!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p><h3 id="var/seen_messages"><aside class="declaration">var </aside>seen_messages
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L131">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 131"/></a></h3>
+        <p>Messages currently seen by this client</p><h3 id="var/selected_target"><aside class="declaration">var </aside>selected_target
+            <aside>&ndash; /list/list/atom</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L115">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 115"/></a></h3>
+        <p>Autoclick list of two elements, first being the clicked thing, second being the parameters.</p><h3 id="var/show_verb_panel"><aside class="declaration">var </aside>show_verb_panel
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 11"/></a></h3>
+        <p>hides the byond verb panel as we use our own custom version</p><h3 id="var/spell_tabs"><aside class="declaration">var </aside>spell_tabs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 145"/></a></h3>
+        <p>list of tabs containing spells and abilities</p><h3 id="var/stat_tab"><aside class="declaration">var </aside>stat_tab
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L136">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 136"/></a></h3>
+        <p>our current tab</p><h3 id="var/statbrowser_ready"><aside class="declaration">var </aside>statbrowser_ready
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 139"/></a></h3>
+        <p>whether our browser is ready or not yet</p><h3 id="var/tgui_cache_reloaded"><aside class="declaration">var </aside>tgui_cache_reloaded
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/external.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;external.dm 139"/></a></h3>
+        <p>global</p>
+<p>TRUE if cache was reloaded by tgui dev server at least once.</p><h3 id="var/tgui_windows"><aside class="declaration">var </aside>tgui_windows
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/external.dm#L132">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;external.dm 132"/></a></h3>
+        <p>global</p>
+<p>Tracks open windows for a user.</p><h3 id="var/total_count_reset"><aside class="declaration">var </aside>total_count_reset
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 23"/></a></h3>
+        <p>Next tick to reset the total message counter</p><h3 id="var/total_message_count"><aside class="declaration">var </aside>total_message_count
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 21"/></a></h3>
+        <p>How many messages sent in the last 10 seconds</p><h3 id="var/verb_tabs"><aside class="declaration">var </aside>verb_tabs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L147">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 147"/></a></h3>
+        <p>list of tabs containing verbs</p><h3 id="var/view_size"><aside class="declaration">var </aside>view_size
+            <aside>&ndash; /<a href="datum.html">datum</a>/viewData</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_defines.dm#L133">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_defines.dm 133"/></a></h3>
+        <p>viewsize datum for holding our view size</p><h2 id="proc">Proc Details</h2><h3 id="proc/ForceAllKeysUp"><aside class="declaration">proc </aside>ForceAllKeysUp<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/keybindings/bindings_client.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;keybindings&#x2F;bindings_client.dm 78"/></a></aside>
+        </h3>
+        <p>Check if the key is short enough to even be a real key
+Keyup's all keys held down.</p><h3 id="proc/NONSENSICAL_VERB_THAT_DOES_NOTHING"><aside class="declaration">verb </aside>NONSENSICAL_VERB_THAT_DOES_NOTHING<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/input.dm#L104">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;input.dm 104"/></a></aside>
+        </h3>
+        <p>*sigh</p><h3 id="proc/Process_Grab"><aside class="declaration">proc </aside>Process_Grab<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_movement.dm#L114">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_movement.dm 114"/></a></aside>
+        </h3>
+        <p>Process_Grab(): checks for grab, attempts to break if so. Return TRUE to prevent movement.</p><h3 id="proc/Process_Incorpmove"><aside class="declaration">proc </aside>Process_Incorpmove<aside>(direction) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_movement.dm#L131">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_movement.dm 131"/></a></aside>
+        </h3>
+        <p>Process_Incorpmove
+Called by client/Move()
+Allows mobs to run though walls</p><h3 id="proc/admin_cmd_remove_ghost_respawn_timer"><aside class="declaration">proc </aside>admin_cmd_remove_ghost_respawn_timer<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/dead/observer/respawn.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;dead&#x2F;observer&#x2F;respawn.dm 56"/></a></aside>
+        </h3>
+        <p>Allows a ghost to bypass respawn delay without lifting respawn restrictions</p><h3 id="proc/admin_cmd_respawn_return_to_lobby"><aside class="declaration">proc </aside>admin_cmd_respawn_return_to_lobby<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/dead/observer/respawn.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;dead&#x2F;observer&#x2F;respawn.dm 7"/></a></aside>
+        </h3>
+        <p>Fully returns a player to lobby, allowing them to bypass all respawn restrictions
+Works on ghosts or new players (lobby players)
+If a lobby player is selected, their restrictions are removed.</p><h3 id="proc/asset_cache_confirm_arrival"><aside class="declaration">proc </aside>asset_cache_confirm_arrival<aside>(job_id) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/asset_cache/asset_cache_client.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;asset_cache&#x2F;asset_cache_client.dm 3"/></a></aside>
+        </h3>
+        <p>Process asset cache client topic calls for <code>&quot;asset_cache_confirm_arrival=[INT]&quot;</code></p><h3 id="proc/asset_cache_preload_data"><aside class="declaration">proc </aside>asset_cache_preload_data<aside>(data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/asset_cache/asset_cache_client.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;asset_cache&#x2F;asset_cache_client.dm 14"/></a></aside>
+        </h3>
+        <p>Process asset cache client topic calls for <code>&quot;asset_cache_preload_data=[HTML+JSON_STRING]&quot;</code></p><h3 id="proc/asset_cache_update_json"><aside class="declaration">proc </aside>asset_cache_update_json<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/asset_cache/asset_cache_client.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;asset_cache&#x2F;asset_cache_client.dm 26"/></a></aside>
+        </h3>
+        <p>Updates the client side stored json file used to keep track of what assets the client has between restarts/reconnects.</p><h3 id="proc/award_heart"><aside class="declaration">proc </aside>award_heart<aside>(heart_reason) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_procs.dm#L1060">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_procs.dm 1060"/></a></aside>
+        </h3>
+        <p>Redirect proc that makes it easier to get the status of an achievement. Achievement type is the typepath to the award.</p><h3 id="proc/browse_queue_flush"><aside class="declaration">proc </aside>browse_queue_flush<aside>(timeout) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/asset_cache/asset_cache_client.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;asset_cache&#x2F;asset_cache_client.dm 35"/></a></aside>
+        </h3>
+        <p>Blocks until all currently sending browse and browse_rsc assets have been sent.
+Due to byond limitations, this proc will sleep for 1 client round trip even if the client has no pending asset sends.
+This proc will return an untrue value if it had to return before confirming the send, such as timeout or the client going away.</p><h3 id="proc/clear_all_maps"><aside class="declaration">proc </aside>clear_all_maps<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 80"/></a></aside>
+        </h3>
+        <p>Clears all the maps of registered screen objects.</p><h3 id="proc/clear_map"><aside class="declaration">proc </aside>clear_map<aside>(map_name) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 68"/></a></aside>
+        </h3>
+        <p>Clears the map of registered screen objects.</p>
+<p>Not really needed most of the time, as the client's screen list gets reset
+on relog. any of the buttons are going to get caught by garbage collection
+anyway. they're effectively qdel'd.</p><h3 id="proc/close_popup"><aside class="declaration">proc </aside>close_popup<aside>(popup) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L137">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 137"/></a></aside>
+        </h3>
+        <p>Closes a popup.</p><h3 id="proc/create_popup"><aside class="declaration">proc </aside>create_popup<aside>(name, ratiox, ratioy) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 92"/></a></aside>
+        </h3>
+        <p>Creates a popup window with a basic map element in it, without any
+further initialization.</p>
+<p>Ratio is how many pixels by how many pixels (keep it simple).</p>
+<p>Returns a map name.</p><h3 id="proc/fix_tgui_panel"><aside class="declaration">verb </aside>fix_tgui_panel<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui_panel/external.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui_panel&#x2F;external.dm 11"/></a></aside>
+        </h3>
+        <p>tgui panel / chat troubleshooting verb</p><h3 id="proc/get_award_status"><aside class="declaration">proc </aside>get_award_status<aside>(achievement_type, /<a href="mob.html">mob</a>/user, value) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_procs.dm#L1056">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_procs.dm 1056"/></a></aside>
+        </h3>
+        <p>Redirect proc that makes it easier to get the status of an achievement. Achievement type is the typepath to the award.</p><h3 id="proc/give_award"><aside class="declaration">proc </aside>give_award<aside>(achievement_type, /<a href="mob.html">mob</a>/user, value) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_procs.dm#L1052">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_procs.dm 1052"/></a></aside>
+        </h3>
+        <p>Redirect proc that makes it easier to call the unlock achievement proc. Achievement type is the typepath to the award, user is the mob getting the award, and value is an optional variable used for leaderboard value increments</p><h3 id="proc/handle_popup_close"><aside class="declaration">verb </aside>handle_popup_close<aside>(window_id) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L144">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 144"/></a></aside>
+        </h3>
+        <p>When the popup closes in any way (player or proc call) it calls this.</p><h3 id="proc/init_verbs"><aside class="declaration">proc </aside>init_verbs<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_procs.dm#L1071">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_procs.dm 1071"/></a></aside>
+        </h3>
+        <p>compiles a full list of verbs and sends it to the browser</p><h3 id="proc/register_map_obj"><aside class="declaration">proc </aside>register_map_obj<aside>(/<a href="obj.html">obj</a>/<a href="obj/screen.html">screen</a>/screen_obj) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 49"/></a></aside>
+        </h3>
+        <p>Registers screen obj with the client, which makes it visible on the
+assigned map, and becomes a part of the assigned map's lifecycle.</p><h3 id="proc/send_resources"><aside class="declaration">proc </aside>send_resources<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/client/client_procs.dm#L931">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;client&#x2F;client_procs.dm 931"/></a></aside>
+        </h3>
+        <p>Send resources to the client.
+Sends both game resources and browser assets.</p><h3 id="proc/set_tab"><aside class="declaration">verb </aside>set_tab<aside>(tab) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/statpanel.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;statpanel.dm 177"/></a></aside>
+        </h3>
+        <p>verbs that send information from the browser UI</p><h3 id="proc/setup_popup"><aside class="declaration">proc </aside>setup_popup<aside>(popup_name, width, height, tilesize, bg_icon) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_onclick/hud/map_popups.dm#L116">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_onclick&#x2F;hud&#x2F;map_popups.dm 116"/></a></aside>
+        </h3>
+        <p>Create the popup, and get it ready for generic use by giving
+it a background.</p>
+<p>Width and height are multiplied by 64 by default.</p><h3 id="proc/uiclose"><aside class="declaration">verb </aside>uiclose<aside>(window_id) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/external.dm#L157">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;external.dm 157"/></a></aside>
+        </h3>
+        <p>verb</p>
+<p>Called by UIs when they are closed.
+Must be a verb so winset() can call it.</p>
+<p>required uiref ref The UI that was closed.</p><h3 id="proc/update_special_keybinds"><aside class="declaration">proc </aside>update_special_keybinds<aside>(/<a href="datum.html">datum</a>/<a href="datum/preferences.html">preferences</a>/direct_prefs) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/keybindings/setup.dm#L166">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;keybindings&#x2F;setup.dm 166"/></a></aside>
+        </h3>
+        <p>Updates the keybinds for special keys</p>
+<p>Handles adding macros for the keys that need it
+And adding movement keys to the clients movement_keys list
+At the time of writing this, communication(OOC, Say, IC) require macros
+Arguments:</p>
+<ul>
+<li>direct_prefs - the preference we're going to get keybinds from</li>
+</ul>
+<p>Returns list of special keybind in key = Mod1Mod2Mod3Key format, NOT Mod1+Mod2+Mod3+Key format.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;machinery&#x2F;hydroponics - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/machinery/hydroponics.html#proc">Proc Details</a></header>
+<main>
+<h1>hydroponics <aside>/<a href="obj.html">obj</a>/<a href="obj/machinery/hydroponics.html">machinery/hydroponics</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/hydroponics.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;hydroponics.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/machinery/hydroponics.html#proc/adjustWater">adjustWater</a></th><td>Tray Setters - The following procs adjust the tray or plants variables, and make sure that the stat doesn't go out of bounds.</td></tr>
+            <tr><th><a href="obj/machinery/hydroponics.html#proc/apply_chemicals">apply_chemicals</a></th><td>This is NOW the gradual affects that each chemical applies on every process() proc. Nutrients now use a more robust reagent holder in order to apply less insane
+stat changes as opposed to 271 lines of individual statline effects. Shoutout to the original comments on chems, I just cleaned a few up.</td></tr>
+            <tr><th><a href="obj/machinery/hydroponics.html#proc/mutation_roll">mutation_roll</a></th><td>Contains the reagents within the tray.</td></tr>
+            <tr><th><a href="obj/machinery/hydroponics.html#proc/plantdies">plantdies</a></th><td>Plant Death Proc.
+Cleans up various stats for the plant upon death, including pests, harvestability, and plant health.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/adjustWater"><aside class="declaration">proc </aside>adjustWater<aside>(adjustamt) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/hydroponics.dm#L714">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;hydroponics.dm 714"/></a></aside>
+        </h3>
+        <p>Tray Setters - The following procs adjust the tray or plants variables, and make sure that the stat doesn't go out of bounds.</p><h3 id="proc/apply_chemicals"><aside class="declaration">proc </aside>apply_chemicals<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/hydroponics_chemreact.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;hydroponics_chemreact.dm 5"/></a></aside>
+        </h3>
+        <p>This is NOW the gradual affects that each chemical applies on every process() proc. Nutrients now use a more robust reagent holder in order to apply less insane
+stat changes as opposed to 271 lines of individual statline effects. Shoutout to the original comments on chems, I just cleaned a few up.</p><h3 id="proc/mutation_roll"><aside class="declaration">proc </aside>mutation_roll<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/hydroponics_chemreact.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;hydroponics_chemreact.dm 14"/></a></aside>
+        </h3>
+        <p>Contains the reagents within the tray.</p><h3 id="proc/plantdies"><aside class="declaration">proc </aside>plantdies<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/hydroponics.dm#L446">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;hydroponics.dm 446"/></a></aside>
+        </h3>
+        <p>Plant Death Proc.
+Cleans up various stats for the plant upon death, including pests, harvestability, and plant health.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

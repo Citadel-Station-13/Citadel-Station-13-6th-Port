@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>(global) - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="global.html#var">Var Details</a> - <a href="global.html#proc">Proc Details</a></header>
+<main>
+<h1>(global)
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/(unknown)">
+        <img src="git.png" width="16" height="16" title="(unknown)"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="global.html#var/Failsafe">Failsafe</a></th><td>Failsafe</td></tr>
+            <tr><th><a href="global.html#var/Master">Master</a></th><td>StonedMC</td></tr>
+            <tr><th><a href="global.html#var/SSfastprocess">SSfastprocess</a></th><td>obj/item/weapon/implant/integrated_circuit</td></tr>
+            <tr><th><a href="global.html#var/SSrunechat">SSrunechat</a></th><td></td></tr>
+            <tr><th><a href="global.html#var/SStgui">SStgui</a></th><td>tgui subsystem</td></tr>
+            <tr><th><a href="global.html#var/SStimer">SStimer</a></th><td></td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="global.html#proc/CreateBans">CreateBans</a></th><td>DEBUG</td></tr>
+            <tr><th><a href="global.html#proc/WrapAdminProcCall">WrapAdminProcCall</a></th><td>Wrapper for proccalls where the datum is flagged as vareditted</td></tr>
+            <tr><th><a href="global.html#proc/___TraitAdd">___TraitAdd</a></th><td>DO NOT USE ___TraitAdd OR ___TraitRemove as a replacement for ADD_TRAIT / REMOVE_TRAIT defines. To be used explicitly for callback.</td></tr>
+            <tr><th><a href="global.html#proc/___TraitRemove">___TraitRemove</a></th><td>DO NOT USE ___TraitAdd OR ___TraitRemove as a replacement for ADD_TRAIT / REMOVE_TRAIT defines. To be used explicitly for callback.</td></tr>
+            <tr><th><a href="global.html#proc/_addtimer">_addtimer</a></th><td>Create a new timer and insert it in the queue.
+You should not call this directly, and should instead use the addtimer macro, which includes source information.</td></tr>
+            <tr><th><a href="global.html#proc/_turf_in_offset">_turf_in_offset</a></th><td>Locating turfs</td></tr>
+            <tr><th><a href="global.html#proc/actionspeed_data_null_check">actionspeed_data_null_check</a></th><td>Checks if a action speed modifier is valid and not missing any data</td></tr>
+            <tr><th><a href="global.html#proc/add_keybinding">add_keybinding</a></th><td>Adds an instanced keybinding to the global tracker</td></tr>
+            <tr><th><a href="global.html#proc/add_verb">add_verb</a></th><td>handles adding verbs and updating the stat panel browser</td></tr>
+            <tr><th><a href="global.html#proc/block_calculate_resultant_damage">block_calculate_resultant_damage</a></th><td>Considers a block return_list and calculates damage to use from that.</td></tr>
+            <tr><th><a href="global.html#proc/callHook">callHook</a></th><td>@file hooks.dm
+Implements hooks, a simple way to run code on pre-defined events.</td></tr>
+            <tr><th><a href="global.html#proc/callback_select">callback_select</a></th><td>Runs a list of callbacks asyncronously, returning only when all have finished</td></tr>
+            <tr><th><a href="global.html#proc/completed_bounty_count">completed_bounty_count</a></th><td>Subtype Gens</td></tr>
+            <tr><th><a href="global.html#proc/create_mafia_game">create_mafia_game</a></th><td>Creates the global datum for playing mafia games, destroys the last if that's required and returns the new.</td></tr>
+            <tr><th><a href="global.html#proc/cultslur">cultslur</a></th><td>Makes you talk like you got cult stunned, which is slurring but with some dark messages</td></tr>
+            <tr><th><a href="global.html#proc/debug_variable">debug_variable</a></th><td>Get displayed variable in VV variable list</td></tr>
+            <tr><th><a href="global.html#proc/deltimer">deltimer</a></th><td>Delete a timer</td></tr>
+            <tr><th><a href="global.html#proc/end_cooldown">end_cooldown</a></th><td>Callback called by a timer to end an associative-list-indexed cooldown.</td></tr>
+            <tr><th><a href="global.html#proc/english_list_assoc">english_list_assoc</a></th><td>English_list but associative supporting. Higher overhead.</td></tr>
+            <tr><th><a href="global.html#proc/firing_squad">firing_squad</a></th><td>firing_squad is a proc for the :B:erforate smite to shoot each individual bullet at them, so that we can add actual delays without sleep() nonsense</td></tr>
+            <tr><th><a href="global.html#proc/generate_asset_name">generate_asset_name</a></th><td>Generate a filename for this asset
+The same asset will always lead to the same asset name
+(Generated names do not include file extention.)</td></tr>
+            <tr><th><a href="global.html#proc/generate_chemwiki_line">generate_chemwiki_line</a></th><td>datum/reagent/medicine, /datum/reagent/toxin, /datum/reagent/consumable, /datum/reagent/plantnutriment, /datum/reagent/uranium,
+datum/reagent/colorful_reagent, /datum/reagent/mutationtoxin, /datum/reagent/fermi, /datum/reagent/drug, /datum/reagent/impure</td></tr>
+            <tr><th><a href="global.html#proc/generate_selectable_species">generate_selectable_species</a></th><td>Generates species available to choose in character setup at roundstart</td></tr>
+            <tr><th><a href="global.html#proc/get_allowed_instrument_ids">get_allowed_instrument_ids</a></th><td>Get all non admin_only instruments.</td></tr>
+            <tr><th><a href="global.html#proc/get_base_area">get_base_area</a></th><td>Returns the base area the target is located in if there is one.
+Alternatively, returns the area as is.</td></tr>
+            <tr><th><a href="global.html#proc/get_bbox_of_atoms">get_bbox_of_atoms</a></th><td>Get a bounding box of a list of atoms.</td></tr>
+            <tr><th><a href="global.html#proc/get_cached_actionspeed_modifier">get_cached_actionspeed_modifier</a></th><td>Grabs a STATIC MODIFIER datum from cache. YOU MUST NEVER EDIT THESE DATUMS, OR IT WILL AFFECT ANYTHING ELSE USING IT TOO!</td></tr>
+            <tr><th><a href="global.html#proc/get_cached_movespeed_modifier">get_cached_movespeed_modifier</a></th><td>Grabs a STATIC MODIFIER datum from cache. YOU MUST NEVER EDIT THESE DATUMS, OR IT WILL AFFECT ANYTHING ELSE USING IT TOO!</td></tr>
+            <tr><th><a href="global.html#proc/get_ranged_target_turf_direct">get_ranged_target_turf_direct</a></th><td>Get ranged target turf, but with direct targets as opposed to directions</td></tr>
+            <tr><th><a href="global.html#proc/get_sub_areas">get_sub_areas</a></th><td>Returns either null, or a list containing every sub area associated with our base area.
+If include_base is TRUE, the base area will also be added to the return list.</td></tr>
+            <tr><th><a href="global.html#proc/get_sub_areas_contents">get_sub_areas_contents</a></th><td>Simple proc that returns a sum of all contents from every sub area,
+Think of the above but for all contents, not just turfs, and without target z.</td></tr>
+            <tr><th><a href="global.html#proc/get_sub_areas_turfs">get_sub_areas_turfs</a></th><td>Proc used for purposes similar to get_areas_turfs(), but aimed to include associated areas.
+Only accepts area instances and paths for the first arg, no text strings.
+Returns a list of all turfs found in the sub areas (including the base's if include_base is TRUE)
+and located in a z level matching target_z, or anywhere if target_z is 0</td></tr>
+            <tr><th><a href="global.html#proc/getleftblocks">getleftblocks</a></th><td>DNA HELPER-PROCS</td></tr>
+            <tr><th><a href="global.html#proc/hull_shielding_get_tiles_around_area">hull_shielding_get_tiles_around_area</a></th><td>HELPER FILE FOR SHIELDING
+Gets hull exterior adjacent tiles of a certain area
+Area method.
+EXPENSIVE.
+If the area itself is already considered exterior, it'll find all tiles inside it that's next to an interior area.</td></tr>
+            <tr><th><a href="global.html#proc/hull_shielding_get_tiles_in_z">hull_shielding_get_tiles_in_z</a></th><td>Gets hull adjacent exterior tiles of an entire zlevel
+EXPENSIVE.
+Gets the tiles in the exterior area touching to a non-exterior area</td></tr>
+            <tr><th><a href="global.html#proc/icon2base64">icon2base64</a></th><td>Converts an icon to base64. Operates by putting the icon in the iconCache savefile,
+exporting it as text, and then parsing the base64 from that.
+(This relies on byond automatically storing icons in savefiles as base64)</td></tr>
+            <tr><th><a href="global.html#proc/init_keybindings">init_keybindings</a></th><td>Creates and sorts all the keybinding datums</td></tr>
+            <tr><th><a href="global.html#proc/is_energy_reflectable_projectile">is_energy_reflectable_projectile</a></th><td>//// MISC HELPERS ////////
+Is this atom reflectable with &quot;&quot;standardized&quot;&quot; reflection methods like you know eshields and deswords and similar</td></tr>
+            <tr><th><a href="global.html#proc/json_deserialize_datum">json_deserialize_datum</a></th><td>Convert a list of json to datum</td></tr>
+            <tr><th><a href="global.html#proc/json_serialize_datum">json_serialize_datum</a></th><td>Convert a datum into a json blob</td></tr>
+            <tr><th><a href="global.html#proc/load_map">load_map</a></th><td>Shortcut function to parse a map and apply it to the world.</td></tr>
+            <tr><th><a href="global.html#proc/log_combat">log_combat</a></th><td>Log a combat message in the attack log</td></tr>
+            <tr><th><a href="global.html#proc/log_tgui">log_tgui</a></th><td>Appends a tgui-related log entry. All arguments are optional.</td></tr>
+            <tr><th><a href="global.html#proc/log_wound">log_wound</a></th><td>log_wound() is for when someone is <em>attacked</em> and suffers a wound. Note that this only captures wounds from damage, so smites/forced wounds aren't logged, as well as demotions like cuts scabbing over</td></tr>
+            <tr><th><a href="global.html#proc/make_datum_references_lists">make_datum_references_lists</a></th><td>Initial Building</td></tr>
+            <tr><th><a href="global.html#proc/md5asfile">md5asfile</a></th><td>Save file as an external file then md5 it.
+Used because md5ing files stored in the rsc sometimes gives incorrect md5 results.</td></tr>
+            <tr><th><a href="global.html#proc/md5filepath">md5filepath</a></th><td>Returns the md5 of a file at a given path.</td></tr>
+            <tr><th><a href="global.html#proc/message_centcom">message_centcom</a></th><td>Used by communications consoles to message CentCom</td></tr>
+            <tr><th><a href="global.html#proc/message_syndicate">message_syndicate</a></th><td>Used by communications consoles to message the Syndicate</td></tr>
+            <tr><th><a href="global.html#proc/message_to_html">message_to_html</a></th><td>Message-related procs</td></tr>
+            <tr><th><a href="global.html#proc/movespeed_data_null_check">movespeed_data_null_check</a></th><td>Checks if a move speed modifier is valid and not missing any data</td></tr>
+            <tr><th><a href="global.html#proc/nuke_request">nuke_request</a></th><td>Used by communications consoles to request the nuclear launch codes</td></tr>
+            <tr><th><a href="global.html#proc/process_teleport_locs">process_teleport_locs</a></th><td>Generate a list of turfs you can teleport to from the areas list</td></tr>
+            <tr><th><a href="global.html#proc/qdel">qdel</a></th><td>Should be treated as a replacement for the 'del' keyword.</td></tr>
+            <tr><th><a href="global.html#proc/recursive_organ_check">recursive_organ_check</a></th><td></td></tr>
+            <tr><th><a href="global.html#proc/release_gas_to">release_gas_to</a></th><td>Releases gas from src to output air. This means that it can not transfer air to gas mixture with higher pressure.
+a global proc due to rustmos</td></tr>
+            <tr><th><a href="global.html#proc/remove_verb">remove_verb</a></th><td>handles removing verb and sending it to browser to update, use this for removing verbs</td></tr>
+            <tr><th><a href="global.html#proc/reset_cooldown">reset_cooldown</a></th><td>Proc used by stoppable timers to end a cooldown before the time has ran out.</td></tr>
+            <tr><th><a href="global.html#proc/rgb_construct_color_matrix">rgb_construct_color_matrix</a></th><td>Assembles a color matrix, defaulting to identity</td></tr>
+            <tr><th><a href="global.html#proc/sanitize_css_class_name">sanitize_css_class_name</a></th><td>Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts</td></tr>
+            <tr><th><a href="global.html#proc/sanitize_hexcolor">sanitize_hexcolor</a></th><td>Sanitizes a hexadecimal color. Always outputs lowercase.</td></tr>
+            <tr><th><a href="global.html#proc/scramble_message_replace_chars">scramble_message_replace_chars</a></th><td>Slightly expensive proc to scramble a message using equal probabilities of character replacement from a list. DOES NOT SUPPORT HTML!</td></tr>
+            <tr><th><a href="global.html#proc/seedify">seedify</a></th><td>Finds and extracts seeds from an object</td></tr>
+            <tr><th><a href="global.html#proc/send2adminchat">send2adminchat</a></th><td>Sends a message to TGS admin chat channels.</td></tr>
+            <tr><th><a href="global.html#proc/send2chat">send2chat</a></th><td>Sends a message to TGS chat channels.</td></tr>
+            <tr><th><a href="global.html#proc/send2otherserver">send2otherserver</a></th><td>Sends a message to a set of cross-communications-enabled servers using world topic calls</td></tr>
+            <tr><th><a href="global.html#proc/slur">slur</a></th><td>Makes you speak like you're drunk</td></tr>
+            <tr><th><a href="global.html#proc/sound_to_playing_players">sound_to_playing_players</a></th><td>Citadel edit - Citadel reverb
+End</td></tr>
+            <tr><th><a href="global.html#proc/stars">stars</a></th><td>Convert random parts of a passed in message to stars</td></tr>
+            <tr><th><a href="global.html#proc/stripped_multiline_input_or_reflect">stripped_multiline_input_or_reflect</a></th><td>stripped_multiline_input but reflects to the user instead if it's too big and returns null.</td></tr>
+            <tr><th><a href="global.html#proc/stutter">stutter</a></th><td>Adds stuttering to the message passed in</td></tr>
+            <tr><th><a href="global.html#proc/tgui_Topic">tgui_Topic</a></th><td>Middleware for /client/Topic.</td></tr>
+            <tr><th><a href="global.html#proc/tgui_alert">tgui_alert</a></th><td>Creates a TGUI alert window and returns the user's response.</td></tr>
+            <tr><th><a href="global.html#proc/tgui_alert_async">tgui_alert_async</a></th><td>Creates an asynchronous TGUI alert window with an associated callback.</td></tr>
+            <tr><th><a href="global.html#proc/tgui_input_list">tgui_input_list</a></th><td>Creates a TGUI input list window and returns the user's response.</td></tr>
+            <tr><th><a href="global.html#proc/tgui_input_list_async">tgui_input_list_async</a></th><td>Creates an asynchronous TGUI input list window with an associated callback.</td></tr>
+            <tr><th><a href="global.html#proc/timeleft">timeleft</a></th><td>Get the remaining deciseconds on a timer</td></tr>
+            <tr><th><a href="global.html#proc/to_chat">to_chat</a></th><td>Sends the message to the recipient (target).</td></tr>
+            <tr><th><a href="global.html#proc/to_chat_immediate">to_chat_immediate</a></th><td>Circumvents the message queue and sends the message
+to the recipient (target) as soon as possible.</td></tr>
+            <tr><th><a href="global.html#proc/url2htmlloader">url2htmlloader</a></th><td>Return html to load a url.
+for use inside of browse() calls to html assets that might be loaded on a cdn.</td></tr>
+            <tr><th><a href="global.html#proc/valid_window_location">valid_window_location</a></th><td>Checks whether the target turf is in a valid state to accept a directional window
+or other directional pseudo-dense object such as railings.</td></tr>
+            <tr><th><a href="global.html#proc/velvetspeech">velvetspeech</a></th><td>FermiChem</td></tr>
+            <tr><th><a href="global.html#proc/voice_of_god">voice_of_god</a></th><td>VOICE OF GOD</td></tr>
+            <tr><th><a href="global.html#proc/wave_explosion">wave_explosion</a></th><td>Creates a wave explosion at a certain place</td></tr>
+            <tr><th><a href="global.html#proc/woundscan">woundscan</a></th><td>Displays wounds with extended information on their status vs medscanners</td></tr>
+            <tr><th><a href="global.html#proc/zone2body_parts_covered">zone2body_parts_covered</a></th><td>For finding out what body parts a body zone covers, the inverse of the below basically</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/Failsafe"><aside class="declaration">var </aside>Failsafe
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/controller/failsafe</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/failsafe.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;failsafe.dm 7"/></a></h3>
+        <p>Failsafe</p>
+<p>Pretty much pokes the MC to make sure it's still alive.</p><h3 id="var/Master"><aside class="declaration">var </aside>Master
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/<a href="datum/controller/master.html">controller/master</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/master.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;master.dm 12"/></a></h3>
+        <p>StonedMC</p>
+<p>Designed to properly split up a given tick among subsystems
+Note: if you read parts of this code and think &quot;why is it doing it that way&quot;
+Odds are, there is a reason</p><h3 id="var/SSfastprocess"><aside class="declaration">var </aside>SSfastprocess
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/processing/fastprocess</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/processing/fastprocess.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;processing&#x2F;fastprocess.dm 1"/></a></h3>
+        <p>obj/item/weapon/implant/integrated_circuit</p><h3 id="var/SSrunechat"><aside class="declaration">var </aside>SSrunechat
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/runechat.html">runechat</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/runechat.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;runechat.dm 18"/></a></h3>
+        <h1 id="runechat-subsystem">Runechat Subsystem</h1>
+<p>Maintains a timer-like system to handle destruction of runechat messages. Much of this code is modeled
+after or adapted from the timer subsystem.</p>
+<p>Note that this has the same structure for storing and queueing messages as the timer subsystem does
+for handling timers: the bucket_list is a list of chatmessage datums, each of which are the head
+of a circularly linked list. Any given index in bucket_list could be null, representing an empty bucket.</p><h3 id="var/SStgui"><aside class="declaration">var </aside>SStgui
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/tgui.html">tgui</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/tgui.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;tgui.dm 13"/></a></h3>
+        <p>tgui subsystem</p>
+<p>Contains all tgui state and subsystem code.</p><h3 id="var/SStimer"><aside class="declaration">var </aside>SStimer
+            <aside>&ndash; /static/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/timer.html">timer</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/timer.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;timer.dm 19"/></a></h3>
+        <h1 id="timer-subsystem">Timer Subsystem</h1>
+<p>Handles creation, callbacks, and destruction of timed events.</p>
+<p>It is important to understand the buckets used in the timer subsystem are just a series of circular doubly-linked
+lists. The object at a given index in bucket_list is a /datum/timedevent, the head of a circular list, which has prev
+and next references for the respective elements in that bucket's circular list.</p><h2 id="proc">Proc Details</h2><h3 id="proc/CreateBans"><aside class="declaration">proc </aside>CreateBans<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/NewBan.dm#L206">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;NewBan.dm 206"/></a></aside>
+        </h3>
+        <p>DEBUG</p><h3 id="proc/WrapAdminProcCall"><aside class="declaration">proc </aside>WrapAdminProcCall<aside>(/<a href="datum.html">datum</a>/target, procname, /list/arguments) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/callproc/callproc.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;callproc&#x2F;callproc.dm 88"/></a></aside>
+        </h3>
+        <p>Wrapper for proccalls where the datum is flagged as vareditted</p><h3 id="proc/___TraitAdd"><aside class="declaration">proc </aside>___TraitAdd<aside>(target, trait, source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/unsorted.dm#L1421">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;unsorted.dm 1421"/></a></aside>
+        </h3>
+        <p>DO NOT USE ___TraitAdd OR ___TraitRemove as a replacement for ADD_TRAIT / REMOVE_TRAIT defines. To be used explicitly for callback.</p><h3 id="proc/___TraitRemove"><aside class="declaration">proc </aside>___TraitRemove<aside>(target, trait, source) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/unsorted.dm#L1435">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;unsorted.dm 1435"/></a></aside>
+        </h3>
+        <p>DO NOT USE ___TraitAdd OR ___TraitRemove as a replacement for ADD_TRAIT / REMOVE_TRAIT defines. To be used explicitly for callback.</p><h3 id="proc/_addtimer"><aside class="declaration">proc </aside>_addtimer<aside>(/<a href="datum.html">datum</a>/<a href="datum/callback.html">callback</a>/callback, wait, flags, file, line) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/timer.dm#L528">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;timer.dm 528"/></a></aside>
+        </h3>
+        <p>Create a new timer and insert it in the queue.
+You should not call this directly, and should instead use the addtimer macro, which includes source information.</p>
+<p>Arguments:</p>
+<ul>
+<li>callback the callback to call on timer finish</li>
+<li>wait deciseconds to run the timer for</li>
+<li>flags flags for this timer, see: code__DEFINES\subsystems.dm</li>
+</ul><h3 id="proc/_turf_in_offset"><aside class="declaration">proc </aside>_turf_in_offset<aside>(s, x, y, z) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/SDQL2/SDQL_2_wrappers.dm#L224">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;SDQL2&#x2F;SDQL_2_wrappers.dm 224"/></a></aside>
+        </h3>
+        <p>Locating turfs</p><h3 id="proc/actionspeed_data_null_check"><aside class="declaration">proc </aside>actionspeed_data_null_check<aside>(/<a href="datum.html">datum</a>/<a href="datum/actionspeed_modifier.html">actionspeed_modifier</a>/M) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/actionspeed/_actionspeed_modifier.dm#L174">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;actionspeed&#x2F;_actionspeed_modifier.dm 174"/></a></aside>
+        </h3>
+        <p>Checks if a action speed modifier is valid and not missing any data</p><h3 id="proc/add_keybinding"><aside class="declaration">proc </aside>add_keybinding<aside>(/<a href="datum.html">datum</a>/<a href="datum/keybinding.html">keybinding</a>/instance) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_globalvars/lists/keybindings.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_globalvars&#x2F;lists&#x2F;keybindings.dm 11"/></a></aside>
+        </h3>
+        <p>Adds an instanced keybinding to the global tracker</p><h3 id="proc/add_verb"><aside class="declaration">proc </aside>add_verb<aside>(/<a href="client.html">client</a>/target, verb_or_list_to_add) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/verbs.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;verbs.dm 9"/></a></aside>
+        </h3>
+        <p>handles adding verbs and updating the stat panel browser</p>
+<p>pass the verb type path to this instead of adding it directly to verbs so the statpanel can update
+Arguments:</p>
+<ul>
+<li>target - Who the verb is being added to, client or mob typepath</li>
+<li>verb - typepath to a verb, or a list of verbs, supports lists of lists</li>
+</ul><h3 id="proc/block_calculate_resultant_damage"><aside class="declaration">proc </aside>block_calculate_resultant_damage<aside>(damage, /list/block_return) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/living_block.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_block.dm 103"/></a></aside>
+        </h3>
+        <p>Considers a block return_list and calculates damage to use from that.</p><h3 id="proc/callHook"><aside class="declaration">proc </aside>callHook<aside>(hook, /list/args) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/hooks.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;hooks.dm 26"/></a></aside>
+        </h3>
+        <p>@file hooks.dm
+Implements hooks, a simple way to run code on pre-defined events.</p>
+<ul>
+<li>
+<p>@page hooks Code hooks</p>
+</li>
+<li>
+<p>@section hooks Hooks</p>
+</li>
+<li>
+<p>A hook is defined under /hook in the type tree.</p>
+</li>
+<li>
+<p>To add some code to be called by the hook, define a proc under the type, as so:</p>
+</li>
+<li>
+<p>@code
+/hook/foo/proc/bar()
+if(1)
+return 1 //Sucessful
+else
+return 0 //Error, or runtime.</p>
+</li>
+<li>
+<p>@endcode</p>
+</li>
+<li>
+<p>All hooks must return nonzero on success, as runtimes will force return null.</p>
+</li>
+</ul>
+<p>Calls a hook, executing every piece of code that's attached to it.
+@param hook	Identifier of the hook to call.
+@returns		1 if all hooked code runs successfully, 0 otherwise.</p><h3 id="proc/callback_select"><aside class="declaration">proc </aside>callback_select<aside>(/list/callbacks, /list/callback_args, savereturns, resolution) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/callback.dm#L205">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;callback.dm 205"/></a></aside>
+        </h3>
+        <p>Runs a list of callbacks asyncronously, returning only when all have finished</p>
+<p>Callbacks can be repeated, to call it multiple times</p>
+<p>Arguments:</p>
+<ul>
+<li>list/callbacks the list of callbacks to be called</li>
+<li>list/callback_args the list of lists of arguments to pass into each callback</li>
+<li>savereturns Optionally save and return the list of returned values from each of the callbacks</li>
+<li>resolution The number of byond ticks between each time you check if all callbacks are complete</li>
+</ul><h3 id="proc/completed_bounty_count"><aside class="declaration">proc </aside>completed_bounty_count<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/cargo/bounty.dm#L181">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;cargo&#x2F;bounty.dm 181"/></a></aside>
+        </h3>
+        <p>Subtype Gens</p>
+<p>Strict Type Gens</p>
+<p>Dynamic Gens</p>
+<p>Cutoff for Non-Low Priority Bounties</p>
+<p>Low Priority Gens</p><h3 id="proc/create_mafia_game"><aside class="declaration">proc </aside>create_mafia_game<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mafia/controller.dm#L981">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mafia&#x2F;controller.dm 981"/></a></aside>
+        </h3>
+        <p>Creates the global datum for playing mafia games, destroys the last if that's required and returns the new.</p><h3 id="proc/cultslur"><aside class="declaration">proc </aside>cultslur<aside>(phrase) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_helpers.dm#L108">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_helpers.dm 108"/></a></aside>
+        </h3>
+        <p>Makes you talk like you got cult stunned, which is slurring but with some dark messages</p><h3 id="proc/debug_variable"><aside class="declaration">proc </aside>debug_variable<aside>(name, value, level, /<a href="datum.html">datum</a>/D, sanitize) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/view_variables/debug_variables.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;view_variables&#x2F;debug_variables.dm 3"/></a></aside>
+        </h3>
+        <p>Get displayed variable in VV variable list</p><h3 id="proc/deltimer"><aside class="declaration">proc </aside>deltimer<aside>(id) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/timer.dm#L577">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;timer.dm 577"/></a></aside>
+        </h3>
+        <p>Delete a timer</p>
+<p>Arguments:</p>
+<ul>
+<li>id a timerid or a /datum/timedevent</li>
+</ul><h3 id="proc/end_cooldown"><aside class="declaration">proc </aside>end_cooldown<aside>(/<a href="datum.html">datum</a>/source, index) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/datum.dm#L243">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 243"/></a></aside>
+        </h3>
+        <p>Callback called by a timer to end an associative-list-indexed cooldown.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - datum storing the cooldown</li>
+<li>index - string index storing the cooldown on the cooldowns associative list</li>
+</ul>
+<p>This sends a signal reporting the cooldown end.</p><h3 id="proc/english_list_assoc"><aside class="declaration">proc </aside>english_list_assoc<aside>(/list/input, nothing_text, and_text, comma_text, final_comma_text) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/_lists.dm#L95">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;_lists.dm 95"/></a></aside>
+        </h3>
+        <p>English_list but associative supporting. Higher overhead.</p><h3 id="proc/firing_squad"><aside class="declaration">proc </aside>firing_squad<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/target, /<a href="turf.html">turf</a>/source_turf, body_zone, wound_bonus, damage) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/randomverbs.dm#L1525">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;randomverbs.dm 1525"/></a></aside>
+        </h3>
+        <p>firing_squad is a proc for the :B:erforate smite to shoot each individual bullet at them, so that we can add actual delays without sleep() nonsense</p>
+<p>Hilariously, if you drag someone away mid smite, the bullets will still chase after them from the original spot, possibly hitting other people. Too funny to fix imo</p>
+<p>Arguments:</p>
+<ul>
+<li>target- guy we're shooting obviously</li>
+<li>source_turf- where the bullet begins, preferably on a turf next to the target</li>
+<li>body_zone- which bodypart we're aiming for, if there is one there</li>
+<li>wound_bonus- the wounding power we're assigning to the bullet, since we don't care about the base one</li>
+<li>damage- the damage we're assigning to the bullet, since we don't care about the base one</li>
+</ul><h3 id="proc/generate_asset_name"><aside class="declaration">proc </aside>generate_asset_name<aside>(file) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/icons.dm#L1112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;icons.dm 1112"/></a></aside>
+        </h3>
+        <p>Generate a filename for this asset
+The same asset will always lead to the same asset name
+(Generated names do not include file extention.)</p><h3 id="proc/generate_chemwiki_line"><aside class="declaration">proc </aside>generate_chemwiki_line<aside>(/<a href="datum.html">datum</a>/<a href="datum/reagent.html">reagent</a>/R, X, processCR) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/reagents/chem_wiki_render.dm#L191">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;reagents&#x2F;chem_wiki_render.dm 191"/></a></aside>
+        </h3>
+        <p>datum/reagent/medicine, /datum/reagent/toxin, /datum/reagent/consumable, /datum/reagent/plantnutriment, /datum/reagent/uranium,
+datum/reagent/colorful_reagent, /datum/reagent/mutationtoxin, /datum/reagent/fermi, /datum/reagent/drug, /datum/reagent/impure</p><h3 id="proc/generate_selectable_species"><aside class="declaration">proc </aside>generate_selectable_species<aside>(clear) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/living/carbon/human/species.dm#L235">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 235"/></a></aside>
+        </h3>
+        <p>Generates species available to choose in character setup at roundstart</p>
+<p>This proc generates which species are available to pick from in character setup.
+If there are no available roundstart species, defaults to human.</p><h3 id="proc/get_allowed_instrument_ids"><aside class="declaration">proc </aside>get_allowed_instrument_ids<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/instruments/instrument_data/_instrument_data.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;instruments&#x2F;instrument_data&#x2F;_instrument_data.dm 16"/></a></aside>
+        </h3>
+        <p>Get all non admin_only instruments.</p><h3 id="proc/get_base_area"><aside class="declaration">proc </aside>get_base_area<aside>(/<a href="atom.html">atom</a>/target) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/areas.dm#L196">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;areas.dm 196"/></a></aside>
+        </h3>
+        <p>Returns the base area the target is located in if there is one.
+Alternatively, returns the area as is.</p><h3 id="proc/get_bbox_of_atoms"><aside class="declaration">proc </aside>get_bbox_of_atoms<aside>(/list/atoms) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/game.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;game.dm 64"/></a></aside>
+        </h3>
+        <p>Get a bounding box of a list of atoms.</p>
+<p>Arguments:</p>
+<ul>
+<li>atoms - List of atoms. Can accept output of view() and range() procs.</li>
+</ul>
+<p>Returns: list(x1, y1, x2, y2)</p><h3 id="proc/get_cached_actionspeed_modifier"><aside class="declaration">proc </aside>get_cached_actionspeed_modifier<aside>(modtype) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/actionspeed/_actionspeed_modifier.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;actionspeed&#x2F;_actionspeed_modifier.dm 48"/></a></aside>
+        </h3>
+        <p>Grabs a STATIC MODIFIER datum from cache. YOU MUST NEVER EDIT THESE DATUMS, OR IT WILL AFFECT ANYTHING ELSE USING IT TOO!</p><h3 id="proc/get_cached_movespeed_modifier"><aside class="declaration">proc </aside>get_cached_movespeed_modifier<aside>(modtype) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 75"/></a></aside>
+        </h3>
+        <p>Grabs a STATIC MODIFIER datum from cache. YOU MUST NEVER EDIT THESE DATUMS, OR IT WILL AFFECT ANYTHING ELSE USING IT TOO!</p><h3 id="proc/get_ranged_target_turf_direct"><aside class="declaration">proc </aside>get_ranged_target_turf_direct<aside>(/<a href="atom.html">atom</a>/A, /<a href="atom.html">atom</a>/target, range, offset) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/unsorted.dm#L434">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;unsorted.dm 434"/></a></aside>
+        </h3>
+        <p>Get ranged target turf, but with direct targets as opposed to directions</p>
+<p>Starts at atom A and gets the exact angle between A and target
+Moves from A with that angle, Range amount of times, until it stops, bound to map size
+Arguments:</p>
+<ul>
+<li>A - Initial Firer / Position</li>
+<li>target - Target to aim towards</li>
+<li>range - Distance of returned target turf from A</li>
+<li>offset - Angle offset, 180 input would make the returned target turf be in the opposite direction</li>
+</ul><h3 id="proc/get_sub_areas"><aside class="declaration">proc </aside>get_sub_areas<aside>(/<a href="atom.html">atom</a>/target, include_base) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/areas.dm#L206">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;areas.dm 206"/></a></aside>
+        </h3>
+        <p>Returns either null, or a list containing every sub area associated with our base area.
+If include_base is TRUE, the base area will also be added to the return list.</p><h3 id="proc/get_sub_areas_contents"><aside class="declaration">proc </aside>get_sub_areas_contents<aside>(/<a href="area.html">area</a>/A, include_base) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/areas.dm#L236">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;areas.dm 236"/></a></aside>
+        </h3>
+        <p>Simple proc that returns a sum of all contents from every sub area,
+Think of the above but for all contents, not just turfs, and without target z.</p><h3 id="proc/get_sub_areas_turfs"><aside class="declaration">proc </aside>get_sub_areas_turfs<aside>(/<a href="area.html">area</a>/A, target_z, include_base) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/areas.dm#L225">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;areas.dm 225"/></a></aside>
+        </h3>
+        <p>Proc used for purposes similar to get_areas_turfs(), but aimed to include associated areas.
+Only accepts area instances and paths for the first arg, no text strings.
+Returns a list of all turfs found in the sub areas (including the base's if include_base is TRUE)
+and located in a z level matching target_z, or anywhere if target_z is 0</p><h3 id="proc/getleftblocks"><aside class="declaration">proc </aside>getleftblocks<aside>(input, blocknumber, blocksize) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/dna.dm#L550">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;dna.dm 550"/></a></aside>
+        </h3>
+        <p>DNA HELPER-PROCS</p><h3 id="proc/hull_shielding_get_tiles_around_area"><aside class="declaration">proc </aside>hull_shielding_get_tiles_around_area<aside>(/<a href="area.html">area</a>/instance, check_tick) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/shielding/helpers.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;shielding&#x2F;helpers.dm 10"/></a></aside>
+        </h3>
+        <p>HELPER FILE FOR SHIELDING
+Gets hull exterior adjacent tiles of a certain area
+Area method.
+EXPENSIVE.
+If the area itself is already considered exterior, it'll find all tiles inside it that's next to an interior area.</p><h3 id="proc/hull_shielding_get_tiles_in_z"><aside class="declaration">proc </aside>hull_shielding_get_tiles_in_z<aside>(zlevel, check_tick, recurse, /list/outlist, /list/scanned_zlevels) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/shielding/helpers.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;shielding&#x2F;helpers.dm 38"/></a></aside>
+        </h3>
+        <p>Gets hull adjacent exterior tiles of an entire zlevel
+EXPENSIVE.
+Gets the tiles in the exterior area touching to a non-exterior area</p><h3 id="proc/icon2base64"><aside class="declaration">proc </aside>icon2base64<aside>(/icon/icon) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/icons.dm#L1120">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;icons.dm 1120"/></a></aside>
+        </h3>
+        <p>Converts an icon to base64. Operates by putting the icon in the iconCache savefile,
+exporting it as text, and then parsing the base64 from that.
+(This relies on byond automatically storing icons in savefiles as base64)</p><h3 id="proc/init_keybindings"><aside class="declaration">proc </aside>init_keybindings<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/_globalvars/lists/keybindings.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;_globalvars&#x2F;lists&#x2F;keybindings.dm 2"/></a></aside>
+        </h3>
+        <p>Creates and sorts all the keybinding datums</p><h3 id="proc/is_energy_reflectable_projectile"><aside class="declaration">proc </aside>is_energy_reflectable_projectile<aside>(/<a href="atom.html">atom</a>/A) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/projectiles/projectile.dm#L839">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;projectile.dm 839"/></a></aside>
+        </h3>
+        <p>//// MISC HELPERS ////////
+Is this atom reflectable with &quot;&quot;standardized&quot;&quot; reflection methods like you know eshields and deswords and similar</p><h3 id="proc/json_deserialize_datum"><aside class="declaration">proc </aside>json_deserialize_datum<aside>(/list/jsonlist, /list/options, target_type, strict_target_type) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/datum.dm#L203">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 203"/></a></aside>
+        </h3>
+        <p>Convert a list of json to datum</p><h3 id="proc/json_serialize_datum"><aside class="declaration">proc </aside>json_serialize_datum<aside>(/<a href="datum.html">datum</a>/D, /list/options) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/datum.dm#L194">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 194"/></a></aside>
+        </h3>
+        <p>Convert a datum into a json blob</p><h3 id="proc/load_map"><aside class="declaration">proc </aside>load_map<aside>(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, x_lower, x_upper, y_lower, y_upper, placeOnTop, orientation, annihilate_tiles, crop_relative_to_game_world) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mapping/reader.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mapping&#x2F;reader.dm 60"/></a></aside>
+        </h3>
+        <p>Shortcut function to parse a map and apply it to the world.</p>
+<ul>
+<li><code>dmm_file</code>: A .dmm file to load (Required).</li>
+<li><code>x_offset</code>, <code>y_offset</code>, <code>z_offset</code>: Positions representign where to load the map (Optional).</li>
+<li><code>cropMap</code>: When true, the map will be cropped to fit the existing world dimensions (Optional).</li>
+<li><code>measureOnly</code>: When true, no changes will be made to the world (Optional).</li>
+<li><code>no_changeturf</code>: When true, <a href="turf.html" title="/turf">turf/AfterChange</a> won't be called on loaded turfs</li>
+<li><code>x_lower</code>, <code>x_upper</code>, <code>y_lower</code>, <code>y_upper</code>: Coordinates (relative to the game world) to crop to (Optional).</li>
+<li><code>placeOnTop</code>: Whether to use <a href="turf.html" title="/turf">turf/PlaceOnTop</a> rather than <a href="turf.html" title="/turf">turf/ChangeTurf</a> (Optional).</li>
+</ul><h3 id="proc/log_combat"><aside class="declaration">proc </aside>log_combat<aside>(/<a href="atom.html">atom</a>/user, /<a href="atom.html">atom</a>/target, what_done, /<a href="atom.html">atom</a>/object, addition) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1152">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1152"/></a></aside>
+        </h3>
+        <p>Log a combat message in the attack log</p>
+<p>Arguments:</p>
+<ul>
+<li>atom/user - argument is the actor performing the action</li>
+<li>atom/target - argument is the target of the action</li>
+<li>what_done - is a verb describing the action (e.g. punched, throwed, kicked, etc.)</li>
+<li>atom/object - is a tool with which the action was made (usually an item)</li>
+<li>addition - is any additional text, which will be appended to the rest of the log line</li>
+</ul><h3 id="proc/log_tgui"><aside class="declaration">proc </aside>log_tgui<aside>(user, message, context, /<a href="datum.html">datum</a>/<a href="datum/tgui_window.html">tgui_window</a>/window, /<a href="datum.html">datum</a>/src_object) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/_logging.dm#L211">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;_logging.dm 211"/></a></aside>
+        </h3>
+        <p>Appends a tgui-related log entry. All arguments are optional.</p><h3 id="proc/log_wound"><aside class="declaration">proc </aside>log_wound<aside>(/<a href="atom.html">atom</a>/victim, /<a href="datum.html">datum</a>/<a href="datum/wound.html">wound</a>/suffered_wound, dealt_damage, dealt_wound_bonus, dealt_bare_wound_bonus, base_roll) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/atoms.dm#L1189">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms.dm 1189"/></a></aside>
+        </h3>
+        <p>log_wound() is for when someone is <em>attacked</em> and suffers a wound. Note that this only captures wounds from damage, so smites/forced wounds aren't logged, as well as demotions like cuts scabbing over</p>
+<p>Note that this has no info on the attack that dealt the wound: information about where damage came from isn't passed to the bodypart's damaged proc. When in doubt, check the attack log for attacks at that same time
+TODO later: Add logging for healed wounds, though that will require some rewriting of healing code to prevent admin heals from spamming the logs. Not high priority</p>
+<p>Arguments:</p>
+<ul>
+<li>victim- The guy who got wounded</li>
+<li>suffered_wound- The wound, already applied, that we're logging. It has to already be attached so we can get the limb from it</li>
+<li>dealt_damage- How much damage is associated with the attack that dealt with this wound.</li>
+<li>dealt_wound_bonus- The wound_bonus, if one was specified, of the wounding attack</li>
+<li>dealt_bare_wound_bonus- The bare_wound_bonus, if one was specified <em>and applied</em>, of the wounding attack. Not shown if armor was present</li>
+<li>base_roll- Base wounding ability of an attack is a random number from 1 to (dealt_damage ** WOUND_DAMAGE_EXPONENT). This is the number that was rolled in there, before mods</li>
+</ul><h3 id="proc/make_datum_references_lists"><aside class="declaration">proc </aside>make_datum_references_lists<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/global_lists.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;global_lists.dm 5"/></a></aside>
+        </h3>
+        <p>Initial Building</p><h3 id="proc/md5asfile"><aside class="declaration">proc </aside>md5asfile<aside>(file) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/files.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;files.dm 81"/></a></aside>
+        </h3>
+        <p>Save file as an external file then md5 it.
+Used because md5ing files stored in the rsc sometimes gives incorrect md5 results.</p><h3 id="proc/md5filepath"><aside class="declaration">proc </aside>md5filepath<aside>(path) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/files.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;files.dm 76"/></a></aside>
+        </h3>
+        <p>Returns the md5 of a file at a given path.</p><h3 id="proc/message_centcom"><aside class="declaration">proc </aside>message_centcom<aside>(text, /<a href="mob.html">mob</a>/sender) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/pray.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;pray.dm 59"/></a></aside>
+        </h3>
+        <p>Used by communications consoles to message CentCom</p><h3 id="proc/message_syndicate"><aside class="declaration">proc </aside>message_syndicate<aside>(text, /<a href="mob.html">mob</a>/sender) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/pray.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;pray.dm 67"/></a></aside>
+        </h3>
+        <p>Used by communications consoles to message the Syndicate</p><h3 id="proc/message_to_html"><aside class="declaration">proc </aside>message_to_html<aside>(message) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgchat/message.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgchat&#x2F;message.dm 14"/></a></aside>
+        </h3>
+        <p>Message-related procs</p>
+<p>Message format (/list):</p>
+<ul>
+<li>type - Message type, must be one of defines in <code>code/__DEFINES/chat.dm</code></li>
+<li>text - Plain message text</li>
+<li>html - HTML message text</li>
+<li>Optional metadata, can be any key/value pair.</li>
+</ul>
+<p>Copyright (c) 2020 Aleksej Komarov
+SPDX-License-Identifier: MIT</p><h3 id="proc/movespeed_data_null_check"><aside class="declaration">proc </aside>movespeed_data_null_check<aside>(/<a href="datum.html">datum</a>/<a href="datum/movespeed_modifier.html">movespeed_modifier</a>/M) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/movespeed/_movespeed_modifier.dm#L263">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;movespeed&#x2F;_movespeed_modifier.dm 263"/></a></aside>
+        </h3>
+        <p>Checks if a move speed modifier is valid and not missing any data</p><h3 id="proc/nuke_request"><aside class="declaration">proc </aside>nuke_request<aside>(text, /<a href="mob.html">mob</a>/sender) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/pray.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;pray.dm 75"/></a></aside>
+        </h3>
+        <p>Used by communications consoles to request the nuclear launch codes</p><h3 id="proc/process_teleport_locs"><aside class="declaration">proc </aside>process_teleport_locs<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/area/areas.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;area&#x2F;areas.dm 151"/></a></aside>
+        </h3>
+        <p>Generate a list of turfs you can teleport to from the areas list</p>
+<p>Includes areas if they're not a shuttle or not not teleport or have no contents</p>
+<p>The chosen turf is the first item in the areas contents that is a station level</p>
+<p>The returned list of turfs is sorted by name</p><h3 id="proc/qdel"><aside class="declaration">proc </aside>qdel<aside>(/<a href="datum.html">datum</a>/D, force, ...) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/garbage.dm#L306">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;garbage.dm 306"/></a></aside>
+        </h3>
+        <p>Should be treated as a replacement for the 'del' keyword.</p>
+<p>Datums passed to this will be given a chance to clean up references to allow the GC to collect them.</p><h3 id="proc/recursive_organ_check"><aside class="declaration">proc </aside>recursive_organ_check<aside>(/<a href="atom.html">atom</a>/O) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/game.dm#L176">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;game.dm 176"/></a></aside>
+        </h3>
+        <ul>
+<li>recursive_organ_check
+<ul>
+<li>inputs: O (object to start with)</li>
+<li>outputs:</li>
+<li>description: A pseudo-recursive loop based off of the recursive mob check, this check looks for any organs held</li>
+<li>
+<pre><code>		 within 'O', toggling their frozen flag. This check excludes items held within other safe organ
+</code></pre>
+</li>
+<li>
+<pre><code>		 storage units, so that only the lowest level of container dictates whether we do or don't decompose
+</code></pre>
+</li>
+</ul>
+</li>
+</ul><h3 id="proc/release_gas_to"><aside class="declaration">proc </aside>release_gas_to<aside>(/<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/input_air, /<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/output_air, target_pressure) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/atmospherics/gasmixtures/gas_mixture.dm#L376">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;atmospherics&#x2F;gasmixtures&#x2F;gas_mixture.dm 376"/></a></aside>
+        </h3>
+        <p>Releases gas from src to output air. This means that it can not transfer air to gas mixture with higher pressure.
+a global proc due to rustmos</p><h3 id="proc/remove_verb"><aside class="declaration">proc </aside>remove_verb<aside>(/<a href="client.html">client</a>/target, verb_or_list_to_remove) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/verbs.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;verbs.dm 58"/></a></aside>
+        </h3>
+        <p>handles removing verb and sending it to browser to update, use this for removing verbs</p>
+<p>pass the verb type path to this instead of removing it from verbs so the statpanel can update
+Arguments:</p>
+<ul>
+<li>target - Who the verb is being removed from, client or mob typepath</li>
+<li>verb - typepath to a verb, or a list of verbs, supports lists of lists</li>
+</ul><h3 id="proc/reset_cooldown"><aside class="declaration">proc </aside>reset_cooldown<aside>(/<a href="datum.html">datum</a>/source, index) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/datum.dm#L259">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 259"/></a></aside>
+        </h3>
+        <p>Proc used by stoppable timers to end a cooldown before the time has ran out.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - datum storing the cooldown</li>
+<li>index - string index storing the cooldown on the cooldowns associative list</li>
+</ul>
+<p>This sends a signal reporting the cooldown end, passing the time left as an argument.</p><h3 id="proc/rgb_construct_color_matrix"><aside class="declaration">proc </aside>rgb_construct_color_matrix<aside>(rr, rg, rb, gr, gg, gb, br, bg, bb, cr, cg, cb) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/matrices.dm#L184">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;matrices.dm 184"/></a></aside>
+        </h3>
+        <p>Assembles a color matrix, defaulting to identity</p><h3 id="proc/sanitize_css_class_name"><aside class="declaration">proc </aside>sanitize_css_class_name<aside>(name) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/asset_cache/asset_list_items.dm#L563">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;asset_cache&#x2F;asset_list_items.dm 563"/></a></aside>
+        </h3>
+        <p>Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts</p><h3 id="proc/sanitize_hexcolor"><aside class="declaration">proc </aside>sanitize_hexcolor<aside>(color, desired_format, include_crunch, default, default_replacement) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/sanitize_values.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;sanitize_values.dm 68"/></a></aside>
+        </h3>
+        <p>Sanitizes a hexadecimal color. Always outputs lowercase.</p>
+<p>@params</p>
+<ul>
+<li>color - input color, 3 or 6 characters without the #.</li>
+<li>desired_format - 3 or 6 characters without the potential #. can only put in 3 or 6 here.</li>
+<li>include_crunch - do we put a # at the start</li>
+<li>default - default color. must be 3 or 6 characters with or without #.</li>
+<li>default_replacement - what we replace broken letters with.</li>
+</ul><h3 id="proc/scramble_message_replace_chars"><aside class="declaration">proc </aside>scramble_message_replace_chars<aside>(original, replaceprob, /list/replacementchars, replace_letters_only, replace_whitespace) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/text.dm#L803">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;text.dm 803"/></a></aside>
+        </h3>
+        <p>Slightly expensive proc to scramble a message using equal probabilities of character replacement from a list. DOES NOT SUPPORT HTML!</p><h3 id="proc/seedify"><aside class="declaration">proc </aside>seedify<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/O, t_max, /<a href="obj.html">obj</a>/<a href="obj/machinery/seed_extractor.html">machinery/seed_extractor</a>/extractor, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/hydroponics/seed_extractor.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;hydroponics&#x2F;seed_extractor.dm 16"/></a></aside>
+        </h3>
+        <p>Finds and extracts seeds from an object</p>
+<p>Checks if the object is such that creates a seed when extracted.  Used by seed
+extractors or posably anything that would create seeds in some way.  The seeds
+are dropped either at the extractor, if it exists, or where the original object
+was and it qdel's the object</p>
+<p>Arguments:</p>
+<ul>
+<li>O - Object containing the seed, can be the loc of the dumping of seeds</li>
+<li>t_max - Amount of seed copies to dump, -1 is ranomized</li>
+<li>extractor - Seed Extractor, used as the dumping loc for the seeds and seed multiplier</li>
+<li>user - checks if we can remove the object from the inventory</li>
+</ul><h3 id="proc/send2adminchat"><aside class="declaration">proc </aside>send2adminchat<aside>(category, message, embed_links) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/chat.dm#L69">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;chat.dm 69"/></a></aside>
+        </h3>
+        <p>Sends a message to TGS admin chat channels.</p>
+<p>category - The category of the mssage.
+message - The message to send.</p><h3 id="proc/send2chat"><aside class="declaration">proc </aside>send2chat<aside>(message, channel_tag) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/chat.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;chat.dm 44"/></a></aside>
+        </h3>
+        <p>Sends a message to TGS chat channels.</p>
+<p>message - The message to send.
+channel_tag - Required. If &quot;&quot;, the message with be sent to all connected (Game-type for TGS3) channels. Otherwise, it will be sent to TGS4 channels with that tag (Delimited by ','s).</p><h3 id="proc/send2otherserver"><aside class="declaration">proc </aside>send2otherserver<aside>(source, msg, type, target_servers, /list/additional_data) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/admin/verbs/adminhelp.dm#L612">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;verbs&#x2F;adminhelp.dm 612"/></a></aside>
+        </h3>
+        <p>Sends a message to a set of cross-communications-enabled servers using world topic calls</p>
+<p>Arguments:</p>
+<ul>
+<li>source - Who sent this message</li>
+<li>msg - The message body</li>
+<li>type - The type of message, becomes the topic command under the hood</li>
+<li>target_servers - A collection of servers to send the message to, defined in config</li>
+<li>additional_data - An (optional) associated list of extra parameters and data to send with this world topic call</li>
+</ul><h3 id="proc/slur"><aside class="declaration">proc </aside>slur<aside>(phrase, strength) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_helpers.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_helpers.dm 71"/></a></aside>
+        </h3>
+        <p>Makes you speak like you're drunk</p><h3 id="proc/sound_to_playing_players"><aside class="declaration">proc </aside>sound_to_playing_players<aside>(soundin, volume, vary, frequency, channel, pressure_affected, /sound/S) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/sound.dm#L202">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;sound.dm 202"/></a></aside>
+        </h3>
+        <p>Citadel edit - Citadel reverb
+End</p><h3 id="proc/stars"><aside class="declaration">proc </aside>stars<aside>(phrase, probability) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_helpers.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_helpers.dm 53"/></a></aside>
+        </h3>
+        <p>Convert random parts of a passed in message to stars</p>
+<ul>
+<li>phrase - the string to convert</li>
+<li>probability - probability any character gets changed</li>
+</ul>
+<p>This proc is dangerously laggy, avoid it or die</p><h3 id="proc/stripped_multiline_input_or_reflect"><aside class="declaration">proc </aside>stripped_multiline_input_or_reflect<aside>(/<a href="mob.html">mob</a>/user, message, title, default, max_length, no_trim) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/text.dm#L115">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;text.dm 115"/></a></aside>
+        </h3>
+        <p>stripped_multiline_input but reflects to the user instead if it's too big and returns null.</p><h3 id="proc/stutter"><aside class="declaration">proc </aside>stutter<aside>(phrase) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/mob/mob_helpers.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;mob_helpers.dm 155"/></a></aside>
+        </h3>
+        <p>Adds stuttering to the message passed in</p><h3 id="proc/tgui_Topic"><aside class="declaration">proc </aside>tgui_Topic<aside>(href_list) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/external.dm#L172">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;external.dm 172"/></a></aside>
+        </h3>
+        <p>Middleware for /client/Topic.</p>
+<p>return bool If TRUE, prevents propagation of the topic call.</p><h3 id="proc/tgui_alert"><aside class="declaration">proc </aside>tgui_alert<aside>(/<a href="mob.html">mob</a>/user, message, title, /list/buttons, timeout) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/tgui_alert.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;tgui_alert.dm 12"/></a></aside>
+        </h3>
+        <p>Creates a TGUI alert window and returns the user's response.</p>
+<p>This proc should be used to create alerts that the caller will wait for a response from.
+Arguments:</p>
+<ul>
+<li>user - The user to show the alert to.</li>
+<li>message - The content of the alert, shown in the body of the TGUI window.</li>
+<li>title - The of the alert modal, shown on the top of the TGUI window.</li>
+<li>buttons - The options that can be chosen by the user, each string is assigned a button on the UI.</li>
+<li>timeout - The timeout of the alert, after which the modal will close and qdel itself. Set to zero for no timeout.</li>
+</ul><h3 id="proc/tgui_alert_async"><aside class="declaration">proc </aside>tgui_alert_async<aside>(/<a href="mob.html">mob</a>/user, message, title, /list/buttons, /<a href="datum.html">datum</a>/<a href="datum/callback.html">callback</a>/callback, timeout) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/tgui_alert.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;tgui_alert.dm 40"/></a></aside>
+        </h3>
+        <p>Creates an asynchronous TGUI alert window with an associated callback.</p>
+<p>This proc should be used to create alerts that invoke a callback with the user's chosen option.
+Arguments:</p>
+<ul>
+<li>user - The user to show the alert to.</li>
+<li>message - The content of the alert, shown in the body of the TGUI window.</li>
+<li>title - The of the alert modal, shown on the top of the TGUI window.</li>
+<li>buttons - The options that can be chosen by the user, each string is assigned a button on the UI.</li>
+<li>callback - The callback to be invoked when a choice is made.</li>
+<li>timeout - The timeout of the alert, after which the modal will close and qdel itself. Disabled by default, can be set to seconds otherwise.</li>
+</ul><h3 id="proc/tgui_input_list"><aside class="declaration">proc </aside>tgui_input_list<aside>(/<a href="mob.html">mob</a>/user, message, title, /list/buttons, timeout) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/tgui_input_list.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;tgui_input_list.dm 12"/></a></aside>
+        </h3>
+        <p>Creates a TGUI input list window and returns the user's response.</p>
+<p>This proc should be used to create alerts that the caller will wait for a response from.
+Arguments:</p>
+<ul>
+<li>user - The user to show the input box to.</li>
+<li>message - The content of the input box, shown in the body of the TGUI window.</li>
+<li>title - The title of the input box, shown on the top of the TGUI window.</li>
+<li>buttons - The options that can be chosen by the user, each string is assigned a button on the UI.</li>
+<li>timeout - The timeout of the input box, after which the input box will close and qdel itself. Set to zero for no timeout.</li>
+</ul><h3 id="proc/tgui_input_list_async"><aside class="declaration">proc </aside>tgui_input_list_async<aside>(/<a href="mob.html">mob</a>/user, message, title, /list/buttons, /<a href="datum.html">datum</a>/<a href="datum/callback.html">callback</a>/callback, timeout) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgui/tgui_input_list.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgui&#x2F;tgui_input_list.dm 42"/></a></aside>
+        </h3>
+        <p>Creates an asynchronous TGUI input list window with an associated callback.</p>
+<p>This proc should be used to create inputs that invoke a callback with the user's chosen option.
+Arguments:</p>
+<ul>
+<li>user - The user to show the input box to.</li>
+<li>message - The content of the input box, shown in the body of the TGUI window.</li>
+<li>title - The title of the input box, shown on the top of the TGUI window.</li>
+<li>buttons - The options that can be chosen by the user, each string is assigned a button on the UI.</li>
+<li>callback - The callback to be invoked when a choice is made.</li>
+<li>timeout - The timeout of the input box, after which the menu will close and qdel itself. Set to zero for no timeout.</li>
+</ul><h3 id="proc/timeleft"><aside class="declaration">proc </aside>timeleft<aside>(id) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/controllers/subsystem/timer.dm#L598">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystem&#x2F;timer.dm 598"/></a></aside>
+        </h3>
+        <p>Get the remaining deciseconds on a timer</p>
+<p>Arguments:</p>
+<ul>
+<li>id a timerid or a /datum/timedevent</li>
+</ul><h3 id="proc/to_chat"><aside class="declaration">proc </aside>to_chat<aside>(target, html, type, text, avoid_highlighting, handle_whitespace, trailing_newline, confidential) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgchat/to_chat.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgchat&#x2F;to_chat.dm 56"/></a></aside>
+        </h3>
+        <p>Sends the message to the recipient (target).</p>
+<p>Recommended way to write to_chat calls:</p>
+<pre><code>to_chat(client,
+    type = MESSAGE_TYPE_INFO,
+    html = &quot;You have found &lt;strong&gt;[object]&lt;/strong&gt;&quot;)
+</code></pre><h3 id="proc/to_chat_immediate"><aside class="declaration">proc </aside>to_chat_immediate<aside>(target, html, type, text, avoid_highlighting, handle_whitespace, trailing_newline, confidential) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/tgchat/to_chat.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tgchat&#x2F;to_chat.dm 10"/></a></aside>
+        </h3>
+        <p>Circumvents the message queue and sends the message
+to the recipient (target) as soon as possible.</p><h3 id="proc/url2htmlloader"><aside class="declaration">proc </aside>url2htmlloader<aside>(url) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/type2type.dm#L626">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;type2type.dm 626"/></a></aside>
+        </h3>
+        <p>Return html to load a url.
+for use inside of browse() calls to html assets that might be loaded on a cdn.</p><h3 id="proc/valid_window_location"><aside class="declaration">proc </aside>valid_window_location<aside>(/<a href="turf.html">turf</a>/dest_turf, test_dir, is_fulltile) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/unsorted.dm#L1264">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;unsorted.dm 1264"/></a></aside>
+        </h3>
+        <p>Checks whether the target turf is in a valid state to accept a directional window
+or other directional pseudo-dense object such as railings.</p>
+<p>Returns FALSE if the target turf cannot accept a directional window or railing.
+Returns TRUE otherwise.</p>
+<p>Arguments:</p>
+<ul>
+<li>dest_turf - The destination turf to check for existing windows and railings</li>
+<li>test_dir - The prospective dir of some atom you'd like to put on this turf.</li>
+<li>is_fulltile - Whether the thing you're attempting to move to this turf takes up the entire tile or whether it supports multiple movable atoms on its tile.</li>
+</ul><h3 id="proc/velvetspeech"><aside class="declaration">proc </aside>velvetspeech<aside>(message, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, base_multiplier, message_admins, debug) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/surgery/organs/vocal_cords.dm#L642">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;surgery&#x2F;organs&#x2F;vocal_cords.dm 642"/></a></aside>
+        </h3>
+        <p>FermiChem</p><h3 id="proc/voice_of_god"><aside class="declaration">proc </aside>voice_of_god<aside>(message, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, /list/span_list, base_multiplier, include_speaker, message_admins) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/surgery/organs/vocal_cords.dm#L126">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;surgery&#x2F;organs&#x2F;vocal_cords.dm 126"/></a></aside>
+        </h3>
+        <p>VOICE OF GOD</p><h3 id="proc/wave_explosion"><aside class="declaration">proc </aside>wave_explosion<aside>(/<a href="turf.html">turf</a>/target, power, factor, constant, flash, fire, /<a href="atom.html">atom</a>/source, speed, silent, bypass_logging, block_resistance, start_immediately) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/explosion2.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;explosion2.dm 2"/></a></aside>
+        </h3>
+        <p>Creates a wave explosion at a certain place</p><h3 id="proc/woundscan"><aside class="declaration">proc </aside>woundscan<aside>(/<a href="mob.html">mob</a>/user, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/patient, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/healthanalyzer/wound/scanner) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/devices/scanners.dm#L519">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices&#x2F;scanners.dm 519"/></a></aside>
+        </h3>
+        <p>Displays wounds with extended information on their status vs medscanners</p><h3 id="proc/zone2body_parts_covered"><aside class="declaration">proc </aside>zone2body_parts_covered<aside>(def_zone) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__HELPERS/type2type.dm#L345">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__HELPERS&#x2F;type2type.dm 345"/></a></aside>
+        </h3>
+        <p>For finding out what body parts a body zone covers, the inverse of the below basically</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

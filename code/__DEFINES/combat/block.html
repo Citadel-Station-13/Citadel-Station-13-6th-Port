@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/combat/block.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/combat/block.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/mob_check_block">mob_check_block</a></th><td>Check whether or not we can block, without &quot;triggering&quot; a block. Basically run checks without effects like depleting shields.
+Wrapper for do_run_block(). The arguments on that means the same as for this.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/mob_run_block">mob_run_block</a></th><td>Runs a block &quot;sequence&quot;, effectively checking and then doing effects if necessary.
+Wrapper for do_run_block(). The arguments on that means the same as for this.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_NONE">BLOCK_NONE</a></th><td>Bitflags for check_block() and handle_block(). Meant to be combined. You can be hit and still reflect, for example, if you do not use BLOCK_SUCCESS.
+Attack was not blocked</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_SUCCESS">BLOCK_SUCCESS</a></th><td>Attack was blocked, do not do damage. THIS FLAG MUST BE THERE FOR DAMAGE/EFFECT PREVENTION!</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_SHOULD_REDIRECT">BLOCK_SHOULD_REDIRECT</a></th><td>The below are for &quot;metadata&quot; on &quot;how&quot; the attack was blocked.
+Attack was and should be redirected according to list argument REDIRECT_METHOD (NOTE: the SHOULD here is important, as it says &quot;the thing blocking isn't handling the reflecting for you so do it yourself&quot;!)</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_REDIRECTED">BLOCK_REDIRECTED</a></th><td>Attack was redirected (whether by us or by SHOULD_REDIRECT flagging for automatic handling)</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_PHYSICAL_EXTERNAL">BLOCK_PHYSICAL_EXTERNAL</a></th><td>Attack was blocked by something like a shield.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_PHYSICAL_INTERNAL">BLOCK_PHYSICAL_INTERNAL</a></th><td>Attack was blocked by something worn on you.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_TARGET_DODGED">BLOCK_TARGET_DODGED</a></th><td>Attack outright missed because the target dodged. Should usually be combined with redirection passthrough or something (see martial arts)</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_CONTINUE_CHAIN">BLOCK_CONTINUE_CHAIN</a></th><td>Meta-flag for run_block/do_run_block : By default, BLOCK_SUCCESS tells do_run_block() to assume the attack is completely blocked and not continue the block chain. If this is present, it will continue to check other items in the chain rather than stopping.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_SHOULD_CHANGE_DAMAGE">BLOCK_SHOULD_CHANGE_DAMAGE</a></th><td>Attack should change the amount of damage incurred. This means something calling run_block() has to handle it!</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_SHOULD_PARTIAL_MITIGATE">BLOCK_SHOULD_PARTIAL_MITIGATE</a></th><td>Attack should scale by this percent, 0 for no block and 100 for full blocked</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_REDIRECT_METHOD">BLOCK_RETURN_REDIRECT_METHOD</a></th><td>For keys in associative list/block_return as we don't want to saturate our (somewhat) limited flags.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/REDIRECT_METHOD_PASSTHROUGH">REDIRECT_METHOD_PASSTHROUGH</a></th><td>Pass through victim</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/REDIRECT_METHOD_DEFLECT">REDIRECT_METHOD_DEFLECT</a></th><td>Deflect at randomish angle</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/REDIRECT_METHOD_REFLECT">REDIRECT_METHOD_REFLECT</a></th><td>reverse 180 angle, basically (as opposed to &quot;realistic&quot; wall reflections)</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/REDIRECT_METHOD_RETURN_TO_SENDER">REDIRECT_METHOD_RETURN_TO_SENDER</a></th><td>&quot;do not taser the bad man with the desword&quot; - actually aims at the firer/attacker rather than just reversing</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_REFLECT_PROJECTILE_CHANCE">BLOCK_RETURN_REFLECT_PROJECTILE_CHANCE</a></th><td>These keys are generally only applied to the list if real_attack is FALSE. Used incase we want to make &quot;smarter&quot; mob AI in the future or something.
+Tells the caller how likely from 0 (none) to 100 (always) we are to reflect energy projectiles</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_NORMAL_BLOCK_CHANCE">BLOCK_RETURN_NORMAL_BLOCK_CHANCE</a></th><td>Tells the caller how likely we are to block attacks from 0 to 100 in general</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_BLOCK_CAPACITY">BLOCK_RETURN_BLOCK_CAPACITY</a></th><td>Tells the caller about how many hits we can soak on average before our blocking fails.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_ACTIVE_BLOCK">BLOCK_RETURN_ACTIVE_BLOCK</a></th><td>Tells the caller we got blocked by active directional block.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_ACTIVE_BLOCK_DAMAGE_MITIGATED">BLOCK_RETURN_ACTIVE_BLOCK_DAMAGE_MITIGATED</a></th><td>Tells the caller our damage mitigation for their attack.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_SET_DAMAGE_TO">BLOCK_RETURN_SET_DAMAGE_TO</a></th><td>For [BLOCK_CHANGE_DAMAGE]. Set damage to this.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_MITIGATION_PERCENT">BLOCK_RETURN_MITIGATION_PERCENT</a></th><td>For <a href="code/__DEFINES/combat/block.html#define/BLOCK_SHOULD_PARTIAL_MITIGATE" title="BLOCK_SHOULD_PARTIAL_MITIGATE">BLOCK_SHOULD_PARTIAL_MITIGATE</a>. Percentage mitigation.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_OVERRIDE_PARRY_EFFICIENCY">BLOCK_RETURN_OVERRIDE_PARRY_EFFICIENCY</a></th><td>Used internally by run_parry proc, use on an on_active_parry() proc to override parrying efficiency.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_FORCE_NO_PARRY_COUNTERATTACK">BLOCK_RETURN_FORCE_NO_PARRY_COUNTERATTACK</a></th><td>Used internally by run_parry proc, use on an on_active_parry() proc to prevent counterattacks</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE">BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE</a></th><td>Always set to 100 by run_block() if BLOCK_SUCCESS is in return value. Otherwise, defaults to mitigation percent if not set. Used by projectile/proc/on_hit().</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/DEFAULT_REDIRECT_METHOD_PROJECTILE">DEFAULT_REDIRECT_METHOD_PROJECTILE</a></th><td>Default if the above isn't set in the list.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block.html#define/BLOCK_PRIORITY_ACTIVE_BLOCK">BLOCK_PRIORITY_ACTIVE_BLOCK</a></th><td>Block priorities. Higher means it's checked sooner.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/BLOCK_CONTINUE_CHAIN"><aside class="declaration">#define </aside>BLOCK_CONTINUE_CHAIN
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 32"/></a>
+    </h3>
+    <p>Meta-flag for run_block/do_run_block : By default, BLOCK_SUCCESS tells do_run_block() to assume the attack is completely blocked and not continue the block chain. If this is present, it will continue to check other items in the chain rather than stopping.</p><h3 id="define/BLOCK_NONE"><aside class="declaration">#define </aside>BLOCK_NONE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 15"/></a>
+    </h3>
+    <p>Bitflags for check_block() and handle_block(). Meant to be combined. You can be hit and still reflect, for example, if you do not use BLOCK_SUCCESS.
+Attack was not blocked</p><h3 id="define/BLOCK_PHYSICAL_EXTERNAL"><aside class="declaration">#define </aside>BLOCK_PHYSICAL_EXTERNAL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 26"/></a>
+    </h3>
+    <p>Attack was blocked by something like a shield.</p><h3 id="define/BLOCK_PHYSICAL_INTERNAL"><aside class="declaration">#define </aside>BLOCK_PHYSICAL_INTERNAL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 28"/></a>
+    </h3>
+    <p>Attack was blocked by something worn on you.</p><h3 id="define/BLOCK_PRIORITY_ACTIVE_BLOCK"><aside class="declaration">#define </aside>BLOCK_PRIORITY_ACTIVE_BLOCK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 76"/></a>
+    </h3>
+    <p>Block priorities. Higher means it's checked sooner.</p><h3 id="define/BLOCK_REDIRECTED"><aside class="declaration">#define </aside>BLOCK_REDIRECTED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 24"/></a>
+    </h3>
+    <p>Attack was redirected (whether by us or by SHOULD_REDIRECT flagging for automatic handling)</p><h3 id="define/BLOCK_RETURN_ACTIVE_BLOCK"><aside class="declaration">#define </aside>BLOCK_RETURN_ACTIVE_BLOCK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L57">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 57"/></a>
+    </h3>
+    <p>Tells the caller we got blocked by active directional block.</p><h3 id="define/BLOCK_RETURN_ACTIVE_BLOCK_DAMAGE_MITIGATED"><aside class="declaration">#define </aside>BLOCK_RETURN_ACTIVE_BLOCK_DAMAGE_MITIGATED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 59"/></a>
+    </h3>
+    <p>Tells the caller our damage mitigation for their attack.</p><h3 id="define/BLOCK_RETURN_BLOCK_CAPACITY"><aside class="declaration">#define </aside>BLOCK_RETURN_BLOCK_CAPACITY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 55"/></a>
+    </h3>
+    <p>Tells the caller about how many hits we can soak on average before our blocking fails.</p><h3 id="define/BLOCK_RETURN_FORCE_NO_PARRY_COUNTERATTACK"><aside class="declaration">#define </aside>BLOCK_RETURN_FORCE_NO_PARRY_COUNTERATTACK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 67"/></a>
+    </h3>
+    <p>Used internally by run_parry proc, use on an on_active_parry() proc to prevent counterattacks</p><h3 id="define/BLOCK_RETURN_MITIGATION_PERCENT"><aside class="declaration">#define </aside>BLOCK_RETURN_MITIGATION_PERCENT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L63">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 63"/></a>
+    </h3>
+    <p>For <a href="code/__DEFINES/combat/block.html#define/BLOCK_SHOULD_PARTIAL_MITIGATE" title="BLOCK_SHOULD_PARTIAL_MITIGATE">BLOCK_SHOULD_PARTIAL_MITIGATE</a>. Percentage mitigation.</p><h3 id="define/BLOCK_RETURN_NORMAL_BLOCK_CHANCE"><aside class="declaration">#define </aside>BLOCK_RETURN_NORMAL_BLOCK_CHANCE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 53"/></a>
+    </h3>
+    <p>Tells the caller how likely we are to block attacks from 0 to 100 in general</p><h3 id="define/BLOCK_RETURN_OVERRIDE_PARRY_EFFICIENCY"><aside class="declaration">#define </aside>BLOCK_RETURN_OVERRIDE_PARRY_EFFICIENCY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L65">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 65"/></a>
+    </h3>
+    <p>Used internally by run_parry proc, use on an on_active_parry() proc to override parrying efficiency.</p><h3 id="define/BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE"><aside class="declaration">#define </aside>BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L69">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 69"/></a>
+    </h3>
+    <p>Always set to 100 by run_block() if BLOCK_SUCCESS is in return value. Otherwise, defaults to mitigation percent if not set. Used by projectile/proc/on_hit().</p><h3 id="define/BLOCK_RETURN_REDIRECT_METHOD"><aside class="declaration">#define </aside>BLOCK_RETURN_REDIRECT_METHOD
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 39"/></a>
+    </h3>
+    <p>For keys in associative list/block_return as we don't want to saturate our (somewhat) limited flags.</p><h3 id="define/BLOCK_RETURN_REFLECT_PROJECTILE_CHANCE"><aside class="declaration">#define </aside>BLOCK_RETURN_REFLECT_PROJECTILE_CHANCE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 51"/></a>
+    </h3>
+    <p>These keys are generally only applied to the list if real_attack is FALSE. Used incase we want to make &quot;smarter&quot; mob AI in the future or something.
+Tells the caller how likely from 0 (none) to 100 (always) we are to reflect energy projectiles</p><h3 id="define/BLOCK_RETURN_SET_DAMAGE_TO"><aside class="declaration">#define </aside>BLOCK_RETURN_SET_DAMAGE_TO
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 61"/></a>
+    </h3>
+    <p>For [BLOCK_CHANGE_DAMAGE]. Set damage to this.</p><h3 id="define/BLOCK_SHOULD_CHANGE_DAMAGE"><aside class="declaration">#define </aside>BLOCK_SHOULD_CHANGE_DAMAGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 34"/></a>
+    </h3>
+    <p>Attack should change the amount of damage incurred. This means something calling run_block() has to handle it!</p><h3 id="define/BLOCK_SHOULD_PARTIAL_MITIGATE"><aside class="declaration">#define </aside>BLOCK_SHOULD_PARTIAL_MITIGATE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 36"/></a>
+    </h3>
+    <p>Attack should scale by this percent, 0 for no block and 100 for full blocked</p><h3 id="define/BLOCK_SHOULD_REDIRECT"><aside class="declaration">#define </aside>BLOCK_SHOULD_REDIRECT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 22"/></a>
+    </h3>
+    <p>The below are for &quot;metadata&quot; on &quot;how&quot; the attack was blocked.
+Attack was and should be redirected according to list argument REDIRECT_METHOD (NOTE: the SHOULD here is important, as it says &quot;the thing blocking isn't handling the reflecting for you so do it yourself&quot;!)</p><h3 id="define/BLOCK_SUCCESS"><aside class="declaration">#define </aside>BLOCK_SUCCESS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 17"/></a>
+    </h3>
+    <p>Attack was blocked, do not do damage. THIS FLAG MUST BE THERE FOR DAMAGE/EFFECT PREVENTION!</p><h3 id="define/BLOCK_TARGET_DODGED"><aside class="declaration">#define </aside>BLOCK_TARGET_DODGED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 30"/></a>
+    </h3>
+    <p>Attack outright missed because the target dodged. Should usually be combined with redirection passthrough or something (see martial arts)</p><h3 id="define/DEFAULT_REDIRECT_METHOD_PROJECTILE"><aside class="declaration">#define </aside>DEFAULT_REDIRECT_METHOD_PROJECTILE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 72"/></a>
+    </h3>
+    <p>Default if the above isn't set in the list.</p><h3 id="define/REDIRECT_METHOD_DEFLECT"><aside class="declaration">#define </aside>REDIRECT_METHOD_DEFLECT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 43"/></a>
+    </h3>
+    <p>Deflect at randomish angle</p><h3 id="define/REDIRECT_METHOD_PASSTHROUGH"><aside class="declaration">#define </aside>REDIRECT_METHOD_PASSTHROUGH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 41"/></a>
+    </h3>
+    <p>Pass through victim</p><h3 id="define/REDIRECT_METHOD_REFLECT"><aside class="declaration">#define </aside>REDIRECT_METHOD_REFLECT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 45"/></a>
+    </h3>
+    <p>reverse 180 angle, basically (as opposed to &quot;realistic&quot; wall reflections)</p><h3 id="define/REDIRECT_METHOD_RETURN_TO_SENDER"><aside class="declaration">#define </aside>REDIRECT_METHOD_RETURN_TO_SENDER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L47">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 47"/></a>
+    </h3>
+    <p>&quot;do not taser the bad man with the desword&quot; - actually aims at the firer/attacker rather than just reversing</p><h3 id="define/mob_check_block"><aside class="declaration">#define </aside>mob_check_block
+            <aside>(object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, return_list)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 3"/></a>
+    </h3>
+    <p>Check whether or not we can block, without &quot;triggering&quot; a block. Basically run checks without effects like depleting shields.
+Wrapper for do_run_block(). The arguments on that means the same as for this.</p><h3 id="define/mob_run_block"><aside class="declaration">#define </aside>mob_run_block
+            <aside>(object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, return_list)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block.dm 8"/></a>
+    </h3>
+    <p>Runs a block &quot;sequence&quot;, effectively checking and then doing effects if necessary.
+Wrapper for do_run_block(). The arguments on that means the same as for this.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

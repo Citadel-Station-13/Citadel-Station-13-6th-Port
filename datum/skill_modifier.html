@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;skill_modifier - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/skill_modifier.html#var">Var Details</a> - <a href="datum/skill_modifier.html#proc">Proc Details</a></header>
+<main>
+<h1>skill_modifier <aside>/<a href="datum.html">datum</a>/<a href="datum/skill_modifier.html">skill_modifier</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 9"/></a></h1>
+
+<p>Base skill modifier datum, used to modify a player skills without directly touching their values, levels and affinity
+and cause lots of edge cases. These are fairly simple overall... make a subtype though, don't use this one.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/affinity_mod">affinity_mod</a></th><td>skill affinity modifier, can be a multiplier or addendum, depending on the modifier_flags.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/identifier">identifier</a></th><td>The identifier key this skill modifier is associated with.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/level_mod">level_mod</a></th><td>skill level modifier, see above.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/modifier_flags">modifier_flags</a></th><td>flags for this skill modifier.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/name">name</a></th><td>Name and description of the skill modifier, used in the UI</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/priority">priority</a></th><td>Priority of this skill modifier compared to other ones.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/target_skills">target_skills</a></th><td>target skills, can be a specific skill typepath or a list of skill traits.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/target_skills_key">target_skills_key</a></th><td>the GLOB.potential_skills_per_mod key generated on runtime. You shouldn't be var-editing it.</td></tr>
+            <tr><th><a href="datum/skill_modifier.html#var/value_mod">value_mod</a></th><td>skill value modifier, see above.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/skill_modifier.html#proc/on_mind_transfer">on_mind_transfer</a></th><td>Body bound modifier signal procs.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/affinity_mod"><aside class="declaration">var </aside>affinity_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 21"/></a></h3>
+        <p>skill affinity modifier, can be a multiplier or addendum, depending on the modifier_flags.</p><h3 id="var/identifier"><aside class="declaration">var </aside>identifier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 19"/></a></h3>
+        <p>The identifier key this skill modifier is associated with.</p><h3 id="var/level_mod"><aside class="declaration">var </aside>level_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 25"/></a></h3>
+        <p>skill level modifier, see above.</p><h3 id="var/modifier_flags"><aside class="declaration">var </aside>modifier_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 13"/></a></h3>
+        <p>flags for this skill modifier.</p><h3 id="var/name"><aside class="declaration">var </aside>name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 11"/></a></h3>
+        <p>Name and description of the skill modifier, used in the UI</p><h3 id="var/priority"><aside class="declaration">var </aside>priority
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 27"/></a></h3>
+        <p>Priority of this skill modifier compared to other ones.</p><h3 id="var/target_skills"><aside class="declaration">var </aside>target_skills
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 15"/></a></h3>
+        <p>target skills, can be a specific skill typepath or a list of skill traits.</p><h3 id="var/target_skills_key"><aside class="declaration">var </aside>target_skills_key
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 17"/></a></h3>
+        <p>the GLOB.potential_skills_per_mod key generated on runtime. You shouldn't be var-editing it.</p><h3 id="var/value_mod"><aside class="declaration">var </aside>value_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 23"/></a></h3>
+        <p>skill value modifier, see above.</p><h2 id="proc">Proc Details</h2><h3 id="proc/on_mind_transfer"><aside class="declaration">proc </aside>on_mind_transfer<aside>(/<a href="datum.html">datum</a>/<a href="datum/mind.html">mind</a>/source, /<a href="mob.html">mob</a>/new_character, /<a href="mob.html">mob</a>/old_character) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/skills/_skill_modifier.dm#L198">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;skills&#x2F;_skill_modifier.dm 198"/></a></aside>
+        </h3>
+        <p>Body bound modifier signal procs.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

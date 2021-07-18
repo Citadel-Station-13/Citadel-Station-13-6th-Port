@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;scar - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/scar.html#var">Var Details</a> - <a href="datum/scar.html#proc">Proc Details</a></header>
+<main>
+<h1>scar <aside>/<a href="datum.html">datum</a>/<a href="datum/scar.html">scar</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 9"/></a></h1>
+
+<p>scars are cosmetic datums that are assigned to bodyparts once they recover from wounds. Each wound type and severity have their own descriptions for what the scars
+look like, and then each body part has a list of &quot;specific locations&quot; like your elbow or wrist or wherever the scar can appear, to make it more interesting than &quot;right arm&quot;</p>
+<p>Arguments:</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/scar.html#var/applicable_zones">applicable_zones</a></th><td>What zones this scar can be applied to</td></tr>
+            <tr><th><a href="datum/scar.html#var/coverable">coverable</a></th><td>Whether this scar can actually be covered up by clothing</td></tr>
+            <tr><th><a href="datum/scar.html#var/fake">fake</a></th><td>Scars from the longtimer quirk are &quot;fake&quot; and won't be saved with persistent scarring, since it makes you spawn with a lot by default</td></tr>
+            <tr><th><a href="datum/scar.html#var/visibility">visibility</a></th><td>How many tiles away someone can see this scar, goes up with severity. Clothes covering this limb will decrease visibility by 1 each, except for the head/face which is a binary &quot;is mask obscuring face&quot; check</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/scar.html#proc/format">format</a></th><td>Used to format a scar to safe in preferences for persistent scars</td></tr>
+            <tr><th><a href="datum/scar.html#proc/format_amputated">format_amputated</a></th><td>Used to format a scar to safe in preferences for persistent scars</td></tr>
+            <tr><th><a href="datum/scar.html#proc/generate">generate</a></th><td>generate() is used to actually fill out the info for a scar, according to the limb and wound it is provided.</td></tr>
+            <tr><th><a href="datum/scar.html#proc/get_examine_description">get_examine_description</a></th><td>What will show up in examine_more() if this scar is visible</td></tr>
+            <tr><th><a href="datum/scar.html#proc/is_visible">is_visible</a></th><td>Whether a scar can currently be seen by the viewer</td></tr>
+            <tr><th><a href="datum/scar.html#proc/lazy_attach">lazy_attach</a></th><td>Used when we finalize a scar from a healing cut</td></tr>
+            <tr><th><a href="datum/scar.html#proc/load">load</a></th><td>Used to &quot;load&quot; a persistent scar</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/applicable_zones"><aside class="declaration">var </aside>applicable_zones
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 24"/></a></h3>
+        <p>What zones this scar can be applied to</p><h3 id="var/coverable"><aside class="declaration">var </aside>coverable
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 22"/></a></h3>
+        <p>Whether this scar can actually be covered up by clothing</p><h3 id="var/fake"><aside class="declaration">var </aside>fake
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 17"/></a></h3>
+        <p>Scars from the longtimer quirk are &quot;fake&quot; and won't be saved with persistent scarring, since it makes you spawn with a lot by default</p><h3 id="var/visibility"><aside class="declaration">var </aside>visibility
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 20"/></a></h3>
+        <p>How many tiles away someone can see this scar, goes up with severity. Clothes covering this limb will decrease visibility by 1 each, except for the head/face which is a binary &quot;is mask obscuring face&quot; check</p><h2 id="proc">Proc Details</h2><h3 id="proc/format"><aside class="declaration">proc </aside>format<aside>() 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 145"/></a></aside>
+        </h3>
+        <p>Used to format a scar to safe in preferences for persistent scars</p><h3 id="proc/format_amputated"><aside class="declaration">proc </aside>format_amputated<aside>(body_zone) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L150">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 150"/></a></aside>
+        </h3>
+        <p>Used to format a scar to safe in preferences for persistent scars</p><h3 id="proc/generate"><aside class="declaration">proc </aside>generate<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/bodypart.html">bodypart</a>/BP, /<a href="datum.html">datum</a>/<a href="datum/wound.html">wound</a>/W, add_to_scars) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 43"/></a></aside>
+        </h3>
+        <p>generate() is used to actually fill out the info for a scar, according to the limb and wound it is provided.</p>
+<p>After creating a scar, call this on it while targeting the scarred bodypart with a given wound to apply the scar.</p>
+<p>Arguments:</p>
+<ul>
+<li>BP- The bodypart being targeted</li>
+<li>W- The wound being used to generate the severity and description info</li>
+<li>add_to_scars- Should always be TRUE unless you're just storing a scar for later usage, like how cuts want to store a scar for the highest severity of cut, rather than the severity when the wound is fully healed (probably demoted to moderate)</li>
+</ul><h3 id="proc/get_examine_description"><aside class="declaration">proc </aside>get_examine_description<aside>(/<a href="mob.html">mob</a>/viewer) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L106">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 106"/></a></aside>
+        </h3>
+        <p>What will show up in examine_more() if this scar is visible</p><h3 id="proc/is_visible"><aside class="declaration">proc </aside>is_visible<aside>(/<a href="mob.html">mob</a>/viewer) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L124">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 124"/></a></aside>
+        </h3>
+        <p>Whether a scar can currently be seen by the viewer</p><h3 id="proc/lazy_attach"><aside class="declaration">proc </aside>lazy_attach<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/bodypart.html">bodypart</a>/BP, /<a href="datum.html">datum</a>/<a href="datum/wound.html">wound</a>/W) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L74">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 74"/></a></aside>
+        </h3>
+        <p>Used when we finalize a scar from a healing cut</p><h3 id="proc/load"><aside class="declaration">proc </aside>load<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/bodypart.html">bodypart</a>/BP, version, description, specific_location, severity) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/wounds/_scars.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;wounds&#x2F;_scars.dm 81"/></a></aside>
+        </h3>
+        <p>Used to &quot;load&quot; a persistent scar</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

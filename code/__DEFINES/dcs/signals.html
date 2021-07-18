@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/dcs/signals.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/dcs/signals.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_NEW_Z">COMSIG_GLOB_NEW_Z</a></th><td>from base of datum/controller/subsystem/mapping/proc/add_new_zlevel(): (list/args)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_VAR_EDIT">COMSIG_GLOB_VAR_EDIT</a></th><td>called after a successful var edit somewhere in the world: (list/args)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_EXPLOSION">COMSIG_GLOB_EXPLOSION</a></th><td>called after an explosion happened : (epicenter, devastation_range, heavy_impact_range, light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_MOB_CREATED">COMSIG_GLOB_MOB_CREATED</a></th><td>mob was created somewhere : (mob)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_MOB_DEATH">COMSIG_GLOB_MOB_DEATH</a></th><td>mob died somewhere : (mob , gibbed)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_LIVING_SAY_SPECIAL">COMSIG_GLOB_LIVING_SAY_SPECIAL</a></th><td>global living say plug - use sparingly: (mob/speaker , message)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_GLOB_PLAY_CINEMATIC">COMSIG_GLOB_PLAY_CINEMATIC</a></th><td>called by datum/cinematic/play() : (datum/cinematic/new_cinematic)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_SUN_MOVED">COMSIG_SUN_MOVED</a></th><td>from SSsun when the sun changes position : (primary_sun, suns)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_THREAT_CALC">COMSIG_THREAT_CALC</a></th><td>from SSactivity for things that add threat but aren't &quot;global&quot; (e.g. phylacteries)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_COMPONENT_ADDED">COMSIG_COMPONENT_ADDED</a></th><td>when a component is added to a datum: (/datum/component)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_COMPONENT_REMOVING">COMSIG_COMPONENT_REMOVING</a></th><td>before a component is removed from a datum because of RemoveComponent: (/datum/component)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PARENT_PREQDELETED">COMSIG_PARENT_PREQDELETED</a></th><td>before a datum's Destroy() is called: (force), returning a nonzero value will cancel the qdel operation</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PARENT_QDELETING">COMSIG_PARENT_QDELETING</a></th><td>just before a datum's Destroy() is called: (force), at this point none of the other components chose to interrupt qdel and Destroy will be called</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TOPIC">COMSIG_TOPIC</a></th><td>generic topic handler (usr, href_list)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ELEMENT_ATTACH">COMSIG_ELEMENT_ATTACH</a></th><td>fires on the target datum when an element is attached to it (/datum/element)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ELEMENT_DETACH">COMSIG_ELEMENT_DETACH</a></th><td>fires on the target datum when an element is attached to it  (/datum/element)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_COMPONENT_UNREGISTER_PARENT">COMSIG_COMPONENT_UNREGISTER_PARENT</a></th><td>sent to the component itself when unregistered from a parent</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_COMPONENT_REGISTER_PARENT">COMSIG_COMPONENT_REGISTER_PARENT</a></th><td>sent to the component itself when registered to a parent</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMPONENT_ADD_TRAIT">COMPONENT_ADD_TRAIT</a></th><td>Trait signals</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_GET_EXAMINE_NAME">COMSIG_ATOM_GET_EXAMINE_NAME</a></th><td>from base of atom/get_examine_name(): (/mob, list/overrides)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PARENT_EXAMINE_MORE">COMSIG_PARENT_EXAMINE_MORE</a></th><td>from base of atom/examine_more(): (/mob)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_WAVE_EX_ACT">COMSIG_ATOM_WAVE_EX_ACT</a></th><td>From base of atom/wave_ex_act(): (datum/wave_explosion/explosion, args)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_EX_ACT">COMSIG_ATOM_EX_ACT</a></th><td>from base of atom/ex_act(): (severity, target)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_EMP_ACT">COMSIG_ATOM_EMP_ACT</a></th><td>from base of atom/emp_act(): (severity)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_FIRE_ACT">COMSIG_ATOM_FIRE_ACT</a></th><td>from base of atom/fire_act(): (exposed_temperature, exposed_volume)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_BULLET_ACT">COMSIG_ATOM_BULLET_ACT</a></th><td>from base of atom/bullet_act(): (/obj/item/projectile, def_zone)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_BLOB_ACT">COMSIG_ATOM_BLOB_ACT</a></th><td>from base of atom/blob_act(): (/obj/structure/blob)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_ACID_ACT">COMSIG_ATOM_ACID_ACT</a></th><td>from base of atom/acid_act(): (acidpwr, acid_volume)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_EMAG_ACT">COMSIG_ATOM_EMAG_ACT</a></th><td>from base of atom/emag_act(): (/mob/user)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RAD_ACT">COMSIG_ATOM_RAD_ACT</a></th><td>from base of atom/rad_act(intensity)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_NARSIE_ACT">COMSIG_ATOM_NARSIE_ACT</a></th><td>from base of atom/narsie_act(): ()</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RATVAR_ACT">COMSIG_ATOM_RATVAR_ACT</a></th><td>from base of atom/ratvar_act(): ()</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RCD_ACT">COMSIG_ATOM_RCD_ACT</a></th><td>from base of atom/rcd_act(): (/mob, /obj/item/construction/rcd, passed_mode)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_SING_PULL">COMSIG_ATOM_SING_PULL</a></th><td>from base of atom/singularity_pull(): (S, current_size)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_BSA_BEAM">COMSIG_ATOM_BSA_BEAM</a></th><td>from obj/machinery/bsa/full/proc/fire(): ()</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_SET_LIGHT">COMSIG_ATOM_SET_LIGHT</a></th><td>from base of atom/set_light(): (l_range, l_power, l_color)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_DIR_CHANGE">COMSIG_ATOM_DIR_CHANGE</a></th><td>from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_CONTENTS_DEL">COMSIG_ATOM_CONTENTS_DEL</a></th><td>from base of atom/handle_atom_del(): (atom/deleted)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_HAS_GRAVITY">COMSIG_ATOM_HAS_GRAVITY</a></th><td>from base of atom/has_gravity(): (turf/location, list/forced_gravities)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RAD_PROBE">COMSIG_ATOM_RAD_PROBE</a></th><td>from proc/get_rad_contents(): ()</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RAD_CONTAMINATING">COMSIG_ATOM_RAD_CONTAMINATING</a></th><td>from base of datum/radiation_wave/radiate(): (strength)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_RAD_WAVE_PASSING">COMSIG_ATOM_RAD_WAVE_PASSING</a></th><td>from base of datum/radiation_wave/check_obstructions(): (datum/radiation_wave, width)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_CANREACH">COMSIG_ATOM_CANREACH</a></th><td>from internal loop in atom/movable/proc/CanReach(): (list/next)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_ORBIT_BEGIN">COMSIG_ATOM_ORBIT_BEGIN</a></th><td>Called from orbit component: (atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ATOM_ORBIT_END">COMSIG_ATOM_ORBIT_END</a></th><td>Called from orbit component: (atom/movable/orbiter, refreshing)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TURF_CHANGE">COMSIG_TURF_CHANGE</a></th><td>from base of turf/ChangeTurf(): (path, list/new_baseturfs, flags, list/transferring_comps)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TURF_HAS_GRAVITY">COMSIG_TURF_HAS_GRAVITY</a></th><td>from base of atom/has_gravity(): (atom/asker, list/forced_gravities)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TURF_MULTIZ_DEL">COMSIG_TURF_MULTIZ_DEL</a></th><td>from base of turf/multiz_turf_del(): (turf/source, direction)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TURF_MULTIZ_NEW">COMSIG_TURF_MULTIZ_NEW</a></th><td>from base of turf/multiz_turf_new: (turf/source, direction)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_MOVABLE_PRE_MOVE">COMSIG_MOVABLE_PRE_MOVE</a></th><td>from base of atom/movable/Moved(): (/atom)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMPONENT_MOVABLE_IMPACT_FLIP_HITPUSH">COMPONENT_MOVABLE_IMPACT_FLIP_HITPUSH</a></th><td>if true, flip if the impact will push what it hits</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMPONENT_MOVABLE_IMPACT_NEVERMIND">COMPONENT_MOVABLE_IMPACT_NEVERMIND</a></th><td>return true if you destroyed whatever it was you're impacting and there won't be anything for hitby() to run on</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_MOB_EYECONTACT">COMSIG_MOB_EYECONTACT</a></th><td>from /mob/living/handle_eye_contact(): (mob/living/other_mob)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_BLOCK_EYECONTACT">COMSIG_BLOCK_EYECONTACT</a></th><td>return this if you want to block printing this message to this person, if you want to print your own (does not affect the other person's message)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_MOB_ALTCLICKON">COMSIG_MOB_ALTCLICKON</a></th><td>from base of mob/AltClickOn(): (atom/A)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_CARBON_ATTACH_LIMB">COMSIG_CARBON_ATTACH_LIMB</a></th><td>from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_ITEM_DISABLE_EMBED">COMSIG_ITEM_DISABLE_EMBED</a></th><td>from <a href="obj/item.html#proc/disableEmbedding" title="/obj/item">/obj/item/proc/disableEmbedding</a>:</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_MINE_TRIGGERED">COMSIG_MINE_TRIGGERED</a></th><td>from [/obj/effect/mine/proc/triggermine]:</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_SUPPLYPOD_LANDED">COMSIG_SUPPLYPOD_LANDED</a></th><td>from [/obj/structure/closet/supplypod/proc/endlaunch]:</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PROJECTILE_SELF_ON_HIT">COMSIG_PROJECTILE_SELF_ON_HIT</a></th><td>from base of /obj/item/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle, hit_limb)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PROJECTILE_ON_HIT">COMSIG_PROJECTILE_ON_HIT</a></th><td>from base of /obj/item/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle, hit_limb)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PROJECTILE_FIRE">COMSIG_PROJECTILE_FIRE</a></th><td>from the base of /obj/item/projectile/proc/fire(): ()</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_PROJECTILE_PREHIT">COMSIG_PROJECTILE_PREHIT</a></th><td>sent to targets during the process_hit proc of projectiles</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_LIVING_PREDEATH">COMSIG_LIVING_PREDEATH</a></th><td>from base of mob/living/death(): (gibbed)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TURF_IS_WET">COMSIG_TURF_IS_WET</a></th><td>Component Specific Signals</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_VOID_MASK_ACT">COMSIG_VOID_MASK_ACT</a></th><td>Mask of Madness</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_NANITE_CHECK_CONSOLE_LOCK">COMSIG_NANITE_CHECK_CONSOLE_LOCK</a></th><td>Checks if a nanite component is able to be controlled by console</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_NANITE_CHECK_HOST_LOCK">COMSIG_NANITE_CHECK_HOST_LOCK</a></th><td>Checks if a nanite component is able to be interfaced with by a host with innate nanite control</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_NANITE_CHECK_VIRAL_PREVENTION">COMSIG_NANITE_CHECK_VIRAL_PREVENTION</a></th><td>Checks if a nanite component is able to be overwritten by viral replica</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/signals.html#define/COMSIG_TWITCH_PLAYS_MOVEMENT_DATA">COMSIG_TWITCH_PLAYS_MOVEMENT_DATA</a></th><td>Returns direction: (wipe_votes)</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/COMPONENT_ADD_TRAIT"><aside class="declaration">#define </aside>COMPONENT_ADD_TRAIT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 56"/></a>
+    </h3>
+    <p>Trait signals</p><h3 id="define/COMPONENT_MOVABLE_IMPACT_FLIP_HITPUSH"><aside class="declaration">#define </aside>COMPONENT_MOVABLE_IMPACT_FLIP_HITPUSH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L196">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 196"/></a>
+    </h3>
+    <p>if true, flip if the impact will push what it hits</p><h3 id="define/COMPONENT_MOVABLE_IMPACT_NEVERMIND"><aside class="declaration">#define </aside>COMPONENT_MOVABLE_IMPACT_NEVERMIND
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L197">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 197"/></a>
+    </h3>
+    <p>return true if you destroyed whatever it was you're impacting and there won't be anything for hitby() to run on</p><h3 id="define/COMSIG_ATOM_ACID_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_ACID_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L99">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 99"/></a>
+    </h3>
+    <p>from base of atom/acid_act(): (acidpwr, acid_volume)</p><h3 id="define/COMSIG_ATOM_BLOB_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_BLOB_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L97">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 97"/></a>
+    </h3>
+    <p>from base of atom/blob_act(): (/obj/structure/blob)</p><h3 id="define/COMSIG_ATOM_BSA_BEAM"><aside class="declaration">#define </aside>COMSIG_ATOM_BSA_BEAM
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L113">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 113"/></a>
+    </h3>
+    <p>from obj/machinery/bsa/full/proc/fire(): ()</p><h3 id="define/COMSIG_ATOM_BULLET_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_BULLET_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L95">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 95"/></a>
+    </h3>
+    <p>from base of atom/bullet_act(): (/obj/item/projectile, def_zone)</p><h3 id="define/COMSIG_ATOM_CANREACH"><aside class="declaration">#define </aside>COMSIG_ATOM_CANREACH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L133">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 133"/></a>
+    </h3>
+    <p>from internal loop in atom/movable/proc/CanReach(): (list/next)</p><h3 id="define/COMSIG_ATOM_CONTENTS_DEL"><aside class="declaration">#define </aside>COMSIG_ATOM_CONTENTS_DEL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L120">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 120"/></a>
+    </h3>
+    <p>from base of atom/handle_atom_del(): (atom/deleted)</p><h3 id="define/COMSIG_ATOM_DIR_CHANGE"><aside class="declaration">#define </aside>COMSIG_ATOM_DIR_CHANGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L118">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 118"/></a>
+    </h3>
+    <p>from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.</p><h3 id="define/COMSIG_ATOM_EMAG_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_EMAG_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L101">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 101"/></a>
+    </h3>
+    <p>from base of atom/emag_act(): (/mob/user)</p><h3 id="define/COMSIG_ATOM_EMP_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_EMP_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L91">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 91"/></a>
+    </h3>
+    <p>from base of atom/emp_act(): (severity)</p><h3 id="define/COMSIG_ATOM_EX_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_EX_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L89">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 89"/></a>
+    </h3>
+    <p>from base of atom/ex_act(): (severity, target)</p><h3 id="define/COMSIG_ATOM_FIRE_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_FIRE_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L93">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 93"/></a>
+    </h3>
+    <p>from base of atom/fire_act(): (exposed_temperature, exposed_volume)</p><h3 id="define/COMSIG_ATOM_GET_EXAMINE_NAME"><aside class="declaration">#define </aside>COMSIG_ATOM_GET_EXAMINE_NAME
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L70">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 70"/></a>
+    </h3>
+    <p>from base of atom/get_examine_name(): (/mob, list/overrides)</p><h3 id="define/COMSIG_ATOM_HAS_GRAVITY"><aside class="declaration">#define </aside>COMSIG_ATOM_HAS_GRAVITY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L122">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 122"/></a>
+    </h3>
+    <p>from base of atom/has_gravity(): (turf/location, list/forced_gravities)</p><h3 id="define/COMSIG_ATOM_NARSIE_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_NARSIE_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L105">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 105"/></a>
+    </h3>
+    <p>from base of atom/narsie_act(): ()</p><h3 id="define/COMSIG_ATOM_ORBIT_BEGIN"><aside class="declaration">#define </aside>COMSIG_ATOM_ORBIT_BEGIN
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 151"/></a>
+    </h3>
+    <p>Called from orbit component: (atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)</p><h3 id="define/COMSIG_ATOM_ORBIT_END"><aside class="declaration">#define </aside>COMSIG_ATOM_ORBIT_END
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L153">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 153"/></a>
+    </h3>
+    <p>Called from orbit component: (atom/movable/orbiter, refreshing)</p><h3 id="define/COMSIG_ATOM_RAD_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_RAD_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 103"/></a>
+    </h3>
+    <p>from base of atom/rad_act(intensity)</p><h3 id="define/COMSIG_ATOM_RAD_CONTAMINATING"><aside class="declaration">#define </aside>COMSIG_ATOM_RAD_CONTAMINATING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L127">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 127"/></a>
+    </h3>
+    <p>from base of datum/radiation_wave/radiate(): (strength)</p><h3 id="define/COMSIG_ATOM_RAD_PROBE"><aside class="declaration">#define </aside>COMSIG_ATOM_RAD_PROBE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L124">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 124"/></a>
+    </h3>
+    <p>from proc/get_rad_contents(): ()</p><h3 id="define/COMSIG_ATOM_RAD_WAVE_PASSING"><aside class="declaration">#define </aside>COMSIG_ATOM_RAD_WAVE_PASSING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L130">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 130"/></a>
+    </h3>
+    <p>from base of datum/radiation_wave/check_obstructions(): (datum/radiation_wave, width)</p><h3 id="define/COMSIG_ATOM_RATVAR_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_RATVAR_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L107">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 107"/></a>
+    </h3>
+    <p>from base of atom/ratvar_act(): ()</p><h3 id="define/COMSIG_ATOM_RCD_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_RCD_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L109">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 109"/></a>
+    </h3>
+    <p>from base of atom/rcd_act(): (/mob, /obj/item/construction/rcd, passed_mode)</p><h3 id="define/COMSIG_ATOM_SET_LIGHT"><aside class="declaration">#define </aside>COMSIG_ATOM_SET_LIGHT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L116">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 116"/></a>
+    </h3>
+    <p>from base of atom/set_light(): (l_range, l_power, l_color)</p><h3 id="define/COMSIG_ATOM_SING_PULL"><aside class="declaration">#define </aside>COMSIG_ATOM_SING_PULL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L111">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 111"/></a>
+    </h3>
+    <p>from base of atom/singularity_pull(): (S, current_size)</p><h3 id="define/COMSIG_ATOM_WAVE_EX_ACT"><aside class="declaration">#define </aside>COMSIG_ATOM_WAVE_EX_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L87">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 87"/></a>
+    </h3>
+    <p>From base of atom/wave_ex_act(): (datum/wave_explosion/explosion, args)</p><h3 id="define/COMSIG_BLOCK_EYECONTACT"><aside class="declaration">#define </aside>COMSIG_BLOCK_EYECONTACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L253">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 253"/></a>
+    </h3>
+    <p>return this if you want to block printing this message to this person, if you want to print your own (does not affect the other person's message)</p><h3 id="define/COMSIG_CARBON_ATTACH_LIMB"><aside class="declaration">#define </aside>COMSIG_CARBON_ATTACH_LIMB
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L336">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 336"/></a>
+    </h3>
+    <p>from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment</p><h3 id="define/COMSIG_COMPONENT_ADDED"><aside class="declaration">#define </aside>COMSIG_COMPONENT_ADDED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 35"/></a>
+    </h3>
+    <p>when a component is added to a datum: (/datum/component)</p><h3 id="define/COMSIG_COMPONENT_REGISTER_PARENT"><aside class="declaration">#define </aside>COMSIG_COMPONENT_REGISTER_PARENT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 53"/></a>
+    </h3>
+    <p>sent to the component itself when registered to a parent</p><h3 id="define/COMSIG_COMPONENT_REMOVING"><aside class="declaration">#define </aside>COMSIG_COMPONENT_REMOVING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 37"/></a>
+    </h3>
+    <p>before a component is removed from a datum because of RemoveComponent: (/datum/component)</p><h3 id="define/COMSIG_COMPONENT_UNREGISTER_PARENT"><aside class="declaration">#define </aside>COMSIG_COMPONENT_UNREGISTER_PARENT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 51"/></a>
+    </h3>
+    <p>sent to the component itself when unregistered from a parent</p><h3 id="define/COMSIG_ELEMENT_ATTACH"><aside class="declaration">#define </aside>COMSIG_ELEMENT_ATTACH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 46"/></a>
+    </h3>
+    <p>fires on the target datum when an element is attached to it (/datum/element)</p><h3 id="define/COMSIG_ELEMENT_DETACH"><aside class="declaration">#define </aside>COMSIG_ELEMENT_DETACH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 48"/></a>
+    </h3>
+    <p>fires on the target datum when an element is attached to it  (/datum/element)</p><h3 id="define/COMSIG_GLOB_EXPLOSION"><aside class="declaration">#define </aside>COMSIG_GLOB_EXPLOSION
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 13"/></a>
+    </h3>
+    <p>called after an explosion happened : (epicenter, devastation_range, heavy_impact_range, light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)</p><h3 id="define/COMSIG_GLOB_LIVING_SAY_SPECIAL"><aside class="declaration">#define </aside>COMSIG_GLOB_LIVING_SAY_SPECIAL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 19"/></a>
+    </h3>
+    <p>global living say plug - use sparingly: (mob/speaker , message)</p><h3 id="define/COMSIG_GLOB_MOB_CREATED"><aside class="declaration">#define </aside>COMSIG_GLOB_MOB_CREATED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 15"/></a>
+    </h3>
+    <p>mob was created somewhere : (mob)</p><h3 id="define/COMSIG_GLOB_MOB_DEATH"><aside class="declaration">#define </aside>COMSIG_GLOB_MOB_DEATH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 17"/></a>
+    </h3>
+    <p>mob died somewhere : (mob , gibbed)</p><h3 id="define/COMSIG_GLOB_NEW_Z"><aside class="declaration">#define </aside>COMSIG_GLOB_NEW_Z
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 9"/></a>
+    </h3>
+    <p>from base of datum/controller/subsystem/mapping/proc/add_new_zlevel(): (list/args)</p><h3 id="define/COMSIG_GLOB_PLAY_CINEMATIC"><aside class="declaration">#define </aside>COMSIG_GLOB_PLAY_CINEMATIC
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 21"/></a>
+    </h3>
+    <p>called by datum/cinematic/play() : (datum/cinematic/new_cinematic)</p><h3 id="define/COMSIG_GLOB_VAR_EDIT"><aside class="declaration">#define </aside>COMSIG_GLOB_VAR_EDIT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 11"/></a>
+    </h3>
+    <p>called after a successful var edit somewhere in the world: (list/args)</p><h3 id="define/COMSIG_ITEM_DISABLE_EMBED"><aside class="declaration">#define </aside>COMSIG_ITEM_DISABLE_EMBED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L400">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 400"/></a>
+    </h3>
+    <p>from <a href="obj/item.html#proc/disableEmbedding" title="/obj/item">/obj/item/proc/disableEmbedding</a>:</p><h3 id="define/COMSIG_LIVING_PREDEATH"><aside class="declaration">#define </aside>COMSIG_LIVING_PREDEATH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L466">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 466"/></a>
+    </h3>
+    <p>from base of mob/living/death(): (gibbed)</p><h3 id="define/COMSIG_MINE_TRIGGERED"><aside class="declaration">#define </aside>COMSIG_MINE_TRIGGERED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L401">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 401"/></a>
+    </h3>
+    <p>from [/obj/effect/mine/proc/triggermine]:</p><h3 id="define/COMSIG_MOB_ALTCLICKON"><aside class="declaration">#define </aside>COMSIG_MOB_ALTCLICKON
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L279">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 279"/></a>
+    </h3>
+    <p>from base of mob/AltClickOn(): (atom/A)</p><h3 id="define/COMSIG_MOB_EYECONTACT"><aside class="declaration">#define </aside>COMSIG_MOB_EYECONTACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L251">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 251"/></a>
+    </h3>
+    <p>from /mob/living/handle_eye_contact(): (mob/living/other_mob)</p><h3 id="define/COMSIG_MOVABLE_PRE_MOVE"><aside class="declaration">#define </aside>COMSIG_MOVABLE_PRE_MOVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L186">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 186"/></a>
+    </h3>
+    <p>from base of atom/movable/Moved(): (/atom)</p><h3 id="define/COMSIG_NANITE_CHECK_CONSOLE_LOCK"><aside class="declaration">#define </aside>COMSIG_NANITE_CHECK_CONSOLE_LOCK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L521">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 521"/></a>
+    </h3>
+    <p>Checks if a nanite component is able to be controlled by console</p><h3 id="define/COMSIG_NANITE_CHECK_HOST_LOCK"><aside class="declaration">#define </aside>COMSIG_NANITE_CHECK_HOST_LOCK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L523">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 523"/></a>
+    </h3>
+    <p>Checks if a nanite component is able to be interfaced with by a host with innate nanite control</p><h3 id="define/COMSIG_NANITE_CHECK_VIRAL_PREVENTION"><aside class="declaration">#define </aside>COMSIG_NANITE_CHECK_VIRAL_PREVENTION
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L525">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 525"/></a>
+    </h3>
+    <p>Checks if a nanite component is able to be overwritten by viral replica</p><h3 id="define/COMSIG_PARENT_EXAMINE_MORE"><aside class="declaration">#define </aside>COMSIG_PARENT_EXAMINE_MORE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 71"/></a>
+    </h3>
+    <p>from base of atom/examine_more(): (/mob)</p><h3 id="define/COMSIG_PARENT_PREQDELETED"><aside class="declaration">#define </aside>COMSIG_PARENT_PREQDELETED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 39"/></a>
+    </h3>
+    <p>before a datum's Destroy() is called: (force), returning a nonzero value will cancel the qdel operation</p><h3 id="define/COMSIG_PARENT_QDELETING"><aside class="declaration">#define </aside>COMSIG_PARENT_QDELETING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 41"/></a>
+    </h3>
+    <p>just before a datum's Destroy() is called: (force), at this point none of the other components chose to interrupt qdel and Destroy will be called</p><h3 id="define/COMSIG_PROJECTILE_FIRE"><aside class="declaration">#define </aside>COMSIG_PROJECTILE_FIRE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L441">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 441"/></a>
+    </h3>
+    <p>from the base of /obj/item/projectile/proc/fire(): ()</p><h3 id="define/COMSIG_PROJECTILE_ON_HIT"><aside class="declaration">#define </aside>COMSIG_PROJECTILE_ON_HIT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L439">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 439"/></a>
+    </h3>
+    <p>from base of /obj/item/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle, hit_limb)</p><h3 id="define/COMSIG_PROJECTILE_PREHIT"><aside class="declaration">#define </aside>COMSIG_PROJECTILE_PREHIT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L444">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 444"/></a>
+    </h3>
+    <p>sent to targets during the process_hit proc of projectiles</p><h3 id="define/COMSIG_PROJECTILE_SELF_ON_HIT"><aside class="declaration">#define </aside>COMSIG_PROJECTILE_SELF_ON_HIT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L438">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 438"/></a>
+    </h3>
+    <p>from base of /obj/item/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle, hit_limb)</p><h3 id="define/COMSIG_SUN_MOVED"><aside class="declaration">#define </aside>COMSIG_SUN_MOVED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 26"/></a>
+    </h3>
+    <p>from SSsun when the sun changes position : (primary_sun, suns)</p><h3 id="define/COMSIG_SUPPLYPOD_LANDED"><aside class="declaration">#define </aside>COMSIG_SUPPLYPOD_LANDED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L405">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 405"/></a>
+    </h3>
+    <p>from [/obj/structure/closet/supplypod/proc/endlaunch]:</p><h3 id="define/COMSIG_THREAT_CALC"><aside class="declaration">#define </aside>COMSIG_THREAT_CALC
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 29"/></a>
+    </h3>
+    <p>from SSactivity for things that add threat but aren't &quot;global&quot; (e.g. phylacteries)</p><h3 id="define/COMSIG_TOPIC"><aside class="declaration">#define </aside>COMSIG_TOPIC
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 43"/></a>
+    </h3>
+    <p>generic topic handler (usr, href_list)</p><h3 id="define/COMSIG_TURF_CHANGE"><aside class="declaration">#define </aside>COMSIG_TURF_CHANGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 177"/></a>
+    </h3>
+    <p>from base of turf/ChangeTurf(): (path, list/new_baseturfs, flags, list/transferring_comps)</p><h3 id="define/COMSIG_TURF_HAS_GRAVITY"><aside class="declaration">#define </aside>COMSIG_TURF_HAS_GRAVITY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L179">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 179"/></a>
+    </h3>
+    <p>from base of atom/has_gravity(): (atom/asker, list/forced_gravities)</p><h3 id="define/COMSIG_TURF_IS_WET"><aside class="declaration">#define </aside>COMSIG_TURF_IS_WET
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L470">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 470"/></a>
+    </h3>
+    <p>Component Specific Signals</p><h3 id="define/COMSIG_TURF_MULTIZ_DEL"><aside class="declaration">#define </aside>COMSIG_TURF_MULTIZ_DEL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L181">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 181"/></a>
+    </h3>
+    <p>from base of turf/multiz_turf_del(): (turf/source, direction)</p><h3 id="define/COMSIG_TURF_MULTIZ_NEW"><aside class="declaration">#define </aside>COMSIG_TURF_MULTIZ_NEW
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L183">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 183"/></a>
+    </h3>
+    <p>from base of turf/multiz_turf_new: (turf/source, direction)</p><h3 id="define/COMSIG_TWITCH_PLAYS_MOVEMENT_DATA"><aside class="declaration">#define </aside>COMSIG_TWITCH_PLAYS_MOVEMENT_DATA
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L572">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 572"/></a>
+    </h3>
+    <p>Returns direction: (wipe_votes)</p><h3 id="define/COMSIG_VOID_MASK_ACT"><aside class="declaration">#define </aside>COMSIG_VOID_MASK_ACT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/signals.dm#L486">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;signals.dm 486"/></a>
+    </h3>
+    <p>Mask of Madness</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

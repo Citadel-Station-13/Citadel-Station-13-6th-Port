@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;component&#x2F;edible - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/component/edible.html#var">Var Details</a> - <a href="datum/component/edible.html#proc">Proc Details</a></header>
+<main>
+<h1>edible <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/edible.html">edible</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 13"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/component/edible.html#var/after_eat">after_eat</a></th><td>Callback to be ran for when you take a bite of something</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/bite_consumption">bite_consumption</a></th><td>Amount of reagents taken per bite</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/bitecount">bitecount</a></th><td>Amount of bites taken so far</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/eat_time">eat_time</a></th><td>Amount of seconds it takes to eat this food</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/eatverbs">eatverbs</a></th><td>Message to send when eating</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/food_flags">food_flags</a></th><td>Flags for food</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/foodtypes">foodtypes</a></th><td>Bitfield of the types of this food</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/junkiness">junkiness</a></th><td>Defines how much it lowers someones satiety (Need to eat, essentialy)</td></tr>
+            <tr><th><a href="datum/component/edible.html#var/last_check_time">last_check_time</a></th><td>Last time we checked for food likes</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/CanConsume">CanConsume</a></th><td>Checks whether or not the eater can actually consume the food</td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/On_Consume">On_Consume</a></th><td>Delete the item when it is fully eaten</td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/TakeBite">TakeBite</a></th><td>This function lets the eater take a bite and transfers the reagents to the eater.</td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/TryToEat">TryToEat</a></th><td>All the checks for the act of eating itself and</td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/UseByAnimal">UseByAnimal</a></th><td>Ability to feed food to puppers</td></tr>
+            <tr><th><a href="datum/component/edible.html#proc/checkLiked">checkLiked</a></th><td>Check foodtypes to see if we should send a moodlet</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/after_eat"><aside class="declaration">var </aside>after_eat
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/callback.html">callback</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 29"/></a></h3>
+        <p>Callback to be ran for when you take a bite of something</p><h3 id="var/bite_consumption"><aside class="declaration">var </aside>bite_consumption
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 15"/></a></h3>
+        <p>Amount of reagents taken per bite</p><h3 id="var/bitecount"><aside class="declaration">var </aside>bitecount
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 17"/></a></h3>
+        <p>Amount of bites taken so far</p><h3 id="var/eat_time"><aside class="declaration">var </aside>eat_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 23"/></a></h3>
+        <p>Amount of seconds it takes to eat this food</p><h3 id="var/eatverbs"><aside class="declaration">var </aside>eatverbs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 27"/></a></h3>
+        <p>Message to send when eating</p><h3 id="var/food_flags"><aside class="declaration">var </aside>food_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 19"/></a></h3>
+        <p>Flags for food</p><h3 id="var/foodtypes"><aside class="declaration">var </aside>foodtypes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 21"/></a></h3>
+        <p>Bitfield of the types of this food</p><h3 id="var/junkiness"><aside class="declaration">var </aside>junkiness
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 25"/></a></h3>
+        <p>Defines how much it lowers someones satiety (Need to eat, essentialy)</p><h3 id="var/last_check_time"><aside class="declaration">var </aside>last_check_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 33"/></a></h3>
+        <p>Last time we checked for food likes</p><h2 id="proc">Proc Details</h2><h3 id="proc/CanConsume"><aside class="declaration">proc </aside>CanConsume<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/eater, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/feeder) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L172">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 172"/></a></aside>
+        </h3>
+        <p>Checks whether or not the eater can actually consume the food</p><h3 id="proc/On_Consume"><aside class="declaration">proc </aside>On_Consume<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/eater) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L215">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 215"/></a></aside>
+        </h3>
+        <p>Delete the item when it is fully eaten</p><h3 id="proc/TakeBite"><aside class="declaration">proc </aside>TakeBite<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/eater, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/feeder) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L147">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 147"/></a></aside>
+        </h3>
+        <p>This function lets the eater take a bite and transfers the reagents to the eater.</p><h3 id="proc/TryToEat"><aside class="declaration">proc </aside>TryToEat<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/eater, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/feeder) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 84"/></a></aside>
+        </h3>
+        <p>All the checks for the act of eating itself and</p><h3 id="proc/UseByAnimal"><aside class="declaration">proc </aside>UseByAnimal<aside>(/<a href="datum.html">datum</a>/source, /<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L229">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 229"/></a></aside>
+        </h3>
+        <p>Ability to feed food to puppers</p><h3 id="proc/checkLiked"><aside class="declaration">proc </aside>checkLiked<aside>(fraction, /<a href="mob.html">mob</a>/M) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/datums/components/edible.dm#L188">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;components&#x2F;edible.dm 188"/></a></aside>
+        </h3>
+        <p>Check foodtypes to see if we should send a moodlet</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

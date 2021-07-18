@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/_flags/_flags.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/_flags/_flags.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/HEAR_1">HEAR_1</a></th><td>This flag is what recursive_hear_check() uses to determine wether to add an item to the hearer list or not.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/DEFAULT_RICOCHET_1">DEFAULT_RICOCHET_1</a></th><td>Projectiles will use default chance-based ricochet handling on things with this.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CONDUCT_1">CONDUCT_1</a></th><td>Conducts electricity (metal etc.).</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NODECONSTRUCT_1">NODECONSTRUCT_1</a></th><td>For machines and structures that should not break into parts, eg, holodeck stuff.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/OVERLAY_QUEUED_1">OVERLAY_QUEUED_1</a></th><td>Atom queued to SSoverlay.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/ON_BORDER_1">ON_BORDER_1</a></th><td>Item has priority to check when entering or leaving.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/PREVENT_CLICK_UNDER_1">PREVENT_CLICK_UNDER_1</a></th><td>Prevent clicking things below it on the same turf eg. doors/ fulltile windows.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/SHOCKED_1">SHOCKED_1</a></th><td>Prevents mobs from getting chainshocked by teslas and the supermatter.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/INITIALIZED_1">INITIALIZED_1</a></th><td>Whether /atom/Initialize() has already run for the object.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/ADMIN_SPAWNED_1">ADMIN_SPAWNED_1</a></th><td>was this spawned by an admin? used for stat tracking stuff.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/PREVENT_CONTENTS_EXPLOSION_1">PREVENT_CONTENTS_EXPLOSION_1</a></th><td>should not get harmed if this gets caught by an explosion?</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/BLOCK_FACE_ATOM_1">BLOCK_FACE_ATOM_1</a></th><td>Early returns mob.face_atom()</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CAN_BE_DIRTY_1">CAN_BE_DIRTY_1</a></th><td>If a turf can be made dirty at roundstart. This is also used in areas.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NO_LAVA_GEN_1">NO_LAVA_GEN_1</a></th><td>Blocks lava rivers being generated on the turf</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NO_RUINS_1">NO_RUINS_1</a></th><td>Blocks ruins spawning on the turf</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/EXCITED_CLEANUP_1">EXCITED_CLEANUP_1</a></th><td>Should this tile be cleaned up and reinserted into an excited group?</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/VALID_TERRITORY">VALID_TERRITORY</a></th><td>/////////////Area flags\\\\\\\
+If it's a valid territory for cult summoning or the CRAB-17 phone to spawn</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/BLOBS_ALLOWED">BLOBS_ALLOWED</a></th><td>If blobs can spawn there and if it counts towards their score.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CAVES_ALLOWED">CAVES_ALLOWED</a></th><td>If mining tunnel generation is allowed in this area</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/FLORA_ALLOWED">FLORA_ALLOWED</a></th><td>If flora are allowed to spawn in this area randomly through tunnel generation</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOB_SPAWN_ALLOWED">MOB_SPAWN_ALLOWED</a></th><td>If mobs can be spawned by natural random generation</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MEGAFAUNA_SPAWN_ALLOWED">MEGAFAUNA_SPAWN_ALLOWED</a></th><td>If megafauna can be spawned by natural random generation</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NOTELEPORT">NOTELEPORT</a></th><td>Are you forbidden from teleporting to the area? (centcom, mobs, wizard, hand teleporter)</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/HIDDEN_AREA">HIDDEN_AREA</a></th><td>Hides area from player Teleport function.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/UNIQUE_AREA">UNIQUE_AREA</a></th><td>If false, loading multiple maps with this area type will create multiple instances.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/BLOCK_SUICIDE">BLOCK_SUICIDE</a></th><td>If people are allowed to suicide in it. Mostly for OOC stuff like minigames</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/XENOBIOLOGY_COMPATIBLE">XENOBIOLOGY_COMPATIBLE</a></th><td>Can the Xenobio management console transverse this area by default?</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/ABDUCTOR_PROOF">ABDUCTOR_PROOF</a></th><td>If Abductors are unable to teleport in with their observation console</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NO_ALERTS">NO_ALERTS</a></th><td>If an area should be hidden from power consoles, power/atmosphere alerts, etc.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CULT_PERMITTED">CULT_PERMITTED</a></th><td>If blood cultists can draw runes or build structures on this AREA.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/UNSTOPPABLE">UNSTOPPABLE</a></th><td>When moving, will Bump()/Cross()/Uncross() everything, but won't be stopped.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CRAWLING">CRAWLING</a></th><td>Applied if you're crawling around on the ground/resting.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/CHECK_MOBILITY">CHECK_MOBILITY</a></th><td>any flag</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_MOVE">MOBILITY_MOVE</a></th><td>can move</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_STAND">MOBILITY_STAND</a></th><td>can, and is, standing up.</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_PICKUP">MOBILITY_PICKUP</a></th><td>can pickup items</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_USE">MOBILITY_USE</a></th><td>can use items and interact with world objects like opening closets/etc</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_UI">MOBILITY_UI</a></th><td>can use interfaces like consoles</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_STORAGE">MOBILITY_STORAGE</a></th><td>can use storage item</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_PULL">MOBILITY_PULL</a></th><td>can pull things</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_HOLD">MOBILITY_HOLD</a></th><td>can hold non-nodropped items voluntarily</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MOBILITY_RESIST">MOBILITY_RESIST</a></th><td>Can resist out of buckling, grabs, cuffs, etc, in the usual order (buckle --&gt; cuffs --&gt; grab)</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/RICOCHET_SHINY">RICOCHET_SHINY</a></th><td>If the thing can reflect light (lasers/energy)</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/RICOCHET_HARD">RICOCHET_HARD</a></th><td>If the thing can reflect matter (bullets/bomb shrapnel)</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/ISDIAGONALDIR">ISDIAGONALDIR</a></th><td>Returns true if the dir is diagonal, false otherwise</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NSCOMPONENT">NSCOMPONENT</a></th><td>True if the dir is north or south, false therwise</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/EWCOMPONENT">EWCOMPONENT</a></th><td>True if the dir is east/west, false otherwise</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/NSDIRFLIP">NSDIRFLIP</a></th><td>Flips the dir for north/south directions</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/EWDIRFLIP">EWDIRFLIP</a></th><td>Flips the dir for east/west directions</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/DIRFLIP">DIRFLIP</a></th><td>Turns the dir by 180 degrees</td></tr>
+        <tr><th><a href="code/__DEFINES/_flags/_flags.html#define/MAX_BITFLAG_DIGITS">MAX_BITFLAG_DIGITS</a></th><td>33554431 (2^24 - 1) is the maximum value our bitflags can reach.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/ABDUCTOR_PROOF"><aside class="declaration">#define </aside>ABDUCTOR_PROOF
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 94"/></a>
+    </h3>
+    <p>If Abductors are unable to teleport in with their observation console</p><h3 id="define/ADMIN_SPAWNED_1"><aside class="declaration">#define </aside>ADMIN_SPAWNED_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 52"/></a>
+    </h3>
+    <p>was this spawned by an admin? used for stat tracking stuff.</p><h3 id="define/BLOBS_ALLOWED"><aside class="declaration">#define </aside>BLOBS_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L74">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 74"/></a>
+    </h3>
+    <p>If blobs can spawn there and if it counts towards their score.</p><h3 id="define/BLOCK_FACE_ATOM_1"><aside class="declaration">#define </aside>BLOCK_FACE_ATOM_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 56"/></a>
+    </h3>
+    <p>Early returns mob.face_atom()</p><h3 id="define/BLOCK_SUICIDE"><aside class="declaration">#define </aside>BLOCK_SUICIDE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L90">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 90"/></a>
+    </h3>
+    <p>If people are allowed to suicide in it. Mostly for OOC stuff like minigames</p><h3 id="define/CAN_BE_DIRTY_1"><aside class="declaration">#define </aside>CAN_BE_DIRTY_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 62"/></a>
+    </h3>
+    <p>If a turf can be made dirty at roundstart. This is also used in areas.</p><h3 id="define/CAVES_ALLOWED"><aside class="declaration">#define </aside>CAVES_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 76"/></a>
+    </h3>
+    <p>If mining tunnel generation is allowed in this area</p><h3 id="define/CHECK_MOBILITY"><aside class="declaration">#define </aside>CHECK_MOBILITY
+            <aside>(target, flags)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L157">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 157"/></a>
+    </h3>
+    <p>any flag</p><h3 id="define/CONDUCT_1"><aside class="declaration">#define </aside>CONDUCT_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 37"/></a>
+    </h3>
+    <p>Conducts electricity (metal etc.).</p><h3 id="define/CRAWLING"><aside class="declaration">#define </aside>CRAWLING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L121">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 121"/></a>
+    </h3>
+    <p>Applied if you're crawling around on the ground/resting.</p><h3 id="define/CULT_PERMITTED"><aside class="declaration">#define </aside>CULT_PERMITTED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L98">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 98"/></a>
+    </h3>
+    <p>If blood cultists can draw runes or build structures on this AREA.</p><h3 id="define/DEFAULT_RICOCHET_1"><aside class="declaration">#define </aside>DEFAULT_RICOCHET_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 35"/></a>
+    </h3>
+    <p>Projectiles will use default chance-based ricochet handling on things with this.</p><h3 id="define/DIRFLIP"><aside class="declaration">#define </aside>DIRFLIP
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L214">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 214"/></a>
+    </h3>
+    <p>Turns the dir by 180 degrees</p><h3 id="define/EWCOMPONENT"><aside class="declaration">#define </aside>EWCOMPONENT
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L208">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 208"/></a>
+    </h3>
+    <p>True if the dir is east/west, false otherwise</p><h3 id="define/EWDIRFLIP"><aside class="declaration">#define </aside>EWDIRFLIP
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L212">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 212"/></a>
+    </h3>
+    <p>Flips the dir for east/west directions</p><h3 id="define/EXCITED_CLEANUP_1"><aside class="declaration">#define </aside>EXCITED_CLEANUP_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 68"/></a>
+    </h3>
+    <p>Should this tile be cleaned up and reinserted into an excited group?</p><h3 id="define/FLORA_ALLOWED"><aside class="declaration">#define </aside>FLORA_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 78"/></a>
+    </h3>
+    <p>If flora are allowed to spawn in this area randomly through tunnel generation</p><h3 id="define/HEAR_1"><aside class="declaration">#define </aside>HEAR_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 33"/></a>
+    </h3>
+    <p>This flag is what recursive_hear_check() uses to determine wether to add an item to the hearer list or not.</p><h3 id="define/HIDDEN_AREA"><aside class="declaration">#define </aside>HIDDEN_AREA
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 86"/></a>
+    </h3>
+    <p>Hides area from player Teleport function.</p><h3 id="define/INITIALIZED_1"><aside class="declaration">#define </aside>INITIALIZED_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 50"/></a>
+    </h3>
+    <p>Whether /atom/Initialize() has already run for the object.</p><h3 id="define/ISDIAGONALDIR"><aside class="declaration">#define </aside>ISDIAGONALDIR
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L204">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 204"/></a>
+    </h3>
+    <p>Returns true if the dir is diagonal, false otherwise</p><h3 id="define/MAX_BITFLAG_DIGITS"><aside class="declaration">#define </aside>MAX_BITFLAG_DIGITS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L217">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 217"/></a>
+    </h3>
+    <p>33554431 (2^24 - 1) is the maximum value our bitflags can reach.</p><h3 id="define/MEGAFAUNA_SPAWN_ALLOWED"><aside class="declaration">#define </aside>MEGAFAUNA_SPAWN_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 82"/></a>
+    </h3>
+    <p>If megafauna can be spawned by natural random generation</p><h3 id="define/MOBILITY_HOLD"><aside class="declaration">#define </aside>MOBILITY_HOLD
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L175">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 175"/></a>
+    </h3>
+    <p>can hold non-nodropped items voluntarily</p><h3 id="define/MOBILITY_MOVE"><aside class="declaration">#define </aside>MOBILITY_MOVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L161">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 161"/></a>
+    </h3>
+    <p>can move</p><h3 id="define/MOBILITY_PICKUP"><aside class="declaration">#define </aside>MOBILITY_PICKUP
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L165">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 165"/></a>
+    </h3>
+    <p>can pickup items</p><h3 id="define/MOBILITY_PULL"><aside class="declaration">#define </aside>MOBILITY_PULL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 173"/></a>
+    </h3>
+    <p>can pull things</p><h3 id="define/MOBILITY_RESIST"><aside class="declaration">#define </aside>MOBILITY_RESIST
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L177">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 177"/></a>
+    </h3>
+    <p>Can resist out of buckling, grabs, cuffs, etc, in the usual order (buckle --&gt; cuffs --&gt; grab)</p><h3 id="define/MOBILITY_STAND"><aside class="declaration">#define </aside>MOBILITY_STAND
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L163">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 163"/></a>
+    </h3>
+    <p>can, and is, standing up.</p><h3 id="define/MOBILITY_STORAGE"><aside class="declaration">#define </aside>MOBILITY_STORAGE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L171">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 171"/></a>
+    </h3>
+    <p>can use storage item</p><h3 id="define/MOBILITY_UI"><aside class="declaration">#define </aside>MOBILITY_UI
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L169">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 169"/></a>
+    </h3>
+    <p>can use interfaces like consoles</p><h3 id="define/MOBILITY_USE"><aside class="declaration">#define </aside>MOBILITY_USE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L167">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 167"/></a>
+    </h3>
+    <p>can use items and interact with world objects like opening closets/etc</p><h3 id="define/MOB_SPAWN_ALLOWED"><aside class="declaration">#define </aside>MOB_SPAWN_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 80"/></a>
+    </h3>
+    <p>If mobs can be spawned by natural random generation</p><h3 id="define/NODECONSTRUCT_1"><aside class="declaration">#define </aside>NODECONSTRUCT_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 39"/></a>
+    </h3>
+    <p>For machines and structures that should not break into parts, eg, holodeck stuff.</p><h3 id="define/NOTELEPORT"><aside class="declaration">#define </aside>NOTELEPORT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 84"/></a>
+    </h3>
+    <p>Are you forbidden from teleporting to the area? (centcom, mobs, wizard, hand teleporter)</p><h3 id="define/NO_ALERTS"><aside class="declaration">#define </aside>NO_ALERTS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L96">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 96"/></a>
+    </h3>
+    <p>If an area should be hidden from power consoles, power/atmosphere alerts, etc.</p><h3 id="define/NO_LAVA_GEN_1"><aside class="declaration">#define </aside>NO_LAVA_GEN_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 64"/></a>
+    </h3>
+    <p>Blocks lava rivers being generated on the turf</p><h3 id="define/NO_RUINS_1"><aside class="declaration">#define </aside>NO_RUINS_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 66"/></a>
+    </h3>
+    <p>Blocks ruins spawning on the turf</p><h3 id="define/NSCOMPONENT"><aside class="declaration">#define </aside>NSCOMPONENT
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L206">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 206"/></a>
+    </h3>
+    <p>True if the dir is north or south, false therwise</p><h3 id="define/NSDIRFLIP"><aside class="declaration">#define </aside>NSDIRFLIP
+            <aside>(d)</aside>
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L210">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 210"/></a>
+    </h3>
+    <p>Flips the dir for north/south directions</p><h3 id="define/ON_BORDER_1"><aside class="declaration">#define </aside>ON_BORDER_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 43"/></a>
+    </h3>
+    <p>Item has priority to check when entering or leaving.</p><h3 id="define/OVERLAY_QUEUED_1"><aside class="declaration">#define </aside>OVERLAY_QUEUED_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 41"/></a>
+    </h3>
+    <p>Atom queued to SSoverlay.</p><h3 id="define/PREVENT_CLICK_UNDER_1"><aside class="declaration">#define </aside>PREVENT_CLICK_UNDER_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 45"/></a>
+    </h3>
+    <p>Prevent clicking things below it on the same turf eg. doors/ fulltile windows.</p><h3 id="define/PREVENT_CONTENTS_EXPLOSION_1"><aside class="declaration">#define </aside>PREVENT_CONTENTS_EXPLOSION_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 54"/></a>
+    </h3>
+    <p>should not get harmed if this gets caught by an explosion?</p><h3 id="define/RICOCHET_HARD"><aside class="declaration">#define </aside>RICOCHET_HARD
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L185">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 185"/></a>
+    </h3>
+    <p>If the thing can reflect matter (bullets/bomb shrapnel)</p><h3 id="define/RICOCHET_SHINY"><aside class="declaration">#define </aside>RICOCHET_SHINY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L183">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 183"/></a>
+    </h3>
+    <p>If the thing can reflect light (lasers/energy)</p><h3 id="define/SHOCKED_1"><aside class="declaration">#define </aside>SHOCKED_1
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 48"/></a>
+    </h3>
+    <p>Prevents mobs from getting chainshocked by teslas and the supermatter.</p><h3 id="define/UNIQUE_AREA"><aside class="declaration">#define </aside>UNIQUE_AREA
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 88"/></a>
+    </h3>
+    <p>If false, loading multiple maps with this area type will create multiple instances.</p><h3 id="define/UNSTOPPABLE"><aside class="declaration">#define </aside>UNSTOPPABLE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L119">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 119"/></a>
+    </h3>
+    <p>When moving, will Bump()/Cross()/Uncross() everything, but won't be stopped.</p><h3 id="define/VALID_TERRITORY"><aside class="declaration">#define </aside>VALID_TERRITORY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 72"/></a>
+    </h3>
+    <p>/////////////Area flags\\\\\\\
+If it's a valid territory for cult summoning or the CRAB-17 phone to spawn</p><h3 id="define/XENOBIOLOGY_COMPATIBLE"><aside class="declaration">#define </aside>XENOBIOLOGY_COMPATIBLE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/_flags/_flags.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;_flags&#x2F;_flags.dm 92"/></a>
+    </h3>
+    <p>Can the Xenobio management console transverse this area by default?</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

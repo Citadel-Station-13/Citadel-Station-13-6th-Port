@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/dcs/flags.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/dcs/flags.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_INCOMPATIBLE">COMPONENT_INCOMPATIBLE</a></th><td>Return this from <code>/datum/component/Initialize</code> or <code>datum/component/OnTransfer</code> to have the component be deleted if it's applied to an incorrect type.
+<code>parent</code> must not be modified if this is to be returned.
+This will be noted in the runtime logs</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_NOTRANSFER">COMPONENT_NOTRANSFER</a></th><td>Returned in PostTransfer to prevent transfer, similar to <code>COMPONENT_INCOMPATIBLE</code></td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ELEMENT_INCOMPATIBLE">ELEMENT_INCOMPATIBLE</a></th><td>Return value to cancel attaching</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ELEMENT_DETACH">ELEMENT_DETACH</a></th><td>Causes the detach proc to be called when the host object is being deleted</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ELEMENT_BESPOKE">ELEMENT_BESPOKE</a></th><td>Only elements created with the same arguments given after <code>id_arg_index</code> share an element instance
+The arguments are the same when the text and number values are the same and all other values have the same ref</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_DUPE_HIGHLANDER">COMPONENT_DUPE_HIGHLANDER</a></th><td>old component is deleted (default)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_DUPE_ALLOWED">COMPONENT_DUPE_ALLOWED</a></th><td>duplicates allowed</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_DUPE_UNIQUE">COMPONENT_DUPE_UNIQUE</a></th><td>new component is deleted</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_DUPE_UNIQUE_PASSARGS">COMPONENT_DUPE_UNIQUE_PASSARGS</a></th><td>old component is given the initialization args of the new</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMPONENT_DUPE_SELECTIVE">COMPONENT_DUPE_SELECTIVE</a></th><td>each component of the same type is consulted as to whether the duplicate should be allowed</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_DEL_ON_IDENTIFY">ID_COMPONENT_DEL_ON_IDENTIFY</a></th><td>/ Identification ////
+Delete on successful broad identification (so the main way we &quot;uncover&quot; how an object works, since this won't be on it to obfuscate it)</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_DECONSTRUCTOR_DEEPSCANNED">ID_COMPONENT_DECONSTRUCTOR_DEEPSCANNED</a></th><td>We've already been successfully deepscanned by a deconstructive analyzer</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_EFFECT_NO_ACTIONS">ID_COMPONENT_EFFECT_NO_ACTIONS</a></th><td>Block user from getting actions if they don't know how to use this. Triggered on equip.</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_IDENTIFY_WITH_DECONSTRUCTOR">ID_COMPONENT_IDENTIFY_WITH_DECONSTRUCTOR</a></th><td>Can be identified in a deconstructive analyzer</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_KNOWLEDGE_NONE">ID_COMPONENT_KNOWLEDGE_NONE</a></th><td>Has no knowledge, default</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/ID_COMPONENT_KNOWLEDGE_FULL">ID_COMPONENT_KNOWLEDGE_FULL</a></th><td>Has full knowledge</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMBAT_MODE_TOGGLED">COMBAT_MODE_TOGGLED</a></th><td>The user wants combat mode on</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMBAT_MODE_ACTIVE">COMBAT_MODE_ACTIVE</a></th><td>combat mode is active.</td></tr>
+        <tr><th><a href="code/__DEFINES/dcs/flags.html#define/COMBAT_MODE_INACTIVE">COMBAT_MODE_INACTIVE</a></th><td>combat mode is not active</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/COMBAT_MODE_ACTIVE"><aside class="declaration">#define </aside>COMBAT_MODE_ACTIVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L83">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 83"/></a>
+    </h3>
+    <p>combat mode is active.</p><h3 id="define/COMBAT_MODE_INACTIVE"><aside class="declaration">#define </aside>COMBAT_MODE_INACTIVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L85">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 85"/></a>
+    </h3>
+    <p>combat mode is not active</p><h3 id="define/COMBAT_MODE_TOGGLED"><aside class="declaration">#define </aside>COMBAT_MODE_TOGGLED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 81"/></a>
+    </h3>
+    <p>The user wants combat mode on</p><h3 id="define/COMPONENT_DUPE_ALLOWED"><aside class="declaration">#define </aside>COMPONENT_DUPE_ALLOWED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 24"/></a>
+    </h3>
+    <p>duplicates allowed</p><h3 id="define/COMPONENT_DUPE_HIGHLANDER"><aside class="declaration">#define </aside>COMPONENT_DUPE_HIGHLANDER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 22"/></a>
+    </h3>
+    <p>old component is deleted (default)</p><h3 id="define/COMPONENT_DUPE_SELECTIVE"><aside class="declaration">#define </aside>COMPONENT_DUPE_SELECTIVE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 30"/></a>
+    </h3>
+    <p>each component of the same type is consulted as to whether the duplicate should be allowed</p><h3 id="define/COMPONENT_DUPE_UNIQUE"><aside class="declaration">#define </aside>COMPONENT_DUPE_UNIQUE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 26"/></a>
+    </h3>
+    <p>new component is deleted</p><h3 id="define/COMPONENT_DUPE_UNIQUE_PASSARGS"><aside class="declaration">#define </aside>COMPONENT_DUPE_UNIQUE_PASSARGS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 28"/></a>
+    </h3>
+    <p>old component is given the initialization args of the new</p><h3 id="define/COMPONENT_INCOMPATIBLE"><aside class="declaration">#define </aside>COMPONENT_INCOMPATIBLE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 4"/></a>
+    </h3>
+    <p>Return this from <code>/datum/component/Initialize</code> or <code>datum/component/OnTransfer</code> to have the component be deleted if it's applied to an incorrect type.
+<code>parent</code> must not be modified if this is to be returned.
+This will be noted in the runtime logs</p><h3 id="define/COMPONENT_NOTRANSFER"><aside class="declaration">#define </aside>COMPONENT_NOTRANSFER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 6"/></a>
+    </h3>
+    <p>Returned in PostTransfer to prevent transfer, similar to <code>COMPONENT_INCOMPATIBLE</code></p><h3 id="define/ELEMENT_BESPOKE"><aside class="declaration">#define </aside>ELEMENT_BESPOKE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 18"/></a>
+    </h3>
+    <p>Only elements created with the same arguments given after <code>id_arg_index</code> share an element instance
+The arguments are the same when the text and number values are the same and all other values have the same ref</p><h3 id="define/ELEMENT_DETACH"><aside class="declaration">#define </aside>ELEMENT_DETACH
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 13"/></a>
+    </h3>
+    <p>Causes the detach proc to be called when the host object is being deleted</p><h3 id="define/ELEMENT_INCOMPATIBLE"><aside class="declaration">#define </aside>ELEMENT_INCOMPATIBLE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 9"/></a>
+    </h3>
+    <p>Return value to cancel attaching</p><h3 id="define/ID_COMPONENT_DECONSTRUCTOR_DEEPSCANNED"><aside class="declaration">#define </aside>ID_COMPONENT_DECONSTRUCTOR_DEEPSCANNED
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L63">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 63"/></a>
+    </h3>
+    <p>We've already been successfully deepscanned by a deconstructive analyzer</p><h3 id="define/ID_COMPONENT_DEL_ON_IDENTIFY"><aside class="declaration">#define </aside>ID_COMPONENT_DEL_ON_IDENTIFY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 61"/></a>
+    </h3>
+    <p>/ Identification ////
+Delete on successful broad identification (so the main way we &quot;uncover&quot; how an object works, since this won't be on it to obfuscate it)</p><h3 id="define/ID_COMPONENT_EFFECT_NO_ACTIONS"><aside class="declaration">#define </aside>ID_COMPONENT_EFFECT_NO_ACTIONS
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L67">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 67"/></a>
+    </h3>
+    <p>Block user from getting actions if they don't know how to use this. Triggered on equip.</p><h3 id="define/ID_COMPONENT_IDENTIFY_WITH_DECONSTRUCTOR"><aside class="declaration">#define </aside>ID_COMPONENT_IDENTIFY_WITH_DECONSTRUCTOR
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 71"/></a>
+    </h3>
+    <p>Can be identified in a deconstructive analyzer</p><h3 id="define/ID_COMPONENT_KNOWLEDGE_FULL"><aside class="declaration">#define </aside>ID_COMPONENT_KNOWLEDGE_FULL
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L77">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 77"/></a>
+    </h3>
+    <p>Has full knowledge</p><h3 id="define/ID_COMPONENT_KNOWLEDGE_NONE"><aside class="declaration">#define </aside>ID_COMPONENT_KNOWLEDGE_NONE
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/dcs/flags.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;dcs&#x2F;flags.dm 75"/></a>
+    </h3>
+    <p>Has no knowledge, default</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;stack&#x2F;sheet - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/stack/sheet.html#var">Var Details</a> - <a href="obj/item/stack/sheet.html#proc">Proc Details</a></header>
+<main>
+<h1>sheet <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/stack.html">stack</a>/<a href="obj/item/stack/sheet.html">sheet</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/stack/sheet.html#var/point_value">point_value</a></th><td>turn-in value for the gulag stacker - loosely relative to its rarity</td></tr>
+            <tr><th><a href="obj/item/stack/sheet.html#var/shard_type">shard_type</a></th><td>the shard debris typepath left over by solar panels and windows etc.</td></tr>
+            <tr><th><a href="obj/item/stack/sheet.html#var/sheettype">sheettype</a></th><td>this is used for girders in the creation of walls/false walls</td></tr>
+            <tr><th><a href="obj/item/stack/sheet.html#var/walltype">walltype</a></th><td>What type of wall does this sheet spawn</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/stack/sheet.html#proc/on_solar_construction">on_solar_construction</a></th><td>Called on the glass sheet upon solar construction (duh):
+Different glass sheets can modify different stas/vars, such as obj_integrity or efficiency
+and possibly extra effects if you wish to code them.
+Keep in mind the solars' max_integrity is set equal to the obj_integrity later,
+so you won't have to do so here.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/point_value"><aside class="declaration">var </aside>point_value
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 16"/></a></h3>
+        <p>turn-in value for the gulag stacker - loosely relative to its rarity</p><h3 id="var/shard_type"><aside class="declaration">var </aside>shard_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 18"/></a></h3>
+        <p>the shard debris typepath left over by solar panels and windows etc.</p><h3 id="var/sheettype"><aside class="declaration">var </aside>sheettype
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 14"/></a></h3>
+        <p>this is used for girders in the creation of walls/false walls</p><h3 id="var/walltype"><aside class="declaration">var </aside>walltype
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 22"/></a></h3>
+        <p>What type of wall does this sheet spawn</p><h2 id="proc">Proc Details</h2><h3 id="proc/on_solar_construction"><aside class="declaration">proc </aside>on_solar_construction<aside>(/<a href="obj.html">obj</a>/<a href="obj/machinery/power/solar.html">machinery/power/solar</a>/S) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/game/objects/items/stacks/sheets/sheets.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;sheets&#x2F;sheets.dm 34"/></a></aside>
+        </h3>
+        <p>Called on the glass sheet upon solar construction (duh):
+Different glass sheets can modify different stas/vars, such as obj_integrity or efficiency
+and possibly extra effects if you wish to code them.
+Keep in mind the solars' max_integrity is set equal to the obj_integrity later,
+so you won't have to do so here.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;clothing - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/clothing.html#var">Var Details</a> - <a href="obj/item/clothing.html#proc">Proc Details</a></header>
+<main>
+<h1>clothing <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/clothing.html">clothing</a></aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/clothing.html#var/armor_list">armor_list</a></th><td>These are armor values that protect the wearer, taken from the clothing's armor datum. List updates on examine because it's currently only used to print armor ratings to chat in Topic().</td></tr>
+            <tr><th><a href="obj/item/clothing.html#var/durability_list">durability_list</a></th><td>These are armor values that protect the clothing, taken from its armor datum. List updates on examine because it's currently only used to print armor ratings to chat in Topic().</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/clothing.html#proc/armor_to_protection_class">armor_to_protection_class</a></th><td>Rounds armor_value to nearest 10, divides it by 10 and then expresses it in roman numerals up to 10</td></tr>
+            <tr><th><a href="obj/item/clothing.html#proc/bristle">bristle</a></th><td>If we're a clothing with at least 1 shredded/disabled zone, give the wearer a periodic heads up letting them know their clothes are damaged</td></tr>
+            <tr><th><a href="obj/item/clothing.html#proc/disable_zone">disable_zone</a></th><td>disable_zone() is used to disable a given bodypart's protection on our clothing item, mainly from [/obj/item/clothing/proc/take_damage_zone()]</td></tr>
+            <tr><th><a href="obj/item/clothing.html#proc/take_damage_zone">take_damage_zone</a></th><td>take_damage_zone() is used for dealing damage to specific bodyparts on a worn piece of clothing, meant to be called from [/obj/item/bodypart/proc/check_woundings_mods()]</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/armor_list"><aside class="declaration">var </aside>armor_list
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 64"/></a></h3>
+        <p>These are armor values that protect the wearer, taken from the clothing's armor datum. List updates on examine because it's currently only used to print armor ratings to chat in Topic().</p><h3 id="var/durability_list"><aside class="declaration">var </aside>durability_list
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 66"/></a></h3>
+        <p>These are armor values that protect the clothing, taken from its armor datum. List updates on examine because it's currently only used to print armor ratings to chat in Topic().</p><h2 id="proc">Proc Details</h2><h3 id="proc/armor_to_protection_class"><aside class="declaration">proc </aside>armor_to_protection_class<aside>(armor_value) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L320">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 320"/></a></aside>
+        </h3>
+        <p>Rounds armor_value to nearest 10, divides it by 10 and then expresses it in roman numerals up to 10</p>
+<p>Rounds armor_value to nearest 10, divides it by 10
+and then expresses it in roman numerals up to 10
+Arguments:</p>
+<ul>
+<li>armor_value - Number we're converting</li>
+</ul><h3 id="proc/bristle"><aside class="declaration">proc </aside>bristle<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/L) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L483">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 483"/></a></aside>
+        </h3>
+        <p>If we're a clothing with at least 1 shredded/disabled zone, give the wearer a periodic heads up letting them know their clothes are damaged</p><h3 id="proc/disable_zone"><aside class="declaration">proc </aside>disable_zone<aside>(def_zone, damage_type) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L172">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 172"/></a></aside>
+        </h3>
+        <p>disable_zone() is used to disable a given bodypart's protection on our clothing item, mainly from [/obj/item/clothing/proc/take_damage_zone()]</p>
+<p>This proc disables all protection on the specified bodypart for this piece of clothing: it'll be as if it doesn't cover it at all anymore (because it won't!)
+If every possible bodypart has been disabled on the clothing, we put it out of commission entirely and mark it as shredded, whereby it will have to be repaired in
+order to equip it again. Also note we only consider it damaged if there's more than one bodypart disabled.</p>
+<p>Arguments:</p>
+<ul>
+<li>def_zone: The bodypart zone we're disabling</li>
+<li>damage_type: Only really relevant for the verb for describing the breaking, and maybe obj_destruction()</li>
+</ul><h3 id="proc/take_damage_zone"><aside class="declaration">proc </aside>take_damage_zone<aside>(def_zone, damage_amount, damage_type, armour_penetration) 
+        
+    
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/modules/clothing/clothing.dm#L148">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;clothing&#x2F;clothing.dm 148"/></a></aside>
+        </h3>
+        <p>take_damage_zone() is used for dealing damage to specific bodyparts on a worn piece of clothing, meant to be called from [/obj/item/bodypart/proc/check_woundings_mods()]</p>
+<pre><code>This proc only matters when a bodypart that this clothing is covering is harmed by a direct attack (being on fire or in space need not apply), and only if this clothing covers
+</code></pre>
+<p>more than one bodypart to begin with. No point in tracking damage by zone for a hat, and I'm not cruel enough to let you fully break them in a few shots.
+Also if limb_integrity is 0, then this clothing doesn't have bodypart damage enabled so skip it.</p>
+<p>Arguments:</p>
+<ul>
+<li>def_zone: The bodypart zone in question</li>
+<li>damage_amount: Incoming damage</li>
+<li>damage_type: BRUTE or BURN</li>
+<li>armour_penetration: If the attack had armour_penetration</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

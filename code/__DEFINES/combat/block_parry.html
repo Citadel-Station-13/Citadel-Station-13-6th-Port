@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/combat/block_parry.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/combat/block_parry.dm 
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/ACTIVE_BLOCK_STARTING_INTERRUPT">ACTIVE_BLOCK_STARTING_INTERRUPT</a></th><td>If this is the value of active_block_starting it signals we want to interrupt the start</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/UNARMED_PARRY">UNARMED_PARRY</a></th><td>&quot;&quot;types&quot;&quot; of parry &quot;items&quot;</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/NOT_PARRYING">NOT_PARRYING</a></th><td>Parry phase we're in</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_DEFAULT_HANDLE_FEEDBACK">PARRY_DEFAULT_HANDLE_FEEDBACK</a></th><td>Default handling for audio/visual feedback</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_LOCK_SPRINTING">PARRY_LOCK_SPRINTING</a></th><td>Lock sprinting while parrying</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_LOCK_ATTACKING">PARRY_LOCK_ATTACKING</a></th><td>Lock attacking while parrying</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN">PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN</a></th><td>Parry effects.
+Automatically melee attacks back normally, LMB equivalent action of an harm intent attack. List association should be defaulting to 1, being the attack damage multiplier for said counterattack</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_DISARM_ATTACKER">PARRY_DISARM_ATTACKER</a></th><td>List association should be TRUE.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_KNOCKDOWN_ATTACKER">PARRY_KNOCKDOWN_ATTACKER</a></th><td>List association should be duration or null for just plain knockdown.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_STAGGER_ATTACKER">PARRY_STAGGER_ATTACKER</a></th><td>List association should be duration.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_DAZE_ATTACKER">PARRY_DAZE_ATTACKER</a></th><td>List association should be amount of time to daze attacker.</td></tr>
+        <tr><th><a href="code/__DEFINES/combat/block_parry.html#define/PARRY_COUNTERATTACK_IGNORE_ADJACENCY">PARRY_COUNTERATTACK_IGNORE_ADJACENCY</a></th><td>Set to TRUE in list association to ignore adjacency checks</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/ACTIVE_BLOCK_STARTING_INTERRUPT"><aside class="declaration">#define </aside>ACTIVE_BLOCK_STARTING_INTERRUPT
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 39"/></a>
+    </h3>
+    <p>If this is the value of active_block_starting it signals we want to interrupt the start</p><h3 id="define/NOT_PARRYING"><aside class="declaration">#define </aside>NOT_PARRYING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L47">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 47"/></a>
+    </h3>
+    <p>Parry phase we're in</p><h3 id="define/PARRY_COUNTERATTACK_IGNORE_ADJACENCY"><aside class="declaration">#define </aside>PARRY_COUNTERATTACK_IGNORE_ADJACENCY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 72"/></a>
+    </h3>
+    <p>Set to TRUE in list association to ignore adjacency checks</p><h3 id="define/PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN"><aside class="declaration">#define </aside>PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 62"/></a>
+    </h3>
+    <p>Parry effects.
+Automatically melee attacks back normally, LMB equivalent action of an harm intent attack. List association should be defaulting to 1, being the attack damage multiplier for said counterattack</p><h3 id="define/PARRY_DAZE_ATTACKER"><aside class="declaration">#define </aside>PARRY_DAZE_ATTACKER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L70">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 70"/></a>
+    </h3>
+    <p>List association should be amount of time to daze attacker.</p><h3 id="define/PARRY_DEFAULT_HANDLE_FEEDBACK"><aside class="declaration">#define </aside>PARRY_DEFAULT_HANDLE_FEEDBACK
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 54"/></a>
+    </h3>
+    <p>Default handling for audio/visual feedback</p><h3 id="define/PARRY_DISARM_ATTACKER"><aside class="declaration">#define </aside>PARRY_DISARM_ATTACKER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 64"/></a>
+    </h3>
+    <p>List association should be TRUE.</p><h3 id="define/PARRY_KNOCKDOWN_ATTACKER"><aside class="declaration">#define </aside>PARRY_KNOCKDOWN_ATTACKER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 66"/></a>
+    </h3>
+    <p>List association should be duration or null for just plain knockdown.</p><h3 id="define/PARRY_LOCK_ATTACKING"><aside class="declaration">#define </aside>PARRY_LOCK_ATTACKING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 58"/></a>
+    </h3>
+    <p>Lock attacking while parrying</p><h3 id="define/PARRY_LOCK_SPRINTING"><aside class="declaration">#define </aside>PARRY_LOCK_SPRINTING
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 56"/></a>
+    </h3>
+    <p>Lock sprinting while parrying</p><h3 id="define/PARRY_STAGGER_ATTACKER"><aside class="declaration">#define </aside>PARRY_STAGGER_ATTACKER
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 68"/></a>
+    </h3>
+    <p>List association should be duration.</p><h3 id="define/UNARMED_PARRY"><aside class="declaration">#define </aside>UNARMED_PARRY
+            <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/blob/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1/code/__DEFINES/combat/block_parry.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;combat&#x2F;block_parry.dm 42"/></a>
+    </h3>
+    <p>&quot;&quot;types&quot;&quot; of parry &quot;items&quot;</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Citadel-Station-13/Citadel-Station-13/tree/06cd2e3b512fe61dc93ae63aa6fce3b9925397e1">06cd2e3</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>
