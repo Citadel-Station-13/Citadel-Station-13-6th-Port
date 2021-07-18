@@ -2257,6 +2257,18 @@
 
 		var/mob/M = locate(href_list["HeadsetMessage"])
 		usr.client.admin_headset_message(M)
+//ambition start
+	else if(href_list["ObjectiveRequest"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/mind/requesting_mind = locate(href_list["ObjectiveRequest"])
+		if(!istype(requesting_mind) || QDELETED(requesting_mind))
+			to_chat(usr, "<span class='warning'>This mind reference is no longer valid. It has probably since been destroyed.</span>")
+			return
+		requesting_mind.do_edit_objectives_ambitions()
+		return
+//ambition end
+
 
 	else if(href_list["reject_custom_name"])
 		if(!check_rights(R_ADMIN))

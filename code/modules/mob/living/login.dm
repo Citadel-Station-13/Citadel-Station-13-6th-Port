@@ -2,7 +2,10 @@
 	..()
 	//Mind updates
 	sync_mind()
-	mind.show_memory(src, 0)
+//ambition start
+	if(mind.memory || mind.antag_datums)
+		to_chat(src, "<i>[mind.show_memory()]</i>")
+//ambition end
 
 	//Round specific stuff
 	if(SSticker.mode)

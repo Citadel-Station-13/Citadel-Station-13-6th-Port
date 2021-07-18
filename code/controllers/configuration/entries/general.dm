@@ -441,3 +441,8 @@
 	config_entry_value = TRUE
 
 /datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
+
+//ambition start
+/datum/config_entry/number/max_ambitions	// Maximum number of ambitions a mind can store.
+	config_entry_value = 5
+//ambition end

@@ -25,6 +25,10 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/show_name_in_check_antagonists = FALSE //Will append antagonist name in admin listings - use for categories that share more than one antag type
 	var/list/blacklisted_quirks = list(/datum/quirk/nonviolent,/datum/quirk/mute) // Quirks that will be removed upon gaining this antag. Pacifist and mute are default.
 	var/threat = 0 // Amount of threat this antag poses, for dynamic mode
+//ambition start
+	/// Lazy list for antagonists to request the admins objectives.
+	var/list/requested_objective_changes
+//ambition end
 	var/show_to_ghosts = FALSE // Should this antagonist be shown as antag to ghosts? Shouldn't be used for stealthy antagonists like traitors
 
 	var/list/skill_modifiers
@@ -35,8 +39,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 /datum/antagonist/Destroy()
 	GLOB.antagonists -= src
-	if(owner)
-		LAZYREMOVE(owner.antag_datums, src)
+//ambition start
+	owner?.do_remove_antag_datum(src)
+//ambition end
 	owner = null
 	return ..()
 
@@ -135,7 +140,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 	remove_innate_effects()
 	clear_antag_moodies()
 	if(owner)
-		LAZYREMOVE(owner.antag_datums, src)
+//ambition start
+		owner.do_remove_antag_datum(src)
+//ambition end
 		for(var/A in skill_modifiers)
 			owner.remove_skill_modifier(GET_SKILL_MOD_ID(A, type))
 		if(!silent && owner.current)
@@ -295,3 +302,33 @@ GLOBAL_LIST_EMPTY(antagonists)
 	else
 		return
 	..()
+
+///Clears change requests from deleted objectives to avoid broken references.
+/datum/antagonist/proc/clean_request_from_del_objective(datum/objective/source, force)
+	var/objective_reference = REF(source)
+	for(var/uid in requested_objective_changes)
+		var/list/change_request = requested_objective_changes[uid]
+		if(change_request["target"] != objective_reference)
+			continue
+		LAZYREMOVE(requested_objective_changes, uid)
+
+
+/datum/antagonist/proc/add_objective_change(uid, list/additions)
+	LAZYADD(requested_objective_changes, uid)
+	var/datum/objective/request_target = additions["target"]
+	if(!ispath(request_target))
+		request_target = locate(request_target) in objectives
+		if(istype(request_target))
+			RegisterSignal(request_target, COMSIG_PARENT_QDELETING, .proc/clean_request_from_del_objective)
+	requested_objective_changes[uid] = additions
+
+
+/datum/antagonist/proc/remove_objective_change(uid)
+	if(!LAZYACCESS(requested_objective_changes, uid))
+		return
+	var/datum/objective/request_target = requested_objective_changes[uid]["target"]
+	if(!ispath(request_target))
+		request_target = locate(request_target) in objectives
+		if(istype(request_target))
+			UnregisterSignal(request_target, COMSIG_PARENT_QDELETING)
+	LAZYREMOVE(requested_objective_changes, uid)

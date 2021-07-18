@@ -111,3 +111,9 @@ GLOBAL_LIST_EMPTY(living_heart_cache)	//A list of all living hearts in existance
 #define BLOB_SPREAD_COST 4
 #define BLOB_ATTACK_REFUND 2 //blob refunds this much if it attacks and doesn't spread
 #define BLOB_REFLECTOR_COST 15
+
+//Objectives-Ambitions Panel
+#define REQUEST_NEW_OBJECTIVE "new_objective"
+#define REQUEST_DEL_OBJECTIVE "del_objective"
+#define REQUEST_WIN_OBJECTIVE "win_objective"
+#define REQUEST_LOSE_OBJECTIVE "lose_objective"
