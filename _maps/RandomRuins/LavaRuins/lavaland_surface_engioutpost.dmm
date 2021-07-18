@@ -1,0 +1,2063 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ab" = (
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ad" = (
+/obj/machinery/power/floodlight,
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ae" = (
+/turf/closed/wall/r_wall,
+/area/lavaland/surface/outdoors)
+"af" = (
+/obj/structure/lattice,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"ag" = (
+/obj/structure/cable,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"ah" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"ai" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"aj" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"al" = (
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"am" = (
+/obj/machinery/power/emitter,
+/obj/effect/turf_decal/stripes/end{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"an" = (
+/turf/closed/wall/mineral/iron,
+/area/lavaland/surface/outdoors)
+"ao" = (
+/obj/item/clothing/under/rank/engineering/chief_engineer,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ap" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"aq" = (
+/obj/machinery/field/generator,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"ar" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"as" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"at" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"au" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"av" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aw" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ax" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber,
+/turf/open/floor/engine/o2,
+/area/lavaland/surface/outdoors)
+"ay" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/high_volume,
+/turf/open/floor/engine/o2,
+/area/lavaland/surface/outdoors)
+"az" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber,
+/turf/open/floor/engine/n2,
+/area/lavaland/surface/outdoors)
+"aA" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/high_volume,
+/turf/open/floor/engine/n2,
+/area/lavaland/surface/outdoors)
+"aB" = (
+/turf/closed/wall,
+/area/lavaland/surface/outdoors)
+"aC" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 8
+	},
+/obj/machinery/light/small/broken{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aD" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/turf/open/floor/engine/o2,
+/area/lavaland/surface/outdoors)
+"aE" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/turf/open/floor/engine/o2,
+/area/lavaland/surface/outdoors)
+"aF" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/turf/open/floor/engine/n2,
+/area/lavaland/surface/outdoors)
+"aG" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/turf/open/floor/engine/n2,
+/area/lavaland/surface/outdoors)
+"aH" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aI" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/item/clothing/suit/space/hardsuit/engine,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aJ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"aK" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aL" = (
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aM" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/turf/open/floor/engine/airless,
+/area/lavaland/surface/outdoors)
+"aN" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/turf/open/floor/engine/airless,
+/area/lavaland/surface/outdoors)
+"aO" = (
+/turf/closed/wall/r_wall/rust,
+/area/lavaland/surface/outdoors)
+"aP" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aQ" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aR" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 6
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aS" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aT" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 10
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aU" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 5
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aV" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aW" = (
+/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aX" = (
+/obj/machinery/atmospherics/components/trinary/mixer/flipped{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aY" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"aZ" = (
+/obj/machinery/atmospherics/pipe/manifold/green/visible{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ba" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 10
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bb" = (
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bc" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"bd" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bf" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/gibs/core,
+/obj/item/clothing/suit/space/hardsuit/engine,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bg" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"bh" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"bi" = (
+/obj/machinery/door/airlock/engineering{
+	name = "The Singularity Engine"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"bj" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bk" = (
+/obj/machinery/door/airlock/engineering{
+	name = "Engine Entry";
+	req_access_txt = "204"
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bl" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bm" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 9
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bn" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bo" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bp" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/visible{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bq" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"br" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bs" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bt" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bu" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bv" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bw" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bx" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 1
+	},
+/obj/machinery/power/apc/unlocked{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"by" = (
+/obj/item/stack/rods{
+	amount = 2
+	},
+/obj/item/shard/plasma,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bA" = (
+/obj/item/flashlight/flare,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bB" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bC" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"bD" = (
+/obj/effect/decal/cleanable/robot_debris,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/item/book/manual/wiki/engineering_singulo_tesla,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bE" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bF" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bG" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 6
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bH" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bI" = (
+/obj/item/pda/clear{
+	note = "Chief's asked me to check on the machinery inside PDA. He's also worried about Build, but i'm sure Harry'll handle the construction. I just need to work on Internals. Fuck i'm hungry"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bJ" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bK" = (
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bL" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/visible,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bM" = (
+/obj/machinery/atmospherics/components/trinary/filter/flipped{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bN" = (
+/obj/machinery/atmospherics/pipe/simple/dark/visible{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bO" = (
+/obj/machinery/atmospherics/pipe/simple/dark/visible{
+	dir = 10
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bP" = (
+/obj/machinery/atmospherics/components/binary/pump,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bQ" = (
+/obj/effect/spawner/structure/window/plasma,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bR" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bS" = (
+/obj/structure/sign/poster/official/build{
+	pixel_x = -32
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bT" = (
+/obj/item/pipe_dispenser,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"bU" = (
+/obj/effect/mob_spawn/human/corpse/assistant,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bV" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bW" = (
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bX" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bY" = (
+/obj/structure/sign/poster/official/safety_internals{
+	pixel_x = 32
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 9
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"bZ" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ca" = (
+/obj/item/flashlight,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cb" = (
+/obj/item/book/manual/wiki/atmospherics,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cc" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cd" = (
+/obj/machinery/atmospherics/pipe/manifold/dark/visible{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ce" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 1
+	},
+/obj/machinery/airalarm/directional/east,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cf" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cg" = (
+/obj/item/wallframe/apc,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"ch" = (
+/obj/machinery/light/broken,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ci" = (
+/obj/structure/sign/poster/official/pda_ad{
+	pixel_y = -32
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cj" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ck" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible{
+	dir = 5
+	},
+/obj/structure/sign/poster/contraband/atmosia_independence{
+	pixel_x = -32
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cl" = (
+/obj/machinery/atmospherics/pipe/manifold4w/supply/visible,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cm" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cn" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"co" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 6
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cp" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 8
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cq" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 1
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cr" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/door_assembly/door_assembly_eng,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cs" = (
+/obj/machinery/atmospherics/components/unary/thermomachine/heater{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"ct" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/visible{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cv" = (
+/obj/machinery/atmospherics/pipe/manifold/green/visible,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cw" = (
+/obj/machinery/atmospherics/pipe/manifold4w/green/visible,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cx" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cy" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/pump,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cz" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 9
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cA" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cB" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 1
+	},
+/obj/structure/cable,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cC" = (
+/obj/effect/decal/cleanable/oil,
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"cD" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"cE" = (
+/obj/machinery/computer/rdconsole/production,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cF" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"cG" = (
+/obj/machinery/field/generator,
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"cH" = (
+/obj/item/construction/rcd,
+/obj/structure/rack,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_upgrade/frames,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cI" = (
+/obj/machinery/airalarm/directional/west,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cJ" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/visible{
+	dir = 8
+	},
+/obj/structure/cable,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cK" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cL" = (
+/obj/effect/turf_decal/stripes/corner,
+/obj/machinery/space_heater,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cM" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cN" = (
+/obj/machinery/atmospherics/components/binary/pump,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cO" = (
+/obj/machinery/light/small,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cP" = (
+/obj/machinery/atmospherics/pipe/simple/dark/visible{
+	dir = 6
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cQ" = (
+/obj/machinery/atmospherics/pipe/simple/dark/visible{
+	dir = 9
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cR" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/machinery/space_heater,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cS" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cT" = (
+/obj/machinery/power/emitter{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/end,
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"cV" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cW" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/effect/turf_decal/trimline/yellow/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cY" = (
+/obj/machinery/light/small/broken,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"cZ" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/supply/visible,
+/turf/open/floor/engine/airless,
+/area/lavaland/surface/outdoors)
+"da" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/brown/visible,
+/turf/open/floor/engine/airless,
+/area/lavaland/surface/outdoors)
+"db" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/dark/visible,
+/turf/open/floor/engine/airless,
+/area/lavaland/surface/outdoors)
+"dc" = (
+/obj/machinery/power/rad_collector,
+/obj/structure/cable,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"dd" = (
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"de" = (
+/obj/machinery/autolathe,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"df" = (
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dg" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dh" = (
+/obj/structure/sign/poster/contraband/grey_tide,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/closed/wall,
+/area/lavaland/surface/outdoors)
+"di" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dj" = (
+/turf/closed/wall/rust,
+/area/lavaland/surface/outdoors)
+"dk" = (
+/obj/machinery/atmospherics/pipe/simple/supply/visible,
+/turf/open/floor/engine/air,
+/area/lavaland/surface/outdoors)
+"dl" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible,
+/turf/open/floor/engine/air,
+/area/lavaland/surface/outdoors)
+"dm" = (
+/obj/machinery/atmospherics/pipe/simple/brown/visible,
+/turf/open/floor/engine/vacuum,
+/area/lavaland/surface/outdoors)
+"dn" = (
+/obj/machinery/atmospherics/pipe/simple/dark/visible,
+/turf/open/floor/engine/vacuum,
+/area/lavaland/surface/outdoors)
+"do" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/effect/decal/cleanable/oil/streak,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"dp" = (
+/obj/machinery/light/built,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"dq" = (
+/obj/item/tank/internals/plasma,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"dr" = (
+/obj/machinery/power/floodlight,
+/obj/structure/cable,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"ds" = (
+/obj/structure/tank_dispenser,
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"dt" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line{
+	dir = 1
+	},
+/obj/machinery/airalarm/directional/north,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"du" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dv" = (
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 5
+	},
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dw" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber{
+	dir = 1
+	},
+/turf/open/floor/engine/air,
+/area/lavaland/surface/outdoors)
+"dx" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/high_volume{
+	dir = 1
+	},
+/turf/open/floor/engine/air,
+/area/lavaland/surface/outdoors)
+"dy" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber{
+	dir = 1
+	},
+/turf/open/floor/engine/vacuum,
+/area/lavaland/surface/outdoors)
+"dz" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/high_volume{
+	dir = 1
+	},
+/turf/open/floor/engine/vacuum,
+/area/lavaland/surface/outdoors)
+"dA" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/turf_decal/trimline/neutral/filled/line,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"dB" = (
+/obj/structure/girder,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"dC" = (
+/obj/structure/door_assembly/door_assembly_eng,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"gA" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"gD" = (
+/obj/machinery/power/emitter{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/end,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"mO" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"oi" = (
+/obj/machinery/space_heater,
+/turf/open/floor/plating/rust,
+/area/lavaland/surface/outdoors)
+"tY" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"CR" = (
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"DM" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"Ee" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+"Wr" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating/icemoon,
+/area/lavaland/surface/outdoors)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aB
+an
+aB
+aB
+an
+ab
+aa
+by
+bQ
+bQ
+aO
+ae
+ae
+ae
+ae
+aO
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aj
+ab
+al
+al
+ab
+ab
+ab
+ab
+ab
+ab
+al
+al
+al
+do
+ae
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aj
+al
+al
+al
+al
+al
+al
+al
+al
+al
+al
+gA
+ae
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aw
+aK
+bc
+bc
+bR
+bc
+bc
+cC
+cT
+ai
+Ee
+aO
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+af
+al
+cD
+gA
+al
+al
+aO
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+bd
+aa
+aa
+aa
+af
+cA
+DM
+dc
+al
+ae
+aa
+"}
+(8,1,1) = {"
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+af
+af
+DM
+ag
+al
+ae
+aa
+"}
+(9,1,1) = {"
+ab
+ab
+al
+ap
+aa
+aa
+aa
+aa
+bf
+aa
+aa
+aa
+af
+af
+DM
+dc
+dp
+ae
+aa
+"}
+(10,1,1) = {"
+ab
+ab
+dd
+ap
+al
+aa
+aa
+aa
+aa
+aa
+bT
+aa
+af
+ab
+DM
+dc
+dq
+ae
+aa
+"}
+(11,1,1) = {"
+ad
+ai
+mO
+aq
+ab
+aa
+aa
+aa
+aa
+bA
+aa
+aa
+af
+aI
+DM
+dc
+al
+ae
+aa
+"}
+(12,1,1) = {"
+ab
+ab
+gA
+ap
+al
+ab
+aJ
+aa
+aa
+aa
+aa
+ab
+ab
+cF
+gA
+al
+al
+aO
+aa
+"}
+(13,1,1) = {"
+ab
+ab
+am
+ar
+at
+at
+at
+at
+Wr
+bB
+bB
+bB
+tY
+cG
+gD
+ai
+dr
+ae
+aa
+"}
+(14,1,1) = {"
+ab
+ah
+al
+as
+au
+as
+as
+as
+bg
+al
+al
+cg
+gA
+al
+al
+al
+al
+ae
+aa
+"}
+(15,1,1) = {"
+ab
+al
+al
+al
+al
+al
+al
+al
+bh
+bC
+al
+al
+CR
+al
+al
+al
+ds
+aO
+aa
+"}
+(16,1,1) = {"
+aO
+aO
+ae
+ae
+ae
+aO
+ae
+aO
+bi
+ae
+aO
+ae
+ae
+aO
+ae
+aO
+ae
+aO
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aL
+bb
+bD
+aO
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+oi
+bj
+ab
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+af
+aa
+aa
+aB
+an
+dj
+ae
+aP
+bk
+aP
+ae
+aB
+aB
+dj
+aB
+aB
+aB
+aa
+aa
+"}
+(20,1,1) = {"
+af
+af
+ab
+aa
+aa
+af
+aC
+aQ
+bl
+bE
+bS
+cf
+cr
+cB
+cI
+ab
+aB
+aa
+aa
+"}
+(21,1,1) = {"
+af
+ab
+ab
+af
+af
+ab
+ab
+ab
+bj
+ab
+bU
+ch
+aB
+cE
+ab
+cY
+dj
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+af
+ab
+ab
+ab
+ab
+ab
+bj
+ab
+bV
+ab
+aP
+cH
+ab
+de
+dj
+aa
+aa
+"}
+(23,1,1) = {"
+ab
+aa
+af
+ab
+ao
+ab
+ab
+aR
+bm
+ab
+bH
+ci
+aB
+aB
+aP
+aB
+aB
+ab
+aa
+"}
+(24,1,1) = {"
+aa
+af
+ab
+al
+ab
+ab
+ab
+aS
+bn
+ab
+bH
+ab
+ab
+cI
+cR
+aB
+dj
+aB
+aB
+"}
+(25,1,1) = {"
+aa
+af
+ab
+ab
+ab
+ab
+ab
+aT
+bo
+ab
+bW
+cj
+cj
+cj
+cS
+dh
+dg
+du
+aB
+"}
+(26,1,1) = {"
+aa
+af
+af
+an
+an
+ab
+ab
+ab
+bp
+bF
+bX
+bF
+bF
+cJ
+cV
+df
+di
+dv
+dB
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+aa
+an
+av
+aH
+av
+bj
+bG
+bY
+av
+av
+cK
+cW
+aB
+dt
+dA
+dC
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+an
+an
+dj
+ae
+bj
+bH
+ae
+aB
+dB
+dB
+aB
+dj
+aB
+aB
+dj
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+bj
+bI
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+bq
+bH
+aO
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+"}
+(31,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+bq
+bJ
+ae
+ae
+aO
+ae
+aO
+aa
+aa
+aa
+aa
+"}
+(32,1,1) = {"
+aa
+aa
+aa
+ae
+ae
+ae
+ae
+ae
+br
+bK
+bZ
+ck
+cs
+cL
+aO
+ae
+ae
+aO
+aa
+"}
+(33,1,1) = {"
+aa
+aa
+aa
+ae
+ax
+aD
+aM
+aU
+bs
+bL
+bZ
+cl
+ct
+cM
+cZ
+dk
+dw
+ae
+aa
+"}
+(34,1,1) = {"
+aa
+aa
+aa
+ae
+ay
+aE
+aN
+aV
+bt
+bM
+ab
+cm
+co
+cN
+aN
+dl
+dx
+ae
+aa
+"}
+(35,1,1) = {"
+aa
+aa
+aa
+ae
+ae
+ae
+aO
+aW
+bu
+bN
+ca
+cn
+cv
+cO
+ae
+aO
+aO
+aO
+aa
+"}
+(36,1,1) = {"
+aa
+aa
+aa
+ae
+az
+aF
+aM
+aX
+bv
+bN
+cb
+co
+cw
+cM
+da
+dm
+dy
+ae
+aa
+"}
+(37,1,1) = {"
+aa
+aa
+aa
+ae
+aA
+aG
+aN
+aY
+bw
+bM
+cc
+cp
+cx
+cP
+db
+dn
+dz
+ae
+aa
+"}
+(38,1,1) = {"
+aa
+aa
+aa
+ae
+aO
+aO
+ae
+aZ
+bu
+bO
+cd
+cd
+cy
+cQ
+ae
+aO
+aO
+aO
+aa
+"}
+(39,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+ba
+bx
+bP
+ce
+cq
+cz
+ab
+ae
+aa
+aa
+aa
+aa
+"}
+(40,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aO
+aO
+ae
+ae
+ae
+aO
+ae
+aO
+aa
+aa
+aa
+aa
+"}
