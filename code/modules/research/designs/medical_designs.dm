@@ -201,7 +201,7 @@
 	build_path = /obj/item/storage/hypospraykit // let's not summon new hyposprays thanks
 	category = list("Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
-	
+
 /datum/design/hypospray/mkii
 	name = "Hypospray Mk. II"
 	id = "hypospray_mkii"
@@ -486,6 +486,28 @@
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
+/datum/design/cyberimp_diagnostics_hud
+	name = "Diagnostics HUD Implant"
+	desc = "These cybernetic eyes will display a diagnostics HUD over everything you see. Wiggle eyes to control."
+	id = "ci-diaghud"
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
+	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 500, /datum/material/gold = 500)
+	build_path = /obj/item/organ/cyberimp/eyes/hud/diagnostic
+	category = list("Misc", "Medical Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
+/datum/design/cyberimp_science_hud
+	name = "Science HUD Implant"
+	desc = "These cybernetic eyes will display a science HUD over everything you see. Wiggle eyes to control."
+	id = "ci-scihud"
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
+	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 500, /datum/material/gold = 500)
+	build_path = /obj/item/organ/cyberimp/eyes/hud/science
+	category = list("Misc", "Medical Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
 /datum/design/cyberimp_security_hud
 	name = "Security HUD Implant"
 	desc = "These cybernetic eyes will display a security HUD over everything you see. Wiggle eyes to control."
@@ -516,6 +538,17 @@
 	construction_time = 60
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 600, /datum/material/gold = 600, /datum/material/plasma = 1000, /datum/material/diamond = 2000)
 	build_path = /obj/item/organ/eyes/robotic/thermals
+	category = list("Misc", "Medical Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
+/datum/design/cyberimp_meson
+	name = "Meson Eyes"
+	desc = "These cybernetic eyes will give you Meson vision."
+	id = "ci-meson"
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 500, /datum/material/gold = 700, /datum/material/plasma = 800)
+	build_path = /obj/item/organ/eyes/robotic/meson
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 

@@ -33,7 +33,6 @@
 		return
 	owner.cure_blind(GENETIC_MUTATION)
 
-
 ///Thermal Vision lets you see mobs through walls
 /datum/mutation/human/thermal
 	name = "Thermal Vision"
@@ -42,7 +41,6 @@
 	difficulty = 18
 	text_gain_indication = "<span class='notice'>You can see the heat rising off of your skin...</span>"
 	time_coeff = 2
-	instability = 40
 	locked = TRUE
 	var/visionflag = TRAIT_THERMAL_VISION
 
@@ -59,12 +57,22 @@
 	REMOVE_TRAIT(owner, visionflag, GENETIC_MUTATION)
 	owner.update_sight()
 
+/datum/mutation/human/thermal/meson
+	name = "Meson Vision"
+	desc = "The user of this genome can visually percieve the basic layout."
+	quality = POSITIVE
+	difficulty = 18
+	text_gain_indication = "<span class='notice'>You can see the layout of your surroundings...</span>"
+	time_coeff = 2
+	instability = 25
+	locked = FALSE
+	visionflag = TRAIT_MESON_VISION
+
 ///X-ray Vision lets you see through walls.
 /datum/mutation/human/thermal/x_ray
 	name = "X Ray Vision"
 	desc = "A strange genome that allows the user to see between the spaces of walls." //actual x-ray would mean you'd constantly be blasting rads, wich might be fun for later //hmb
 	text_gain_indication = "<span class='notice'>The walls suddenly disappear!</span>"
-	instability = 50
 	locked = TRUE
 	visionflag = TRAIT_XRAY_VISION
 

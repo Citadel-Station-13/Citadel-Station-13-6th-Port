@@ -188,6 +188,15 @@
 	flash_protect = -1
 	see_in_dark = 8
 
+/obj/item/organ/eyes/robotic/meson
+	name = "meson eyes"
+	desc = "These cybernetic eye implants will give you meson vision."
+	left_eye_color = "66F"
+	right_eye_color = "66F"
+	see_in_dark = 2
+	sight_flags = SEE_TURFS
+	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+
 /obj/item/organ/eyes/robotic/flashlight
 	name = "flashlight eyes"
 	desc = "It's two flashlights rigged together with some wire. Why would you put these in someone's head?"

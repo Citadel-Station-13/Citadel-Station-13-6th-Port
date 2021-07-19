@@ -41,6 +41,8 @@
 #define STIMMED		/datum/mutation/human/stimmed
 #define FIRESWEAT	/datum/mutation/human/fire
 #define THERMAL		/datum/mutation/human/thermal
+#define MESON       /datum/mutation/human/thermal/meson
+#define NIGHTVISION /datum/mutation/human/nv
 #define ANTENNA		/datum/mutation/human/antenna
 #define PARANOIA	/datum/mutation/human/paranoia
 #define MINDREAD	/datum/mutation/human/mindreader

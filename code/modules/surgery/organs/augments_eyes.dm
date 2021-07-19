@@ -31,6 +31,16 @@
 	desc = "These cybernetic eye implants will display a medical HUD over everything you see."
 	HUD_type = DATA_HUD_MEDICAL_ADVANCED
 
+/obj/item/organ/cyberimp/eyes/hud/diagnostic
+	name = "Diagnostics HUD implant"
+	desc = "These cybernetic eye implants will display a diagnostics HUD over everything you see."
+	HUD_type = DATA_HUD_DIAGNOSTIC_ADVANCED
+
+/obj/item/organ/cyberimp/eyes/hud/science
+	name = "Science HUD implant"
+	desc = "These cybernetic eye implants will display a science HUD over everything you see."
+	actions_types = list(/datum/action/item_action/toggle_research_scanner)
+
 /obj/item/organ/cyberimp/eyes/hud/security
 	name = "Security HUD implant"
 	desc = "These cybernetic eye implants will display a security HUD over everything you see."

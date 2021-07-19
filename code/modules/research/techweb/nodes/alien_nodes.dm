@@ -24,7 +24,7 @@
 	display_name = "Alien Biological Tools"
 	description = "Advanced biological tools."
 	prereq_ids = list("alientech", "advance_surgerytools")
-	design_ids = list("alien_scalpel", "alien_hemostat", "alien_retractor", "alien_saw", "alien_drill", "alien_cautery", "ayyplantgenes")
+	design_ids = list("alien_scalpel", "alien_hemostat", "alien_retractor", "alien_saw", "alien_drill", "alien_cautery", "ayyplantgenes", "ci-xray")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
 /datum/techweb_node/alien_engi

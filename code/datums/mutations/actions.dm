@@ -502,3 +502,43 @@
 	spikey.forceMove(get_turf(L))
 	transfered.visible_message("<span class='notice'>[spikey] falls out of [transfered]!</span>")
 
+/datum/mutation/human/nv
+	name = "Night Vision"
+	desc = "The user of this genome can see well in the dark."
+	quality = POSITIVE
+	text_gain_indication = "<span class='notice'>Your eyes feel different...</span>"
+	instability = 40
+	locked = TRUE
+	power = /obj/effect/proc_holder/spell/self/nvtoggle
+
+/obj/effect/proc_holder/spell/self/nvtoggle
+	name = "Night Vision"
+	desc = "Focus really hard to adjust your eyesight."
+	clothes_req = NONE
+	antimagic_allowed = TRUE
+	charge_max = 100
+	active = FALSE
+	action_icon = 'icons/mob/actions/actions_changeling.dmi'
+	action_icon_state = "ling_augmented_eyesight"
+
+/obj/effect/proc_holder/spell/self/nvtoggle/cast(mob/living/carbon/human/user)
+	. = ..()
+	var/obj/item/organ/eyes/E = user.getorganslot(ORGAN_SLOT_EYES)
+	if(E)
+		if(!active)
+			ADD_TRAIT(user, TRAIT_TRUE_NIGHT_VISION, GENETIC_MUTATION)
+			E.flash_protect = -2 //Adjust the user's eyes' flash protection
+			to_chat(user, "You adjust your eyes to see better in the dark.")
+			active = TRUE //Defined in code/modules/spells/spell.dm
+		else
+			REMOVE_TRAIT(user, TRAIT_TRUE_NIGHT_VISION, GENETIC_MUTATION)
+			E.flash_protect = 0 //Adjust the user's eyes' flash protection
+			to_chat(user, "You adjust your eyes to be less sensitive again.")
+			active = FALSE
+		user.update_sight()
+	else
+		to_chat(user, "You don't have eyes!")
+
+
+
+	return 1
