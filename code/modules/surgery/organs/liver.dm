@@ -25,7 +25,7 @@
 	var/cachedmoveCalc = 1
 	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/iron = 5)
 
-/obj/item/organ/liver/on_life()
+/obj/item/organ/liver/on_life(seconds, times_fired)
 	. = ..()
 	if(!. || !owner)//can't process reagents with a failing liver
 		return
@@ -40,7 +40,7 @@
 				damage += (thisamount*toxLethality)
 
 	//metabolize reagents
-	owner.reagents.metabolize(owner, can_overdose=TRUE)
+	owner.reagents.metabolize(owner, seconds, times_fired, can_overdose=TRUE)
 
 	if(damage > 10 && prob(damage/3))//the higher the damage the higher the probability
 		to_chat(owner, "<span class='warning'>You feel a dull pain in your abdomen.</span>")

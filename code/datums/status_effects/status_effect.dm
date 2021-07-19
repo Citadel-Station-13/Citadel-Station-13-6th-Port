@@ -5,6 +5,8 @@
 /datum/status_effect
 	var/id = "effect" //Used for screen alerts.
 	var/duration = -1 //How long the status effect lasts in DECISECONDS. Enter -1 for an effect that never ends unless removed through some means.
+	/// do we tick()?
+	var/tick = TRUE
 	var/tick_interval = 10 //How many deciseconds between ticks, approximately. Leave at 10 for every second.
 	var/next_tick //The scheduled time for the next tick.
 	var/mob/living/owner //The mob affected by the status effect.

@@ -29,3 +29,5 @@
 /// Factor to multiply by for stamina usage past buffer into health
 /datum/config_entry/number/stamina_combat/overdraw_penalty_factor
 	config_entry_value = 1.5
+
+/datum/config_entry/flag/disable_stambuffer

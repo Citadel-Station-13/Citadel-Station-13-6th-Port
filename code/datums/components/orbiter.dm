@@ -90,7 +90,7 @@
 		return
 	SEND_SIGNAL(parent, COMSIG_ATOM_ORBIT_END, orbiter, refreshing)
 	UnregisterSignal(orbiter, COMSIG_MOVABLE_MOVED)
-	orbiter.SpinAnimation(0, 0)
+	orbiter.SpinAnimation(0, 0, parallel = FALSE)
 	if(istype(orbiters[orbiter],/matrix)) //This is ugly.
 		orbiter.transform = orbiters[orbiter]
 	orbiters -= orbiter

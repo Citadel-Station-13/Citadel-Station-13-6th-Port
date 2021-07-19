@@ -1,0 +1,33 @@
+## Breast cups selectable from the character creation menu. Keep em lowercase.
+BREASTS_CUPS_PREFS a
+BREASTS_CUPS_PREFS b
+BREASTS_CUPS_PREFS c
+BREASTS_CUPS_PREFS d
+BREASTS_CUPS_PREFS e
+BREASTS_CUPS_PREFS f
+BREASTS_CUPS_PREFS g
+BREASTS_CUPS_PREFS h
+
+## Minimum and maximum limits for penis length from the character creation menu.
+PENIS_MIN_INCHES_PREFS 1
+PENIS_MAX_INCHES_PREFS 24
+
+## Body size configs, the feature will be disabled if both min and max have the same value.
+BODY_SIZE_MIN 0.9
+BODY_SIZE_MAX 1.25
+
+## Allowed visibility toggles
+
+# SAFE_VISIBILITY_TOGGLES Always visible
+SAFE_VISIBILITY_TOGGLES Hidden by clothes
+SAFE_VISIBILITY_TOGGLES Hidden by underwear
+SAFE_VISIBILITY_TOGGLES Always hidden
+
+## Pun-Pun movement slowdown given to characters with a body size smaller than this value,
+## to compensate for their smaller hitbox.
+## To disable, just make sure the value is lower than 'body_size_min'
+THRESHOLD_BODY_SIZE_PENALTY 1
+
+## Multiplier used in the smaller strides slowdown calculation.
+## Doesn't apply to floating or crawling mobs.
+BODY_SIZE_SLOWDOWN_MULTIPLIER 0

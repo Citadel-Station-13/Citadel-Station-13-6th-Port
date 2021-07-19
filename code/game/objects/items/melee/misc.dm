@@ -73,14 +73,14 @@
 
 /datum/block_parry_data/captain_saber
 	parry_time_windup = 0
-	parry_time_active = 6
+	parry_time_active = 10
 	parry_time_spindown = 0
 	parry_time_perfect = 0.75
-	parry_time_perfect_leeway = 0.75
+	parry_time_perfect_leeway = 1.5
 	parry_imperfect_falloff_percent = 30
 	parry_efficiency_perfect = 100
 	parry_failed_stagger_duration = 3 SECONDS
-	parry_failed_clickcd_duration = 1 SECONDS
+	parry_failed_clickcd_duration = 0
 	parry_flags = PARRY_DEFAULT_HANDLE_FEEDBACK
 	parry_automatic_enabled = TRUE
 
@@ -179,19 +179,23 @@
 // Fast, efficient parry.
 /datum/block_parry_data/traitor_rapier
 	parry_time_windup = 0
-	parry_time_active = 6
+	parry_time_active = 10
 	parry_time_spindown = 0
 	parry_time_active_visual_override = 3
 	parry_time_spindown_visual_override = 2
 	parry_flags = PARRY_DEFAULT_HANDLE_FEEDBACK | PARRY_LOCK_ATTACKING
-	parry_time_perfect = 1
-	parry_time_perfect_leeway = 1
+	parry_time_perfect = 2
+	parry_time_perfect_leeway = 2
 	parry_time_perfect_leeway_override = list(
 		TEXT_ATTACK_TYPE_PROJECTILE = 1
 	)
 	parry_imperfect_falloff_percent = 30
-	parry_efficiency_to_counterattack = INFINITY
+	parry_efficiency_to_counterattack = 100
 	parry_efficiency_considered_successful = 1
+	parry_data = list(
+		PARRY_KNOCKDOWN_ATTACKER = 10,
+		PARRY_DISARM_ATTACKER = TRUE
+	)
 	parry_efficiency_perfect = 100
 	parry_stamina_cost = 5
 	parry_failed_stagger_duration = 2 SECONDS

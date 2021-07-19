@@ -1,0 +1,85 @@
+## log OOC channel
+LOG_OOC
+
+## log client Say
+LOG_SAY
+
+## log admin actions
+@LOG_ADMIN
+
+## log admin chat
+@LOG_ADMINCHAT
+
+## log client access (logon/logoff)
+LOG_ACCESS
+
+## log game actions (start of round, results, etc.)
+LOG_GAME
+
+## log player votes
+LOG_VOTE
+
+## log player crafting
+LOG_CRAFT
+
+## log client Whisper
+LOG_WHISPER
+
+## log emotes
+LOG_EMOTE
+
+## log attack messages
+LOG_ATTACK
+
+## log pda messages
+LOG_PDA
+
+## log telecomms messages
+LOG_TELECOMMS
+
+## log prayers
+LOG_PRAYER
+
+## log lawchanges
+LOG_LAW
+
+## log crew manifest to seperate file
+LOG_MANIFEST
+
+## log job divide debugging information
+LOG_JOB_DEBUG
+
+## Log shuttle related actions
+LOG_SHUTTLE
+
+## log all world.Topic() calls
+LOG_WORLD_TOPIC
+
+## enables use of the proc twitterize() that lets you take a large list of strings and turn it into a JSON file of tweet sized strings.
+## As an example of how this could be """useful""" look towards Poly (https://twitter.com/Poly_the_Parrot)
+# LOG_TWITTER
+
+## Enable logging pictures
+LOG_PICTURES
+
+## Log camera pictures
+PICTURE_LOGGING_CAMERA
+
+## log virus and actions
+LOG_VIRUS
+
+## Log all raw hrefs of tgui, rather than letting tgui logging handle it. KEEP THIS OFF UNLESS YOU KNOW WHAT YOU ARE DOING.
+# EMERGENCY_TGUI_LOGGING
+
+## Cooldown time for each occurance of a unique runtime in deciseconds
+ERROR_COOLDOWN 600
+
+## Max runtimes of one type before silencing
+ERROR_LIMIT 50
+
+## How long an unique runtime will be silenced for when reaching limit in deciseconds
+ERROR_SILENCE_TIME 6000
+
+How long to wait between messaging admins about an unique runtime
+ERROR_MSG_DELAY 50
+

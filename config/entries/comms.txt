@@ -7,9 +7,12 @@
 #CROSS_SERVER ServerName byond:\\address:port
 
 ## Name that the server calls itself in communications
-#CROSS_COMMS_NAME
+# CROSS_COMMS_NAME Citadel Main
 
 ## Network-name used for cross-server broadcasts made from communication consoles.
 ## Servers that do not match this network-name will have their messages discarded.
 ## Leaving this commented will allow all messages through, regardless of network.
 #CROSS_COMMS_NETWORK default_network
+
+## CITADEL CONFIG: List of cross server URLs, same as CROSS_SERVER, to send bunker override messages for
+## Format is the same as CROSS_SERVER.

@@ -704,16 +704,20 @@
 /datum/status_effect/stabilized/sepia
 	id = "stabilizedsepia"
 	colour = "sepia"
-	var/mod = 0
+	var/list/possible = list(
+		-0.5,
+		-0.25,
+		0,
+		0.5,
+		1
+	)
+
+/datum/status_effect/stabilized/sepia/New(list/arguments)
+	. = ..()
+	possible = typelist(NAMEOF(src, possible), possible)
 
 /datum/status_effect/stabilized/sepia/tick()
-	if(prob(50) && mod > -1)
-		mod--
-		owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/status_effect/sepia, multiplicative_slowdown = 1)
-	else if(mod < 1)
-		mod++
-		// yeah a value of 0 does nothing but replacing the trait in place is cheaper than removing and adding repeatedly
-		owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/status_effect/sepia, multiplicative_slowdown = 0)
+	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/status_effect/sepia, multiplicative_slowdown = safepick(possible))
 	return ..()
 
 /datum/status_effect/stabilized/sepia/on_remove()
@@ -934,6 +938,7 @@
 
 /datum/status_effect/stabilized/lightpink/on_apply()
 	ADD_TRAIT(owner, TRAIT_FREESPRINT, "stabilized_slime")
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/status_effect/slime/light_pink)
 	return ..()
 
 /datum/status_effect/stabilized/lightpink/tick()
@@ -945,6 +950,7 @@
 
 /datum/status_effect/stabilized/lightpink/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_FREESPRINT, "stabilized_slime")
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/status_effect/slime/light_pink)
 	return ..()
 
 /datum/status_effect/stabilized/adamantine

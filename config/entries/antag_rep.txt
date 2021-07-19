@@ -1,0 +1,19 @@
+## disclaimer: this is a confusing file. reading and understanding antag rep code is recommended for future headmins/server leads.
+
+## Use the antagonist reputation system
+# ANTAG_REP
+
+## Maximum antag roll ticketts someone can have
+# ANTAG_REP_MAXIMUM 200
+
+## "Free" tickets someone gets on roll
+# DEFAULT_ANTAG_TICKETS 100
+
+## Maximum **STORED** tickets used ontop of default per roll
+# MAX_TICKETS_PER_ROLL 100
+
+## Custom antag reputation values
+## List of job titles followed by antag rep value, all prefixed with ANTAG_REP. See code/modules/jobs/job_types for titles
+## e.g. 
+## ANTAG_REP Captain 10
+## ANTAG_REP Assistant 0

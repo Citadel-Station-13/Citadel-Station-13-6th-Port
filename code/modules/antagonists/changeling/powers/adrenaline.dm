@@ -13,5 +13,5 @@
 
 //Recover from stuns.
 /obj/effect/proc_holder/changeling/adrenaline/sting_action(mob/living/user)
-	user.do_adrenaline(0, FALSE, 70, 0, TRUE, list(/datum/reagent/medicine/epinephrine = 3, /datum/reagent/drug/methamphetamine/changeling = 10, /datum/reagent/medicine/changelingadrenaline = 5), "<span class='notice'>Energy rushes through us.</span>", 0, 0.75, 0)
+	user.do_adrenaline(0, FALSE, 70, 0, TRUE, list(/datum/reagent/medicine/epinephrine = 3, /datum/reagent/medicine/changelinghaste = 10, /datum/reagent/medicine/changelingadrenaline = 5), "<span class='notice'>Energy rushes through us.</span>", 0, 0.75, 0)
 	return TRUE

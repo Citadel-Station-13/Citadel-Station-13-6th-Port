@@ -1,0 +1,37 @@
+## set a server location for world reboot. Don't include the byond://, just give the address and port.
+## Don't set this to the same server, BYOND will automatically restart players to the server when it has restarted.
+# SERVER ss13.example.com:2506
+
+## forum address
+# FORUMURL https://citadel-station.net/forum/
+
+## Wiki address
+# WIKIURL https://citadel-station.net/wikimain/index.php
+
+## Wiki address of upstream
+WIKIURLTG http://www.tgstation13.org/wiki
+
+## Rules address
+# RULESURL https://citadel-station.net/wikimain/index.php?title=Rules_-_Main
+
+## Github address
+# GITHUBURL https://github.com/Citadel-Station-13/Citadel-Station-13
+
+## Round specific stats address
+## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
+## This will take priority over the game logs address during reboot.
+## Example: https://atlantaned.space/statbus/round.php?round=
+# ROUNDSTATSURL http://citadel-station.net/slimbus/
+
+## Game Logs address
+## Incase you don't have a fancy parsing system, but still want players to be able to find where you keep your server's logs.
+## Example: https://tgstation13.org/parsed-logs/basil/data/logs/
+# GAMELOGURL
+
+## Github repo id
+##This can be found by going to https://api.github.com/users/<user name here>/repos
+##Or https://api.github.com/orgs/<org name here>/repos if the repo owner is an organization
+# GITHUBREPOID 62485194
+
+## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
+# BANAPPEALS https://citadel-station.net/forum/viewforum.php?f=8&sid=a0ce5331d5594ef6d49661609c6f4ff9

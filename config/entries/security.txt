@@ -1,0 +1,38 @@
+### FAIL2TOPIC:
+### Automated IP bans for world/Topic() spammers
+### NOTE FOR WINDOWS HOSTS: This requires you to be running dreamdaemon as an administrator for it to work at all. TGS3 handles this automatically, and honestly there's no reason not to be using TGS3 if you're hosting on Windows.
+### NOTE FOR LINUX HOSTS: This requires manual setup of iptables. Beware that improper configuration of this can and will irreversibly fuck up a server, so please don't tinker with it if you don't know what you're doing.
+## Enabled
+#FAIL2TOPIC_ENABLED
+## Minimum wait time in deciseconds between valid requests
+FAIL2TOPIC_RATE_LIMIT 10
+## Number of requests after breaching rate limit that triggers a ban
+FAIL2TOPIC_MAX_FAILS 5
+## Firewall rule name used on physical server
+## FOR LINUX HOSTS: This is used as the chain name. The iptables chain doesn't get created or hooked up to INPUT automatically, so you'll have to get that set up yourself. Recommended name: BYOND
+@FAIL2TOPIC_RULE_NAME _dd_fail2topic
+
+## Topic max size before it's rejected, using BYOND length()
+TOPIC_MAX_SIZE 8192
+
+## Fail2topic rate limit whitelist. Using any external IPs is not recommended.
+# TOPIC_RATE_LIMIT_WHITELIST 127.0.0.1:1337
+
+## TOPIC RATE LIMITING
+## This allows you to limit how many topic calls (clicking on an interface window) the client can do in any given game second and/or game minute.
+## Admins are exempt from these limits.
+## Hitting the minute limit notifies admins.
+## Set to 0 or comment out to disable.
+SECOND_TOPIC_LIMIT 10
+
+MINUTE_TOPIC_LIMIT 100
+
+## CLICK RATE LIMITING
+## Same as above, but applies to clicking on objects in the game window.
+## This should be a higher then the interface limit to allow for the spam clickly nature of most battles.
+## Admins are exempt from these limits.
+## Hitting the minute limit notifies admins.
+## Set to 0 to disable.
+SECOND_CLICK_LIMIT 15
+
+MINUTE_CLICK_LIMIT 400

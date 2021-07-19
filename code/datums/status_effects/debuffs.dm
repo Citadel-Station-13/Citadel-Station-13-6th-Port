@@ -199,6 +199,23 @@
 	movespeed_mod = /datum/movespeed_modifier/status_effect/tased/no_combat_mode
 	stamdmg_per_ds = 1
 
+/datum/status_effect/vtec_disabled
+	id = "vtec_disable"
+	tick = FALSE
+
+/datum/status_effect/vtec_disabled/on_creation(mob/living/new_owner, set_duration)
+	if(isnum(set_duration))
+		duration = set_duration
+	. = ..()
+	if(iscyborg(owner))
+		var/mob/living/silicon/robot/R = owner
+		R.vtec_disabled = TRUE
+
+/datum/status_effect/vtec_disabled/on_remove()
+	if(iscyborg(owner))
+		var/mob/living/silicon/robot/R = owner
+		R.vtec_disabled = FALSE
+	return ..()
 
 //OTHER DEBUFFS
 /datum/status_effect/his_wrath //does minor damage over time unless holding His Grace

@@ -1,0 +1,11 @@
+## Citadel donator system
+## this is a bad system but I'm lazy so it piggybacks off config loader system.
+## File isn't properly documented because the donator system desperately needs a rewrite and I can't be arsed to right now.
+
+#Specify group followed by ckey for each ckey.
+
+#TIER_1_DONATORS test_ckey
+
+#TIER_2_DONATORS test_ckey
+
+#TIER_3_DONATORS test_ckey

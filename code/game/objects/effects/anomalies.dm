@@ -296,7 +296,7 @@
 		var/mob/C = pick(candidates)
 		message_admins("[key_name_admin(C)] has taken control of ([key_name_admin(S)])")
 		C.transfer_ckey(S, FALSE)
-		var/list/policies = CONFIG_GET(keyed_list/policyconfig)
+		var/list/policies = CONFIG_GET(keyed_list/policy)
 		var/policy = policies[POLICYCONFIG_ON_PYROCLASTIC_SENTIENT]
 		if(policy)
 			to_chat(S,policy)

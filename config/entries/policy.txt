@@ -1,0 +1,24 @@
+## Policy configuration
+## Current valid keys are:
+## ON_CLONE - displayed after a successful cloning operation to the cloned person
+## ON_DEFIB_INTACT - displayed after defibbing before memory loss time threshold
+## ON_DEFIB_LATE - displayed after defibbing post memory loss time threshold
+## SDGF - displayed on SDGF clone spawning
+## SDGF_GOOD - displayed on SDGF clone spawning, if the clone is loyal
+## SDGF_BAD - displayed on SDGF clone spawning, if the clone is not loyal
+## PAI - displayed on PAI personality being loaded
+## EXAMPLE:
+## POLICY ON_CLONE insert text here <span class='notice'>span classes are fully supported</span>
+
+POLICY ON_CLONE <span class='warning'>Your thoughts are hazy as the cloning algorithms reboot your consciousness. Unfortunately for you, the imperfect nature of the process has left out your more recent, less entrenched memories.</span><br><span class='userdanger'>You only remember vague details of your death, without clear recollection of who or what is specifically responsible for your demise.</span><br><span class='red'>(If you were murdered, you do not remember the exact name or appearance of your killer, only vague details of how they killed you rather than the exact murder weapon. (ex: drank something and blanked out, felt an impact in the back and bled out)<br>If you died to environmental hazards like ash storms or spacing, this is not as applicable -- <b>however, keep in mind that if someone set you up to die to that, like being tossed forcefully into space, that the previous clause of not remembering killer name in a murder applies!</b></span>
+
+POLICY ON_DEFIB_LATE <span class='warning'>Your mind barely responds as first as you are forcefully returned to the world of the living after all too long in a state of decay. While medicine may restore your brain functions, you can't seem to remember your latest memories...</span><br><span class='userdanger'>You only remember vague details of your death, without clear recollection of who or what is specifically responsible for your demise.</span><br><span class='red'>(If you were murdered, you do not remember the exact name or appearance of your killer, only vague details of how they killed you rather than the exact murder weapon. (ex: drank something and blanked out, felt an impact in the back and bled out)<br>If you died to environmental hazards like ash storms or spacing, this is not as applicable -- <b>however, keep in mind that if someone set you up to die to that, like being tossed forcefully into space, that the previous clause of not remembering killer name in a murder applies!</b></span>
+
+POLICY ON_DEFIB_INTACT <span class='notice'>You barely miss a beat as you gasp, awakening from the slumber of the deceased. The rapid resuscitation has saved you from the worst effects of brain damage.</span><br><span class='boldnotice'>You recall all information leading up to your death and exact details on method of death and killer if applicable, as long as you were conscious to witness such.</span>
+
+POLICY PAI <span class='big warning'>If you are given an ERP-related directive without OOC consent, ahelp immediately.</span>w
+
+## Misc entries for above
+
+## Defib time limit for "cloning memory disorder" memory loss in seconds
+DEFIB_CMD_TIME_LIMIT 300

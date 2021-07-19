@@ -1,0 +1,67 @@
+## allow players to initiate a restart vote
+#ALLOW_VOTE_RESTART
+
+## allow players to initate a mode-change start
+#ALLOW_VOTE_MODE
+
+## min delay (deciseconds) between voting sessions (default 10 minutes)
+VOTE_DELAY 6000
+
+## time period (deciseconds) which voting session will last (default 1 minute)
+VOTE_PERIOD 600
+
+## autovote initial delay (deciseconds) before first automatic transfer vote call (default 120 minutes)
+## Set to 0 to disable the subsystem altogether.
+VOTE_AUTOTRANSFER_INITIAL 72000
+
+## autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes)
+VOTE_AUTOTRANSFER_INTERVAL 18000
+
+## autovote maximum votes until automatic transfer call. (default 4)
+## Set to 0 to force automatic crew transfer after the 'vote_autotransfer_initial' elapsed.
+## Set to -1 to disable the maximum votes cap.
+VOTE_AUTOTRANSFER_MAXIMUM 4
+
+## prevents dead players from voting or starting votes
+# NO_DEAD_VOTE
+
+## players' votes default to "No vote" (otherwise,  default to "No change")
+# DEFAULT_NO_VOTE
+
+## Map rotation
+## You should edit maps.txt to match your configuration when you enable this.
+MAPROTATION
+
+## TG-style map rotation
+## By default, Citadel uses a more traditional method of map voting, where at the end of a round, players are given a full upfront vote.
+## This PR will disable that, and will make the server use TG's map rotation instead.
+#TGSTYLE_MAPROTATION
+
+## Map voting
+## Allows players to vote for their preffered map
+## When it's set to zero, the map will be randomly picked each round
+ALLOW_MAP_VOTING 1
+
+## Map voting type
+## Determines what kind of vote the map vote is
+## Options are:
+##   PLURALITY (default, only vote for one option)
+##   APPROVAL (can vote for as many as you want), I
+##   IRV (vote by ranked choice, winner determined by instant runoff algorithm)
+##   SCORE (give individual rankings of each choice, winner determined by majority judgement algorithm)
+MAP_VOTE_TYPE APPROVAL
+
+## Map rotate chance delta
+## This is the chance of map rotation factored to the round length.
+## A value of 1 would mean the map rotation chance is the round length in minutes (hour long round == 60% rotation chance)
+## A value of 0.5 would mean the map rotation chance is half of the round length in minutes (hour long round == 30% rotation chance)
+#MAPROTATIONCHANCEDELTA 0.75
+
+## Whether or not there's a mode tier list vote after the secret/extended vote.
+MODETIER_VOTING
+
+## Number of modes dropped by the modetier vote during mode selection, after vote.
+DROPPED_MODES 3
+
+## Whether or not you must be readied up to vote gamemode
+#MUST_BE_READIED_TO_VOTE_GAMEMODE

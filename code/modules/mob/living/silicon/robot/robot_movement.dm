@@ -23,4 +23,4 @@
 	. = ..()
 	if(!resting && !(combat_flags & COMBAT_FLAG_SPRINT_ACTIVE))
 		. += 1
-	. += speed
+	. += vtec_disabled? 0 : vtec

@@ -122,7 +122,7 @@
 /obj/item/paicard/proc/setPersonality(mob/living/silicon/pai/personality)
 	src.pai = personality
 	src.add_overlay("pai-null")
-	var/list/policies = CONFIG_GET(keyed_list/policyconfig)
+	var/list/policies = CONFIG_GET(keyed_list/policy)
 	var/policy = policies[POLICYCONFIG_PAI]
 	if(policy)
 		to_chat(personality, policy)

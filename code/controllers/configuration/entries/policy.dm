@@ -3,9 +3,9 @@
 	config_entry_value = 300
 	integer = TRUE
 
-/datum/config_entry/keyed_list/policyconfig
+/datum/config_entry/keyed_list/policy
 	key_mode = KEY_MODE_TEXT
 	value_mode = VALUE_MODE_TEXT
 
-/datum/config_entry/keyed_list/policyconfig/preprocess_key(key)
+/datum/config_entry/keyed_list/policy/preprocess_key(key)
 	return uppertext(..())

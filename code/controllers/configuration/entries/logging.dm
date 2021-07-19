@@ -9,6 +9,7 @@
 
 /datum/config_entry/flag/log_admin	// log admin actions
 	protection = CONFIG_ENTRY_LOCKED
+	config_entry_value = TRUE
 
 /datum/config_entry/flag/log_prayer	// log prayers
 	config_entry_value = TRUE
@@ -68,3 +69,16 @@
 /// forces log_href for tgui
 /datum/config_entry/flag/emergency_tgui_logging
 	config_entry_value = FALSE
+
+/datum/config_entry/number/error_cooldown	// The "cooldown" time for each occurrence of a unique error
+	config_entry_value = 600
+	min_val = 0
+
+/datum/config_entry/number/error_limit	// How many occurrences before the next will silence them
+	config_entry_value = 50
+
+/datum/config_entry/number/error_silence_time	// How long a unique error will be silenced for
+	config_entry_value = 6000
+
+/datum/config_entry/number/error_msg_delay	// How long to wait between messaging admins about occurrences of a unique error
+	config_entry_value = 50

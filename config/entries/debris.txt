@@ -1,0 +1,8 @@
+## Default turf threshold to get dirt
+TURF_DIRT_THRESHOLD 100
+
+## Default alpha of dirt on spawn
+DIRT_ALPHA_STARTING 127
+
+## Multiplier for how dirty walking over a turf makes it
+TURF_DIRTY_MULTIPLIER 1

@@ -43,3 +43,6 @@ BSQL_THREAD_LIMIT 50
 
 ## Uncomment to enable verbose BSQL communication logs
 #BSQL_DEBUG
+
+## Time to wait before considering a query as lingering too long
+@QUERY_DEBUG_LOG_TIMEOUT 70

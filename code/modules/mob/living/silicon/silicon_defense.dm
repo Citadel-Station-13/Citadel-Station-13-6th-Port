@@ -79,6 +79,8 @@
 			M.visible_message("[M] pets [src].", \
 							"<span class='notice'>You pet [src].</span>", target = src,
 							target_message = "[M] pets you.")
+		if(INTENT_DISARM)
+			disarm_shove(M)
 		if(INTENT_GRAB)
 			grabbedby(M)
 		else
@@ -87,6 +89,9 @@
 			visible_message("<span class='danger'>[M] punches [src], but doesn't leave a dent.</span>", \
 				"<span class='warning'>[M] punches you, but doesn't leave a dent.</span>", null, COMBAT_MESSAGE_RANGE, null, M,
 				"<span class='danger'>You punch [src], but don't leave a dent.</span>")
+
+/mob/living/silicon/proc/disarm_shove(mob/living/carbon/human/H)
+	visible_message(span_danger("[H] shoves [src], but doesn't manage to make much of an effect."))
 
 /mob/living/silicon/attack_drone(mob/living/simple_animal/drone/M)
 	if(M.a_intent == INTENT_HARM)

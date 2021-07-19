@@ -82,6 +82,18 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	if(!opened)
 		return ..()
 
+/mob/living/silicon/robot/disarm_shove(mob/living/carbon/human/H)
+	visible_message(span_danger("[src]'s motors grind as they are shoved by [H]!"))
+	vtec_disable(10 SECONDS)
+
+/mob/living/silicon/robot/proc/vtec_disable(time)
+	var/datum/status_effect/vtec_disabled/V = has_status_effect(/datum/status_effect/vtec_disabled)
+	if(V)
+		V.duration = max(V.duration, world.time + time)
+	else
+		apply_status_effect(/datum/status_effect/vtec_disabled, time)
+	update_movespeed()
+
 /mob/living/silicon/robot/fire_act()
 	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
 		IgniteMob()

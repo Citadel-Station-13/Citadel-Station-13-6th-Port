@@ -1,0 +1,178 @@
+## Comment to disable weighting modes by how chaotic recent mode rolls were.
+WEIGH_BY_RECENT_CHAOS
+
+## The weight adjustment will be proportional to this power relative to the "ideal" weight range.
+## e.g. if we have a weight range of 0-5, and an exponent of 1, 6 will be weighted 1/2, 7 1/3 etc.
+## if exponent is 2, it'll be 1/4, 1/9 etc.
+CHAOS_EXPONENT 1
+
+## Percent weight reductions for three of the most recent modes
+
+REPEATED_MODE_ADJUST 45 30 10
+
+## Probablities for game modes chosen in 'secret' and 'random' modes.
+## Default probablity is 1, increase to make that mode more likely to be picked.
+## Set to 0 to disable that mode.
+
+PROBABILITY TRAITOR 5
+PROBABILITY TRAITORBRO 2
+PROBABILITY TRAITORCHAN 4
+PROBABILITY INTERNAL_AFFAIRS 3
+PROBABILITY NUCLEAR 2
+PROBABILITY REVOLUTION 2
+PROBABILITY CULT 2
+PROBABILITY CHANGELING 2
+PROBABILITY WIZARD 4
+PROBABILITY MONKEY 0
+PROBABILITY METEOR 0
+PROBABILITY EXTENDED 0
+PROBABILITY SECRET_EXTENDED 0
+PROBABILITY DEVIL 0
+PROBABILITY DEVIL_AGENTS 0
+PROBABILITY CLOWNOPS 0
+PROBABILITY BLOODSUCKER 0
+
+## You probably want to keep sandbox off by default for secret and random.
+PROBABILITY SANDBOX 0
+
+## Toggles for continuous modes.
+## Modes that aren't continuous will end the instant all antagonists are dead.
+
+CONTINUOUS TRAITOR
+CONTINUOUS TRAITORBRO
+CONTINUOUS TRAITORCHAN
+CONTINUOUS INTERNAL_AFFAIRS
+#CONTINUOUS NUCLEAR
+#CONTINUOUS REVOLUTION
+CONTINUOUS CULT
+CONTINUOUS CLOCKWORK_CULT
+CONTINUOUS CHANGELING
+CONTINUOUS WIZARD
+#CONTINUOUS MONKEY
+CONTINUOUS BLOODSUCKER
+CONTINUOUS HERESY
+
+##Note: do not toggle continuous off for these modes, as they have no antagonists and would thus end immediately!
+
+CONTINUOUS METEOR
+CONTINUOUS EXTENDED
+CONTINUOUS SECRET_EXTENDED
+
+## Toggles for allowing midround antagonists (aka mulligan antagonists).
+## In modes that are continuous, if all antagonists should die then a new set of antagonists will be created.
+
+MIDROUND_ANTAG TRAITOR
+#MIDROUND_ANTAG TRAITORBRO
+MIDROUND_ANTAG TRAITORCHAN
+MIDROUND_ANTAG INTERNAL_AFFAIRS
+#MIDROUND_ANTAG  NUCLEAR
+#MIDROUND_ANTAG  REVOLUTION
+MIDROUND_ANTAG CULT
+MIDROUND_ANTAG CLOCKWORK_CULT
+MIDROUND_ANTAG CHANGELING
+MIDROUND_ANTAG WIZARD
+#MIDROUND_ANTAG  MONKEY
+
+## Toggles for whether this mode should force antags even if not enough players have it enabled.
+## If it's off, it just won't roll as many antags.
+#FORCE_ANTAG_COUNT TRAITOR
+#FORCE_ANTAG_COUNT TRAITORBRO
+#FORCE_ANTAG_COUNT TRAITORCHAN
+#FORCE_ANTAG_COUNT INTERNAL_AFFAIRS
+FORCE_ANTAG_COUNT  NUCLEAR
+FORCE_ANTAG_COUNT  REVOLUTION
+FORCE_ANTAG_COUNT CULT
+FORCE_ANTAG_COUNT CLOCKWORK_CULT
+#FORCE_ANTAG_COUNT CHANGELING
+#FORCE_ANTAG_COUNT WIZARD
+#FORCE_ANTAG_COUNT  MONKEY
+
+## A config for how much each game mode's chaos level is.
+## All of them have reasonable defaults, but this can be used to adjust them.
+## 0-9, where 0 is lowest chaos (should only be extended) and 9 is highest (wizard? nukies?)
+#CHAOS_LEVEL EXTENDED 0
+
+## Uncomment these for overrides of the minimum / maximum number of players in a round type.
+## If you set any of these occasionally check to see if you still need them as the modes
+## will still be actively rebalanced around the SUGGESTED populations, not your overrides.
+## Notes: For maximum number of players a value of -1 means no maximum. Setting minimums to
+## VERY low numbers (< 5) can lead to errors if the roundtypes were not designed for that.
+
+#MIN_POP TRAITOR 0
+#MAX_POP TRAITOR -1
+
+#MIN_POP TRAITORBRO 0
+#MAX_POP TRAITORBRO -1
+
+#MIN_POP TRAITORCHAN 15
+#MAX_POP TRAITORCHAN -1
+
+#MIN_POP DOUBLE_AGENTS 25
+#MAX_POP DOUBLE_AGENTS -1
+
+#MIN_POP NUCLEAR 0
+#MAX_POP NUCLEAR -1
+
+#MIN_POP REVOLUTION 20
+#MAX_POP REVOLUTION -1
+
+#MIN_POP CULT 24
+#MAX_POP CULT -1
+
+#MIN_POP CLOCKWORK_CULT 24
+#MAX_POP CLOCKWORK_CULT -1
+
+#MIN_POP CHANGELING 15
+#MAX_POP CHANGELING -1
+
+#MIN_POP WIZARD 20
+#MAX_POP WIZARD -1
+
+#MIN_POP MONKEY 20
+#MAX_POP MONKEY -1
+
+#MIN_POP METEOR 0
+#MAX_POP METEOR -1
+
+#MIN_POP DEVIL 0
+#MAX_POP DEVIL -1
+
+#MIN_POP DEVIL_AGENTS 25
+#MAX_POP DEVIL_AGENTS -1
+
+## Setting at least one mode to be playable at 0/1 players is required.
+#MIN_POP EXTENDED 0
+#MAX_POP EXTENDED -1
+
+## Variables calculate how number of antagonists will scale to population.
+## Used as (Antagonists = Population / Coeff)
+## Set to 0 to disable scaling and use default numbers instead.
+TRAITOR_SCALING_COEFF 6
+## per brother TEAM
+BROTHER_SCALING_COEFF 12
+CHANGELING_SCALING_COEFF 6
+## heretics
+ECULT_SCALING_COEFF 5
+## per abductor TEAM
+ABDUCTOR_SCALING_COEFF 15
+
+## Variables calculate how number of open security officer positions will scale to population.
+## Used as (Officers = Population / Coeff)
+## Set to 0 to disable scaling and use default numbers instead.
+SECURITY_SCALING_COEFF 8
+
+## The number of objectives traitors get.
+## Not including escaping/hijacking.
+TRAITOR_OBJECTIVES_AMOUNT 2
+BROTHER_OBJECTIVES_AMOUNT 2
+
+## Uncomment to prohibit jobs that start with loyalty
+## implants from being most antagonists.
+#PROTECT_ROLES_FROM_ANTAGONIST
+
+## Uncomment to prohibit assistants from becoming most antagonists.
+#PROTECT_ASSISTANT_FROM_ANTAGONIST
+
+
+## If late-joining players have a chance to become a traitor/changeling
+ALLOW_LATEJOIN_ANTAGONISTS

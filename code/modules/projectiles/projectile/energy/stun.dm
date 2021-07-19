@@ -31,6 +31,11 @@
 		else if(tase_duration && (C.status_flags & CANKNOCKDOWN) && !HAS_TRAIT(C, TRAIT_STUNIMMUNE) && !HAS_TRAIT(C, TRAIT_TASED_RESISTANCE))
 			C.apply_status_effect(strong_tase? STATUS_EFFECT_TASED : STATUS_EFFECT_TASED_WEAK, tase_duration)
 			addtimer(CALLBACK(C, /mob/living/carbon.proc/do_jitter_animation, jitter), 5)
+	else if(iscyborg(target))
+		target.visible_message(span_danger("A shower of sparks emit from [target] on impact from [src]!"))
+		do_sparks(1, TRUE, target)
+		var/mob/living/silicon/robot/R = target
+		R.vtec_disable(10 SECONDS)
 
 /obj/item/projectile/energy/electrode/on_range() //to ensure the bolt sparks when it reaches the end of its range if it didn't hit a target yet
 	do_sparks(1, TRUE, src)

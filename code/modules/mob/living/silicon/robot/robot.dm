@@ -966,7 +966,8 @@
 
 	upgrades.Cut()
 
-	speed = 0
+	vtec = 0
+	vtec_disabled = FALSE
 	ionpulse = FALSE
 	revert_shell()
 

@@ -1,8 +1,15 @@
-#define COOLDOWN_STUN 1200
-#define COOLDOWN_KNOCKDOWN 600
-#define COOLDOWN_DAMAGE 600
-#define COOLDOWN_MEME 300
-#define COOLDOWN_NONE 100
+#define COOLDOWN_STUN 300
+#define COOLDOWN_KNOCKDOWN 300
+#define COOLDOWN_DAMAGE 300
+#define COOLDOWN_MEME 150
+#define COOLDOWN_NONE 50
+
+/// anything above this requires adminbus, to prevent a cultist from stacking chaplain + cult + specific listener = 8x, which is enough to instantly kill someone with damage.
+#define VOG_MAX_STANDARD_POWER 3
+/// max damage we can do in one "blast" to a listener
+#define VOG_MAX_BURST_DAMAGE 40
+/// max healing we can do in one "blast" to a listener
+#define VOG_MAX_BURST_HEAL 40
 
 /obj/item/organ/vocal_cords //organs that are activated through speech with the :x/MODE_KEY_VOCALCORDS channel
 	name = "vocal cords"
@@ -130,13 +137,11 @@
 		return 0 //no cooldown
 
 	var/log_message = uppertext(message)
-	if(!span_list || !span_list.len)
-		if(iscultist(user))
-			span_list = list("narsiesmall")
-		else if (is_servant_of_ratvar(user))
-			span_list = list("ratvar")
-		else
-			span_list = list()
+	if(iscultist(user))
+		span_list = list("narsiesmall")
+	else if (is_servant_of_ratvar(user))
+		span_list = list("ratvar")
+	LAZYINITLIST(span_list)
 
 	user.say(message, spans = span_list, sanitize = FALSE)
 
@@ -156,39 +161,24 @@
 		cooldown = COOLDOWN_NONE
 		return cooldown
 
-	var/power_multiplier = base_multiplier
-
-	if(user.mind)
-		//Chaplains are very good at speaking with the voice of god
-		if(user.mind.assigned_role == "Chaplain")
-			power_multiplier *= 2
-		//Command staff has authority
-		if(user.mind.assigned_role in GLOB.command_positions)
-			power_multiplier *= 1.4
-		//Why are you speaking
-		if(user.mind.assigned_role == "Mime")
-			power_multiplier *= 0.5
-
-	//Cultists are closer to their gods and are more powerful, but they'll give themselves away
-	if(iscultist(user))
-		power_multiplier *= 2
-	else if (is_servant_of_ratvar(user))
-		power_multiplier *= 2
-
 	//Try to check if the speaker specified a name or a job to focus on
 	var/list/specific_listeners = list()
 	var/found_string = null
+	var/devil_target = FALSE
 
 	//Get the proper job titles
 	message = get_full_job_name(message)
 
+	// limitation: this only checks at the start of the message.
+	// if we wanted to check anywhere we'd have to make the user use delimiters to specify who they're talking to,
+	// as otherwise it'd be far too computationally and logically expensive to find out who we want.
 	for(var/V in listeners)
 		var/mob/living/L = V
 		var/datum/antagonist/devil/devilinfo = is_devil(L)
 		if(devilinfo && findtext(message, devilinfo.truename))
 			var/start = findtext(message, devilinfo.truename)
 			listeners = list(L) //Devil names are unique.
-			power_multiplier *= 5 //if you're a devil and god himself addressed you, you fucked up
+			devil_target = TRUE //if you're a devil and god himself addressed you, you fucked up
 			//Cut out the name so it doesn't trigger commands
 			message = copytext(message, 1, start) + copytext(message, start + length(devilinfo.truename))
 			break
@@ -207,10 +197,14 @@
 			//Cut out the job so it doesn't trigger commands
 			found_string = L.mind.assigned_role
 
+	var/power_multiplier = get_vog_multiplier(user, base_multiplier, specific_listeners)
+	var/adminbus = power_multiplier > VOG_MAX_STANDARD_POWER		// an admin is being a dunce, bypass hard scaling limits on this message
+	if(devil_target)
+		power_multiplier = max(power_multiplier, 5)
+
 	if(specific_listeners.len)
-		listeners = specific_listeners
-		power_multiplier *= (1 + (1/specific_listeners.len)) //2x on a single guy, 1.5x on two and so on
 		message = copytext(message, length(found_string) + 1)
+		listeners = specific_listeners.Copy()
 
 	var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt")
 	var/static/regex/knockdown_words = regex("drop|fall|trip|knockdown")
@@ -264,7 +258,7 @@
 		cooldown = COOLDOWN_STUN
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.Stagger(60 * power_multiplier)
+			L.Stagger(40 * power_multiplier)
 
 	//KNOCKDOWN
 	else if(findtext(message, knockdown_words))
@@ -272,6 +266,7 @@
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.DefaultCombatKnockdown()
+			L.Stagger(10 * power_multiplier)
 
 	//VOMIT
 	else if((findtext(message, vomit_words)))
@@ -285,13 +280,13 @@
 		for(var/mob/living/carbon/C in listeners)
 			if(user.mind && (user.mind.assigned_role == "Curator" || user.mind.assigned_role == "Mime"))
 				power_multiplier *= 3
-			C.silent += (10 * power_multiplier)
+			C.silent += (5 * power_multiplier)
 
 	//HALLUCINATE
 	else if((findtext(message, hallucinate_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/C in listeners)
-			new /datum/hallucination/delusion(C, TRUE, null,150 * power_multiplier,0)
+			new /datum/hallucination/delusion(C, TRUE, null, 150 * power_multiplier, 0)
 
 	//WAKE UP
 	else if((findtext(message, wakeup_words)))
@@ -305,14 +300,14 @@
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.heal_overall_damage(10 * power_multiplier, 10 * power_multiplier, 0, FALSE, FALSE)
+			L.heal_overall_damage(min(17.5 * power_multiplier, adminbus? INFINITY : VOG_MAX_BURST_HEAL), min(17.5 * power_multiplier, VOG_MAX_BURST_HEAL), 0, FALSE, FALSE)
 
 	//BRUTE DAMAGE
 	else if((findtext(message, hurt_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.apply_damage(15 * power_multiplier, def_zone = BODY_ZONE_CHEST, wound_bonus=CANT_WOUND)
+			L.apply_damage(min(20 * power_multiplier, adminbus? INFINITY : VOG_MAX_BURST_DAMAGE), def_zone = BODY_ZONE_CHEST, wound_bonus = CANT_WOUND)
 
 	//BLEED
 	else if((findtext(message, bleed_words)))
@@ -334,14 +329,14 @@
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.adjust_bodytemperature(50 * power_multiplier)
+			L.adjust_bodytemperature(75 * power_multiplier)
 
 	//COLD
 	else if((findtext(message, cold_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.adjust_bodytemperature(-50 * power_multiplier)
+			L.adjust_bodytemperature(-75 * power_multiplier)
 
 	//REPULSE
 	else if((findtext(message, repulse_words)))
@@ -595,6 +590,34 @@
 	SSblackbox.record_feedback("tally", "voice_of_god", 1, log_message)
 
 	return cooldown
+
+/proc/get_vog_multiplier(mob/living/carbon/user, base_multiplier = 1, list/specific_listeners = list())
+	if(base_multiplier >= VOG_MAX_STANDARD_POWER)
+		return base_multiplier		// an admin bussed you and they probably didn't realize you were a chaplain/cultist.
+
+	var/special_check = get_vog_special(user)
+	if(!special_check)
+		return 0
+
+	. = min(base_multiplier * special_check, VOG_MAX_STANDARD_POWER)		// anything above should require conscious admin fuckery, as things are balanced around 3 multiplier tops (see: damage being 15*3)
+	if(!specific_listeners.len)
+		return
+	. = min(. * (1 + (1 / specific_listeners.len)), VOG_MAX_STANDARD_POWER)
+
+/// get special role multiplier for voice of god. No double dipping.
+/proc/get_vog_special(mob/living/carbon/user)
+	if(iscultist(user) || is_servant_of_ratvar(user))
+		return 2	// servant of god
+	if(user.mind)
+		// servant of god
+		if(user.mind.assigned_role == "Chaplain")
+			return 2
+		// shut up you broke your vow
+		if(user.mind.assigned_role == "Mime")
+			return 0.5
+		if(user.mind.assigned_role in GLOB.command_positions)
+			return 1.4		// heads are great at speaking with authority
+	return 1
 
 //////////////////////////////////////
 ///////ENTHRAL VELVET CHORDS//////////

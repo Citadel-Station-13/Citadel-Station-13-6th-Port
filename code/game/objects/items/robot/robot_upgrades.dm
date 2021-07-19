@@ -90,7 +90,7 @@ as performing this in action() will cause the upgrade to end up in the borg inst
 			to_chat(user, "<span class='notice'>There's no room for another VTEC unit!</span>")
 			return FALSE
 
-		//R.speed = -2 // Gotta go fast.
+		//R.vtec = -2 // Gotta go fast.
         //Citadel change - makes vtecs give an ability rather than reducing the borg's speed instantly
 		VC = new /obj/effect/proc_holder/silicon/cyborg/vtecControl
 		R.AddAbility(VC)
@@ -100,7 +100,7 @@ as performing this in action() will cause the upgrade to end up in the borg inst
 	. = ..()
 	if (.)
 		R.RemoveAbility(VC)
-		R.speed = initial(R.speed)
+		R.vtec = initial(R.vtec)
 		R.cansprint = 1
 
 /obj/item/borg/upgrade/disablercooler
@@ -690,11 +690,11 @@ as performing this in action() will cause the upgrade to end up in the borg inst
 	if(istype(user))
 		switch(currentState)
 			if (0)
-				user.speed = initial(user.speed)
+				user.vtec = initial(user.vtec)
 			if (1)
-				user.speed = initial(user.speed) - maxReduction * 0.5
+				user.vtec = initial(user.vtec) - maxReduction * 0.5
 			if (2)
-				user.speed = initial(user.speed) - maxReduction * 1
+				user.vtec = initial(user.vtec) - maxReduction * 1
 
 	action.button_icon_state = "Chevron_State_[currentState]"
 	action.UpdateButtonIcon()

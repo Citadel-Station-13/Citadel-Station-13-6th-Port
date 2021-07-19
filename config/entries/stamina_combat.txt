@@ -1,0 +1,28 @@
+## haha these keys are going to collide with other stuff for sure someday
+
+## OUT_OF_COMBAT_TIMER, PERCENT_REGENERATION_OUT_OF_COMBAT disabled - combat mode has been yanked from the codebase and made a UI toggle.
+
+## Maximum stamina buffer
+BUFFER_MAX 25
+
+## Seconds until out of combat regen kicks in
+# OUT_OF_COMBAT_TIMER 15
+
+## Base regen per second
+BASE_REGENERATION 3.5
+
+## Regenerate this % of total buffer when out of combat
+# PERCENT_REGENERATION_OUT_OF_COMBAT
+
+## Seconds after an action for which regeneration is penalized
+POST_ACTION_PENALTY_DELAY 5
+
+## Factor to multiply by for penalizing post action regen
+POST_ACTION_PENALTY_FACTOR 0.25
+
+## Factor to multiply by for stamina usage past buffer into health
+OVERDRAW_PENALTY_FACTOR 1.5
+
+## Completely disable stamina combat by giving people infinite buffers.
+## Has serious balance implications.
+# DISABLE_STAMBUFFER

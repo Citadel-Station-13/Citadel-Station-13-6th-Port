@@ -1,0 +1,93 @@
+## Deny all new connections by ckeys we haven't seen before (exempts admins and only denies the connection if the database is enabled and connected)
+##	Requires database
+#PANIC_BUNKER
+
+## If a player connects during a bunker with less then or this amount of living time (Minutes), we deny the connection
+#PANIC_BUNKER_LIVING 90
+
+## The message the Panic Bunker gives when someone is rejected by it
+## %minutes% is replaced with PANIC_BUNKER_LIVING on runtime, remove it if you don't want this
+#PANIC_BUNKER_MESSAGE Sorry, but the server is currently not accepting connections from players with less than %minutes% minutes of living time.
+
+## If panic bunker is on and a player is rejected (see above), attempt to send them to this connected server (see below) instead.
+##	You probably want this to be the same as CROSS_SERVER_ADDRESS
+#PANIC_SERVER_ADDRESS byond://address:port
+
+##Name of the place to send people rejected by the bunker
+#PANIC_SERVER_NAME [Put the name here]
+
+## Number of days for an individual panic bunker passthrough entry to be wiped. Note that they're also wiped as soon as a player is in the database.
+#MAX_BUNKER_DAYS 7
+
+## Notify admins when a new player connects for the first x days a player's been around. (0 for first connection only, -1 for never)
+##	Requres database
+NOTIFY_NEW_PLAYER_AGE 0
+
+## Notify admins when a player connects if their byond account was created in the last X days
+## Requires database
+NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
+
+##Automated age verification, comment this out to not ask new users if they are 18+
+#AGE_VERIFICATION
+
+## Notify the irc channel when a new player makes their first connection
+##	Requres database
+#IRC_FIRST_CONNECTION_ALERT
+
+## Comment this out to disable checking for the cid randomizer dll. (disabled if database isn't enabled or connected)
+CHECK_RANDOMIZER
+
+## IPINTEL:
+## This allows you to detect likely proxies by checking ips against getipintel.net
+## Rating to warn at: (0.9 is good, 1 is 100% likely to be a spammer/proxy, 0.8 is 80%, etc) anything equal to or higher then this number triggers an admin warning
+#IPINTEL_RATING_BAD 0.9
+## Contact email, (required to use the service, leaving blank or default disables IPINTEL)
+#IPINTEL_EMAIL ch@nge.me
+## How long to save good matches (ipintel rate limits to 15 per minute and 500 per day. so this shouldn't be too low, getipintel.net suggests 6 hours, time is in hours) (Your ip will get banned if you go over 500 a day too many times)
+#IPINTEL_SAVE_GOOD 12
+## How long to save bad matches (these numbers can change as ips change hands, best not to save these for too long in case somebody gets a new ip used by a spammer/proxy before.)
+#IPINTEL_SAVE_BAD 3
+## Domain name to query (leave commented out for the default, only needed if you pay getipintel.net for more querys)
+#IPINTEL_DOMAIN check.getipintel.net
+
+## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
+#AGGRESSIVE_CHANGELOG
+
+## Uncomment to allow web client connections
+#ALLOW_WEBCLIENT
+
+## Uncomment to restrict web client connections to byond members
+## This makes for a nice pay gate to cut down on ban evading, as the webclient's cid system isn't that great
+## byond membership starts at $10 for 3 months, so to use the webclient to evade, they would have sink 10 bucks in each evade.
+#WEBCLIENT_ONLY_BYOND_MEMBERS
+
+## CLIENT VERSION CONTROL
+## This allows you to configure the minimum required client version, as well as a warning version, and message for both.
+## These trigger for any version below (non-inclusive) the given version, so 510 triggers on 509 or lower.
+## These messages will be followed by one stating the clients current version and the required version for clarity.
+## If CLIENT_WARN_POPUP is uncommented a popup window with the message will be displayed instead
+#CLIENT_WARN_VERSION 511
+#CLIENT_WARN_POPUP
+#CLIENT_WARN_MESSAGE Byond released 511 as the stable release. You can set the framerate your client runs at, which makes the game feel very different and cool. Shortly after its release we will end up using 511 client features and you will be forced to update.
+CLIENT_ERROR_VERSION 511
+CLIENT_ERROR_MESSAGE Your version of byond is not supported. Please upgrade.
+## The minimum build needed for joining the server, if using 512, a good minimum build would be 1421 as that disables the Middle Mouse Button exploit.
+CLIENT_ERROR_BUILD 1421
+
+## Uncomment for 'soft' population caps, players will be warned while joining if the living crew exceeds the listed number.
+#SOFT_POPCAP 100
+
+## Message for soft cap
+SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, consider using alternative game servers.
+
+## Uncomment for 'hard' population caps, players will not be allowed to spawn if the living crew exceeds the listed number, though they may still observe or wait for the living crew to decrease in size.
+#HARD_POPCAP 150
+
+## Message for hard cap
+HARD_POPCAP_MESSAGE The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers.
+
+## Uncomment for 'extreme' population caps, players will not be allowed to join the server if living crew exceeds the listed number.
+#EXTREME_POPCAP 200
+
+## Message for extreme cap
+EXTREME_POPCAP_MESSAGE The server is currently serving a high number of users, find alternative servers.

@@ -280,70 +280,113 @@
 	R.handle_reactions()
 	return amount
 
-/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE)
+/**
+ * Triggers metabolizing for all the reagents in this holder
+ *
+ * Arguments:
+ * * mob/living/carbon/carbon - The mob to metabolize in, if null it uses [/datum/reagents/var/my_atom]
+ * * delta_time - the time in server seconds between proc calls (when performing normally it will be 2)
+ * * times_fired - the number of times the owner's life() tick has been called aka The number of times SSmobs has fired
+ * * can_overdose - Allows overdosing
+ * * liverless - Stops reagents that aren't set as [/datum/reagent/var/self_consuming] from metabolizing
+ */
+/datum/reagents/proc/metabolize(mob/living/carbon/owner, delta_time, times_fired, can_overdose = FALSE, liverless = FALSE)
 	var/list/cached_reagents = reagent_list
-	var/list/cached_addictions = addiction_list
-	if(C)
-		expose_temperature(C.bodytemperature, 0.25)
-	var/need_mob_update = 0
-	for(var/reagent in cached_reagents)
-		var/datum/reagent/R = reagent
-		if(QDELETED(R.holder))
-			continue
-		if(liverless && !R.self_consuming) //need to be metabolized
-			continue
-		if(!C)
-			C = R.holder.my_atom
-		if(!R.metabolizing)
-			R.metabolizing = TRUE
-			R.on_mob_metabolize(C)
-		if(C && R)
-			if(C.reagent_check(R) != 1)
-				if(can_overdose)
-					if(R.overdose_threshold)
-						if(R.volume > R.overdose_threshold && !R.overdosed)
-							R.overdosed = 1
-							var/turf/CT = get_turf(C)
-							log_reagent("OVERDOSE START: [key_name(C)] at [AREACOORD(CT)] started overdosing on [R.volume] units of [R].")
-							need_mob_update += R.overdose_start(C)
-					if(R.addiction_threshold)
-						if(R.volume > R.addiction_threshold && !is_type_in_list(R, cached_addictions))
-							var/datum/reagent/new_reagent = new R.type()
-							cached_addictions.Add(new_reagent)
-					if(R.overdosed)
-						need_mob_update += R.overdose_process(C)
-					if(is_type_in_list(R,cached_addictions))
-						for(var/addiction in cached_addictions)
-							var/datum/reagent/A = addiction
-							if(istype(R, A))
-								A.addiction_stage = -15 // you're satisfied for a good while.
-				need_mob_update += R.on_mob_life(C)
-
+	if(owner)
+		expose_temperature(owner.bodytemperature, 0.25)
+	var/need_mob_update = FALSE
+	for(var/datum/reagent/reagent as anything in cached_reagents)
+		need_mob_update += metabolize_reagent(owner, reagent, delta_time, times_fired, can_overdose, liverless)
 	if(can_overdose)
 		if(addiction_tick == 6)
 			addiction_tick = 1
-			for(var/addiction in cached_addictions)
+			for(var/addiction in addiction_list)
 				var/datum/reagent/R = addiction
-				if(C && R)
+				if(owner && R)
 					R.addiction_stage++
 					if(1 <= R.addiction_stage && R.addiction_stage <= R.addiction_stage1_end)
-						need_mob_update += R.addiction_act_stage1(C)
+						need_mob_update += R.addiction_act_stage1(owner)
 					else if(R.addiction_stage1_end < R.addiction_stage && R.addiction_stage <= R.addiction_stage2_end)
-						need_mob_update += R.addiction_act_stage2(C)
+						need_mob_update += R.addiction_act_stage2(owner)
 					else if(R.addiction_stage2_end < R.addiction_stage && R.addiction_stage <= R.addiction_stage3_end)
-						need_mob_update += R.addiction_act_stage3(C)
+						need_mob_update += R.addiction_act_stage3(owner)
 					else if(R.addiction_stage3_end < R.addiction_stage && R.addiction_stage <= R.addiction_stage4_end)
-						need_mob_update += R.addiction_act_stage4(C)
+						need_mob_update += R.addiction_act_stage4(owner)
 					else if(R.addiction_stage4_end < R.addiction_stage)
 						remove_addiction(R)
 					else
-						SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "[R.type]_overdose")
+						SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "[R.type]_overdose")
 		addiction_tick++
-	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
-		C.updatehealth()
-		C.update_mobility()
-		C.update_stamina()
+	if(owner && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
+		owner.updatehealth()
+		owner.update_mobility()
+		owner.update_stamina()
 	update_total()
+
+/*
+ * Metabolises a single reagent for a target owner carbon mob. See above.
+ *
+ * Arguments:
+ * * mob/living/carbon/owner - The mob to metabolize in, if null it uses [/datum/reagents/var/my_atom]
+ * * delta_time - the time in server seconds between proc calls (when performing normally it will be 2)
+ * * times_fired - the number of times the owner's life() tick has been called aka The number of times SSmobs has fired
+ * * can_overdose - Allows overdosing
+ * * liverless - Stops reagents that aren't set as [/datum/reagent/var/self_consuming] from metabolizing
+ */
+/datum/reagents/proc/metabolize_reagent(mob/living/carbon/owner, datum/reagent/reagent, delta_time, times_fired, can_overdose = FALSE, liverless = FALSE)
+	var/need_mob_update = FALSE
+	if(QDELETED(reagent.holder))
+		return FALSE
+
+	if(!owner)
+		owner = reagent.holder.my_atom
+
+	if(owner && reagent)
+		if(!owner.reagent_check(reagent, delta_time, times_fired) != TRUE)
+			return
+		if(liverless && !reagent.self_consuming) //need to be metabolized
+			return
+		if(!reagent.metabolizing)
+			reagent.metabolizing = TRUE
+			reagent.on_mob_metabolize(owner)
+		if(can_overdose)
+			if(reagent.overdose_threshold)
+				if(reagent.volume >= reagent.overdose_threshold && !reagent.overdosed)
+					reagent.overdosed = TRUE
+					need_mob_update += reagent.overdose_start(owner)
+					log_game("[key_name(owner)] has started overdosing on [reagent.name] at [reagent.volume] units.")
+
+			// for(var/addiction in reagent.addiction_types)
+			// 	owner.mind?.add_addiction_points(addiction, reagent.addiction_types[addiction] * REAGENTS_METABOLISM)
+			if(reagent.addiction_threshold)
+				if(reagent.volume > reagent.addiction_threshold && !is_type_in_list(reagent, addiction_list))
+					var/datum/reagent/new_reagent = new reagent.type()
+					addiction_list.Add(new_reagent)
+			if(is_type_in_list(reagent, addiction_list))
+				for(var/addiction in addiction_list)
+					var/datum/reagent/A = addiction
+					if(istype(reagent, A))
+						A.addiction_stage = -15 // you're satisfied for a good while.
+
+			if(reagent.overdosed)
+				need_mob_update += reagent.overdose_process(owner, delta_time, times_fired)
+
+		need_mob_update += reagent.on_mob_life(owner, delta_time, times_fired)
+	return need_mob_update
+
+/// Signals that metabolization has stopped, triggering the end of trait-based effects
+/datum/reagents/proc/end_metabolization(mob/living/carbon/C, keep_liverless = TRUE)
+	var/list/cached_reagents = reagent_list
+	for(var/datum/reagent/reagent as anything in cached_reagents)
+		if(QDELETED(reagent.holder))
+			continue
+		if(keep_liverless && reagent.self_consuming) //Will keep working without a liver
+			continue
+		if(!C)
+			C = reagent.holder.my_atom
+		if(reagent.metabolizing)
+			reagent.metabolizing = FALSE
+			reagent.on_mob_end_metabolize(C)
 
 /datum/reagents/proc/remove_addiction(datum/reagent/R)
 	to_chat(my_atom, "<span class='notice'>You feel like you've gotten over your need for [R.name].</span>")
@@ -353,21 +396,6 @@
 		log_reagent("OVERDOSE STOP: [key_name(my_atom)] at [AREACOORD(T)] got over their need for [R].")
 	addiction_list.Remove(R)
 	qdel(R)
-
-//Signals that metabolization has stopped, triggering the end of trait-based effects
-/datum/reagents/proc/end_metabolization(mob/living/carbon/C, keep_liverless = TRUE)
-	var/list/cached_reagents = reagent_list
-	for(var/reagent in cached_reagents)
-		var/datum/reagent/R = reagent
-		if(QDELETED(R.holder))
-			continue
-		if(keep_liverless && R.self_consuming) //Will keep working without a liver
-			continue
-		if(!C)
-			C = R.holder.my_atom
-		if(R.metabolizing)
-			R.metabolizing = FALSE
-			R.on_mob_end_metabolize(C)
 
 /datum/reagents/proc/conditional_update_move(atom/A, Running = 0)
 	var/list/cached_reagents = reagent_list
