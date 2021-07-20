@@ -3,6 +3,7 @@
 	specific_heat = 20
 	name = "Oxygen"
 	oxidation_temperature = T0C - 100 // it checks max of this and fire temperature, so rarely will things spontaneously combust
+	molar_mass = 32
 
 /datum/gas/nitrogen
 	id = GAS_N2
@@ -18,6 +19,7 @@
 		)
 	)
 	name = "Nitrogen"
+	molar_mass = 28
 
 /datum/gas/carbon_dioxide //what the fuck is this?
 	id = GAS_CO2
@@ -35,6 +37,7 @@
 		)
 	)
 	fusion_power = 3
+	molar_mass = 44
 
 /datum/gas/plasma
 	id = GAS_PLASMA
@@ -43,6 +46,7 @@
 	gas_overlay = "plasma"
 	moles_visible = MOLES_GAS_VISIBLE
 	flags = GAS_FLAG_DANGEROUS
+	molar_mass = 400
 	// no fire info cause it has its own bespoke reaction for trit generation reasons
 
 /datum/gas/water_vapor
@@ -53,6 +57,7 @@
 	moles_visible = MOLES_GAS_VISIBLE
 	fusion_power = 8
 	breath_reagent = /datum/reagent/water
+	molar_mass = 18
 
 /datum/gas/hypernoblium
 	id = GAS_HYPERNOB
@@ -60,6 +65,7 @@
 	name = "Hyper-noblium"
 	gas_overlay = "freon"
 	moles_visible = MOLES_GAS_VISIBLE
+	molar_mass = 600
 
 /datum/gas/nitrous_oxide
 	id = GAS_NITROUS
@@ -91,6 +97,7 @@
 	moles_visible = MOLES_GAS_VISIBLE
 	flags = GAS_FLAG_DANGEROUS
 	fusion_power = 1
+	molar_mass = 10
 	/*
 	these are for when we add hydrogen, trit gets to keep its hardcoded fire for legacy reasons
 	fire_provides = list(GAS_H2O = 2)

@@ -1,6 +1,7 @@
 //ATMOS
 //stuff you should probably leave well alone!
 #define R_IDEAL_GAS_EQUATION	8.31	//kPa*L/(K*mol)
+#define IDEAL_GAS_ENTROPY_CONSTANT 1164    // (mol^3 * s^3) / (kg^3 * L).
 #define ONE_ATMOSPHERE			101.325	//kPa
 #define TCMB					2.7		// -270.3degC
 #define TCRYO					225		// -48.15degC
@@ -107,17 +108,6 @@
 #define LOW_PRESSURE_DAMAGE					8		//The amount of damage someone takes when in a low pressure area (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
 
 #define COLD_SLOWDOWN_FACTOR				35		//Humans are slowed by the difference between bodytemp and BODYTEMP_COLD_DAMAGE_LIMIT divided by this
-
-//PIPES
-//Atmos pipe limits
-#define MAX_OUTPUT_PRESSURE					4500 // (kPa) What pressure pumps and powered equipment max out at.
-#define MAX_TRANSFER_RATE					200 // (L/s) Maximum speed powered equipment can work at.
-
-//used for device_type vars
-#define UNARY		1
-#define BINARY 		2
-#define TRINARY		3
-#define QUATERNARY	4
 
 //TANKS
 #define TANK_MELT_TEMPERATURE				1000000	//temperature in kelvins at which a tank will start to melt
@@ -233,53 +223,6 @@
 #define INCINERATOR_SYNDICATELAVA_AIRLOCK_CONTROLLER 	"syndicatelava_airlock_controller"
 #define INCINERATOR_SYNDICATELAVA_AIRLOCK_INTERIOR 		"syndicatelava_airlock_interior"
 #define INCINERATOR_SYNDICATELAVA_AIRLOCK_EXTERIOR	 	"syndicatelava_airlock_exterior"
-
-//MULTIPIPES
-//IF YOU EVER CHANGE THESE CHANGE SPRITES TO MATCH.
-#define PIPING_LAYER_MIN 1
-#define PIPING_LAYER_MAX 3
-#define PIPING_LAYER_DEFAULT 2
-#define PIPING_LAYER_P_X 5
-#define PIPING_LAYER_P_Y 5
-#define PIPING_LAYER_LCHANGE 0.05
-
-#define PIPING_ALL_LAYER				(1<<0)	//intended to connect with all layers, check for all instead of just one.
-#define PIPING_ONE_PER_TURF				(1<<1) 	//can only be built if nothing else with this flag is on the tile already.
-#define PIPING_DEFAULT_LAYER_ONLY		(1<<2)	//can only exist at PIPING_LAYER_DEFAULT
-#define PIPING_CARDINAL_AUTONORMALIZE	(1<<3)	//north/south east/west doesn't matter, auto normalize on build.
-
-// Gas defines because i hate typepaths
-#define GAS_O2					"o2"
-#define GAS_N2					"n2"
-#define GAS_CO2					"co2"
-#define GAS_PLASMA				"plasma"
-#define GAS_H2O					"water_vapor"
-#define GAS_HYPERNOB			"nob"
-#define GAS_NITROUS				"n2o"
-#define GAS_NITRYL				"no2"
-#define GAS_TRITIUM				"tritium"
-#define GAS_BZ					"bz"
-#define GAS_STIMULUM			"stim"
-#define GAS_PLUOXIUM			"pluox"
-#define GAS_MIASMA				"miasma"
-#define GAS_METHANE				"methane"
-#define GAS_METHYL_BROMIDE		"methyl_bromide"
-
-#define GAS_FLAG_DANGEROUS		(1<<0)
-#define GAS_FLAG_BREATH_PROC	(1<<1)
-
-//HELPERS
-#define PIPING_LAYER_SHIFT(T, PipingLayer) \
-	if(T.dir & (NORTH|SOUTH)) {									\
-		T.pixel_x = (PipingLayer - PIPING_LAYER_DEFAULT) * PIPING_LAYER_P_X;\
-	}																		\
-	if(T.dir & (WEST|EAST)) {										\
-		T.pixel_y = (PipingLayer - PIPING_LAYER_DEFAULT) * PIPING_LAYER_P_Y;\
-	}
-
-#define PIPING_LAYER_DOUBLE_SHIFT(T, PipingLayer) \
-	T.pixel_x = (PipingLayer - PIPING_LAYER_DEFAULT) * PIPING_LAYER_P_X;\
-	T.pixel_y = (PipingLayer - PIPING_LAYER_DEFAULT) * PIPING_LAYER_P_Y;
 
 #define QUANTIZE(variable)		(round(variable,0.0000001))/*I feel the need to document what happens here. Basically this is used to catch most rounding errors, however it's previous value made it so that
 															once gases got hot enough, most procedures wouldnt occur due to the fact that the mole counts would get rounded away. Thus, we lowered it a few orders of magnititude */

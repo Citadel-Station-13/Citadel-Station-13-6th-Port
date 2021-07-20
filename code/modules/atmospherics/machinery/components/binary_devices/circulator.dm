@@ -3,7 +3,7 @@
 #define CIRCULATOR_HOT 0
 #define CIRCULATOR_COLD 1
 
-/obj/machinery/atmospherics/components/binary/circulator
+/obj/machinery/atmospherics/component/binary/circulator
 	name = "circulator/heat exchanger"
 	desc = "A gas circulator pump and heat exchanger."
 	icon_state = "circ-off-0"
@@ -12,7 +12,7 @@
 	var/active = FALSE
 
 	var/last_pressure_delta = 0
-	pipe_flags = PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY
+	pipe_flags = PIPE_ONE_PER_TURF | PIPE_DEFAULT_LAYER_ONLY
 
 	density = TRUE
 
@@ -22,23 +22,23 @@
 	var/obj/machinery/power/generator/generator
 
 //default cold circ for mappers
-/obj/machinery/atmospherics/components/binary/circulator/cold
+/obj/machinery/atmospherics/component/binary/circulator/cold
 	mode = CIRCULATOR_COLD
 
-/obj/machinery/atmospherics/components/binary/circulator/Initialize(mapload)
+/obj/machinery/atmospherics/component/binary/circulator/Initialize(mapload)
 	.=..()
 	component_parts = list(new /obj/item/circuitboard/machine/circulator)
 
-/obj/machinery/atmospherics/components/binary/circulator/ComponentInitialize()
+/obj/machinery/atmospherics/component/binary/circulator/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/simple_rotation,ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS )
 
-/obj/machinery/atmospherics/components/binary/circulator/Destroy()
+/obj/machinery/atmospherics/component/binary/circulator/Destroy()
 	if(generator)
 		disconnectFromGenerator()
 	return ..()
 
-/obj/machinery/atmospherics/components/binary/circulator/proc/return_transfer_air()
+/obj/machinery/atmospherics/component/binary/circulator/proc/return_transfer_air()
 
 	var/datum/gas_mixture/air1 = airs[1]
 	var/datum/gas_mixture/air2 = airs[2]
@@ -69,11 +69,11 @@
 	else
 		last_pressure_delta = 0
 
-/obj/machinery/atmospherics/components/binary/circulator/process_atmos()
+/obj/machinery/atmospherics/component/binary/circulator/process_atmos()
 	..()
 	update_icon()
 
-/obj/machinery/atmospherics/components/binary/circulator/update_icon()
+/obj/machinery/atmospherics/component/binary/circulator/update_icon()
 	if(!is_operational())
 		icon_state = "circ-p-[flipped]"
 	else if(last_pressure_delta > 0)
@@ -84,7 +84,7 @@
 	else
 		icon_state = "circ-off-[flipped]"
 
-/obj/machinery/atmospherics/components/binary/circulator/wrench_act(mob/living/user, obj/item/I)
+/obj/machinery/atmospherics/component/binary/circulator/wrench_act(mob/living/user, obj/item/I)
 	if(!panel_open)
 		return
 	anchored = !anchored
@@ -122,31 +122,31 @@
 
 	return TRUE
 
-/obj/machinery/atmospherics/components/binary/circulator/SetInitDirections()
+/obj/machinery/atmospherics/component/binary/circulator/SetInitDirections()
 	switch(dir)
 		if(NORTH, SOUTH)
 			initialize_directions = EAST|WEST
 		if(EAST, WEST)
 			initialize_directions = NORTH|SOUTH
 
-/obj/machinery/atmospherics/components/binary/circulator/getNodeConnects()
+/obj/machinery/atmospherics/component/binary/circulator/getNodeConnects()
 	if(flipped)
 		return list(turn(dir, 270), turn(dir, 90))
 	return list(turn(dir, 90), turn(dir, 270))
 
-/obj/machinery/atmospherics/components/binary/circulator/can_be_node(obj/machinery/atmospherics/target)
+/obj/machinery/atmospherics/component/binary/circulator/can_be_node(obj/machinery/atmospherics/target)
 	if(anchored)
 		return ..(target)
 	return FALSE
 
-/obj/machinery/atmospherics/components/binary/circulator/multitool_act(mob/living/user, obj/item/I)
+/obj/machinery/atmospherics/component/binary/circulator/multitool_act(mob/living/user, obj/item/I)
 	if(generator)
 		disconnectFromGenerator()
 	mode = !mode
 	to_chat(user, "<span class='notice'>You set [src] to [mode?"cold":"hot"] mode.</span>")
 	return TRUE
 
-/obj/machinery/atmospherics/components/binary/circulator/screwdriver_act(mob/user, obj/item/I)
+/obj/machinery/atmospherics/component/binary/circulator/screwdriver_act(mob/user, obj/item/I)
 	if(..())
 		return TRUE
 	panel_open = !panel_open
@@ -154,15 +154,15 @@
 	to_chat(user, "<span class='notice'>You [panel_open?"open":"close"] the panel on [src].</span>")
 	return TRUE
 
-/obj/machinery/atmospherics/components/binary/circulator/crowbar_act(mob/user, obj/item/I)
+/obj/machinery/atmospherics/component/binary/circulator/crowbar_act(mob/user, obj/item/I)
 	default_deconstruction_crowbar(I)
 	return TRUE
 
-/obj/machinery/atmospherics/components/binary/circulator/on_deconstruction()
+/obj/machinery/atmospherics/component/binary/circulator/on_deconstruction()
 	if(generator)
 		disconnectFromGenerator()
 
-/obj/machinery/atmospherics/components/binary/circulator/proc/disconnectFromGenerator()
+/obj/machinery/atmospherics/component/binary/circulator/proc/disconnectFromGenerator()
 	if(mode)
 		generator.cold_circ = null
 	else
@@ -170,12 +170,12 @@
 	generator.update_icon()
 	generator = null
 
-/obj/machinery/atmospherics/components/binary/circulator/setPipingLayer(new_layer)
+/obj/machinery/atmospherics/component/binary/circulator/setPipingLayer(new_layer)
 	..()
 	pixel_x = 0
 	pixel_y = 0
 
-/obj/machinery/atmospherics/components/binary/circulator/verb/circulator_flip()
+/obj/machinery/atmospherics/component/binary/circulator/verb/circulator_flip()
 	set name = "Flip"
 	set category = "Object"
 	set src in oview(1)

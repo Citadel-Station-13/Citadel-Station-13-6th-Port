@@ -35,6 +35,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 	var/list/fire_enthalpies = list()
 	var/list/fire_products = list()
 	var/list/fire_burn_rates = list()
+	var/list/molar_masses = list()
 
 
 /datum/gas
@@ -55,6 +56,8 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 	var/list/fire_products = null // what results when this gas is burned (oxidizer or fuel); null for none
 	var/fire_energy_released = 0 // how much energy is released per mole of fuel burned
 	var/fire_burn_rate = 1 // how many moles are burned per product released
+	/// Molar mass in g/mol, used for specific entropy calculations (gas pumping difficulty). Heavier gases are harder to pump.
+	var/molar_mass = 32
 
 /datum/gas/proc/breath(partial_pressure, light_threshold, heavy_threshold, moles, mob/living/carbon/C, obj/item/organ/lungs/lungs)
 	// This is only called on gases with the GAS_FLAG_BREATH_PROC flag. When possible, do NOT use this--
@@ -79,6 +82,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 		ids[g] = g
 		typepaths[g] = gas.type
 		fusion_powers[g] = gas.fusion_power
+		molar_masses = gas.molar_mass
 
 		if(gas.breath_alert_info)
 			breath_alert_info[g] = gas.breath_alert_info

@@ -357,6 +357,7 @@
 	return (OXYLOSS)
 
 /obj/item/shockpaddles/update_icon_state()
+	. = ..()
 	icon_state = "[base_icon_state][wielded]"
 	item_state = icon_state
 	if(cooldown)

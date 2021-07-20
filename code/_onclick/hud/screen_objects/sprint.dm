@@ -14,6 +14,7 @@
 		H.default_toggle_sprint()
 
 /obj/screen/sprintbutton/update_icon_state()
+	. = ..()
 	var/mob/living/user = hud?.mymob
 	if(!istype(user))
 		return

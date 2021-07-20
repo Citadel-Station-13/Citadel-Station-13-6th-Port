@@ -11,7 +11,7 @@
 /obj/item/holochip/Initialize(mapload, amount)
 	. = ..()
 	credits = amount
-	update_icon()
+	update_appearance()
 
 /obj/item/holochip/examine(mob/user)
 	. = ..()
@@ -21,20 +21,30 @@
 /obj/item/holochip/get_item_credit_value()
 	return credits
 
-/obj/item/holochip/update_icon()
+/obj/item/holochip/update_name()
+	. = ..()
 	name = "\improper [credits] credit holochip"
-	var/rounded_credits = credits
+
+/obj/item/holochip/update_icon_state()
 	switch(credits)
 		if(1 to 999)
 			icon_state = "holochip"
 		if(1000 to 999999)
 			icon_state = "holochip_kilo"
-			rounded_credits = round(rounded_credits * 0.001)
 		if(1000000 to 999999999)
 			icon_state = "holochip_mega"
-			rounded_credits = round(rounded_credits * 0.000001)
 		if(1000000000 to INFINITY)
 			icon_state = "holochip_giga"
+
+/obj/item/holochip/update_overlays()
+	. = ..()
+	var/rounded_credits = credits
+	switch(credits)
+		if(1000 to 999999)
+			rounded_credits = round(rounded_credits * 0.001)
+		if(1000000 to 999999999)
+			rounded_credits = round(rounded_credits * 0.000001)
+		if(1000000000 to INFINITY)
 			rounded_credits = round(rounded_credits * 0.000000001)
 	var/overlay_color = "#914792"
 	switch(rounded_credits)
@@ -54,17 +64,16 @@
 			overlay_color = "#0153C1"
 		if(500 to INFINITY)
 			overlay_color = "#2C2C2C"
-	cut_overlays()
 	var/mutable_appearance/holochip_overlay = mutable_appearance('icons/obj/economy.dmi', "[icon_state]-color")
 	holochip_overlay.color = overlay_color
-	add_overlay(holochip_overlay)
+	. += holochip_overlay
 
 /obj/item/holochip/proc/spend(amount, pay_anyway = FALSE)
 	if(credits >= amount)
 		credits -= amount
 		if(credits == 0)
 			qdel(src)
-		update_icon()
+		update_appearance()
 		return amount
 	else if(pay_anyway)
 		qdel(src)
@@ -78,7 +87,7 @@
 		var/obj/item/holochip/H = I
 		credits += H.credits
 		to_chat(user, "<span class='notice'>You insert the credits into [src].</span>")
-		update_icon()
+		update_appearance()
 		qdel(H)
 	if(istype(I, /obj/item/card/id))
 		var/obj/item/card/id/ID = I

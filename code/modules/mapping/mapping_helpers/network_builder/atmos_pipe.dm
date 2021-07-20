@@ -6,7 +6,7 @@
 	icon_state = "atmospipebuilder"
 
 	/// Layer to put our pipes on
-	var/pipe_layer = PIPING_LAYER_DEFAULT
+	var/pipe_layer = PIPE_LAYER_DEFAULT
 
 	/// Color to set our pipes to
 	var/pipe_color
@@ -23,9 +23,9 @@
 		if(other.pipe_layer == pipe_layer)
 			return other
 	for(var/obj/machinery/atmospherics/A in loc)
-		if(A.pipe_flags & PIPING_ALL_LAYER)
+		if(A.pipe_flags & PIPE_ALL_LAYER)
 			return A
-		if(A.piping_layer == pipe_layer)
+		if(A.pipe_layer == pipe_layer)
 			return A
 	return FALSE
 
@@ -48,7 +48,7 @@
 		if(found)
 			continue
 		for(var/obj/machinery/atmospherics/A in T)
-			if((A.piping_layer == pipe_layer) && (A.initialize_directions & turn(i, 180)))
+			if((A.pipe_layer == pipe_layer) && (A.initialize_directions & turn(i, 180)))
 				network_directions += i
 				break
 	return network_directions
@@ -81,16 +81,16 @@
 
 /obj/effect/mapping_helpers/network_builder/atmos_pipe/distro
 	name = "distro line autobuilder"
-	pipe_layer = PIPING_LAYER_MIN
-	pixel_x = -PIPING_LAYER_P_X
-	pixel_y = -PIPING_LAYER_P_Y
+	pipe_layer = PIPE_LAYER_MIN
+	pixel_x = -PIPE_LAYER_P_X
+	pixel_y = -PIPE_LAYER_P_Y
 	pipe_color = rgb(130,43,255)
 	color = rgb(130,43,255)
 
 /obj/effect/mapping_helpers/network_builder/atmos_pipe/scrubbers
 	name = "scrubbers line autobuilder"
-	pipe_layer = PIPING_LAYER_MAX
-	pixel_x = PIPING_LAYER_P_X
-	pixel_y = PIPING_LAYER_P_Y
+	pipe_layer = PIPE_LAYER_MAX
+	pixel_x = PIPE_LAYER_P_X
+	pixel_y = PIPE_LAYER_P_Y
 	pipe_color = rgb(255,0,0)
 	color = rgb(255,0,0)

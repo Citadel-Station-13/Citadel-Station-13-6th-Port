@@ -371,6 +371,29 @@ get_true_breath_pressure(pp) --> gas_pp = pp/breath_pp*total_moles()
 	to_chat(src, "Operations per second: [100000 / (total_time/1000)]")
 */
 
+/**
+ * Faux entropy calculation
+ * Used for gas pumping
+ * Things we care about:
+ *
+ * Taking gas out of low entropy is easy
+ * Putting gas into low entropy is hard
+ * Taking gas out of high entropy is hard
+ * Putting gas into high entropy is easy
+ * Pumping from high entropy to low entropy is hard
+ * Pumping from low entropy to high entropy is easy
+ */
+/datum/gas_mixture/proc/specific_entropy()
+	if(!total_moles())
+		return INFINITY		// some ridiculously high value
+	. = 0
+	for(var/gasid in get_gases())
+		var/moles = get_moles(gasid)
+		var/molar_mass = GLOB.gas_data.molar_masses[gasid]
+		var/specific_heat = GLOB.gas_data.specific_heats[gasid]
+		. += R_IDEAL_GAS_EQUATION * (log((IDEAL_GAS_ENTROPY_CONSTANT * return_volume() / (moles * return_temperature())) * ((molar_mass * 0.001 * specific_heat * return_temperature()) ** (2/3)) + 1) + 15) * moles
+	. /= total_moles()
+
 /// Releases gas from src to output air. This means that it can not transfer air to gas mixture with higher pressure.
 /// a global proc due to rustmos
 /proc/release_gas_to(datum/gas_mixture/input_air, datum/gas_mixture/output_air, target_pressure)

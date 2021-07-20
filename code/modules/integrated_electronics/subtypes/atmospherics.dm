@@ -244,7 +244,7 @@
 			"on disconnected" = IC_PINTYPE_PULSE_OUT
 			)
 
-	var/obj/machinery/atmospherics/components/unary/portables_connector/connector
+	var/obj/machinery/atmospherics/component/unary/portables_connector/connector
 
 /obj/item/integrated_circuit/atmospherics/connector/Initialize()
 	air_contents = new(volume)
@@ -258,7 +258,7 @@
 /obj/item/integrated_circuit/atmospherics/connector/check_gassource(atom/gasholder)
 	if(!gasholder)
 		return FALSE
-	if(!istype(gasholder,/obj/machinery/atmospherics/components/unary/portables_connector))
+	if(!istype(gasholder,/obj/machinery/atmospherics/component/unary/portables_connector))
 		return FALSE
 	return TRUE
 
@@ -279,7 +279,7 @@
 		activate_pin(4)
 		return
 
-	var/obj/machinery/atmospherics/components/unary/portables_connector/PC = locate() in get_turf(src)
+	var/obj/machinery/atmospherics/component/unary/portables_connector/PC = locate() in get_turf(src)
 	// If no connector can't connect
 	if(!PC)
 		activate_pin(3)

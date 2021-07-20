@@ -7,7 +7,7 @@
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
-	pipe_flags = PIPING_CARDINAL_AUTONORMALIZE
+	pipe_flags = PIPE_CARDINAL_AUTONORMALIZE
 
 	device_type = BINARY
 
@@ -25,14 +25,14 @@
 			initialize_directions = EAST|WEST
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple/update_icon()
-	icon_state = "pipe[nodes[1] ? "1" : "0"][nodes[2] ? "1" : "0"]-[piping_layer]"
+	icon_state = "pipe[nodes[1] ? "1" : "0"][nodes[2] ? "1" : "0"]-[pipe_layer]"
 	update_layer()
 	update_alpha()
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple/layer1
-	piping_layer = 1
+	pipe_layer = 1
 	icon_state = "pipe11-1"
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple/layer3
-	piping_layer = 3
+	pipe_layer = 3
 	icon_state = "pipe11-3"

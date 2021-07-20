@@ -59,7 +59,7 @@ Doesn't work on other aliens/AI.*/
 	return TRUE
 
 /obj/effect/proc_holder/alien/proc/check_vent_block(mob/living/user)
-	var/obj/machinery/atmospherics/components/unary/atmos_thing = locate() in user.loc
+	var/obj/machinery/atmospherics/component/unary/atmos_thing = locate() in user.loc
 	if(atmos_thing)
 		var/rusure = alert(user, "Laying eggs and shaping resin here would block access to [atmos_thing]. Do you want to continue?", "Blocking Atmospheric Component", "Yes", "No")
 		if(rusure != "Yes")

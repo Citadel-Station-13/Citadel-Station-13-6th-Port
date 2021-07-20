@@ -55,8 +55,8 @@
 	productivity = P
 
 /obj/machinery/bloodbankgen/update_icon_state()
-	if(is_operational())
-		icon_state = "bloodbank-[is_operational() ? "on" : "off"]"
+	. = ..()
+	icon_state = "bloodbank-[is_operational() ? "on" : "off"]"
 
 /obj/machinery/bloodbankgen/update_overlays()
 	. = ..()

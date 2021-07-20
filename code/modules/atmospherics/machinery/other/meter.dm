@@ -13,7 +13,7 @@
 	var/frequency = 0
 	var/atom/target
 	var/id_tag
-	var/target_layer = PIPING_LAYER_DEFAULT
+	var/target_layer = PIPE_LAYER_DEFAULT
 
 /obj/machinery/meter/atmos
 	frequency = FREQ_ATMOS_STORAGE
@@ -31,9 +31,9 @@
 	target = null
 	return ..()
 
-/obj/machinery/meter/Initialize(mapload, new_piping_layer)
-	if(!isnull(new_piping_layer))
-		target_layer = new_piping_layer
+/obj/machinery/meter/Initialize(mapload, new_pipe_layer)
+	if(!isnull(new_pipe_layer))
+		target_layer = new_pipe_layer
 	SSair.atmos_machinery += src
 	if(!target)
 		reattach_to_layer()
@@ -42,17 +42,17 @@
 /obj/machinery/meter/proc/reattach_to_layer()
 	var/obj/machinery/atmospherics/candidate
 	for(var/obj/machinery/atmospherics/pipe/pipe in loc)
-		if(pipe.piping_layer == target_layer)
+		if(pipe.pipe_layer == target_layer)
 			candidate = pipe
 			if(pipe.level == 2)
 				break
 	if(candidate)
 		target = candidate
-		setAttachLayer(candidate.piping_layer)
+		setAttachLayer(candidate.pipe_layer)
 
 /obj/machinery/meter/proc/setAttachLayer(new_layer)
 	target_layer = new_layer
-	PIPING_LAYER_DOUBLE_SHIFT(src, target_layer)
+	PIPE_LAYER_DOUBLE_SHIFT(src, target_layer)
 
 /obj/machinery/meter/process_atmos()
 	if(!(target?.flags_1 & INITIALIZED_1))

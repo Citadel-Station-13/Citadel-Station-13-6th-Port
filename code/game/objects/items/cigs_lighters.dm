@@ -540,6 +540,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return BRUTELOSS
 
 /obj/item/lighter/update_icon_state()
+	. = ..()
 	icon_state = "[initial(icon_state)][lit ? "-on" : ""]"
 
 /obj/item/lighter/update_overlays()
@@ -666,6 +667,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	update_icon()
 
 /obj/item/lighter/greyscale/update_icon_state()
+	. = ..()
 	icon_state = "[initial(icon_state)][lit ? "-on" : ""]"
 
 /obj/item/lighter/greyscale/update_overlays()

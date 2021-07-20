@@ -323,7 +323,7 @@
 				occupant_message("<span class='warning'>Unable to disconnect from the air system port!</span>")
 				return
 		else
-			var/obj/machinery/atmospherics/components/unary/portables_connector/possible_port = locate() in loc
+			var/obj/machinery/atmospherics/component/unary/portables_connector/possible_port = locate() in loc
 			if(internal_tank.connect(possible_port))
 				occupant_message("Connected to the air system port.")
 				mecha_log_message("Connected to gas port.")

@@ -225,37 +225,13 @@ All ShuttleMove procs go here
 		on = TRUE
 	update_list()
 
-/obj/machinery/atmospherics/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
+/obj/machinery/atmospherics/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 	. = ..()
-	var/missing_nodes = FALSE
-	for(var/i in 1 to device_type)
-		if(nodes[i])
-			var/obj/machinery/atmospherics/node = nodes[i]
-			var/connected = FALSE
-			for(var/D in GLOB.cardinals)
-				if(node in get_step(src, D))
-					connected = TRUE
-					break
-
-			if(!connected)
-				nullifyNode(i)
-
-		if(!nodes[i])
-			missing_nodes = TRUE
-
-	if(missing_nodes)
-		atmosinit()
-		for(var/obj/machinery/atmospherics/A in pipeline_expansion())
-			A.atmosinit()
-			if(A.returnPipenet())
-				A.addMember(src)
-		SSair.add_to_rebuild_queue(src)
-	else
-		// atmosinit() calls update_icon(), so we don't need to call it
-		update_icon()
+	Leave()
 
 /obj/machinery/atmospherics/pipe/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
+	Join()
 	var/turf/T = loc
 	hide(T.intact)
 

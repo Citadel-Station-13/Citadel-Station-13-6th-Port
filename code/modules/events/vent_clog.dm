@@ -64,7 +64,7 @@
 
 /datum/round_event/vent_clog/setup()
 	endWhen = rand(120, 180)
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent in GLOB.machines)
+	for(var/obj/machinery/atmospherics/component/unary/vent_scrubber/temp_vent in GLOB.machines)
 		var/turf/T = get_turf(temp_vent)
 		var/area/A = T.loc
 		if(T && is_station_level(T.z) && !temp_vent.welded && !A.safe)
@@ -80,7 +80,7 @@
 
 	CHECK_TICK
 
-	var/obj/machinery/atmospherics/components/unary/vent = pick(vents)
+	var/obj/machinery/atmospherics/component/unary/vent = pick(vents)
 	vents -= vent
 
 	if(!vent || vent.welded)
@@ -143,7 +143,7 @@
 	priority_announce("The scrubbers network is experiencing an unexpected surge of pressurized beer. Some ejection of contents may occur.", "Atmospherics alert")
 
 /datum/round_event/vent_clog/beer/start()
-	for(var/obj/machinery/atmospherics/components/unary/vent in vents)
+	for(var/obj/machinery/atmospherics/component/unary/vent in vents)
 		if(vent && vent.loc && !vent.welded)
 			var/datum/reagents/R = new/datum/reagents(1000)
 			R.my_atom = vent
@@ -158,7 +158,7 @@
 	priority_announce("We are deploying an experimental plasma decontamination system. Please stand away from the vents and do not breathe the smoke that comes out.", "Central Command Update")
 
 /datum/round_event/vent_clog/plasma_decon/start()
-	for(var/obj/machinery/atmospherics/components/unary/vent in vents)
+	for(var/obj/machinery/atmospherics/component/unary/vent in vents)
 		if(vent && vent.loc && !vent.welded)
 			var/datum/effect_system/smoke_spread/freezing/decon/smoke = new
 			smoke.set_up(7, get_turf(vent), 7)

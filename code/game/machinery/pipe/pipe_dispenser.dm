@@ -6,14 +6,14 @@
 	density = TRUE
 	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_OFFLINE
 	var/wait = 0
-	var/piping_layer = PIPING_LAYER_DEFAULT
+	var/pipe_layer = PIPE_LAYER_DEFAULT
 
 /obj/machinery/pipedispenser/attack_paw(mob/user)
 	return attack_hand(user)
 
 /obj/machinery/pipedispenser/ui_interact(mob/user)
 	. = ..()
-	var/dat = "PIPING LAYER: <A href='?src=[REF(src)];layer_down=1'>--</A><b>[piping_layer]</b><A href='?src=[REF(src)];layer_up=1'>++</A><BR>"
+	var/dat = "PIPING LAYER: <A href='?src=[REF(src)];layer_down=1'>--</A><b>[pipe_layer]</b><A href='?src=[REF(src)];layer_up=1'>++</A><BR>"
 
 	var/recipes = GLOB.atmos_pipe_recipes
 
@@ -47,7 +47,7 @@
 				return
 			var/p_dir = text2num(href_list["dir"])
 			var/obj/item/pipe/P = new (loc, p_type, p_dir)
-			P.setPipingLayer(piping_layer)
+			P.setPipingLayer(pipe_layer)
 			P.add_fingerprint(usr)
 			wait = world.time + 10
 	if(href_list["makemeter"])
@@ -55,9 +55,9 @@
 			new /obj/item/pipe_meter(loc)
 			wait = world.time + 15
 	if(href_list["layer_up"])
-		piping_layer = clamp(++piping_layer, PIPING_LAYER_MIN, PIPING_LAYER_MAX)
+		pipe_layer = clamp(++pipe_layer, PIPE_LAYER_MIN, PIPE_LAYER_MAX)
 	if(href_list["layer_down"])
-		piping_layer = clamp(--piping_layer, PIPING_LAYER_MIN, PIPING_LAYER_MAX)
+		pipe_layer = clamp(--pipe_layer, PIPE_LAYER_MIN, PIPE_LAYER_MAX)
 	return
 
 /obj/machinery/pipedispenser/attackby(obj/item/W, mob/user, params)

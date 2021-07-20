@@ -164,7 +164,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 /datum/hallucination/fake_flood/New(mob/living/carbon/C, forced = TRUE)
 	set waitfor = FALSE
 	..()
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/U in orange(7,target))
+	for(var/obj/machinery/atmospherics/component/unary/vent_pump/U in orange(7,target))
 		if(!U.welded)
 			center = get_turf(U)
 			break
@@ -227,13 +227,13 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 /datum/hallucination/xeno_attack
 	//Xeno crawls from nearby vent,jumps at you, and goes back in
-	var/obj/machinery/atmospherics/components/unary/vent_pump/pump = null
+	var/obj/machinery/atmospherics/component/unary/vent_pump/pump = null
 	var/obj/effect/hallucination/simple/xeno/xeno = null
 
 /datum/hallucination/xeno_attack/New(mob/living/carbon/C, forced = TRUE)
 	set waitfor = FALSE
 	..()
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/U in orange(7,target))
+	for(var/obj/machinery/atmospherics/component/unary/vent_pump/U in orange(7,target))
 		if(!U.welded)
 			pump = U
 			break

@@ -174,7 +174,7 @@
 				G.adjust_moles(GAS_N2, G.get_moles(GAS_PLASMA))
 				G.set_moles(GAS_PLASMA, 0)
 		if (weldvents)
-			for(var/obj/machinery/atmospherics/components/unary/U in T)
+			for(var/obj/machinery/atmospherics/component/unary/U in T)
 				if(!isnull(U.welded) && !U.welded) //must be an unwelded vent pump or vent scrubber.
 					U.welded = TRUE
 					U.update_icon()

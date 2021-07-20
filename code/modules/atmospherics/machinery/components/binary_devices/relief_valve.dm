@@ -1,7 +1,7 @@
-/obj/machinery/atmospherics/components/binary/relief_valve
+/obj/machinery/atmospherics/component/binary/relief_valve
 	name = "binary pressure relief valve"
 	desc = "Like a manual valve, but opens at a certain pressure rather than being toggleable."
-	icon = 'icons/obj/atmospherics/components/relief_valve.dmi'
+	icon = 'icons/obj/atmospherics/component/relief_valve.dmi'
 	icon_state = "relief_valve-t-map"
 	can_unwrench = TRUE
 	construction_type = /obj/item/pipe/binary
@@ -11,17 +11,17 @@
 	var/close_pressure = ONE_ATMOSPHERE
 	pipe_state = "relief_valve-t"
 
-/obj/machinery/atmospherics/components/binary/relief_valve/layer1
-	piping_layer = PIPING_LAYER_MIN
-	pixel_x = -PIPING_LAYER_P_X
-	pixel_y = -PIPING_LAYER_P_Y
+/obj/machinery/atmospherics/component/binary/relief_valve/layer1
+	pipe_layer = PIPE_LAYER_MIN
+	pixel_x = -PIPE_LAYER_P_X
+	pixel_y = -PIPE_LAYER_P_Y
 
-/obj/machinery/atmospherics/components/binary/relief_valve/layer3
-	piping_layer = PIPING_LAYER_MAX
-	pixel_x = PIPING_LAYER_P_X
-	pixel_y = PIPING_LAYER_P_Y
+/obj/machinery/atmospherics/component/binary/relief_valve/layer3
+	pipe_layer = PIPE_LAYER_MAX
+	pixel_x = PIPE_LAYER_P_X
+	pixel_y = PIPE_LAYER_P_Y
 
-/obj/machinery/atmospherics/components/binary/relief_valve/update_icon_nopipes()
+/obj/machinery/atmospherics/component/binary/relief_valve/update_icon_nopipes()
 	if(dir==SOUTH)
 		setDir(NORTH)
 	else if(dir==WEST)
@@ -34,18 +34,18 @@
 
 	icon_state = "relief_valve-t-blown"
 
-/obj/machinery/atmospherics/components/binary/relief_valve/proc/open()
+/obj/machinery/atmospherics/component/binary/relief_valve/proc/open()
 	opened = TRUE
 	update_icon_nopipes()
 	update_parents()
 	var/datum/pipeline/parent1 = parents[1]
 	parent1.reconcile_air()
 
-/obj/machinery/atmospherics/components/binary/relief_valve/proc/close()
+/obj/machinery/atmospherics/component/binary/relief_valve/proc/close()
 	opened = FALSE
 	update_icon_nopipes()
 
-/obj/machinery/atmospherics/components/binary/relief_valve/process_atmos()
+/obj/machinery/atmospherics/component/binary/relief_valve/process_atmos()
 	..()
 
 	if(!is_operational())
@@ -60,20 +60,20 @@
 	else if(!opened && our_pressure >= open_pressure)
 		open()
 
-/obj/machinery/atmospherics/components/binary/relief_valve/ui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/component/binary/relief_valve/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AtmosRelief", name)
 		ui.open()
 
-/obj/machinery/atmospherics/components/binary/relief_valve/ui_data()
+/obj/machinery/atmospherics/component/binary/relief_valve/ui_data()
 	var/list/data = list()
 	data["open_pressure"] = round(open_pressure)
 	data["close_pressure"] = round(close_pressure)
 	data["max_pressure"] = round(50*ONE_ATMOSPHERE)
 	return data
 
-/obj/machinery/atmospherics/components/binary/relief_valve/ui_act(action, params)
+/obj/machinery/atmospherics/component/binary/relief_valve/ui_act(action, params)
 	if(..())
 		return
 	switch(action)

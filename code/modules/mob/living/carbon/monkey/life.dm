@@ -93,7 +93,7 @@
 					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
 
 	else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !HAS_TRAIT(src, TRAIT_RESISTCOLD))
-		if(!istype(loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
+		if(!istype(loc, /obj/machinery/atmospherics/component/unary/cryo_cell))
 			switch(bodytemperature)
 				if(200 to 260)
 					throw_alert("temp", /obj/screen/alert/cold, 1)

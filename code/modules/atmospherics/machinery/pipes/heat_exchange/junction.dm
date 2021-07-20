@@ -31,15 +31,15 @@
 	return ..(target, given_layer, TRUE)
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/junction/update_icon()
-	icon_state = "pipe[nodes[1] ? "1" : "0"][nodes[2] ? "1" : "0"]-[piping_layer]"
+	icon_state = "pipe[nodes[1] ? "1" : "0"][nodes[2] ? "1" : "0"]-[pipe_layer]"
 	update_layer()
 	update_alpha()
 
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/junction/layer1
-	piping_layer = 1
+	pipe_layer = 1
 	icon_state = "pipe11-1"
 
 /obj/machinery/atmospherics/pipe/heat_exchanging/junction/layer3
-	piping_layer = 3
+	pipe_layer = 3
 	icon_state = "pipe11-3"

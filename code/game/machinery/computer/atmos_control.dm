@@ -43,7 +43,8 @@
 	id_tag = ATMOS_GAS_MONITOR_SENSOR_INCINERATOR
 
 /obj/machinery/air_sensor/update_icon_state()
-		icon_state = "gsensor[on]"
+	. = ..()
+	icon_state = "gsensor[on]"
 
 /obj/machinery/air_sensor/process_atmos()
 	if(on)
@@ -243,10 +244,10 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	var/list/IO = list()
 	var/datum/radio_frequency/freq = SSradio.return_frequency(frequency)
 	var/list/devices = freq.devices["_default"]
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/U in devices)
+	for(var/obj/machinery/atmospherics/component/unary/vent_pump/U in devices)
 		var/list/text = splittext(U.id_tag, "_")
 		IO |= text[1]
-	for(var/obj/machinery/atmospherics/components/unary/outlet_injector/U in devices)
+	for(var/obj/machinery/atmospherics/component/unary/outlet_injector/U in devices)
 		var/list/text = splittext(U.id, "_")
 		IO |= text[1]
 	if(!IO.len)
@@ -264,9 +265,9 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 				sensors = list("[S]_sensor" = "[S] Tank")
 				break
 
-	for(var/obj/machinery/atmospherics/components/unary/outlet_injector/U in devices)
+	for(var/obj/machinery/atmospherics/component/unary/outlet_injector/U in devices)
 		U.broadcast_status()
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/U in devices)
+	for(var/obj/machinery/atmospherics/component/unary/vent_pump/U in devices)
 		U.broadcast_status()
 
 /obj/machinery/computer/atmos_control/tank/ui_data(mob/user)

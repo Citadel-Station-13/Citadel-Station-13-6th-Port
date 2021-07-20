@@ -1,7 +1,7 @@
 #define SIPHONING	0
 #define SCRUBBING	1
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber
+/obj/machinery/atmospherics/component/unary/vent_scrubber
 	icon_state = "scrub_map-2"
 	name = "air scrubber"
 	desc = "Has a valve and pump attached to it."
@@ -30,12 +30,12 @@
 
 	pipe_state = "scrubber"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/New()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/New()
 	..()
 	if(!id_tag)
 		id_tag = assign_uid_vents()
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/Destroy()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/Destroy()
 	var/area/A = get_base_area(src)
 	if (A)
 		A.air_scrub_names -= id_tag
@@ -46,7 +46,7 @@
 	adjacent_turfs.Cut()
 	return ..()
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/auto_use_power()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/auto_use_power()
 	if(!on || welded || !is_operational() || !powered(power_channel))
 		return FALSE
 
@@ -62,10 +62,10 @@
 	use_power(amount, power_channel)
 	return TRUE
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/update_icon_nopipes()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/update_icon_nopipes()
 	cut_overlays()
 	if(showpipe)
-		var/image/cap = getpipeimage(icon, "scrub_cap", initialize_directions, piping_layer = piping_layer)
+		var/image/cap = getpipeimage(icon, "scrub_cap", initialize_directions, pipe_layer = pipe_layer)
 		add_overlay(cap)
 
 	if(welded)
@@ -84,12 +84,12 @@
 	else //scrubbing == SIPHONING
 		icon_state = "scrub_purge"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/set_frequency(new_frequency)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)
 	frequency = new_frequency
 	radio_connection = SSradio.add_object(src, frequency, radio_filter_in)
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/broadcast_status()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/proc/broadcast_status()
 	if(!radio_connection)
 		return FALSE
 
@@ -119,7 +119,7 @@
 
 	return TRUE
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/atmosinit()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/atmosinit()
 	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
 	if(frequency)
@@ -128,7 +128,7 @@
 	check_turfs()
 	..()
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/process_atmos()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/process_atmos()
 	..()
 	if(welded || !is_operational())
 		return FALSE
@@ -141,7 +141,7 @@
 			scrub(tile)
 	return TRUE
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/scrub(var/turf/tile)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/proc/scrub(var/turf/tile)
 	if(!istype(tile))
 		return FALSE
 	var/datum/gas_mixture/environment = tile.return_air()
@@ -166,20 +166,20 @@
 
 //There is no easy way for an object to be notified of changes to atmos can pass flags
 //	So we check every machinery process (2 seconds)
-/obj/machinery/atmospherics/components/unary/vent_scrubber/process()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/process()
 	if(widenet)
 		check_turfs()
 
 //we populate a list of turfs with nonatmos-blocked cardinal turfs AND
 //	diagonal turfs that can share atmos with *both* of the cardinal turfs
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/check_turfs()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/proc/check_turfs()
 	adjacent_turfs.Cut()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		adjacent_turfs = T.GetAtmosAdjacentTurfs(alldir = 1)
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/receive_signal(datum/signal/signal)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/receive_signal(datum/signal/signal)
 	if(!is_operational() || !signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
 		return 0
 
@@ -223,11 +223,11 @@
 	update_icon()
 	return
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/power_change()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/power_change()
 	..()
 	update_icon_nopipes()
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/welder_act(mob/living/user, obj/item/I)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/welder_act(mob/living/user, obj/item/I)
 	if(!I.tool_start_check(user, amount=0))
 		return TRUE
 	to_chat(user, "<span class='notice'>Now welding the scrubber.</span>")
@@ -243,21 +243,21 @@
 		pipe_vision_img.plane = ABOVE_HUD_PLANE
 	return TRUE
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/can_unwrench(mob/user)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational())
 		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/examine(mob/user)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/examine(mob/user)
 	. = ..()
 	if(welded)
 		. += "It seems welded shut."
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/can_crawl_through()
+/obj/machinery/atmospherics/component/unary/vent_scrubber/can_crawl_through()
 	return !welded
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/attack_alien(mob/user)
+/obj/machinery/atmospherics/component/unary/vent_scrubber/attack_alien(mob/user)
 	if(!welded || !(do_after(user, 20, target = src)))
 		return
 	user.visible_message("[user] furiously claws at [src]!", "You manage to clear away the stuff blocking the scrubber.", "You hear loud scraping noises.")
@@ -267,24 +267,24 @@
 	pipe_vision_img.plane = ABOVE_HUD_PLANE
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 100, 1)
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/layer1
-	piping_layer = 1
+/obj/machinery/atmospherics/component/unary/vent_scrubber/layer1
+	pipe_layer = 1
 	icon_state = "scrub_map-1"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/layer3
-	piping_layer = 3
+/obj/machinery/atmospherics/component/unary/vent_scrubber/layer3
+	pipe_layer = 3
 	icon_state = "scrub_map-3"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on
+/obj/machinery/atmospherics/component/unary/vent_scrubber/on
 	on = TRUE
 	icon_state = "scrub_map_on-2"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer1
-	piping_layer = 1
+/obj/machinery/atmospherics/component/unary/vent_scrubber/on/layer1
+	pipe_layer = 1
 	icon_state = "scrub_map_on-1"
 
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3
-	piping_layer = 3
+/obj/machinery/atmospherics/component/unary/vent_scrubber/on/layer3
+	pipe_layer = 3
 	icon_state = "scrub_map_on-3"
 
 #undef SIPHONING

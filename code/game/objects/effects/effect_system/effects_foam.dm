@@ -326,7 +326,7 @@
 					continue
 				G.set_moles(I, 0)
 			O.air_update_turf()
-		for(var/obj/machinery/atmospherics/components/unary/U in O)
+		for(var/obj/machinery/atmospherics/component/unary/U in O)
 			if(!U.welded)
 				U.welded = TRUE
 				U.update_icon()

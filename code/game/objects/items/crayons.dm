@@ -762,6 +762,7 @@
 	. = ..()
 
 /obj/item/toy/crayon/spraycan/update_icon_state()
+	. = ..()
 	icon_state = is_capped ? icon_capped : icon_uncapped
 
 /obj/item/toy/crayon/spraycan/update_overlays()

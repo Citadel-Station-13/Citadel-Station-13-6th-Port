@@ -61,7 +61,7 @@
 	var/internal_tank_valve = ONE_ATMOSPHERE
 	var/obj/machinery/portable_atmospherics/canister/internal_tank
 	var/datum/gas_mixture/cabin_air
-	var/obj/machinery/atmospherics/components/unary/portables_connector/connected_port = null
+	var/obj/machinery/atmospherics/component/unary/portables_connector/connected_port = null
 
 	var/obj/item/radio/mech/radio
 	var/list/trackers = list()

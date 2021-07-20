@@ -152,6 +152,7 @@
 	object_overlays.Cut()
 
 /obj/screen/inventory/update_icon_state()
+	. = ..()
 	if(!icon_empty)
 		icon_empty = icon_state
 
@@ -359,6 +360,7 @@
 	toggle(usr)
 
 /obj/screen/mov_intent/update_icon_state()
+	. = ..()
 	switch(hud?.mymob?.m_intent)
 		if(MOVE_INTENT_WALK)
 			icon_state = CONFIG_GET(flag/sprint_enabled)? "walking" : "walking_nosprint"
@@ -381,6 +383,7 @@
 	usr.stop_pulling()
 
 /obj/screen/pull/update_icon_state()
+	. = ..()
 	if(hud?.mymob?.pulling)
 		icon_state = "pull"
 	else
@@ -411,6 +414,7 @@
 		L.lay_down()
 
 /obj/screen/rest/update_icon_state()
+	. = ..()
 	var/mob/living/user = hud?.mymob
 	if(!istype(user))
 		return

@@ -134,7 +134,7 @@
 				calculated_non_operational_thrusters ++
 				continue
 			if(E.attached_heater)
-				var/obj/machinery/atmospherics/components/unary/shuttle/heater/resolvedHeater = E.attached_heater.resolve()
+				var/obj/machinery/atmospherics/component/unary/shuttle/heater/resolvedHeater = E.attached_heater.resolve()
 				if(resolvedHeater && !resolvedHeater.hasFuel(dist * E.fuel_use) && useFuel)
 					calculated_fuel_less_thrusters ++
 					continue
@@ -160,7 +160,7 @@
 		if(get_area(M) != get_area(shuttle_machine))
 			continue
 		if(shuttle_machine.attached_heater)
-			var/obj/machinery/atmospherics/components/unary/shuttle/heater/resolvedHeater = shuttle_machine.attached_heater.resolve()
+			var/obj/machinery/atmospherics/component/unary/shuttle/heater/resolvedHeater = shuttle_machine.attached_heater.resolve()
 			if(resolvedHeater && !resolvedHeater.hasFuel(dist * shuttle_machine.fuel_use))
 				continue
 			resolvedHeater?.consumeFuel(dist * shuttle_machine.fuel_use)

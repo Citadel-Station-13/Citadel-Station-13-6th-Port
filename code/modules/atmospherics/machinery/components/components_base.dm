@@ -1,29 +1,57 @@
 // So much of atmospherics.dm was used solely by components, so separating this makes things all a lot cleaner.
 // On top of that, now people can add component-speciic procs/vars if they want!
 
-/obj/machinery/atmospherics/components
-	var/welded = FALSE //Used on pumps and scrubbers
+/obj/machinery/atmospherics/component
+	/// Welded vents/scrubbers
+	var/welded = FALSE
+	// Air movement calculations
+	// Not all components will use these, but they're pretty much standard.
+	/// Maximum power rating - maximum power it can draw for operations in watts.
+	var/power_rating = ATMOSMECH_POWER_RATING
+	/// Current power rating - defaults to max
+	var/power_setting = ATMOSMECH_POWER_RATING
+	/// Max operating pressure - cannot pressurize above this, but can accept above this
+	var/max_pressure = ATMOSMECH_PUMP_PRESSURE
+	/// Current pressure setting - defaults to max
+	var/pressure_setting = ATMOSMECH_PUMP_PRESSURE
+	/// Max operating rate - cannot pump faster than this (L/s)
+	var/max_rate = ATMOSMECH_PUMP_RATE
+	/// Current rate setting - defaults to max
+	var/rate_setting = ATMOSMECH_PUMP_RATE
+	/// Efficiency multiplier
+	var/power_efficiency = 1
+	/// Minimum volume to move per second before it gives up
+	var/futile_rate = ATMOSMECH_FUTILE_PUMP_RATE
+	/// Below this in moles, anything left is instantly moved. This ensures you can't require infinite power to drain something.
+	var/moles_to_instant_pump = ATMOSMECH_INSTANT_PUMP_MOLES
+	/// Below this in pressure, anything left is instantly moved. This ensures you can't require infinite power to drain something.
+	var/pressure_to_instant_pump = ATMOSMECH_INSTANT_PUMP_PRESSURE
+	/// Last flow rate, set by gas transfer procs [code/modules/atmospherics/gasmixtures/transfer_helpers.dm]. Has different contexts based on what proc you used.
+	var/last_transfer_rate
+	/// Last power usage, set by gas transfer procs [code/modules/atmospherics/gasmixtures/transfer_helpers.dm].
+	/// Pipelines this belongs to. This should have the same indices as [connected]
+	var/list/datum/pipeline/pipelines
+	/// Gas mixtures we contain. This should have the same indices as [connected]
+	var/list/datum/gas_mixture/airs
+	/// Volume of each of our airs
+	var/volume = 200
+
 	var/showpipe = FALSE
 	var/shift_underlay_only = TRUE //Layering only shifts underlay?
 
-	var/list/datum/pipeline/parents
-	var/list/datum/gas_mixture/airs
-
-/obj/machinery/atmospherics/components/New()
-	parents = new(device_type)
-	airs = new(device_type)
-	..()
-
+/obj/machinery/atmospherics/component/InitAtmos()
+	pipelines = new /list(device_type)
+	airs = new /list(device_type)
 	for(var/i in 1 to device_type)
-		var/datum/gas_mixture/A = new(200)
-		airs[i] = A
+		airs[i] = new /datum/gas_mixture(volume)
+	return ..()
 
 // Iconnery
 
-/obj/machinery/atmospherics/components/proc/update_icon_nopipes()
+/obj/machinery/atmospherics/component/proc/update_icon_nopipes()
 	return
 
-/obj/machinery/atmospherics/components/update_icon()
+/obj/machinery/atmospherics/component/update_icon()
 	update_icon_nopipes()
 
 	underlays.Cut()
@@ -42,8 +70,8 @@
 	var/connected = 0 //Direction bitset
 
 	for(var/i in 1 to device_type) //adds intact pieces
-		if(nodes[i])
-			var/obj/machinery/atmospherics/node = nodes[i]
+		if(connected[i])
+			var/obj/machinery/atmospherics/node = connected[i]
 			var/image/img = get_pipe_underlay("pipe_intact", get_dir(src, node), node.pipe_color)
 			underlays += img
 			connected |= img.dir
@@ -53,59 +81,63 @@
 			underlays += get_pipe_underlay("pipe_exposed", direction)
 
 	if(!shift_underlay_only)
-		PIPING_LAYER_SHIFT(src, piping_layer)
+		PIPE_LAYER_SHIFT(src, pipe_layer)
 
-/obj/machinery/atmospherics/components/proc/get_pipe_underlay(state, dir, color = null)
+/obj/machinery/atmospherics/component/proc/get_pipe_underlay(state, dir, color = null)
 	if(color)
-		. = getpipeimage('icons/obj/atmospherics/components/binary_devices.dmi', state, dir, color, piping_layer = shift_underlay_only ? piping_layer : 2)
+		. = getpipeimage('icons/obj/atmospherics/component/binary_devices.dmi', state, dir, color, pipe_layer = shift_underlay_only ? pipe_layer : 2)
 	else
-		. = getpipeimage('icons/obj/atmospherics/components/binary_devices.dmi', state, dir, piping_layer = shift_underlay_only ? piping_layer : 2)
+		. = getpipeimage('icons/obj/atmospherics/component/binary_devices.dmi', state, dir, pipe_layer = shift_underlay_only ? pipe_layer : 2)
 
-// Pipenet stuff; housekeeping
+/obj/machinery/atmospherics/component/Teardown()
+	for(var/i in 1 to pipelines.len)
+		if(pipelines[i])
+			QDEL_NULL(pipelines[i])
 
-/obj/machinery/atmospherics/components/nullifyNode(i)
-	if(nodes[i])
-		nullifyPipenet(parents[i])
-		QDEL_NULL(airs[i])
-	..()
+/obj/machinery/atmospherics/component/Build()
+	for(var/i in 1 to pipelines.len)
+		if(!pipelines[i])
+			var/datum/pipeline/PL = new
+			pipelines[i] = PL
+			PL.build_pipeline(src)
 
-/obj/machinery/atmospherics/components/on_construction()
-	..()
-	update_parents()
+/obj/machinery/atmospherics/component/NullifyPipeline(datum/pipeline/removing)
+	var/index = pipelines.Find(removing)
+	if(!index)
+		CRASH("FATAL: NullifyPipeline could not find [removing] in [src] ([COORD(src)])")
+	pipelines[index] = null
 
-/obj/machinery/atmospherics/components/build_network()
-	for(var/i in 1 to device_type)
-		if(!parents[i])
-			parents[i] = new /datum/pipeline()
-			var/datum/pipeline/P = parents[i]
-			P.build_pipeline(src)
+/obj/machinery/atmospherics/component/SetPipeline(datum/pipeline/setting, obj/machinery/atmospherics/source)
+	// We want to set the pipeline index that corrosponds to the node order
+	var/index = connected.Find(source)
+	if(!index)
+		CRASH("FATAL: SetPipeline could not find [source] in [src] ([COORD(src)])")
+	pipelines[index] = setting
 
-/obj/machinery/atmospherics/components/proc/nullifyPipenet(datum/pipeline/reference)
-	if(!reference)
-		CRASH("nullifyPipenet(null) called by [type] on [COORD(src)]")
-	var/i = parents.Find(reference)
-	reference.other_airs -= airs[i]
-	reference.other_atmosmch -= src
-	parents[i] = null
+/obj/machinery/atmospherics/component/ReplacePipeline(datum/pipeline/old, datum/pipeline/replacing)
+	var/index = pipelines.Find(old)
+	if(!index)
+		CRASH("FATAL: ReplacePipeline() could not find [old] in [src] ([COORD(src)])")
+	pipelines[index] = replacing
 
-/obj/machinery/atmospherics/components/returnPipenetAir(datum/pipeline/reference)
-	return airs[parents.Find(reference)]
+/obj/machinery/atmospherics/component/DirectConnection(datum/pipeline/querying, obj/machinery/atmospherics/source)
+	var/index = pipelines.Find(querying)
+	if(!index)
+		CRASH("FATAL: DirectConnection() could not find [querying] in [src] ([COORD(src)]). Source was [source]")
+	. = list()
+	if(connected[index])
+		. += connected[index]
 
-/obj/machinery/atmospherics/components/pipeline_expansion(datum/pipeline/reference)
-	if(reference)
-		return list(nodes[parents.Find(reference)])
-	return ..()
+/**
+ * Gets the air that corrosponds to a pipeline
+ */
+/obj/machinery/atmospherics/component/proc/ReturnPipenetAir(datum/pipeline/querying)
+	var/index = pipelines.Find(querying)
+	if(!index)
+		CRASH("FATAL: ReturnPipenetAir() could not find [querying] in [src] ([COORD(src)])")
+	return airs[index]
 
-/obj/machinery/atmospherics/components/setPipenet(datum/pipeline/reference, obj/machinery/atmospherics/A)
-	parents[nodes.Find(A)] = reference
-
-/obj/machinery/atmospherics/components/returnPipenet(obj/machinery/atmospherics/A = nodes[1]) //returns parents[1] if called without argument
-	return parents[nodes.Find(A)]
-
-/obj/machinery/atmospherics/components/replacePipenet(datum/pipeline/Old, datum/pipeline/New)
-	parents[parents.Find(Old)] = New
-
-/obj/machinery/atmospherics/components/unsafe_pressure_release(var/mob/user, var/pressures)
+/obj/machinery/atmospherics/component/unsafe_pressure_release(var/mob/user, var/pressures)
 	..()
 
 	var/turf/T = get_turf(src)
@@ -125,44 +157,61 @@
 			T.assume_air_moles(air, shared_loss)
 		air_update_turf(1)
 
-/obj/machinery/atmospherics/components/proc/safe_input(var/title, var/text, var/default_set)
+/obj/machinery/atmospherics/component/proc/safe_input(var/title, var/text, var/default_set)
 	var/new_value = input(usr,text,title,default_set) as num
 	if(usr.canUseTopic(src))
 		return new_value
 	return default_set
 
+/obj/machinery/atmospherics/component/ReturnPipelines()
+	. = list()
+	for(var/datum/pipeline/PL in pipelines)
+		. += PL
+
 // Helpers
 
-/obj/machinery/atmospherics/components/proc/update_parents()
-	for(var/i in 1 to device_type)
-		var/datum/pipeline/parent = parents[i]
-		if(!parent)
-			stack_trace("Component is missing a pipenet! Rebuilding...")
-			SSair.add_to_rebuild_queue(src)
-		parent.update = 1
-
-/obj/machinery/atmospherics/components/returnPipenets()
-	. = list()
-	for(var/i in 1 to device_type)
-		. += returnPipenet(nodes[i])
-
+/**
+ * Marks all pipelines as needing to update
+ */
+/obj/machinery/atmospherics/component/proc/MarkDirty()
+	for(var/i in 1 to pipelines.len)
+		var/datum/pipeline/PL = pipelines[i]
+		if(!PL)
+			stack_trace("[src] is missing a pipenet. Rebuilding.")
+			QueueRebuild()
+			return
+		PL.update = TRUE
 
 // UI Stuff
 
-
-/obj/machinery/atmospherics/components/ui_status(mob/user)
+/obj/machinery/atmospherics/component/ui_status(mob/user)
 	if(allowed(user))
 		return ..()
 	to_chat(user, "<span class='danger'>Access denied.</span>")
 	return UI_CLOSE
 
-/obj/machinery/atmospherics/components/attack_ghost(mob/dead/observer/O)
+/obj/machinery/atmospherics/component/attack_ghost(mob/dead/observer/O)
 	. = ..()
 	atmosanalyzer_scan(airs, O, src, FALSE)
 
+// Standard ui_data
+/obj/machinery/atmospherics/component/ui_static_data(mob/user)
+	. = ..()
+	.["power_max"] = power_rating
+	.["pressure_max"] = max_pressure
+	.["rate_max"] = max_rate
+
+// Standard ui_data
+/obj/machinery/atmospherics/component/ui_data(mob/user)
+	. = ..()
+	.["power_setting"] = power_setting
+	.["pressure_setting"] = pressure_setting
+	.["rate_setting"] = rate_setting
+	.["power_current"] = last_power_draw
+	.["rate_current"] = last_transfer_rate
+
 // Tool acts
 
-
-/obj/machinery/atmospherics/components/analyzer_act(mob/living/user, obj/item/I)
+/obj/machinery/atmospherics/component/analyzer_act(mob/living/user, obj/item/I)
 	atmosanalyzer_scan(airs, user, src)
 	return TRUE

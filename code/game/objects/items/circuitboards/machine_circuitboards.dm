@@ -215,7 +215,7 @@
 /obj/item/circuitboard/machine/circulator
 	name = "Circulator/Heat Exchanger (Machine Board)"
 	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/binary/circulator
+	build_path = /obj/machinery/atmospherics/component/binary/circulator
 	req_components = list()
 
 /obj/item/circuitboard/machine/emitter
@@ -337,15 +337,15 @@
 /obj/item/circuitboard/machine/thermomachine
 	name = "Thermomachine (Machine Board)"
 	desc = "You can use a screwdriver to switch between heater and freezer."
-	var/pipe_layer = PIPING_LAYER_DEFAULT
+	var/pipe_layer = PIPE_LAYER_DEFAULT
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/micro_laser = 2,
 		/obj/item/stack/cable_coil = 1,
 		/obj/item/stack/sheet/glass = 1)
 
-#define PATH_FREEZER /obj/machinery/atmospherics/components/unary/thermomachine/freezer
-#define PATH_HEATER  /obj/machinery/atmospherics/components/unary/thermomachine/heater
+#define PATH_FREEZER /obj/machinery/atmospherics/component/unary/thermomachine/freezer
+#define PATH_HEATER  /obj/machinery/atmospherics/component/unary/thermomachine/heater
 
 /obj/item/circuitboard/machine/thermomachine/Initialize()
 	. = ..()
@@ -375,7 +375,7 @@
 		return
 
 	if(I.tool_behaviour == TOOL_MULTITOOL)
-		pipe_layer = (pipe_layer >= PIPING_LAYER_MAX) ? PIPING_LAYER_MIN : (pipe_layer + 1)
+		pipe_layer = (pipe_layer >= PIPE_LAYER_MAX) ? PIPE_LAYER_MIN : (pipe_layer + 1)
 		to_chat(user, "<span class='notice'>You change the circuitboard to layer [pipe_layer].</span>")
 		return
 
@@ -399,28 +399,28 @@
 // /obj/item/circuitboard/machine/HFR_fuel_input
 // 	name = "HFR Fuel Input (Machine Board)"
 // 	icon_state = "engineering"
-// 	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/fuel_input
+// 	build_path = /obj/machinery/atmospherics/component/unary/hypertorus/fuel_input
 // 	req_components = list(
 // 		/obj/item/stack/sheet/plasteel = 5)
 
 // /obj/item/circuitboard/machine/HFR_waste_output
 // 	name = "HFR Waste Output (Machine Board)"
 // 	icon_state = "engineering"
-// 	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/waste_output
+// 	build_path = /obj/machinery/atmospherics/component/unary/hypertorus/waste_output
 // 	req_components = list(
 // 		/obj/item/stack/sheet/plasteel = 5)
 
 // /obj/item/circuitboard/machine/HFR_moderator_input
 // 	name = "HFR Moderator Input (Machine Board)"
 // 	icon_state = "engineering"
-// 	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/moderator_input
+// 	build_path = /obj/machinery/atmospherics/component/unary/hypertorus/moderator_input
 // 	req_components = list(
 // 		/obj/item/stack/sheet/plasteel = 5)
 
 // /obj/item/circuitboard/machine/HFR_core
 // 	name = "HFR core (Machine Board)"
 // 	icon_state = "engineering"
-// 	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/core
+// 	build_path = /obj/machinery/atmospherics/component/unary/hypertorus/core
 // 	req_components = list(
 // 		/obj/item/stack/cable_coil = 10,
 // 		/obj/item/stack/sheet/glass = 10,
@@ -826,7 +826,7 @@
 /obj/item/circuitboard/machine/cryo_tube
 	name = "Cryotube (Machine Board)"
 	icon_state = "medical"
-	build_path = /obj/machinery/atmospherics/components/unary/cryo_cell
+	build_path = /obj/machinery/atmospherics/component/unary/cryo_cell
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stack/cable_coil = 1,
@@ -1464,7 +1464,7 @@
 /obj/item/circuitboard/machine/shuttle/heater
 	name = "Electronic Engine Heater (Machine Board)"
 	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/shuttle/heater
+	build_path = /obj/machinery/atmospherics/component/unary/shuttle/heater
 	req_components = list(/obj/item/stock_parts/micro_laser = 2,
 		/obj/item/stock_parts/matter_bin = 1)
 

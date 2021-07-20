@@ -1,4 +1,6 @@
-//4-Way Manifold
+/**
+ * 4 way manifolds.
+ */
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/obj/atmospherics/pipes/manifold.dmi'
@@ -24,16 +26,11 @@
 /obj/machinery/atmospherics/pipe/manifold4w/SetInitDirections()
 	initialize_directions = initial(initialize_directions)
 
-/obj/machinery/atmospherics/pipe/manifold4w/update_icon()
-	cut_overlays()
-	if(!center)
-		center = mutable_appearance(icon, "manifold_center")
-	PIPING_LAYER_DOUBLE_SHIFT(center, piping_layer)
-	add_overlay(center)
-
+/obj/machinery/atmospherics/pipe/manifold4w/update_overlays()
+	. = ..()
+	PIPE_LAYER_DOUBLE_SHIFT(center, pipe_layer)
+	. += center
 	//Add non-broken pieces
 	for(var/i in 1 to device_type)
-		if(nodes[i])
-			add_overlay( getpipeimage(icon, "pipe-[piping_layer]", get_dir(src, nodes[i])) )
-	update_layer()
-	update_alpha()
+		if(connected[i])
+			. += getpipeimage(icon, "pipe-[pipe_layer]", get_dir(src, connected[i]))

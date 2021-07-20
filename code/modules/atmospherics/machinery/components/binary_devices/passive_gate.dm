@@ -159,9 +159,9 @@ Passive gate is similar to the regular pump except:
 		return FALSE
 
 /obj/machinery/atmospherics/components/binary/passive_gate/layer1
-	piping_layer = 1
+	pipe_layer = 1
 	icon_state = "passgate_map-1"
 
 /obj/machinery/atmospherics/components/binary/passive_gate/layer3
-	piping_layer = 3
+	pipe_layer = 3
 	icon_state = "passgate_map-3"

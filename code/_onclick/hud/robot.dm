@@ -296,6 +296,7 @@
 	update_icon()
 
 /obj/screen/robot/lamp/update_icon()
+	. = ..()
 	if(robot?.lamp_enabled)
 		icon_state = "lamp_on"
 	else

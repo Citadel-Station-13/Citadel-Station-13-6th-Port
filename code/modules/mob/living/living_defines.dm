@@ -136,7 +136,7 @@
 	var/list/obj/effect/proc_holder/abilities = list()
 
 	var/radiation = 0 //If the mob is irradiated.
-	var/ventcrawl_layer = PIPING_LAYER_DEFAULT
+	var/ventcrawl_layer = PIPE_LAYER_DEFAULT
 	var/losebreath = 0
 
 	//List of active diseases

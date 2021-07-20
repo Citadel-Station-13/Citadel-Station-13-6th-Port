@@ -62,6 +62,11 @@ SUBSYSTEM_DEF(air)
 	// Excited group processing will try to equalize groups with total pressure difference less than this amount.
 	var/excited_group_pressure_goal = 0.25
 
+	/// Queued for rebuild
+	var/static/list/obj/machinery/atmospherics/rebuild_queue = list()
+	/// Bluespace pipe networks - name = list(pipe_refs)
+	var/static/list/bluespace_pipe_networks = list()
+
 /datum/controller/subsystem/air/stat_entry(msg)
 	msg += "C:{"
 	msg += "HP:[round(cost_highpressure,1)]|"
@@ -125,22 +130,6 @@ SUBSYSTEM_DEF(air)
 
 /datum/controller/subsystem/air/fire(resumed = 0)
 	var/timer = TICK_USAGE_REAL
-
-	if(currentpart == SSAIR_REBUILD_PIPENETS)
-		timer = TICK_USAGE_REAL
-		var/list/pipenet_rebuilds = pipenets_needing_rebuilt
-		for(var/thing in pipenet_rebuilds)
-			var/obj/machinery/atmospherics/AT = thing
-			if(!istype(AT))
-				continue
-			AT.build_network()
-		cost_rebuilds = MC_AVERAGE(cost_rebuilds, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		pipenets_needing_rebuilt.Cut()
-		if(state != SS_RUNNING)
-			return
-		resumed = FALSE
-		currentpart = SSAIR_PIPENETS
-
 	if(currentpart == SSAIR_PIPENETS || !resumed)
 		timer = TICK_USAGE_REAL
 		process_pipenets(resumed)
@@ -253,7 +242,8 @@ SUBSYSTEM_DEF(air)
 		resumed = 0
 		currentpart = SSAIR_HOTSPOTS
 	*/
-	currentpart = SSAIR_REBUILD_PIPENETS
+	currentpart = SSAIR_PIPENETS
+	cost_rebuilds = 0
 
 /datum/controller/subsystem/air/proc/process_pipenets(resumed = 0)
 	if (!resumed)
@@ -269,10 +259,6 @@ SUBSYSTEM_DEF(air)
 			networks.Remove(thing)
 		if(MC_TICK_CHECK)
 			return
-
-/datum/controller/subsystem/air/proc/add_to_rebuild_queue(atmos_machine)
-	if(istype(atmos_machine, /obj/machinery/atmospherics))
-		pipenets_needing_rebuilt += atmos_machine
 
 /datum/controller/subsystem/air/proc/process_deferred_airs(resumed = 0)
 	max_deferred_airs = max(deferred_airs.len,max_deferred_airs)
@@ -473,13 +459,26 @@ SUBSYSTEM_DEF(air)
 
 	return pipe_init_dirs_cache[type]["[dir]"]
 
+/datum/controller/subsystem/air/proc/queue_for_rebuild(obj/machinery/atmospherics/A)
+	if(!rebuild_queue.len)
+		addtimer(CALLBACK(src, .proc/rebuild_queue), 0)
+	rebuild_queue += A
+
+/datum/controller/subsystem/air/proc/rebuild_queue()
+	var/start = TICK_USAGE_REAL
+	for(var/obj/machinery/atmospherics/A as anything in rebuild_queue)
+		if(!QDELETED(A))
+			continue
+		A.Rebuild()
+	rebuild_queue.len = 0
+	cost_rebuilds = TICK_USAGE_REAL - start
+
 #undef SSAIR_PIPENETS
 #undef SSAIR_ATMOSMACHINERY
 #undef SSAIR_EXCITEDGROUPS
 #undef SSAIR_HIGHPRESSURE
 #undef SSAIR_HOTSPOTS
 #undef SSAIR_TURF_CONDUCTION
-#undef SSAIR_REBUILD_PIPENETS
 #undef SSAIR_EQUALIZE
 #undef SSAIR_ACTIVETURFS
 #undef SSAIR_TURF_POST_PROCESS

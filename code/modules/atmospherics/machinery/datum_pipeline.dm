@@ -1,13 +1,23 @@
 /datum/pipeline
+	/// Next UID
+	var/static/uid_next = 0
+	/// UID
+	var/uid
+	/// Name for debug purposes
+	var/name
+
 	var/datum/gas_mixture/air
 	var/list/datum/gas_mixture/other_airs
 
 	var/list/obj/machinery/atmospherics/pipe/members
-	var/list/obj/machinery/atmospherics/components/other_atmosmch
+	var/list/obj/machinery/atmospherics/component/other_atmosmch
 
 	var/update = TRUE
 
 /datum/pipeline/New()
+	uid = ++uid_next
+	name = "Pipeline #[uid]"
+
 	other_airs = list()
 	members = list()
 	other_atmosmch = list()
@@ -19,7 +29,7 @@
 		temporarily_store_air()
 	for(var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
-	for(var/obj/machinery/atmospherics/components/C in other_atmosmch)
+	for(var/obj/machinery/atmospherics/component/C in other_atmosmch)
 		C.nullifyPipenet(src)
 	return ..()
 
@@ -78,7 +88,7 @@
 
 	air.set_volume(volume)
 
-/datum/pipeline/proc/addMachineryMember(obj/machinery/atmospherics/components/C)
+/datum/pipeline/proc/addMachineryMember(obj/machinery/atmospherics/component/C)
 	other_atmosmch |= C
 	var/datum/gas_mixture/G = C.returnPipenetAir(src)
 	if(!G)
@@ -112,7 +122,7 @@
 	for(var/obj/machinery/atmospherics/pipe/S in E.members)
 		S.parent = src
 	air.merge(E.air)
-	for(var/obj/machinery/atmospherics/components/C in E.other_atmosmch)
+	for(var/obj/machinery/atmospherics/component/C in E.other_atmosmch)
 		C.replacePipenet(E, src)
 	other_atmosmch.Add(E.other_atmosmch)
 	other_airs.Add(E.other_airs)
@@ -127,7 +137,7 @@
 /obj/machinery/atmospherics/pipe/addMember(obj/machinery/atmospherics/A)
 	parent.addMember(A, src)
 
-/obj/machinery/atmospherics/components/addMember(obj/machinery/atmospherics/A)
+/obj/machinery/atmospherics/component/addMember(obj/machinery/atmospherics/A)
 	var/datum/pipeline/P = returnPipenet(A)
 	if(!P)
 		CRASH("null.addMember() called by [type] on [COORD(src)]")
@@ -223,18 +233,18 @@
 			continue
 		GL += P.return_air()
 		for(var/atmosmch in P.other_atmosmch)
-			if (istype(atmosmch, /obj/machinery/atmospherics/components/binary/valve))
-				var/obj/machinery/atmospherics/components/binary/valve/V = atmosmch
+			if (istype(atmosmch, /obj/machinery/atmospherics/component/binary/valve))
+				var/obj/machinery/atmospherics/component/binary/valve/V = atmosmch
 				if(V.on)
 					PL |= V.parents[1]
 					PL |= V.parents[2]
-			else if (istype(atmosmch,/obj/machinery/atmospherics/components/binary/relief_valve))
-				var/obj/machinery/atmospherics/components/binary/relief_valve/V = atmosmch
+			else if (istype(atmosmch,/obj/machinery/atmospherics/component/binary/relief_valve))
+				var/obj/machinery/atmospherics/component/binary/relief_valve/V = atmosmch
 				if(V.opened)
 					PL |= V.parents[1]
 					PL |= V.parents[2]
-			else if (istype(atmosmch, /obj/machinery/atmospherics/components/unary/portables_connector))
-				var/obj/machinery/atmospherics/components/unary/portables_connector/C = atmosmch
+			else if (istype(atmosmch, /obj/machinery/atmospherics/component/unary/portables_connector))
+				var/obj/machinery/atmospherics/component/unary/portables_connector/C = atmosmch
 				if(C.connected_device)
 					GL += C.portableConnectorReturnAir()
 	return GL

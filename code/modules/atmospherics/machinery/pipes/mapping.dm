@@ -10,22 +10,22 @@
 		layer = GAS_PIPE_VISIBLE_LAYER;	\
 	}									\
 	##Fulltype/visible/layer1 {			\
-		piping_layer = 1;				\
+		pipe_layer = 1;				\
 		icon_state = Iconbase + "-1";	\
 	}									\
 	##Fulltype/visible/layer3 {			\
-		piping_layer = 3;				\
+		pipe_layer = 3;				\
 		icon_state = Iconbase + "-3";	\
 	}									\
 	##Fulltype/hidden {					\
 		level = PIPE_HIDDEN_LEVEL;		\
 	}									\
 	##Fulltype/hidden/layer1 {			\
-		piping_layer = 1;				\
+		pipe_layer = 1;				\
 		icon_state = Iconbase + "-1";	\
 	}									\
 	##Fulltype/hidden/layer3 {			\
-		piping_layer = 3;				\
+		pipe_layer = 3;				\
 		icon_state = Iconbase + "-3";	\
 	}
 

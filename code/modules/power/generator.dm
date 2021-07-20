@@ -5,8 +5,8 @@
 	density = TRUE
 	use_power = NO_POWER_USE
 
-	var/obj/machinery/atmospherics/components/binary/circulator/cold_circ
-	var/obj/machinery/atmospherics/components/binary/circulator/hot_circ
+	var/obj/machinery/atmospherics/component/binary/circulator/cold_circ
+	var/obj/machinery/atmospherics/component/binary/circulator/hot_circ
 
 	var/lastgen = 0
 	var/lastgenlev = -1
@@ -161,8 +161,8 @@
 /obj/machinery/power/generator/proc/find_circs()
 	kill_circs()
 	var/list/circs = list()
-	var/obj/machinery/atmospherics/components/binary/circulator/C
-	var/circpath = /obj/machinery/atmospherics/components/binary/circulator
+	var/obj/machinery/atmospherics/component/binary/circulator/C
+	var/circpath = /obj/machinery/atmospherics/component/binary/circulator
 	if(dir == NORTH || dir == SOUTH)
 		C = locate(circpath) in get_step(src, EAST)
 		if(C && C.dir == WEST)

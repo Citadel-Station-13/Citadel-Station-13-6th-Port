@@ -113,7 +113,7 @@
 	max_integrity = 3
 	var/amount_grown = 0
 	var/grow_as = null
-	var/obj/machinery/atmospherics/components/unary/vent_pump/entry_vent
+	var/obj/machinery/atmospherics/component/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
 	var/player_spiders = 0
 	var/directive = "" //Message from the mother
@@ -173,12 +173,12 @@
 		if(get_dist(src, entry_vent) <= 1)
 			var/list/vents = list()
 			var/datum/pipeline/entry_vent_parent = entry_vent.parents[1]
-			for(var/obj/machinery/atmospherics/components/unary/vent_pump/temp_vent in entry_vent_parent.other_atmosmch)
+			for(var/obj/machinery/atmospherics/component/unary/vent_pump/temp_vent in entry_vent_parent.other_atmosmch)
 				vents.Add(temp_vent)
 			if(!vents.len)
 				entry_vent = null
 				return
-			var/obj/machinery/atmospherics/components/unary/vent_pump/exit_vent = pick(vents)
+			var/obj/machinery/atmospherics/component/unary/vent_pump/exit_vent = pick(vents)
 			if(prob(50))
 				visible_message("<B>[src] scrambles into the ventilation ducts!</B>", \
 								"<span class='italics'>You hear something scampering through the ventilation ducts.</span>")
@@ -217,7 +217,7 @@
 				src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
 	else if(prob(10))
 		//ventcrawl!
-		for(var/obj/machinery/atmospherics/components/unary/vent_pump/v in view(7,src))
+		for(var/obj/machinery/atmospherics/component/unary/vent_pump/v in view(7,src))
 			if(!v.welded)
 				entry_vent = v
 				walk_to(src, entry_vent, 1)
