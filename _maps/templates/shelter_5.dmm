@@ -81,6 +81,9 @@
 /area/survivalpod/nonpowered)
 "mN" = (
 /obj/machinery/power/rtg/advanced/fullupgrade,
+/obj/structure/cable/white{
+	icon_state = "0-8"
+	},
 /turf/open/floor/pod/dark,
 /area/survivalpod/nonpowered)
 "oo" = (
@@ -238,6 +241,12 @@
 	},
 /turf/open/floor/pod/dark,
 /area/survivalpod/nonpowered)
+"TI" = (
+/obj/structure/cable/white{
+	icon_state = "4-8"
+	},
+/turf/open/floor/pod/dark,
+/area/survivalpod/nonpowered)
 "TQ" = (
 /obj/structure/fans,
 /turf/open/floor/pod/dark,
@@ -272,6 +281,9 @@
 "Xy" = (
 /obj/machinery/light,
 /obj/machinery/power/apc/auto_name/south,
+/obj/structure/cable/white{
+	icon_state = "0-4"
+	},
 /turf/open/floor/pod/dark,
 /area/survivalpod/nonpowered)
 "YH" = (
@@ -445,7 +457,7 @@ td
 FZ
 Fo
 Lv
-Lv
+TI
 FZ
 "}
 (12,1,1) = {"
