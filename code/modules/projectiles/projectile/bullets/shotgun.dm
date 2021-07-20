@@ -1,6 +1,7 @@
 /obj/item/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
-	damage = 50
+	damage = 40
+	armour_penetration = 30
 	sharpness = SHARP_POINTY
 	wound_bonus = 0
 
@@ -86,12 +87,13 @@
 	return BULLET_ACT_HIT
 
 /obj/item/projectile/bullet/pellet
-	var/tile_dropoff = 0.45
+	var/tile_dropoff = 0.5
 	var/tile_dropoff_s = 1.25
 
 /obj/item/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
-	damage = 7.5
+	damage = 8.5
+	armour_penetration = -10
 	wound_bonus = 5
 	bare_wound_bonus = 5
 	wound_falloff_tile = -2.5 // low damage + additional dropoff will already curb wounding potential anything past point blank
