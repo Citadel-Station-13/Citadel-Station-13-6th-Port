@@ -335,7 +335,6 @@
 	name = "Bone Arrow"
 	result = /obj/item/ammo_casing/caseless/arrow/bone
 	time = 5
-	always_availible = FALSE
 	reqs = list(/obj/item/stack/sheet/bone = 1,
 				 /obj/item/stack/sheet/sinew = 1,
 				 /obj/item/ammo_casing/caseless/arrow/ash = 1)
@@ -347,7 +346,6 @@
 	result = /obj/item/ammo_casing/caseless/arrow/ash
 	tools = list(TOOL_WELDER)
 	time = 10 // 1.5 seconds minimum per actually worthwhile arrow excluding interface lag
-	always_availible = FALSE
 	reqs = list(/obj/item/ammo_casing/caseless/arrow/wood = 1)
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO

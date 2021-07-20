@@ -6417,7 +6417,6 @@
 /area/awaymission/research/interior/maint)
 "Hs" = (
 /obj/structure/table/wood,
-/obj/item/book/granter/crafting_recipe/bone_bow,
 /turf/open/floor/mineral/plasma,
 /area/space/nearstation)
 "Km" = (

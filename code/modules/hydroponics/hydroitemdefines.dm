@@ -84,6 +84,12 @@
 	user.visible_message("<span class='suicide'>[user] is scratching [user.p_their()] back as hard as [user.p_they()] can with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (BRUTELOSS)
 
+/obj/item/cultivator/bone
+	name = "bone cultivator"
+	desc = "Bones used for removing weeds."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "cultivator_bone"
+
 /obj/item/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
@@ -111,6 +117,12 @@
 	user.visible_message("<span class='suicide'>[user] is chopping at [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	playsound(src, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return (BRUTELOSS)
+
+/obj/item/hatchet/bone
+	name = "Bone Hatchet"
+	desc = "A very sharp bone blade tied to a bone handle with sinew. You can process wood with it."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "hatchet_bone"
 
 /obj/item/scythe
 	icon_state = "scythe0"

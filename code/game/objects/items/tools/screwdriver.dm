@@ -93,6 +93,14 @@
 /obj/item/screwdriver/brass/family
 	toolspeed = 1
 
+/obj/item/screwdriver/ashwalker
+	name = "bone screwdriver"
+	desc = "A rudimentary screwdriver made of carved bones."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "screwdriver_bone"
+	toolspeed = 0.75
+	random_color = FALSE
+
 /obj/item/screwdriver/bronze
 	name = "bronze screwdriver"
 	desc = "A screwdriver plated with bronze."

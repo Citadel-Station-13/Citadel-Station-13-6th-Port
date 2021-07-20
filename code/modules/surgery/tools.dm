@@ -48,6 +48,13 @@
 	w_class = WEIGHT_CLASS_TINY
 	toolspeed = 0.5
 
+/obj/item/retractor/ashwalker
+	name = "Bone Retractor"
+	desc = "Kinda looks like a chicken bone."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "retractor_bone"
+	toolspeed = 0.85
+
 /obj/item/hemostat
 	name = "hemostat"
 	desc = "You think you have seen this before."
@@ -78,6 +85,14 @@
 	toolspeed = 0.5
 	attack_verb = list("attacked", "pinched")
 
+/obj/item/hemostat/ashwalker
+	name = "Femurstat"
+	desc = "Bones that are strapped together with sinews. Used to stop bleeding."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "hemostat_bone"
+	toolspeed = 0.85
+
+
 /obj/item/cautery
 	name = "cautery"
 	desc = "This stops bleeding."
@@ -107,6 +122,13 @@
 	w_class = WEIGHT_CLASS_TINY
 	toolspeed = 0.5
 	attack_verb = list("burnt")
+
+/obj/item/cautery/ashwalker
+	name = "Coretery"
+	desc = "A legion core strapped to a bone. It can close wounds."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "cautery_bone"
+	toolspeed = 0.85
 
 /obj/item/surgicaldrill
 	name = "surgical drill"
@@ -257,6 +279,14 @@
 	user.visible_message("<span class='suicide'>[user] is slitting [user.p_their()] [pick("wrists", "throat", "stomach")] with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (BRUTELOSS)
 
+/obj/item/scalpel/ashwalker
+	name = "diamond scalpel"
+	desc = "Bones and a Diamond tied together to make a scalpel."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "scalpel_bone"
+	force = 12
+	toolspeed = 0.85
+
 /obj/item/circular_saw
 	name = "circular saw"
 	desc = "For heavy duty cutting."
@@ -309,6 +339,14 @@
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharpness = SHARP_EDGED
 
+/obj/item/circular_saw/ashwalker
+	name = "diamond bonesaw"
+	desc = "Bones designed like a skull, with diamond teeth to cut through bones."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "saw_bone"
+	force = 12
+	toolspeed = 0.85
+
 /obj/item/surgical_drapes
 	name = "surgical drapes"
 	desc = "Nanotrasen brand surgical drapes provide optimal safety and infection control."
@@ -340,6 +378,13 @@
 		if(id in linked_techweb.researched_designs)
 			prototype = SSresearch.techweb_design_by_id(id)
 			. |= prototype.surgery
+
+
+/obj/item/surgical_drapes/goliath
+	name = "goliath drapes"
+	desc = "Probably not the most hygienic but what the heck else are you gonna use?"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "surgical_drapes_goli"
 
 /obj/item/organ_storage //allows medical cyborgs to manipulate organs without hands
 	name = "organ storage bag"
@@ -433,3 +478,10 @@
 		to_chat(user, "<span class='warning'>You refrain from hitting [L] with [src], as you are in help intent.</span>")
 		return
 	return ..()
+
+/obj/item/bonesetter/bone
+	name = "bone bonesetter"
+	desc = "A bonesetter made of bones... for setting bones with... bones?"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "bone setter_bone"
+	toolspeed = 0.85

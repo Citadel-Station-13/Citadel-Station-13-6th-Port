@@ -1982,7 +1982,6 @@
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/obj/item/book/granter/crafting_recipe/bone_bow,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "Ef" = (
@@ -2306,7 +2305,6 @@
 	},
 /obj/structure/table/wood,
 /obj/item/kitchen/knife/combat/bone,
-/obj/item/book/granter/crafting_recipe/bone_bow,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
 "TN" = (
@@ -2401,7 +2399,6 @@
 /area/ruin/unpowered/ash_walkers)
 "WA" = (
 /obj/structure/stone_tile/block/cracked,
-/obj/item/book/granter/crafting_recipe/bone_bow,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "WL" = (

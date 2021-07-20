@@ -93,7 +93,6 @@
 
 /datum/crafting_recipe/quiver
 	name = "Quiver"
-	always_availible = FALSE
 	result = /obj/item/storage/belt/quiver
 	time = 80
 	reqs = list(/obj/item/stack/sheet/leather = 3,
@@ -104,19 +103,18 @@
 	name = "Bone Bow"
 	result = /obj/item/gun/ballistic/bow/ashen
 	time = 120 // 80+120 = 200
-	always_availible = FALSE
 	reqs = list(/obj/item/stack/sheet/bone = 8,
 				 /obj/item/stack/sheet/sinew = 4)
 	category = CAT_PRIMAL
 
-/datum/crafting_recipe/bow_tablet
+/*/datum/crafting_recipe/bow_tablet
 	name = "Sandstone Bow Making Manual"
 	result = /obj/item/book/granter/crafting_recipe/bone_bow
 	time = 200 //Scribing // don't care
 	always_availible = FALSE
 	reqs = list(/obj/item/stack/rods = 1,
 				 /obj/item/stack/sheet/mineral/sandstone = 4)
-	category = CAT_PRIMAL
+	category = CAT_PRIMAL*/
 
 /datum/crafting_recipe/rib
 	name = "Collosal Rib"
@@ -153,4 +151,159 @@
             /datum/reagent/oil = 5,
             /obj/item/shovel/spade = 1)
 	result = /obj/item/shovel/serrated
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_screwdriver
+	name = "Bone Screwdriver"
+	result = /obj/item/screwdriver/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_crowbar
+	name = "Bone Crowbar"
+	result = /obj/item/crowbar/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_cutters
+	name = "Bone Wirecutters"
+	result = /obj/item/wirecutters/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 2)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_wrench
+	name = "Bone Wrench"
+	result = /obj/item/wrench/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/necropolis_welding
+	name = "Necropolis Welding Torch"
+	result = /obj/item/weldingtool/experimental/ashwalker
+	time = 120
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 2,
+				 /obj/item/organ/regenerative_core = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/tribalbelt
+	name = "Hunter's Belt"
+	result = /obj/item/storage/belt/mining/primitive
+	time = 80
+	reqs = list(/obj/item/stack/sheet/sinew = 4)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/goliath_gloves
+	name = "Goliath Gloves"
+	result = /obj/item/clothing/gloves/tackler/combat/goliath
+	time = 80
+	reqs = list(/obj/item/stack/sheet/sinew = 2,
+				/obj/item/stack/sheet/animalhide/goliath_hide = 2,
+				/obj/item/stack/sheet/cloth = 2,
+				/obj/item/stack/sheet/leather = 2)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/goliath_drapes
+	name = "Goliath Drapes"
+	result = /obj/item/surgical_drapes/goliath
+	time = 80
+	reqs = list(/obj/item/stack/sheet/sinew = 1,
+				 /obj/item/stack/sheet/animalhide/goliath_hide = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/diamond_scalpel
+	name = "Diamond Scalpel"
+	result = /obj/item/scalpel/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1,
+				 /obj/item/stack/sheet/mineral/diamond = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_retractor
+	name = "Bone Retractor"
+	result = /obj/item/retractor/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/diamond_bonesaw
+	name = "Diamond Bonesaw"
+	result = /obj/item/circular_saw/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1,
+				 /obj/item/organ/regenerative_core = 1,
+				 /obj/item/stack/sheet/mineral/diamond = 2)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/femurstat
+	name = "Bone Hemostat"
+	result = /obj/item/hemostat/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_bonesetter
+	name = "Bone Bonersetter"
+	result = /obj/item/bonesetter/bone
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/coretery
+	name = "Necropolis Cautery"
+	result = /obj/item/cautery/ashwalker
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 1,
+				 /obj/item/stack/sheet/animalhide/goliath_hide = 1,
+				 /obj/item/organ/regenerative_core = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_spade
+	name = "Bone Spade"
+	result = /obj/item/shovel/spade/bone
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 1,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_hatchet
+	name = "Bone Hatchet"
+	result = /obj/item/hatchet/bone
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 1,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_cultivator
+	name = "Bone Cultivator"
+	result = /obj/item/cultivator/bone
+	time = 80
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/sinew = 1)
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/bone_glaive
+	name = "Necropolis Glaive"
+	result = /obj/item/kinetic_crusher/glaive/bone
+	time = 120
+	reqs = list(/obj/item/stack/sheet/bone = 2,
+				 /obj/item/stack/sheet/mineral/wood = 4,
+				 /obj/item/stack/sheet/sinew = 4,
+				 /obj/item/organ/regenerative_core = 2,
+				 /obj/item/stack/sheet/mineral/diamond = 2,
+				 /obj/item/stack/sheet/animalhide/goliath_hide = 2,
+				 /obj/item/stack/sheet/leather = 2)
 	category = CAT_PRIMAL

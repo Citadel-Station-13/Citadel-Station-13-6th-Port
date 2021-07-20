@@ -90,6 +90,14 @@
 /obj/item/wirecutters/brass/family
 	toolspeed = 1
 
+/obj/item/wirecutters/ashwalker
+	name = "bone wirecutters"
+	desc = "A rudimentary wirecutters made of sharpened bones and sinew."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "cutters_bone"
+	toolspeed = 0.75
+	random_color = FALSE
+
 /obj/item/wirecutters/bronze
 	name = "bronze plated wirecutters"
 	desc = "A pair of wirecutters plated with bronze."

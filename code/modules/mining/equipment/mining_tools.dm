@@ -179,6 +179,12 @@
 	custom_materials = list(/datum/material/iron=50)
 	w_class = WEIGHT_CLASS_SMALL
 
+/obj/item/shovel/spade/bone
+	name = "bone spade"
+	desc = "A small tool for digging and moving dirt."
+	icon_state = "spade_bone"
+	toolspeed = 0.75
+
 /obj/item/shovel/serrated
 	name = "serrated bone shovel"
 	desc = "A wicked tool that cleaves through dirt just as easily as it does flesh. The design was styled after ancient lavaland tribal designs."

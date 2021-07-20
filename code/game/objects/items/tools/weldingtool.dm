@@ -385,6 +385,16 @@
 	icon_state = "clockwelder"
 	item_state = "brasswelder"
 
+/obj/item/weldingtool/experimental/ashwalker
+	name = "necropolis welding torch"
+	desc = "A mysterious welding tool with its origins in the depths of the necropolis. A mysterious force keeps replenishing its."
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	refueling_interval = 5
+	toolspeed = 0.75
+	max_fuel = 20
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "ashwelder"
+
 /obj/item/weldingtool/abductor
 	name = "alien welding tool"
 	desc = "An alien welding tool. Whatever fuel it uses, it never runs out."

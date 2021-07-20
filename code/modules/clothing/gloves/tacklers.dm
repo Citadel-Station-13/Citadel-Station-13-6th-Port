@@ -67,6 +67,20 @@
 	resistance_flags = NONE
 	strip_mod = 1.2 // because apparently black gloves had this
 
+/obj/item/clothing/gloves/tackler/combat/goliath
+	name = "goliath gloves"
+	desc = "Rudimentary combat gloves. To be fair, Goliaths are really good at grappling... Also, they're fireproof."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "goligloves"
+	item_state = "goligloves"
+
+	tackle_stam_cost = 25
+	base_knockdown = 1 SECONDS
+	tackle_range = 5
+	tackle_speed = 2
+	min_distance = 2
+	skill_mod = 1
+
 /obj/item/clothing/gloves/tackler/combat/insulated
 	name = "guerrilla gloves"
 	desc = "Superior quality combative gloves, good for performing tackle takedowns as well as absorbing electrical shocks."
